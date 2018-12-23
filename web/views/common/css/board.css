@@ -1,0 +1,207 @@
+@charset "utf-8";
+
+/* board */
+
+/******************************************** tab */
+/* normalTab */
+.tabBox {overflow:hidden;}
+.tabBox ul {height:43px; border-bottom:1px solid #1173b8;}
+.tabBox li {float:left; text-align:center; line-height: 43px; background:#fafafa;}
+.tabBox li a {color:#787878; font-size:14px;}
+.tabBox li:hover,.tabBox .on {background:#1173b8;}
+.tabBox li:hover a,.tabBox .on a {color:#fff; }
+
+.tab_2ea li {width:50%;}
+.tab_3ea li {width:33.33%;}
+.tab_4ea li {width:25%;}
+.tab_5ea li {width:20%;}
+.tab_6ea li {width:16.66%;}
+.tab_7ea li {width:14.28%;}
+.tab_8ea li {width:12.5%;}
+
+/* 2줄 */
+.tabBox2 {overflow:hidden;}
+.tabBox2 ul {min-height:60px; border-bottom:1px solid #1173b8;}
+.tabBox2 li {display:table; float:left; background:#fafafa; min-height:60px;}
+.tabBox2 li a {display: table-cell; text-align:center; vertical-align:middle; color:#787878; font-size:14px;}
+.tabBox2 li:hover,.tabBox2 .on {background:#1173b8;}
+.tabBox2 li:hover a,.tabBox2 .on a {color:#fff; }
+
+.tabBox2 .tab_2ea {width:50%;}
+.tabBox2 .tab_3ea {width:33.33%;}
+.tabBox2 .tab_4ea {width:25%;}
+.tabBox2 .tab_5ea {width:20%;}
+.tabBox2 .tab_6ea {width:16.66%;}
+.tabBox2 .tab_7ea {width:14.28%;}
+.tabBox2 .tab_8ea {width:12.5%;}
+
+
+
+/* bigTab */
+.tabBigBox {overflow:hidden;}
+.tabBigBox li {float:left; text-align:center; line-height:53px; background:#fff; border-left:1px solid #fff; border-top:3px solid #fff; border-right:1px solid #fff; border-bottom:1px solid #e5e5e5;}
+.tabBigBox li a {color:#bababa; font-size:18px;}
+.tabBigBox li:hover,.tabBigBox .on {border-top:3px solid #606060; background:#fff; line-height:53px; border-left:1px solid #e5e5e5; border-right:1px solid #e5e5e5; border-bottom:none;}
+.tabBigBox li:hover a,.tabBigBox .on a {color:#333; font-weight:bold;}
+
+.btab_2ea li {width:49.6%;}
+.btab_3ea li {width:33.1%;}
+.btab_4ea li {width:24.8%;}
+.btab_5ea li {width:19.8%;}
+.btab_6ea li {width:16.5%;}
+.btab_7ea li {width:14.1%;}
+.btab_8ea li {width:12.3%;}
+
+
+.tab_group a{float:left;margin-left:-1px;font-size:17px;line-height:58px;letter-spacing:-0.05em;color:#409bdb;border:1px solid #409bdb;text-align:center;display:inline-block;}
+.tab_group a:first-child{width:118px;margin-left:0;}
+.tab_group a:hover, .tab_group a:focus{text-decoration:underline;}
+.tab_group a.on {color:#fff;background-color:#409bdb;border-color:#388eca;}
+
+
+
+/******************************* tableStyle */
+
+/* contents board */
+.listBoard {clear:both; border-top:3px solid #6488ba; width:100%;}
+.listBoard tr th {background:#f6faff; font-size:16px; font-weight:bold; color:#2e5182; padding:10px; border-bottom:1px solid #dedede; text-align:center;}
+.listBoard tr td {padding:10px; border-bottom:1px solid #dedede; text-align:center;}
+
+/* contents board line */
+/* v.blue */
+.lineBoard {clear:both; border-top:3px solid #6488ba; width:100%; border-right:1px solid #dedede;}
+.lineBoard tr th {background:#f6faff; font-size:14px; font-weight:bold; color:#2e5182; padding:9px; border-bottom:1px solid #dedede; border-left:1px solid #dedede; text-align:center;}
+.lineBoard tr td {padding:10px; border-bottom:1px solid #dedede; border-left:1px solid #dedede; text-align:center;}
+.lineBoard tr td input {height:22px; line-height:22px;}
+
+
+/* v.black */
+.lineBoard2 {clear:both; border-top:3px solid #919191; width:100%; border-right:1px solid #dedede;}
+.lineBoard2 tr th {background:#fbfbfb; font-size:16px; font-weight:bold; color:#5d5d5d; padding:10px; border-bottom:1px solid #dedede; border-left:1px solid #dedede; text-align:center;}
+.lineBoard2 tr td {padding:10px; border-bottom:1px solid #dedede; border-left:1px solid #dedede; text-align:center;}
+.lineBoard2 tr td input {height:22px; line-height:22px;}
+
+
+.col tr td:nth-child(even) {background:#f9f9f9;}
+.row tr:nth-child(even) {background:#f9f9f9;}
+.rowBlue tr:nth-child(even) {background:#f7fdff;}
+
+
+/* board */
+.boardList {clear:both; border-top:2px solid #727272; width:100%;}
+.boardList tr th {background:#f6f6f6; font-size:16px; font-weight:500; padding:15px 0; border-bottom:1px solid #dedede; text-align:center;}
+.boardList tr td {padding:12px 0 14px 0; border-bottom:1px solid #dedede; text-align:center; font-size:14px; }
+.boardList tr td input.checkBox {vertical-align:middle; width:16px; height:16px;}
+.boardList tr td .btn_gn {color:#ffffff; font-size:12px; line-height:17px; background:#86B404; padding:3px 10px; border:solid #63A65C 1px; text-align:center;}
+.boardList tr td .btn_or {color:#ffffff; font-size:12px; line-height:17px; background:#FF9800; padding:3px 10px; border:solid #FF8000 1px; text-align:center;}
+.boardList tr td img {margin-bottom:2px;}
+.boardList tr td img.donate {width:100px; height:75px;}
+.boardList tr td input {height:22px; line-height:22px;}
+.boardList tr td input.inputText {width:90%; height:22px; line-height:22px; text-align:center;}
+.boardList tr td select {height:28px; line-height:28px; padding:0 0 0 5px; font-size:13px;}
+.boardList tr td .sort {padding:5px 10px; color:#fff !important; background:#444 !important; font-size:12px; margin-right:5px;}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.boardList tr th {padding:14px 0;}
+.boardList tr td {padding:13px 0 14px 0;}
+}
+
+.boardWrite {clear:both; border-top:2px solid #727272; width:100%;}
+.boardWrite tr th {background:#f6f6f6; font-size:16px; font-weight:500; padding:5px 0 7px 0 ; border-bottom:1px solid #dedede;}
+.boardWrite tr td {padding:12px 0 14px 10px; border-bottom:1px solid #dedede; text-align:left;}
+.boardWrite tr td input {height:22px; line-height:22px; padding-left:5px}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.boardWrite tr th {padding:10px 0 8px 0}
+.boardWrite tr td {padding:13px 0 14px 15px;}
+.boardWrite tr th input,.boardWrite tr td input {line-height:23px;}
+}
+.boardWrite tr td input.inputText {width:100%; height:22px; line-height:22px;}
+.boardWrite tr td input.check {vertical-align:middle; height:16px; line-height:16px;}
+.boardWrite tr td textarea {width:100%; min-height:100px;}
+.boardWrite tr td select {height:28px; line-height:28px; padding:0 0 0 5px; font-size:13px;}
+
+.noticeWrite {clear:both; border-top:2px solid #727272; width:100%;}
+.noticeWrite tr th {/* background:#f6f6f6;  */font-size:16px; font-weight:500; padding:5px 0 7px 0 ; border-bottom:1px solid #dedede;}
+.noticeWrite tr td {padding:12px 0 14px 10px; border-bottom:1px solid #dedede; text-align:left;}
+.noticeWrite tr td input {height:22px; line-height:22px; padding-left:5px}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.noticeWrite tr th {padding:10px 0 8px 0}
+.noticeWrite tr td {padding:13px 0 14px 15px;}
+.noticeWrite tr th input,.boardWrite tr td input {line-height:23px;}
+}
+.noticeWrite tr td input.inputText {width:100%; height:22px; line-height:22px;}
+.noticeWrite tr td input.check {vertical-align:middle; height:16px; line-height:16px;}
+.noticeWrite tr td textarea {width:100%; min-height:100px;}
+.noticeWrite tr td select {height:28px; line-height:28px; padding:0 0 0 5px; font-size:13px;}
+
+/* Photo List */
+.photo_list {clear:both; border-top:2px solid #727272; position:relative;}
+.photo_list ul.photobox {overflow:hidden; padding:20px 0 20px 0; border-bottom:1px solid #eaeaea;}
+.photo_list ul li {float:left; width:33%; text-align:center; padding:10px 0;}
+.photo_list ul li .hoto img {width:190px; height:140px;}
+.photo_list ul li .ptit { margin-top:2px;}
+.photo_list ul li .ptit a {display:block; overflow:hidden; text-align:center;}
+.photo_list ul li .ptit a:hover {color:#F57C00;}
+
+
+
+
+/* search Table */
+.searchTbl {clear:both; border-top:2px solid #c8d6e7; border-left:1px solid #c8d6e7; width:100%;}
+.searchTbl tr th {background:#f4f9ff; font-size:16px; font-weight:bold; color:#26508b; padding:7px 0; border-bottom:1px solid #c8d6e7; border-right:1px solid #c8d6e7;}
+.searchTbl tr td {padding:10px; border-bottom:1px solid #c8d6e7; border-right:1px solid #c8d6e7; text-align:left;}
+.searchTbl tr td.radio span {padding-right:20px;}
+.searchTbl tr td input {height:22px; border:1px solid #d2d2d2;}
+.searchTbl tr td input.inputText {width:90%; height:22px;}
+.searchTbl tr td textarea {width:100%; min-height:100px;}
+.searchTbl tr td select {font-size:13px !important; color:#7d7d7d; padding:2px 0 4px 0}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.searchTbl tr td select {padding:5px 0 4px 0}
+.searchTbl tr td input {padding:2px 0 2px 5px;}
+}
+
+
+/* numberStyle */
+.numbox {clear:both; position:relative; text-align:center; height:30px;}
+.numbox span {display:inline-block; }
+.numbox a {display:block; width:30px; height:30px; line-height:30px;}
+.numbox .num {border:1px solid #dfdfdf;}
+.numbox .on,.numbox a:hover {border:0; background:#444; border:1px solid #444; color:#fff;}
+
+/* searchStyle */
+
+.topsearch {float:right; position:relative; overflow:hidden;}
+.topsearch span {vertical-align:top; position:relative;}
+/* .topsearch select {height:30px; line-height:30px; font-size:14px; border:1px solid #e3e3e3;} */
+.topsearch select {height:34px; padding-left:10px; font-size:16px; border:1px solid #e3e3e3;
+-webkit-appearance:none; 
+-moz-appearance:none;
+appearance:none; 
+background:url('../images/contents/select-arrow.png') no-repeat 95% 50%; /* 화살표 아이콘 추가 */}
+.topsearch select::-ms-expand {
+   display: none;            
+}
+.topsearch input {margin-left:3px; height:30px; font-size:16px; border-top:none; border-left:none; border-right:none; border-bottom:1px solid #e3e3e3; width:100px; padding-left:5px;}
+.topsearch a.sch {position:absolute; top:3px; right:8px;}
+.topsearch a.write {display:inline-block; font-size:14px; padding:5px 15px 6px 15px; text-align:center;}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.topsearch a.write {padding:4px 15px 6px 15px;}
+}
+
+/* btnboxStyle */
+.btnbox {text-align:center;}
+
+/* selBox*/
+.selBox {overflow:hidden;}
+.selBox span {vertical-align:middle;}
+.selBox .tit {font-size:16px; font-weight:bold;}
+.selBox select {font-size:13px !important; color:#7d7d7d; padding:2px 0 4px 0}
+@media screen and (-webkit-min-device-pixel-ratio:0){
+.selBox .tit {font-size:16px; font-weight:bold;}
+.selBox select {padding:5px 0 4px 0}
+}
+
+
+/* replyBox */
+.replyBox table tr td textarea {width:88%; height:50px; float:left;}
+.replyBox table tr td .bbtn {height:42px; line-height:42px;}
+
