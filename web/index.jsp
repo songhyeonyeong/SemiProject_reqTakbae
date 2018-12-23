@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/include/common.jsp" %>
+<%@ include file="/views/include/common.jsp" %>
 
 <title>택배를 부탁해 홈</title>
 
@@ -20,7 +20,7 @@
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="/hyun/myPost/include/header.jsp" %>
+<%@ include file="/views/include/header.jsp" %>
 
 <div id="visual"><!-- visual S -->
 	<ul class="bxslider">
@@ -59,13 +59,13 @@
 </div><!--// noticeLine E-->
 
 
-<%@ include file="/hyun/myPost/include/footer.jsp" %>
+<%@ include file="/views/include/footer.jsp" %>
 
 
 </div><!--// Wrap E-->
 
 
-<%@ include file="/hyun/myPost/include/myNav.jsp" %>
+<%@ include file="/views/include/myNav.jsp" %>
 
 </body>
 </html>

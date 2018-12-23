@@ -6,11 +6,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-<link rel="stylesheet" type="text/css" href="/hyun/myPost/common/css/style.css"/>
+<link rel="stylesheet" type="text/css" href="/reqtakbae/views/common/css/style.css"/>
 
-<script type="text/javascript" src="/hyun/myPost/common/js/jquery.min.js"></script><!-- mainbanner -->
-<script type="text/javascript" src="/hyun/myPost/common/js/jquery.cycle.all.js"></script><!-- mainbanner -->
-<script type="text/javascript" src="/hyun/myPost/common/js/jquery.bxslider.min.js"></script><!-- main small banner -->
+<script type="text/javascript" src="/reqtakbae/views/common/js/jquery.min.js"></script><!-- mainbanner -->
+<script type="text/javascript" src="/reqtakbae/views/common/js/jquery.cycle.all.js"></script><!-- mainbanner -->
+<script type="text/javascript" src="/reqtakbae/views/common/js/jquery.bxslider.min.js"></script><!-- main small banner -->
 
 <script type="text/javascript">
 	$(document).ready(function(){
