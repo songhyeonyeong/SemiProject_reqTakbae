@@ -2,7 +2,7 @@
 <% 
 	String tabon="1";
 %>	
-<%@ include file="/hyun/myPost/admin/include/common.jsp" %>
+<%@ include file="/views/admin/include/common.jsp" %>
 
 
 <title>택배를 부탁해 관리자페이지</title>
@@ -10,7 +10,7 @@
 <body>
 <div id="Wrap"><!-- Wrap S -->
 
-	<%@ include file="include/header.jsp" %>
+	<%@ include file="/views/admin/include/header.jsp" %>
 
 	<div id="container"><!-- container S -->
 
@@ -18,7 +18,7 @@
 
 		<div class="contBox mt30"><!-- contBox S -->
 	
-			<%@ include file="include/tab_notice.jsp" %>
+			<%@ include file="/views/admin/include/tab_notice.jsp" %>
 
 			<table class="searchTbl mt30 mb30"><!-- searchTbl S -->
 				<caption>공고 검색입니다.</caption>
@@ -70,7 +70,7 @@
 				<span><a class="mbtn db wth60" href="#">검색</a></span>
 			</div>
 
-			<p class="flo_right mb10"><a class="mbtn or" href="allNoticeWrite.jsp">공고등록하기</a></p><!-- user에게만 보임 -->
+			<p class="flo_right mb10"><a class="mbtn or" href="/views/admin/allNoticeWrite.jsp">공고등록하기</a></p><!-- user에게만 보임 -->
 
 			<table class="boardList mt20">
 				<caption>전체공고 리스트입니다.</caption>
@@ -114,7 +114,7 @@
 						<td>중</td>
 						<td>8000</td>
 						<td class="darkblue bold">모집중</td>
-						<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
+						<td><a class="sbtn gy" href="/views/admin/allNoticeView.jsp">상세보기</a></td>
 					</tr>
 					<tr>
 						<td>
@@ -129,7 +129,7 @@
 						<td>중</td>
 						<td>8000</td>
 						<td class="orange bold">배송중</td>
-						<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
+						<td><a class="sbtn gy" href="/views/admin/allNoticeView.jsp">상세보기</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -153,7 +153,7 @@
 
 	</div><!--// container E-->
 
-	<%@ include file="include/footer.jsp" %>
+	<%@ include file="/views/admin/include/footer.jsp" %>
 
 
 </div><!--// Wrap E-->

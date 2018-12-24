@@ -2,7 +2,7 @@
 <% 
 	String bigtabon="1";
 %>
-<%@ include file="/hyun/myPost/include/common.jsp" %>
+<%@ include file="/views/include/common.jsp" %>
 
 <title>이용안내</title>
 
@@ -12,14 +12,14 @@
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="/hyun/myPost/include/header.jsp" %>
+<%@ include file="/views/include/header.jsp" %>
 
 <div id="subvisual">이용안내</div>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 
-		<%@ include file="/hyun/myPost/include/tabInfo.jsp" %>
+		<%@ include file="/views/include/tabInfo.jsp" %>
  
 		<div class="titNavi">
 			이용순서 및 수수료안내
@@ -36,13 +36,13 @@
 	</div><!--// inner E-->
 </div>
 
-<%@ include file="/hyun/myPost/include/footer.jsp" %>
+<%@ include file="/views/include/footer.jsp" %>
 
 
 </div><!--// Wrap E-->
 
 
-<%@ include file="/hyun/myPost/include/myNav.jsp" %>
+<%@ include file="/views/include/myNav.jsp" %>
 
 </body>
 </html>
