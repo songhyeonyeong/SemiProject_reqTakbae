@@ -6,7 +6,7 @@
 		<!-- 로그인 전 -->
 		<div class="multBoxL1">
 			<span class="mu11"><a href="javascript:openpop();">로그인</a></span>
-			<span class="mu12"><a href="/views/member/joinSort.jsp">회원가입</a></span>
+			<span class="mu12"><a href="/reqtakbae/views/member/joinSort.jsp">회원가입</a></span>
 		</div>
 
 		<!-- 로그인 후 -->
@@ -45,7 +45,7 @@
 				<span> / </span>
 				<span><a href="javascript:openpop();">로그인</a></span>
 				<span> / </span>
-				<span><a href="/reqtakbae/views/mypage/myPage.jsp">마이페이지</a></span>
+				<span><a href="/reqtakbae/views/mypage/mypage.jsp">마이페이지</a></span>
 			</p>
 		  </div>
 		</div><!--// gnbmenu E-->
