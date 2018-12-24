@@ -1,4 +1,4 @@
-package com.kh.jsp.filter;
+package com.kh.jinkuk.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
