@@ -2,7 +2,7 @@
 <% 
 	String bigtabon="5";
 %>
-<%@ include file="/hyun/myPost/include/common.jsp" %>
+<%@ include file="/views/include/common.jsp" %>
 
 <title>환전내역</title>
 
@@ -12,14 +12,14 @@
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="/hyun/myPost/include/header.jsp" %>
+<%@ include file="/views/include/header.jsp" %>
 
 <div id="subvisual">마이페이지</div>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
-		<%@ include file="/hyun/myPost/include/tabMypage.jsp" %>
+		<%@ include file="/views/include/tabMypage.jsp" %>
 
 		<p class="flo_right mb10"><a class="mbtn or" href="#">환전하기</a></p>
 
@@ -92,13 +92,13 @@
 	</div><!--// inner E-->
 </div>
 
-<%@ include file="/hyun/myPost/include/footer.jsp" %>
+<%@ include file="/views/include/footer.jsp" %>
 
 
 </div><!--// Wrap E-->
 
 
-<%@ include file="/hyun/myPost/include/myNav.jsp" %>
+<%@ include file="/views/include/myNav.jsp" %>
 
 </body>
 </html>
