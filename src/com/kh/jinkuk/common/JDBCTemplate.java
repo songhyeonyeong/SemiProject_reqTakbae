@@ -1,4 +1,4 @@
-package com.kh.jsp.common;
+package com.kh.jinkuk.common;
 
 import java.io.FileReader;
 import java.io.IOException;
