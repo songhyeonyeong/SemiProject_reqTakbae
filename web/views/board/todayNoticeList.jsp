@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/hyun/myPost/include/common.jsp" %>
+<%@ include file="/views/include/common.jsp" %>
 
 <title>오늘의 공고</title>
 
@@ -16,7 +16,7 @@ function fn_open() {
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="/hyun/myPost/include/header.jsp" %>
+<%@ include file="/views/include/header.jsp" %>
 
 <div id="subvisual">오늘의 공고</div>
 
@@ -160,13 +160,13 @@ function fn_open() {
 	</div><!--// inner E-->
 </div>
 
-<%@ include file="/hyun/myPost/include/footer.jsp" %>
+<%@ include file="/views/include/footer.jsp" %>
 
 
 </div><!--// Wrap E-->
 
 
-<%@ include file="/hyun/myPost/include/myNav.jsp" %>
+<%@ include file="/views/include/myNav.jsp" %>
 
 </body>
 </html>
