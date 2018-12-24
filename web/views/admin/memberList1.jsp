@@ -2,7 +2,7 @@
 <% 
 	String tabon="1";
 %>	
-<%@ include file="/hyun/myPost/admin/include/common.jsp" %>
+<%@ include file="/views/admin/include/common.jsp" %>
 
 
 <title>택배를 부탁해 관리자페이지</title>
@@ -32,7 +32,7 @@
 				</span>
 				<span>
 					<label for="Keyword"></label><input id="Keyword" name="Keyword" class="wth240" type="text">
-					<a class="sch" href="#"><img src="/hyun/myPost/common/images/contents/icoSearch.png" alt="검색" title="검색"></a> 
+					<a class="sch" href="#"><img src="../common/images/contents/icoSearch.png" alt="검색" title="검색"></a> 
 				</span>
 			</div>			
 			
