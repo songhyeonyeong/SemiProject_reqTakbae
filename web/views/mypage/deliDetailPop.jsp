@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/hyun/myPost/include/common.jsp" %>
+<%@ include file="/views/include/common.jsp" %>
 
 <title>기사정보</title>
 

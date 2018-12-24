@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../include/common.jsp"%>
 
- <title>회원가입</title>
+<%@ include file="/views/include/common.jsp" %>
+<title>회원가입</title>
 </head>
 <body>
 
@@ -29,13 +29,12 @@
 	</div><!--// inner E-->
 </div>
 
-<%@ include file="/views/include/footer.jsp" %>
 
+<%@ include file="/views/include/footer.jsp" %>
 
 </div><!--// Wrap E-->
 
-
-<%@ include file="/views/include/myNav.jsp" %> 
+<%@ include file="/views/include/myNav.jsp" %>
 
 </body>
 </html>

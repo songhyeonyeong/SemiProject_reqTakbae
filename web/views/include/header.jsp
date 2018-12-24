@@ -45,7 +45,7 @@
 				<span> / </span>
 				<span><a href="javascript:openpop();">로그인</a></span>
 				<span> / </span>
-				<span><a href="/reqtakbae/views/mypage/myPage.jsp">마이페이지</a></span>
+				<span><a href="/reqtakbae/views/mypage/mypage.jsp">마이페이지</a></span>
 			</p>
 		  </div>
 		</div><!--// gnbmenu E-->
