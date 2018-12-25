@@ -2,7 +2,7 @@
 <% 
 	String tabon="1";
 %>	
-<%@ include file="/hyun/myPost/admin/include/common.jsp" %>
+<%@ include file="/views/admin/include/common.jsp" %>
 
 
 <title>택배를 부탁해 관리자페이지</title>
@@ -88,7 +88,7 @@
 		</table>
 
 		
-		<p class="flo_right mt10"><a class="mbtn or" href="reviewWrite.jsp">후기작성하기</a></p>
+		<p class="flo_right mt10"><a class="mbtn or" href="/reqtakbae/views/board/reviewWrite.jsp">후기작성하기</a></p>
 		
 		<div class="numbox pt40 pb50"> 
 			<span><a class="num" href="#">&lt;</a></span>
