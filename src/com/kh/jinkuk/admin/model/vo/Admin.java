@@ -2,7 +2,7 @@ package com.kh.jinkuk.admin.model.vo;
 
 import java.sql.Date;
 
-public class Admin {
+public class Admin implements java.io.Serializable{
 	private int uno;
 	private String b_name;
 	private int b_num;

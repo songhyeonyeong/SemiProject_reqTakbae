@@ -1,5 +1,7 @@
 package com.kh.jinkuk.admin.model.dao;
 
+import static com.kh.jinkuk.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.jinkuk.admin.model.vo.Admin;
-import static com.kh.jinkuk.common.JDBCTemplate.*;
 
 public class AdminDao {
 	private Properties prop = new Properties();
@@ -38,15 +39,17 @@ public class AdminDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("selectNoticeAll");
+		String query = prop.getProperty("selectMemberAll");
 		
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);	
+
 			list= new ArrayList<Admin>();
 			System.out.println(query);
 			while(rset.next()) {
 				Admin m = new Admin();
+				
 				
 				m.setUserId(rset.getString("USER_ID"));
 				m.setUserName(rset.getString("USER_NAME"));
@@ -56,10 +59,108 @@ public class AdminDao {
 				m.setBlackList(rset.getString("BLACKLIST"));
 				m.setC_money(rset.getInt("C_MONEY"));
 				m.setC_point(rset.getInt("C_POINT"));
-				
+	
+			
 				
 				list.add(m);
+			
+				
 			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		
+		return list;
+	}
+
+	public ArrayList<Admin> selectDeliver(Connection con) {
+		ArrayList<Admin> list = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectDeliver");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);	
+
+			list= new ArrayList<Admin>();
+			System.out.println(query);
+			while(rset.next()) {
+				Admin m = new Admin();
+				
+				
+				m.setUserId(rset.getString("USER_ID"));
+				m.setUserName(rset.getString("USER_NAME"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setU_date(rset.getDate("U_DATE"));
+				m.setBlackList(rset.getString("BLACKLIST"));
+				m.setC_money(rset.getInt("C_MONEY"));
+				m.setC_point(rset.getInt("C_POINT"));
+	
+			
+				
+				list.add(m);
+			
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		
+		return list;
+	}
+
+	public ArrayList<Admin> selectBlack(Connection con) {
+		ArrayList<Admin> list = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectBlack");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);	
+
+			list= new ArrayList<Admin>();
+			System.out.println(query);
+			while(rset.next()) {
+				Admin m = new Admin();
+				
+				
+				m.setUserId(rset.getString("USER_ID"));
+				m.setUserName(rset.getString("USER_NAME"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setU_date(rset.getDate("U_DATE"));
+				m.setBlackList(rset.getString("BLACKLIST"));
+				m.setC_money(rset.getInt("C_MONEY"));
+				m.setC_point(rset.getInt("C_POINT"));
+	
+			
+				
+				list.add(m);
+			
+				
+			}
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
