@@ -2,7 +2,7 @@
 
 <header>
 	<div class="inner"><!-- inner S -->
-		<h1><a href="/index.jsp"><img src="/reqtakbae/views/common/images/gnb/logo.png" alt="택배를 부탁해 로고"></a></h1>
+		<h1><a href="/reqtakbae/index.jsp"><img src="/reqtakbae/views/common/images/gnb/logo.png" alt="택배를 부탁해 로고"></a></h1>
 		<!-- 로그인 전 -->
 		<div class="multBoxL1">
 			<span class="mu11"><a href="javascript:openpop();">로그인</a></span>
