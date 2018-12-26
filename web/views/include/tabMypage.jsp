@@ -2,7 +2,7 @@
 
 	<div class="tabBigBox btab_8ea mt50 mb50">
 		<ul>
-			<li <%if(bigtabon.equals("1")){%>class="on"<%}%>><a href="myPage.jsp">마이페이지 메인</a></li>
+			<li <%if(bigtabon.equals("1")){%>class="on"<%}%>><a href="mypage.jsp">마이페이지 메인</a></li>
 			<li <%if(bigtabon.equals("2")){%>class="on"<%}%>><a href="deliList.jsp">내 공고목록</a></li>
 			<li <%if(bigtabon.equals("3")){%>class="on"<%}%>><a href="uMatchingDeliList.jsp">배송중 공고목록</a></li>
 			<li <%if(bigtabon.equals("4")){%>class="on"<%}%>><a href="pointList.jsp">충전/적립 내역</a></li>
