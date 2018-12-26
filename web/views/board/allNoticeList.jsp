@@ -2,6 +2,7 @@
 
 <%@ include file="/views/include/common.jsp" %>
 
+
 <title>전체 공고</title>
 
 <script type="text/javascript">
@@ -98,7 +99,7 @@ function fn_open() {
 			<thead>
 				<tr>
 					<th scope="col">No</th>
-					<th scope="col">공고번호</th>
+					<th scope="col">공고등록일자</th>
 					<th scope="col">출발지</th>
 					<th scope="col">도착지</th>
 					<th scope="col">공고내용</th>
@@ -140,6 +141,17 @@ function fn_open() {
 					<td class="orange bold">배송중</td>
 					<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
 				</tr>
+				<% for(Board a : list){ %>
+				<tr>
+					<input type="hidden" value="<%= b.getBid()%>">
+					<td><%= b.getBno() %></td>
+					<td><%= b.getCategory() %></td>
+					<td><%= b.getbTitle() %></td>
+					<td><%= b.getbWriter() %></td>
+					<td><%= b.getbCount() %></td>
+					<td><%= b.getbDate() %></td>
+				</tr>
+				<% } %>
 			</tbody>
 		</table>
 		
