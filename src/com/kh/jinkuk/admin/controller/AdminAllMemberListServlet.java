@@ -1,23 +1,28 @@
-package com.kh.jinkuk.change.controller;
+package com.kh.jinkuk.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.jinkuk.admin.model.service.AdminService;
+import com.kh.jinkuk.admin.model.vo.Admin;
+
 /**
- * Servlet implementation class ChangeServlet
+ * Servlet implementation class AdminAllNoticeListServlet
  */
-@WebServlet("/ChangeServlet")
-public class ChangeServlet extends HttpServlet {
+@WebServlet("/admin.no")
+public class AdminAllMemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeServlet() {
+    public AdminAllMemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +31,19 @@ public class ChangeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String amount = request.getParameter("amount");
-		String approval = request.getParameter("approval");
 		
-		System.out.println(amount);
-		System.out.println(approval);
+		ArrayList<Admin> list = new AdminService().selectAll();
+		
+		
+		String page="";
+		if(list != null) {
+			request.setAttribute("list", list);
+			page="views/admin/memberList1.jsp";
+		}else {
+			request.setAttribute("msg", "회원정보 조회 실패!");
+			page="views/common/errorPage.jsp";
+		}
+		
 		
 		
 		

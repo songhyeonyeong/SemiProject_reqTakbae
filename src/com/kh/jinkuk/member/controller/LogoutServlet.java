@@ -1,4 +1,4 @@
-package com.kh.jinkuk.change.controller;
+package com.kh.jinkuk.member.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ChangeServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/ChangeServlet")
-public class ChangeServlet extends HttpServlet {
+@WebServlet("/logout.me")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeServlet() {
+    public LogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,15 +26,8 @@ public class ChangeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String amount = request.getParameter("amount");
-		String approval = request.getParameter("approval");
-		
-		System.out.println(amount);
-		System.out.println(approval);
-		
-		
-		
-	}
+		request.getSession().invalidate();
+		response.sendRedirect("index.jsp");	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

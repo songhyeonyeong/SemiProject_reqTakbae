@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/hyun/myPost/include/common.jsp" %>
+<%@ include file="/views/include/common.jsp" %>
 
 <!-- 클릭한페이지 head에 붙이기 
 
