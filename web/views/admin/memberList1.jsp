@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.util.*,com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="1";
+	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -64,8 +66,8 @@
 						<th scope="col">휴대폰번호</th>
 						<th scope="col">이메일 주소</th>
 						<th scope="col">가입일</th>
-						<th scope="col">최종 접속일시</th>
-						<th scope="col">경고횟수</th>
+						<th scope="col">블랙리스트 유무</th>
+						<th scope="col">보유 사이버머니</th>
 						<th scope="col">보유포인트</th>
 					</tr>
 				</thead>
@@ -75,15 +77,17 @@
 							<label for=""> 체크</label>
 							<input id="" name="" class="check" type="checkbox">
 						</td>
-						<td>test1234</td>
+					
+						<td>dsddsd</td>
 						<td>현빈</td>
 						<td>010-1234-4567</td>
 						<td>gusqls@naver.com</td>
 						<td>2015-01-01</td>
-						<td>2018-11-01 13:05:25</td>
-						<td>0</td>
+						<td>N</td>
+						<td>500P</td>
 						<td>5000p</td>
 					</tr>
+				
 				</tbody>
 			</table>
 
