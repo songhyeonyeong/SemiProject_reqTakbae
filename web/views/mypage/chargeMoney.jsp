@@ -5,7 +5,7 @@
 <%@ include file="/views/include/common.jsp" %>
 
 <title>충전하기</title>
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
 
@@ -27,29 +27,68 @@
 			<dl>
 				<dt class="font20 bold">사이버머니 5,000P</dt>
 				<dd class="font18">5,000원(부가세별도)</dd>
-				<dd class="mt5"><a class="bbtn db" href="#">충전하기</a></dd>
+				<dd class="mt5"><a class="bbtn db" href="javascript:void(0);" onclick="a(5500);">충전하기</a></dd>
 			</dl>
 
 			<dl>
 				<dt class="font20 bold">사이버머니 10,000P</dt>
 				<dd class="font18">10,000원(부가세별도)</dd>
-				<dd class="mt5"><a class="bbtn db" href="#">충전하기</a></dd>
+				<dd class="mt5"><a class="bbtn db" href="javascript:void(0);" onclick="a(11000);">충전하기</a></dd>
 			</dl>
 
 			<dl>
 				<dt class="font20 bold">사이버머니 20,000P</dt>
 				<dd class="font18">20,000원(부가세별도)</dd>
-				<dd class="mt5"><a class="bbtn db" href="#">충전하기</a></dd>
+				<dd class="mt5"><a class="bbtn db" href="javascript:void(0);" onclick="a(22000);">충전하기</a></dd>
 			</dl>
 			<dl>
 				<dt class="font20 bold">사이버머니 50,000P</dt>
 				<dd class="font18">50,000원(부가세별도)</dd>
-				<dd class="mt5"><a class="bbtn db" href="#">충전하기</a></dd>
+				<dd class="mt5"><a class="bbtn db" href="javascript:void(0);" onclick="a(55000);">충전하기</a></dd>
 			</dl>
 		</div>
 
 	</div><!--// inner E-->
 </div>
+<script>
+	 function a(m){
+		
+		var IMP = window.IMP; // 생략가능
+		IMP.init('imp54655431');
+		
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '사이버머니',
+		    amount : m,
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울특별시 강남구 삼성동',
+		    buyer_postcode : '123-456',
+		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		        /* var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num; */
+		        var amount = rsp.paid_amount;
+		        var approval = rsp.apply_num;
+		        location.href="<%=request.getContextPath()%>/ChangeServlet?amount=" +amount+ "&approval="+approval;
+		        
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		        location.href="<%=request.getContextPath()%>/ChangeServlet?msg=" +msg;
+		    }
+		    /* alert(msg); */
+		});
+	} 
+	
+</script>
 
 <%@ include file="/views/include/footer.jsp" %>
 
@@ -58,6 +97,7 @@
 
 
 <%@ include file="/views/include/myNav.jsp" %>
+
 
 </body>
 </html>
