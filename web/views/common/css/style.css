@@ -132,3 +132,9 @@ footer li,footer address,footer span a {color:#c0c0c0}
 .mypgBox .bx .boardShort {background:#f1f1f1; border-radius:10px; padding:20px; margin-top:10px;}
 .mypgBox .bx .boardShort li,
 .mypgBox .bx .boardShort li a {font-size:18px;}
+
+/* chargeBox */
+.chargeBox {overflow:hidden; padding:0 100px;}
+.chargeBox dl {position:relative; float:left; margin-top:30px; border:1px solid #e2e2e2; width:348px; padding:50px 0 50px 130px; background:url(../images/contents/img_point.png) no-repeat 6% 40%;}
+.chargeBox dl:nth-child(2n) {margin-left:40px;}
+.chargeBox dd a {position:absolute; top:60px; right:20px;}

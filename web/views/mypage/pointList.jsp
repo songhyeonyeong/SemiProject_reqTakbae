@@ -49,7 +49,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<p class="flo_right mb10"><a class="mbtn or" href="#">충전하기</a></p>
+		<p class="flo_right mb10"><a class="mbtn or" href="/reqtakbae/views/mypage/chargeMoney.jsp">충전하기</a></p>
 		
 		<table class="boardList mt20">
 			<caption>충전적립 리스트입니다.</caption>
