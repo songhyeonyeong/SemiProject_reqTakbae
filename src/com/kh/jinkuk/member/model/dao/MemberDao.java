@@ -65,4 +65,28 @@ public class MemberDao {
 		return m;
 	}
 
+	public boolean idCheck(Connection con, String SId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean flag = false;
+		
+		String query = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, SId);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				flag=true; //중복있음
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return flag;
+	}
 }

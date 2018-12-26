@@ -19,4 +19,14 @@ public class MemberService {
 		return loginUser;
 	}
 
+	public boolean idCheck(String SId) {
+		Connection con = getConnection();
+		
+		boolean flag = new MemberDao().idCheck(con, SId);
+		
+		close(con);
+		
+		return flag;
+	}
+
 }
