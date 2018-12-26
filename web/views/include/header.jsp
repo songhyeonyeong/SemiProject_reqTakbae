@@ -26,7 +26,7 @@
 		<div class="multBoxR">
 			<span class="mu1"><a href="/reqtakbae/views/board/allNoticeList.jsp">공고신청</a></span>
 			<span class="mu2"><a href="#">배송조회</a></span>
-			<span class="mu3"><a href="#">이용안내</a></span>
+			<span class="mu3"><a href="/reqtakbae/views/info/info.jsp">이용안내</a></span>
 		</div>
 
 		<span class="menuAll" onclick="openNav()"><img src="/reqtakbae/views/common/images/gnb/ico_menu.png" alt="menu"></span><!-- gnbmenu S -->

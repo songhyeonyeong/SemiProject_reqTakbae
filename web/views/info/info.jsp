@@ -22,16 +22,14 @@
 		<%@ include file="/views/include/tabInfo.jsp" %>
  
 		<div class="titNavi">
-			이용순서 및 수수료안내
-			<span>홈 &gt; 이용안내 &gt; 이용순서 및 수수료안내</span>
+			이용안내
+			<span>홈 &gt; 이용안내 &gt; 이용안내</span>
 		</div>
 
-
-		<div class="ingBox mt100">
-			<p class="img"></p>
-			<p class="font18 mt10">빠른 시일내에 준비하도록 하겠습니다.</p>
-			<p class="font18">이용에 불편을 드려 대단히 죄송합니다.</p>
+		<div style="text-align: center">
+			<img src="/reqtakbae/views/common/images/contents/process.png" align="center">
 		</div>
+		
 
 	</div><!--// inner E-->
 </div>

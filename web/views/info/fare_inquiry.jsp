@@ -66,9 +66,9 @@
 			</tr>
 			<tr>
 				<td>금액</td>
-				<td>4500</td>
-				<td>4800</td>
-				<td>5500</td>
+				<td>4500원</td>
+				<td>4800원</td>
+				<td>5500원</td>
 			</tr>
 			</tbody>
 		</table>
@@ -78,26 +78,35 @@
 				<span>무게 : </span>
 				<span>
 				<label for=""></label>
-				<input id="" name="" class="wth100" type="text" value="" >
+				<input id="weight" name="" class="wth100" type="text" >
 				</span>
 				<span>kg</span>
 			</li>
 			<li class="ml100">
-				<span>크기 : </span>
-				<span><label for=""></label><input id="" name="" class="" type="radio" value="" > </span>
+				<!-- <span>크기 : </span>
+				<span><label for=""></label><input id="small" name="" class="" type="radio" value="" > </span>
 				<span>소</span>
 				<span><label for=""></label><input id="" name="" class="" type="radio" value="" > </span>
 				<span>중</span>
 				<span><label for=""></label><input id="" name="" class="" type="radio" value="" > </span>
-				<span>대</span>
+				<span>대</span> -->
+				
+				<span>크기 : </span>
+				<input type="radio" id="size" name="size" value="s">소
+				<input type="radio" id="size" name="size" value="m">중
+				<input type="radio" id="size" name="size" value="l" checked>대
+				
+				
 			</li>
 			<li class="ml100">
+				<span><button id="moneyCheck" class="mbtn gy" >요금조회</button></span>
 				<span>금액 : </span>
 				<span>
 				<label for=""></label>
-				<input id="" name="" class="wth100" type="text" value="" >
+				<!-- <input id="" name="" class="wth100" type="label" value="" > -->
+				<span id="money" style="font-size: 1.5em"></span>
 				</span>
-				<span>원</span>
+				<!-- <span>원</span> -->
 			</li>
 		</ul>
 
@@ -111,6 +120,42 @@
 
 
 <%@ include file="/views/include/myNav.jsp" %>
+
+<script>
+	$("#moneyCheck").click(function(){
+		var weight = $("#weight").val();
+		var size = $("#size").val();
+		
+		
+	if(weight == ""){
+		alert("무게를 입력하세요");
+	}else{	
+		if(weight<=5){
+			if(size == "m"){
+				$("#money").html("4800원");
+			}else if(size == "m"){
+				$("#money").html("5500원");
+			}else{
+				$("#money").html("4500원");
+			}
+		}else if(weight<=10){
+			if(size == "l"){
+				$("#money").html("5500원");
+			}else{
+				$("#money").html("4800원");
+			}
+		}else{
+			$("#money").html("5500원");	
+		}
+	}	
+	
+		
+		
+	});
+
+</script>
+
+
 
 </body>
 </html>
