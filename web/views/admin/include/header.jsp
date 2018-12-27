@@ -2,7 +2,7 @@
 
 <header>
 
-	<h1><a href="/reqtakbae/views/admin/memberList1.jsp"><em class="orange font30 bold">택배를 부탁해</em> 관리자페이지</a></h1>
+	<h1><a href="#INSERT" onClick="submitFrom();"><em class="orange font30 bold">택배를 부탁해</em> 관리자페이지</a></h1>
 
 	<div class="inner"><!-- inner S -->
 		<ul class="gnbMenu">
@@ -20,6 +20,8 @@
 		function submitFrom(){
 			location.href="<%=request.getContextPath()%>/admin.no";
 		}
+		
 	
 	</script>
+	
 </header>

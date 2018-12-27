@@ -72,22 +72,29 @@
 					</tr>
 				</thead>
 				<tbody>
+				<% for(Admin m : list){ %>
 					<tr>
 						<td>
 							<label for=""> 체크</label>
 							<input id="" name="" class="check" type="checkbox">
 						</td>
 					
-						<td>dsddsd</td>
-						<td>현빈</td>
-						<td>010-1234-4567</td>
-						<td>gusqls@naver.com</td>
-						<td>2015-01-01</td>
-						<td>N</td>
-						<td>500P</td>
-						<td>5000p</td>
+						
+							
+							<td><%= m.getUserId() %></td>
+							<td><%= m.getUserName() %></td>
+							<td><%= m.getPhone()%></td>
+							<td><%= m.getEmail()%></td>
+							<td><%= m.getU_date() %></td>
+							<td><%= m.getBlackList() %></td>
+							<td><%= m.getC_money() %></td>
+							<td><%= m.getC_point() %></td>
+
+							
+						
+						
 					</tr>
-				
+				<% } %> 
 				</tbody>
 			</table>
 
