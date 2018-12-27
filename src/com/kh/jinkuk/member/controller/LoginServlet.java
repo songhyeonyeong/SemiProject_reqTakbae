@@ -30,7 +30,8 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
-
+		System.out.println(userId);
+		System.out.println(userPwd);
 
 		Member reqMember = new Member();
 		reqMember.setUser_id(userId);
