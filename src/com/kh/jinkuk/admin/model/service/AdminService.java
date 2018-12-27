@@ -40,4 +40,16 @@ public class AdminService {
 		return list;
 	}
 
+	public int goBlack(Admin m) {
+		Connection con = getConnection();
+		System.out.println(con);
+		int result = new AdminDao().goBlack(con,m);
+	
+		close(con);
+		
+		return result;
+	}
+
+
+
 }

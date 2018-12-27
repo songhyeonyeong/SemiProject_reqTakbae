@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 		if (loginUser != null) {
 			request.getSession().setAttribute("loginUser", loginUser);
 			if (loginUser.getUser_id().equals("admin")) {
-				response.sendRedirect("/reqtakbae/views/admin/memberList1.jsp");
+				response.sendRedirect("/reqtakbae/admin.no");
 			} else {
 				response.sendRedirect("index.jsp");
 			}
