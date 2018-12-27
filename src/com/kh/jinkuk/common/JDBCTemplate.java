@@ -29,7 +29,6 @@ public class JDBCTemplate {
 			con = DriverManager.getConnection(url, user, password);
 			
 			con.setAutoCommit(false);
-			System.out.println("DB접속완료");
 			
 		} catch (IOException e) {
 			e.printStackTrace();
