@@ -2,8 +2,14 @@
 	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="2";
-	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");
-%>	
+	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>
 <%@ include file="/views/admin/include/common.jsp" %>
 
 
@@ -67,7 +73,7 @@
 						<th scope="col">이메일 주소</th>
 						<th scope="col">가입일</th>
 						<th scope="col">블랙리스트 유무</th>
-						<th scope="col">보유 사이버머니</th>
+						<th scope="col">사이버머니</th>
 						<th scope="col">보유포인트</th>
 					</tr>
 				</thead>
@@ -76,7 +82,7 @@
 					<tr>
 						<td>
 							<label for=""> 체크</label>
-							<input id="" name="" class="check" type="checkbox">
+							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getUserId()%>">
 						</td>
 					
 						
@@ -99,19 +105,35 @@
 			</table>
 
 			
-			<div class="numbox pt40 pb50"> 
-				<span><a class="num" href="#">&lt;</a></span>
-				<span><a class="num on" href="#">1</a></span>
-				<span><a class="num" href="#">2</a></span>
-				<span><a class="num" href="#">3</a></span>
-				<span><a class="num" href="#">4</a></span>
-				<span><a class="num" href="#">5</a></span>
-				<span><a class="num" href="#">6</a></span>
-				<span><a class="num" href="#">7</a></span>
-				<span><a class="num" href="#">8</a></span>
-				<span><a class="num" href="#">9</a></span>
-				<span><a class="num" href="#">&gt;</a></span>
-			</div>
+		<div class="numbox pt40 pb50" align="center"> 
+			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=1'"><<</a></span>
+			<% if(currentPage <=1){ %>
+				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=currentPage - 1 %>'"><</a></span> <!-- 하나 이전페이지로 이동 -->
+			<%} %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){%>
+				
+				<span><a class="num" href="#" disable><%= p %></a></span> <!-- 비활성화 -->
+			<%  }else{ %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%= p %>'"><%= p %></a></span>
+			
+			
+			<%         } %>
+			<%} %>
+			
+			<%if(currentPage >= maxPage){ %>
+				<span><a class="num" href="#" disable>></a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
+			<%} %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.me?currentPage=<%=maxPage%>'">>></a></span>
+			
+			
+		</div>
+	
 		</div><!--// contBox E-->
 
 	</div><!--// container E-->
@@ -120,6 +142,60 @@
 
 
 </div><!--// Wrap E-->
+
+	<script>
+	
+		 $('span').eq(2).click(function() {
+
+			$("input[name=memCheck]:checkbox").each(function() {
+
+				$(this).attr("checked", true);
+
+			});
+
+		});
+		 
+		 $('span').eq(3).click(function() {
+			 
+				$("input[name=memCheck]:checked").each(function() {
+
+					
+					var test =$(this).val();
+
+					console.log(test);
+					
+					location.href="<%=request.getContextPath()%>/goBlack.de?name=" + test; 
+
+				});
+				
+			
+
+			});
+		 
+		 $('span').eq(4).click(function() {
+			 
+				$("input[name=memCheck]:checked").each(function() {
+
+					
+					var test =$(this).val();
+
+					console.log(test);
+					
+					location.href="<%=request.getContextPath()%>/delete.de?name=" + test; 
+
+				});
+				
+			
+
+			});
+
+		 
+		
+		
+		
+	</script>
+
+	
 
 </body>
 </html>

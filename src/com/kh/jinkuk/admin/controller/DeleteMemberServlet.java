@@ -8,22 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.jinkuk.admin.model.service.AdminService;
 import com.kh.jinkuk.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class goBlackServlet
+ * Servlet implementation class DeleteMemberServlet
  */
-@WebServlet("/goBlack")
-public class goBlackServlet extends HttpServlet {
+@WebServlet("/delete.me")
+public class DeleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public goBlackServlet() {
+    public DeleteMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +34,22 @@ public class goBlackServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		//request객체에서 parameter꺼내기
-		String userId = request.getParameter("name");
 		
-		System.out.println(userId);
+		String userId = request.getParameter("name");
+		System.out.println("delete UserId : " + userId);
+		
 		Admin m = new Admin();
 		m.setUserId(userId);
 		
-
-		int result = new AdminService().goBlack(m);
-		System.out.println(result);
+		int result = new AdminService().deleteMember(m);
 		
-		String page="";
 		if(result > 0) {
-			RequestDispatcher view = request.getRequestDispatcher("/selectAll.bl");
+			RequestDispatcher view = request.getRequestDispatcher("/admin.no");
 			view.forward(request, response);
-	
+			
 		}
 
+		
 		
 	}
 

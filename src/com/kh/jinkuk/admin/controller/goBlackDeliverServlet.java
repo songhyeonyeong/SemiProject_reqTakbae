@@ -8,22 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.jinkuk.admin.model.service.AdminService;
 import com.kh.jinkuk.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class goBlackServlet
+ * Servlet implementation class goBlackDeliverServlet
  */
-@WebServlet("/goBlack")
-public class goBlackServlet extends HttpServlet {
+@WebServlet("/goBlack.de")
+public class goBlackDeliverServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public goBlackServlet() {
+    public goBlackDeliverServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,13 +36,12 @@ public class goBlackServlet extends HttpServlet {
 		
 		//request객체에서 parameter꺼내기
 		String userId = request.getParameter("name");
-		
 		System.out.println(userId);
+		
 		Admin m = new Admin();
 		m.setUserId(userId);
 		
-
-		int result = new AdminService().goBlack(m);
+		int result = new AdminService().goBlackDeliver(m);
 		System.out.println(result);
 		
 		String page="";
@@ -52,8 +50,6 @@ public class goBlackServlet extends HttpServlet {
 			view.forward(request, response);
 	
 		}
-
-		
 	}
 
 	/**
