@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-
+import static com.kh.jinkuk.common.JDBCTemplate.*;
 import com.kh.jinkuk.member.model.vo.Member;
 import com.kh.jinkuk.member.model.dao.MemberDao;
 
@@ -60,6 +60,9 @@ public class MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
 		}
 		
 		return m;
