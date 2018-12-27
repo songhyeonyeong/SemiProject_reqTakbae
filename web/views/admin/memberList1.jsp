@@ -34,7 +34,7 @@
 				</span>
 				<span>
 					<label for="Keyword"></label><input id="Keyword" name="Keyword" class="wth240" type="text">
-					<a class="sch" href="#"><img src="../common/images/contents/icoSearch.png" alt="검색" title="검색"></a> 
+					<a class="sch" href="#"><img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색"></a> 
 				</span>
 			</div>			
 			
@@ -72,28 +72,31 @@
 					</tr>
 				</thead>
 				<tbody>
-				<% for(Admin m : list){ %>
-					<tr>
-						<td>
-							<label for=""> 체크</label>
-							<input id="" name="" class="check" type="checkbox">
-						</td>
+				<% if(list != null){
+	
+					 for(Admin m : list){ %>
+					 	
+	
+						<tr class="parent">
+							<td>
+								<form action="<%=request.getContextPath() %>/goBLack" method="post">
+								<label for=""> 체크</label>
+								<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getUserId()%>" >
+								</form>
 					
-						
-							
-							<td><%= m.getUserId() %></td>
-							<td><%= m.getUserName() %></td>
-							<td><%= m.getPhone()%></td>
-							<td><%= m.getEmail()%></td>
-							<td><%= m.getU_date() %></td>
-							<td><%= m.getBlackList() %></td>
-							<td><%= m.getC_money() %></td>
-							<td><%= m.getC_point() %></td>
+							</td>
 
-							
-						
-						
-					</tr>
+								<td><%= m.getUserId() %></td>
+								<td><%= m.getUserName() %></td>
+								<td><%= m.getPhone()%></td>
+								<td><%= m.getEmail()%></td>
+								<td><%= m.getU_date() %></td>
+								<td><%= m.getBlackList() %></td>
+								<td><%= m.getC_money() %></td>
+								<td><%= m.getC_point() %></td>
+				
+						</tr>
+					<% } %> 
 				<% } %> 
 				</tbody>
 			</table>
@@ -120,6 +123,66 @@
 
 
 </div><!--// Wrap E-->
+	<script>
+		<%-- function goBlack(){
+			location.href = "<%=request.getContextPath()%>/goBlack";
+		}
+		 --%>
+	
+		 $('span').eq(2).click(function() {
+
+			$("input[name=memCheck]:checkbox").each(function() {
+
+				$(this).attr("checked", true);
+
+			});
+
+		});
+		 
+		 $('span').eq(3).click(function() {
+			 
+				$("input[name=memCheck]:checked").each(function() {
+
+					
+					var test =$(this).val();
+
+					console.log(test);
+					
+					location.href="<%=request.getContextPath()%>/goBlack?name=" + test; 
+
+				});
+				
+			
+
+			});
+			
+		
+	
+		 
+	
+	
+
+
+		
+	
+		
+		
+		
+	</script>
+
+
+
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

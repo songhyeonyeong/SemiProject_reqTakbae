@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,7 +40,8 @@ public class AdminDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("selectMemberAll");
+		String query = "SELECT USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT"
+				+ " FROM MEMBER WHERE STATUS='Y' AND USER_DIV='신청자'";
 		
 		try {
 			stmt = con.createStatement();
@@ -86,7 +88,7 @@ public class AdminDao {
 		Statement stmt = null;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("selectDeliver");
+		String query = "SELECT USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT FROM MEMBER WHERE STATUS='Y' AND USER_DIV='기사'";
 		
 		try {
 			stmt = con.createStatement();
@@ -175,4 +177,39 @@ public class AdminDao {
 		return list;
 	}
 
+	public int goBlack(Connection con, Admin m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateBlack");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, m.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
