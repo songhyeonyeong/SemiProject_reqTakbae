@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" 
+	import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
+<%
+	ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");
+%>
 <%@ include file="/views/include/common.jsp" %>
 
 
@@ -111,7 +114,7 @@ function fn_open() {
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<!-- <tr>
 					<td>
 						<label for=""> 체크</label>
 						<input id="" name="" class="check" type="checkbox">
@@ -140,16 +143,21 @@ function fn_open() {
 					<td>8000</td>
 					<td class="orange bold">배송중</td>
 					<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
-				</tr>
-				<% for(Board a : list){ %>
+				</tr> -->
+				<% for(Announcment a : list){ %>
 				<tr>
-					<input type="hidden" value="<%= b.getBid()%>">
-					<td><%= b.getBno() %></td>
-					<td><%= b.getCategory() %></td>
-					<td><%= b.getbTitle() %></td>
-					<td><%= b.getbWriter() %></td>
-					<td><%= b.getbCount() %></td>
-					<td><%= b.getbDate() %></td>
+					<td><%= a.getG_NO() %></td>
+					<td><%= a.getG_S_DATE() %></td>
+					<td><%= a.getG_S_AREA() %></td>
+					<td><%= a.getG_E_AREA() %></td>
+					<td><%= a.getG_CONTEXT() %></td>
+					<td><%= a.getG_DAY() %></td>
+					<td><%= a.getG_SIZE() %></td>
+					<td><%= a.getG_PRICE() %></td>
+					<td><%= a.getG_PRICE() %></td>
+					<td><%= a.getSTATUS() %></td>
+					<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
+
 				</tr>
 				<% } %>
 			</tbody>

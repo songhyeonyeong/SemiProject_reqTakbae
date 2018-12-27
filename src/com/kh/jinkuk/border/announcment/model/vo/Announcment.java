@@ -16,14 +16,14 @@ public class Announcment implements java.io.Serializable{
 	private int G_SUM;
 	private int G_PRICE;
 	private String G_SIZE;
-	private Date DATE;
+	private Date G_DAY;
 	private String STATUS;
 	private int U_NO;
 	
 	public Announcment() {}
-
+	
 	public Announcment(int g_NO, String g_TITLE, String g_CONTEXT, int g_DIV, Date g_S_DATE, Date g_E_DATE,
-			String g_S_AREA, String g_E_AREA, String g_TYPE, int g_SUM, int g_PRICE, String g_SIZE, Date dATE,
+			String g_S_AREA, String g_E_AREA, String g_TYPE, int g_SUM, int g_PRICE, String g_SIZE, Date g_DAY,
 			String sTATUS, int u_NO) {
 		super();
 		G_NO = g_NO;
@@ -38,13 +38,13 @@ public class Announcment implements java.io.Serializable{
 		G_SUM = g_SUM;
 		G_PRICE = g_PRICE;
 		G_SIZE = g_SIZE;
-		DATE = dATE;
+		G_DAY = g_DAY;
 		STATUS = sTATUS;
 		U_NO = u_NO;
 	}
 	
 	
-	
+
 	public int getG_NO() {
 		return G_NO;
 	}
@@ -141,12 +141,12 @@ public class Announcment implements java.io.Serializable{
 		G_SIZE = g_SIZE;
 	}
 
-	public Date getDATE() {
-		return DATE;
+	public Date getG_DAY() {
+		return G_DAY;
 	}
 
-	public void setDATE(Date dATE) {
-		DATE = dATE;
+	public void setG_DAY(Date g_DAY) {
+		G_DAY = g_DAY;
 	}
 
 	public String getSTATUS() {
@@ -170,9 +170,8 @@ public class Announcment implements java.io.Serializable{
 		return "Announcment [G_NO=" + G_NO + ", G_TITLE=" + G_TITLE + ", G_CONTEXT=" + G_CONTEXT + ", G_DIV=" + G_DIV
 				+ ", G_S_DATE=" + G_S_DATE + ", G_E_DATE=" + G_E_DATE + ", G_S_AREA=" + G_S_AREA + ", G_E_AREA="
 				+ G_E_AREA + ", G_TYPE=" + G_TYPE + ", G_SUM=" + G_SUM + ", G_PRICE=" + G_PRICE + ", G_SIZE=" + G_SIZE
-				+ ", DATE=" + DATE + ", STATUS=" + STATUS + ", U_NO=" + U_NO + "]";
+				+ ", G_DAY=" + G_DAY + ", STATUS=" + STATUS + ", U_NO=" + U_NO + "]";
 	}
 
-	
 	
 }
