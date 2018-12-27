@@ -11,16 +11,14 @@ import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 
 public class AnnouncmentService {
 	
-	public class BoardService {
 
-		public ArrayList<Announcment> selectList() {
-			Connection con = getConnection();
-			
-			ArrayList<Announcment> list = new AnnouncmentDao().selectAnnouncment(con);
-			
-			close(con);
-			
-			return list;
-		}
+	public ArrayList<Announcment> selectList() {
+		Connection con = getConnection();
+		
+		ArrayList<Announcment> list = new AnnouncmentDao().selectAnnouncment(con);
+		
+		close(con);
+		
+		return list;
 	}
 }
