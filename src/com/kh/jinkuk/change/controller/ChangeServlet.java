@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.jinkuk.change.model.service.ChangeService;
 import com.kh.jinkuk.change.model.vo.Change;
 import com.kh.jinkuk.member.model.vo.Member;
 
@@ -32,29 +33,54 @@ public class ChangeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String amount = request.getParameter("amount");
-		String approval = request.getParameter("approval");
+		System.out.println("서블릿 연결");
+		int chOk = Integer.parseInt(request.getParameter("apply"));
 		String msg = request.getParameter("msg");
+		String chDiv = request.getParameter("chDiv");
+		int rMoney = Integer.parseInt(request.getParameter("amount"));
+		int cMoney = 0;
+		if(rMoney >= 10000) {
+			cMoney = rMoney - (rMoney % 10000);
+		}else {
+			cMoney = rMoney - (rMoney % 1000);
+		}
 		
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		String userId = loginUser.getUser_id();
+		int userNo = loginUser.getU_no();
 		
 		System.out.println(msg);
-		System.out.println(userId);
-		System.out.println(amount);
-		System.out.println(approval);
+		System.out.println(userNo);
+		System.out.println(rMoney);
+		System.out.println(cMoney);
+		System.out.println(chOk);
+		System.out.println(chDiv);
 		
-		Change change = new Change();
+		Change c = new Change();
+		c.setCh_cmoney(cMoney);
+		c.setCh_rmoney(rMoney);
+		c.setCh_div(chDiv);
+		c.setCh_ok(chOk);
+		c.setU_no(userNo);
 		
-		response.setContentType("text/html; charset=UTF-8");
-        
-        /*PrintWriter out = response.getWriter();
-        out.println("<script>"
-        		+ "alert('ㅁㅇㄴㄹ')"
-        		+ "location.href=""
-        		+ "</script>");*
-        out.close();*/
+		int result = new ChangeService().InsertChange(c);
+		
+		if(result >0) {
+			response.setContentType("text/html; charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+	        out.println("<script>"
+	        		+ "alert('결제에 이상이 있을시 관리자에게 문의해주세요.');"
+	        		+ "location.href='"+request.getContextPath()+"/Cybermoney_breakdownServlet';</script>");
+	        out.close();
+	        
+			/*response.sendRedirect(request.getContextPath()+"/Cybermoney_breakdownServlet")*/;
+		}else {
+			request.setAttribute("msg", "결제정보 저장 실패");
+			System.out.println("결제정보 저장 실패");
+			/*request.getRequestDispatcher(arg0)*/
+		}
+		
+		
 
 
 		
