@@ -1,6 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="com.kh.jinkuk.mypage.model.vo.*, com.kh.jinkuk.cybermoney_breakdown.model.vo.*,java.sql.*, java.util.*"%>
 <% 
 	String bigtabon="3";
+ArrayList<MyR_M_article> list = (ArrayList<MyR_M_article>) request.getAttribute("list");
+PageInfo pi = (PageInfo) request.getAttribute("pi");
+
+
+int listCount = pi.getListCount();
+int currentPage = pi.getCurrentPage();
+int maxPage = pi.getMaxPage();
+int startPage = pi.getStartPage();
+int endPage = pi.getEndPage();
 %>
 <%@ include file="/views/include/common.jsp" %>
 
@@ -39,55 +50,77 @@
 					<th scope="col">구분</th>
 					<th scope="col">공고번호</th>
 					<th scope="col">공고내용</th>
-					<th scope="col">배송날짜</th>
-					<th scope="col">선택기사</th>
-					<th scope="col">상태</th>
+					<th scope="col">신청자ID</th>
 					<th scope="col">상세</th>
+					<th scope="col" colspan="2">배송상태</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>
-						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
-					</td>
-					<td>당일</td>
-					<td>20181217002</td>
-					<td>맥북 배송</td>
-					<td>2018-12-03</td>
-					<td>ddeded112</td>
-					<td>인수</td>
-					<td><a class="sbtn gy" href="deliView.jsp">상세보기</a></td>
-				</tr>
-				<tr>
-					<td>
-						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
-					</td>
-					<td>일반</td>
-					<td>20181217004</td>
-					<td>나이키 신발</td>
-					<td>2018-12-03</td>
-					<td>suhyun003</td>
-					<td>배송중</td>
-					<td><a class="sbtn gy" href="deliView.jsp">상세보기</a></td>
-				</tr>
+				<!--  내공고 목록 출력 tr -->
+						<%
+							for (MyR_M_article m : list) {
+						%>
+						<tr>
+							<input type="hidden" value="<%=m.getG_no()%>">
+							<tr>
+							<td><label for=""> 체크</label> <input id="" name=""
+								class="check" type="checkbox"></td>
+							<td><%=m.getG_div()%></td>
+							<td><%=m.getG_no()%></td>
+							<td><%=m.getG_context()%></td>
+							<td><%=m.getUser_id()%></td>
+							<td><a class="sbtn gy" href="#">상세보기</a></td>
+							<td>
+							<form 
+							<select id="selectDel" name="selectDel">
+							<option value="default ">선택</option>
+							<option value="인수중">인수중</option>
+							<option value="배송중">배송중</option>
+							<option value="배송완료">배송완료</option>
+							</select>
+							&nbsp;&nbsp;<button onclick="changeST()">적용</button></td>
+							<td style="color:blue"><%=m.getB_status()%></td>
+						</tr>
+						<%
+							}
+						%>
 			</tbody>
 		</table>
-		
+				<script type="text/javascript">
+					function changeST(){
+						var t=$("option:selected").val();
+						$("option").attr("default");
+						console.log(t);
+					}
+				
+				</script>
 		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+			<% if(currentPage <= 1){ %>
+			<span><a class="num" disabled>&lt;</a></span>
+			<% }else{ %>
+			<span><a class="num" href="<%=request.getContextPath()%>/matchingdellist.mp?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){ 
+					if(p == currentPage){
+			%>
+						<span><a class="num on" disabled><%= p %></a></span>
+			<%      }else{ %>
+								<span><a class="num" href="<%=request.getContextPath()%>/matchingdellist.mp?currentPage=<%= p %>"><%= p %></a></span>
+			<%      } %>
+	
+			<% } %>
+			
+			
+			<% if(currentPage >= maxPage){ %>
+			<span><a class="num" disabled>></a></span>
+			<% }else{ %>
+				<span><a class="num" href="<%=request.getContextPath()%>/matchingdellist.mp?currentPage=<%=currentPage + 1%>">></a></span>
+			<% } %>
+			
+			
 		</div>
+		
 
 	</div><!--// inner E-->
 </div>

@@ -118,7 +118,7 @@
 			<% if(currentPage <= 1){ %>
 			<span><a class="num" disabled>&lt;</a></span>
 			<% }else{ %>
-			<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+			<span><a class="num" href="<%=request.getContextPath()%>/reqList.mp?currentPage=<%=currentPage - 1%>">&lt;</a></span>
 <%-- 			<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage - 1%>'"><</button> --%>
 			<% } %>
 			
@@ -128,7 +128,7 @@
 						<span><a class="num on" disabled><%= p %></a></span>
 <%-- 					<button disabled><%= p %></button> --%>
 			<%      }else{ %>
-								<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%= p %>"><%= p %></a></span>
+								<span><a class="num" href="<%=request.getContextPath()%>/reqList.mp?currentPage=<%= p %>"><%= p %></a></span>
 <%-- 					<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%= p %>'"><%= p %></button> --%>
 			<%      } %>
 	
@@ -139,7 +139,7 @@
 			<span><a class="num" disabled>></a></span>
 <!-- 			<button disabled>></button> -->
 			<% }else{ %>
-				<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage + 1%>">></a></span>
+				<span><a class="num" href="<%=request.getContextPath()%>/reqList.mp?currentPage=<%=currentPage + 1%>">></a></span>
 <%-- 			<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage + 1%>'">></button> --%>
 			<% } %>
 			
