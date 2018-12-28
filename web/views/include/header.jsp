@@ -43,7 +43,7 @@
 			<p><a href="/reqtakbae/views/info/info.jsp">이용 안내</a></p>
 			<p><a href="/reqtakbae/views/board/allNoticeList.jsp">전체 공고</a></p>
 			<p><a href="/reqtakbae/views/board/todayNoticeList.jsp">오늘의 공고</a></p>
-			<p><a href="/reqtakbae/views/board/reviewList.jsp">후기게시판</a></p>
+			<p><a href="<%= request.getContextPath() %>/selectReview">후기게시판</a></p>
 			<p><a href="/reqtakbae/views/board/qnaWrite.jsp">문의하기</a></p>
 			<p class="smMenu mt20">
 				<span><a href="/reqtakbae/views/member/joinSort.jsp">회원가입</a></span>
