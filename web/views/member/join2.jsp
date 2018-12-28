@@ -31,27 +31,32 @@
 			<tbody>
 			<tr>
 				<th scope="row">아이디</th>
-				<td colspan="3">
+				<td >
 					<label for=""></label>
-					<!-- <input id="" name="" class="wth300" type="text" value="" > -->
 					<input id="SId" name="" type="text" value="" >
-					<span><a id="idCheckBtn" class="sbtn db" >중복확인</a></span>
-					<span id="idCheck"> </span>
+					<span>
+						<a id="idCheckBtn" class="sbtn db" >중복확인</a>
+						<span id="idCheckMsg"></span>
+					</span>
 				</td>
+				<td><img id="idCheckImg" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">비밀번호</th>
 				<td>
 					<label for=""></label>
-					<input id="SPwd" name="" type="text" value="" > 
+					<input id="SPwd" name="" type="password" value="" > 
+					<span id="pwdCheckMsg"></span>
 				</td>
+				<td><img id="pwdCheckImg" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">비밀번호 확인</th>
 				<td>
 					<label for=""></label>
-					<input id="SPwd2" name="" type="text" value="" > 
+					<input id="SPwd2" name="" type="password" value="" > 
 				</td>
+				<td><img id="pwdCheckImg2" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">이름</th>
@@ -59,16 +64,20 @@
 					<label for=""></label>
 					<input id="SName" name="" type="text" value="" > 
 				</td>
+				<td><img id="nameCheckImg" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">휴대폰번호</th>
 				<td>
-					<span><label for=""></label><input id="Sphone1" name="" class="wth50" type="text" value="" ></span>
+					<!-- <span><label for=""></label><input id="Sphone1" name="" class="wth50" type="text" value="" ></span>
 					<span> - </span>
 					<span><label for=""></label><input id="Sphone2" name="" class="wth60" type="text" value="" ></span>
 					<span> - </span>
 					<span><label for=""></label><input id="Sphone3" name="" class="wth60" type="text" value="" ></span>
-				</td>
+				 -->
+				 <span><label for=""></label><input id="Sphone" name="" type="text" value="" placeholder="-없이 입력"></span>
+				 </td>
+				<td><img id="phoneCheckImg" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">이메일</th>
@@ -83,28 +92,37 @@
 								<option value="daum">daum.net</option>
 								<option value="google">google.com</option>
 						</select>
-						
 					</span>
 					<span>
-						<a class="sbtn db" id="sendEmail">인증코드 발송</a>
+						<a class="sbtn db" id="sendEmail">인증번호 발송</a>
 					</span>
+					
+					
+					<%
+						//인증시 인증하기 버튼 보이게
+					%>
 					
 					<%!
 						public int getRandom(){
-							int random=0;
-							random = (int)Math.floor((Math.random()*99999-10000+1))+10000;
-							return random;
-					}
+							int randomCode=0;
+							randomCode = (int)Math.floor((Math.random()*99999-10000+1))+10000;
+							return randomCode;
+						}
 					%>
 					
 					<span>
-						<%-- <input type="hidden" value="<%=getRandom()%>" id="randomCode"> --%>
 						<input type="hidden" value="<%=getRandom()%>" id="randomCode">
 						<input type="hidden" value="takbububu@gmail.com" id="from">
-						<!-- <input type="hidden" value="유솔이" id="adName"> -->
+					</span>
+					
+					<br><br>
+					<span>
+						<input id="authCode" type="text" placeholder="인증번호를 입력하세요">
+						<a class="sbtn db" onclick="auth();">인증하기</a>
 					</span>
 					
 				</td>
+				<td><img id="emailCheckImg" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row" rowspan="3">계좌번호</th>
@@ -119,10 +137,8 @@
 						계좌번호 <input id="accountNum" name="" type="text"><br>
 						생년월일 <input id="birth" type="text" placeholder="951015형식으로 입력"><br>
 						예금주  <input id="depositor" type="text">
-						<!-- <span id="bankCheck" class="sbtn db">계좌 인증</span><br>
-						<span id="testtest" class="sbtn db">testtest</span><br> -->
-						<span id="bankCheck" class="sbtn db" onclick="testtest();">계좌 인증</span><br>
-						
+						<span id="bankCheck" class="sbtn db" onclick="testtest();">계좌 인증</span>
+						<!-- <span id="accountCheck"> </span> -->
 						<%
 							Calendar cal = Calendar.getInstance();
 							java.util.Date date = cal.getTime();
@@ -131,6 +147,7 @@
 						<input id="today" type="hidden" value="<%= today %>" ><br>
 					</span>
 				</td>
+				<td><img id="accountCheck" src=""></td>
 			</tr>
 			</tbody>
 		</table><!--// boardWrite E-->
@@ -152,52 +169,154 @@
 <%@ include file="/views/include/myNav.jsp" %>
 
 <script>
-
-	//아이디 중복체크
+	var checkImgPath="/reqtakbae/views/common/images/contents/check.PNG";
+	
+	//아이디 정규표현식 && 중복체크
 	$("#idCheckBtn").click(function(){
 		var SId = $("#SId").val();
+		var regExp = /^[a-z0-9]{3,}$/;
 		
-		$.ajax({
-			url:"/reqtakbae/idCheck.me",
-			type:"post",
-			data:{SId:SId},
-			success:function(data){
-				if(data=="YES"){
-					if(SId != "") {
-						$("#idCheck").html("사용가능");
-						$("#idCheck").css("color","black");
+		if(regExp.test(SId)){
+			$.ajax({
+				url:"/reqtakbae/idCheck.me",
+				type:"post",
+				data:{SId:SId},
+				success:function(data){
+					if(data=="YES"){
+						if(SId != "") {
+							$("#idCheckMsg").html("");
+							//$("#idCheckMsg").css("color","black");
+							$("#idCheckImg").attr("src",checkImgPath);
+						}
+					}else{
+						$("#idCheckMsg").html("이미 사용중인 아이디입니다");
+						$("#idCheckMsg").css("color","red");
+						$("#idCheckImg").attr("src","");
 					}
-				}else{
-					$("#idCheck").html("사용불가");
-					$("#idCheck").css("color","red");
-					$("#SId").val('');
 				}
-			}
-			
-		})
+				
+			})
+		}else{
+			alert("아이디 : 영문소문자/숫자 조합 3자리 이상");
+			$("#idCheckMsg").html("");
+			//$("#idCheckMsg").css("color","red");
+			$("#idCheckImg").attr("src","");
+		}
 	});
+	
+	
+	//비밀번호 유효성체크
+	$("#SPwd").change(function(){
+		var pwd1 = $("#SPwd").val();
+		
+		var regExp=/^[a-z0-9]{3,}$/;
+		
+		if(!regExp.test(pwd1)){
+			alert("비밀번호 : 영문소문자/숫자 조합 3자리 이상");
+			$("#SPwd").val("");
+			$("#SPwd2").val("");
+			$("#pwdCheckImg").attr("src","");
+			$("#pwdCheckImg2").attr("src","");
+		}else{
+			
+		}
+	});
+	
+	//비밀번호 체크
+	$("#SPwd2").change(function(){
+		var pwd1 = $("#SPwd").val();
+		var pwd2 = $("#SPwd2").val();
+		
+		if(pwd1 != pwd2){
+			$("#pwdCheckMsg").html("비밀번호가 일치하지 않습니다");
+			$("#pwdCheckMsg").css("color","red");
+			
+			$("#SPwd").val("");
+			$("#SPwd2").val("");
+			$("#pwdCheckImg").attr("src","");
+			$("#pwdCheckImg2").attr("src","");
+		}else if(pwd2==null || pwd1==null){
+			$("#pwdCheckMsg").html('');
+			$("#pwdCheckImg").attr("src","");
+			$("#pwdCheckImg2").attr("src","");
+		}else{
+			$("#pwdCheckMsg").html('');
+			$("#pwdCheckImg").attr("src",checkImgPath);
+			$("#pwdCheckImg2").attr("src",checkImgPath);
+		}
+		
+	});
+	
+	
+	//이름 체크
+	$("#SName").change(function(){
+		var name = $("#SName").val();
+		var regExp =/^[ㄱ-ㅎㅏ-ㅣ가-힣]{1,}$/;
+		
+		if(regExp.test(name)){
+			$("#nameCheckImg").attr("src",checkImgPath);
+		}else{
+			alert("이름 : 한글 ");
+			$("#nameCheckImg").attr("src","");
+		}
+	});
+	
+	
+	//핸드폰 체크
+	$("#Sphone").change(function(){
+		var phone = $("#Sphone").val();
+		var regExp=/[^-]{11,12}$/;
+		
+		if(regExp.test(phone)){
+			$("#phoneCheckImg").attr("src",checkImgPath);
+		}else{
+			alert("휴대폰번호 : -없이 11-12자리");
+			$("#phoneCheckImg").attr("src","");
+		}
+		
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//이메일 select 선택시 값 변경
 	 $("#email").change(function(){
 		if($("#email option:selected").val() == "naver"){
+			//$("#Semail2").attr("value",$(this).find("option[value='" + $(this).val() + "']").text());
 			$("#Semail2").attr("value","naver.com");
 		}else if($("#email option:selected").val() == "daum"){
 			$("#Semail2").attr("value","daum.net");
 		}else if($("#email option:selected").val() == "google"){
 			$("#Semail2").attr("value","google.com");
-		}else{
+		}else if($("#email option:selected").val() == "self"){
 			$("#Semail2").attr("value","");
 		}
-	});
+	}); 
 	
 	
+	
+	
+	
+	var randomCode = $("#randomCode").val();
 	//이메일 인증번호 발송
-	$("#sendEmail").click(function(){
+	$("#sendEmail").click(function(){		
 		var email1 = $("#Semail1").val();
 		var email2 = $("#Semail2").val();
 		var fullEmail = email1 + "@" +email2;
-		var randomCode = $("#randomCode").val();
 	
 		$.ajax({
 			url:"/reqtakbae/sendEmail",
@@ -217,6 +336,23 @@
 		});
 	});
 	
+	
+	
+	
+	//이메일 인증코드 확인
+	function auth(){
+		if($("#authCode").val() == randomCode){
+			alert("이메일 인증 성공");
+			//$("#emailCheck").html("인증 성공");
+			//$("#emailCheck").css("color","black");
+			$("#emailCheck").attr("src","/reqtakbae/views/common/images/contents/check.PNG");
+		}else{
+			alert("이메일 인증 실패");
+			$("#emailCheck").html("인증 실패");
+			$("#emailCheck").css("color","red");
+		}
+		
+	}
 	
 	
 	
@@ -290,8 +426,13 @@
 					console.log(data);
 					if(depositor==data.account_holder_name && accountNum==data.account_num && bankNum==data.bank_code_std){
 						alert("계좌 인증 성공");
+						//$("#accountCheck").html("인증 성공");
+						//$("#accountCheck").css("color","black");
+						$("#accountCheck").attr("src","/reqtakbae/views/common/images/contents/check.PNG");
 					}else{
 						alert("계좌 인증 실패");
+						$("#accountCheck").html("인증 실패");
+						$("#accountCheck").css("color","red");
 					}
 				},
 				error:function(data){
