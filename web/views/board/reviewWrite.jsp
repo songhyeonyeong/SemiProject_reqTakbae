@@ -56,7 +56,8 @@ Calendar cal = Calendar.getInstance();
 				<td><input id="driname" name="driname" class="" type="text" value="" ></td>
 				<th scope="row">신청자</th>
 				<td>
-					<input type="text" value="<%=loginUser.getUser_id() %>" name="writer" readonly>
+					<input type="text" value="<%=loginUser.getUser_id()%>" name="writer" readonly>
+					<input type="hidden" value="<%=loginUser.getU_no() %>" name="uno">
 				</td>
 			</tr>
 			<tr>

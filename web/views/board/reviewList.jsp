@@ -39,8 +39,9 @@
 
 				<div class="topsearch mt30 mb30">
 					<!-- topsearch S -->
-
-					<span> <label for="col01"></label> <select id="col01"
+		
+					<span> <label for="col01"></label> 
+					<select id="col01"
 						name="col01" class="wth140">
 							<option value="">제목</option>
 							<option value="">내용</option>
@@ -56,7 +57,7 @@
 				</div>
 
 
-				<table class="boardList mt20" id="listArea">
+				<table class="boardList mt20" >
 					<caption>후기게시판 리스트입니다.</caption>
 					<colgroup>
 						<col style="width: 7%;">
@@ -72,7 +73,8 @@
 						<col style="width: 10%;">
 						<!--  -->
 					</colgroup>
-					<thead>
+				
+					<thead id="listArea">
 						<tr>
 							<th scope="col">No</th>
 							<th scope="col">제목</th>
@@ -85,7 +87,8 @@
 							for (Review r : list) {
 						%>
 						<tr>
-							<td><%=r.getHno()%></td>
+							<input type="hidden" value="<%=r.getHno()%>">
+							<td> <%=r.getHno()%></td>
 							<td><%=r.gethTitle()%></td>
 							<td><%=r.getDriname()%></td>
 							<td><%=r.getUname()%></td>
@@ -144,6 +147,20 @@
 			</div>
 			<!--// inner E-->
 		</div>
+		<script>
+		$(function(){
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+			}).click(function(){
+				var num = $(this).parent().children("input").val();
+				
+				
+				location.href="<%=request.getContextPath()%>/selectOneRe?num=" + num;
+			});
+		});
+		</script>
 
 		<%@ include file="/views/include/footer.jsp"%>
 

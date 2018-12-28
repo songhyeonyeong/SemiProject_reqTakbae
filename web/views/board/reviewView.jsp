@@ -1,9 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+import ="com.kh.jinkuk.border.review.model.vo.*"%>
+<%
+	Review r = (Review)request.getAttribute("r");
+%>
 <%@ include file="/views/include/common.jsp" %>
 
 <title>후기게시판</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -33,36 +36,26 @@
 			<tbody>
 			<tr>
 				<th scope="row">제목</th>
-				<td colspan="3">넘친절해용~~~~~~~~~~~~~~~ㅎㅎ</td>
+				<td colspan="3"><span><%=r.gethTitle() %></span></td>
 			</tr>
 			<tr>
 				<th scope="row">기사명</th>
-				<td>현빈 기사님</td>
+				<td><span><%=r.getDriname() %></span></td>
 				<th scope="row">신청자</th>
-				<td>김**</td>
+				<td><span><%=r.getUname() %></span></td>
 			</tr>
 			<tr>
 				<th scope="row">별점</th>
 				<td>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
+					<!--  <span><img src="../common/images/contents/starOn.png" alt="별on"></span>-->
+				<span><%=r.gethGrade() %></span>
 				</td>
 				<th scope="row">작성일</th>
-				<td>2018-12-12</td>
+				<td><span><%=r.gethDate() %></span></td>
 			</tr>
 			<tr>
 				<td colspan="4" class="">
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
+					<span><%=r.gethContext() %></span>
 				</td>
 			</tr>
 			</tbody>
@@ -70,8 +63,8 @@
 		
 
 		<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn bk" href="reviewList.jsp">목록</a></span>
-			<span><a class="mbtn gy" href="#">수정</a></span>
+			<span><a class="mbtn bk" href='<%=request.getContextPath()%>/selectReview'>목록</a></span>
+			<span><a class="mbtn gy" href='<%=request.getContextPath()%>/'>수정</a></span>
 			<span><a class="mbtn rd" href="#">삭제</a></span>
 		</div><!--// btnbox E-->
 

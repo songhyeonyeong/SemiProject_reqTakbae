@@ -57,7 +57,7 @@ public class ReviewService {
 		return list;
 	}
 	
-	
+	//페이징 처리 카운트 메소드
 	public int getListCount() {
 		Connection con = getConnection();
 		
@@ -65,6 +65,17 @@ public class ReviewService {
 		close(con);
 		
 		return listCount;
+	}
+
+	//후기 상세보기 메소드
+	public Review selectOne(int num) {
+		Connection con = getConnection();
+		
+		Review r=new ReviewDao().selectOne(con, num);
+		
+	
+		close(con);
+		return r;
 	}
 
 	
