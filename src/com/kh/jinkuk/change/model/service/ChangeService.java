@@ -15,7 +15,9 @@ public class ChangeService {
 		
 		int up = new ChangeDao().UpdateMoney(con, c);
 		
-		if(result > 0 && up >0) {
+		int cyberInsert = new ChangeDao().CyberInsert(con, c);
+		
+		if(result > 0 && up >0 && cyberInsert >0) {
 			commit(con);
 			
 		}else {
