@@ -41,7 +41,7 @@
 		  <div class="overlay-content">
 			<p class="clear"><a href="/reqtakbae/views/company/comInfo.jsp">회사 소개</a></p>
 			<p><a href="/reqtakbae/views/info/info.jsp">이용 안내</a></p>
-			<p><a href="/reqtakbae/views/board/allNoticeList.jsp">전체 공고</a></p>
+			<p><a href="<%=request.getContextPath() %>/selectList.bo">전체 공고</a></p>
 			<p><a href="/reqtakbae/views/board/todayNoticeList.jsp">오늘의 공고</a></p>
 			<p><a href="/reqtakbae/views/board/reviewList.jsp">후기게시판</a></p>
 			<p><a href="/reqtakbae/views/board/qnaWrite.jsp">문의하기</a></p>

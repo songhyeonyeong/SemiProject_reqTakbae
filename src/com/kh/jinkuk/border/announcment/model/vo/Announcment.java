@@ -7,7 +7,7 @@ public class Announcment implements java.io.Serializable{
 	private int G_NO;
 	private String G_TITLE;
 	private String G_CONTEXT;
-	private int G_DIV;
+	private String G_DIV;
 	private Date G_S_DATE;
 	private Date G_E_DATE;
 	private String G_S_AREA;
@@ -22,7 +22,7 @@ public class Announcment implements java.io.Serializable{
 	
 	public Announcment() {}
 	
-	public Announcment(int g_NO, String g_TITLE, String g_CONTEXT, int g_DIV, Date g_S_DATE, Date g_E_DATE,
+	public Announcment(int g_NO, String g_TITLE, String g_CONTEXT, String g_DIV, Date g_S_DATE, Date g_E_DATE,
 			String g_S_AREA, String g_E_AREA, String g_TYPE, int g_SUM, int g_PRICE, String g_SIZE, Date g_DAY,
 			String sTATUS, int u_NO) {
 		super();
@@ -69,11 +69,11 @@ public class Announcment implements java.io.Serializable{
 		G_CONTEXT = g_CONTEXT;
 	}
 
-	public int getG_DIV() {
+	public String getG_DIV() {
 		return G_DIV;
 	}
 
-	public void setG_DIV(int g_DIV) {
+	public void setG_DIV(String g_DIV) {
 		G_DIV = g_DIV;
 	}
 
