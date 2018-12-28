@@ -21,10 +21,20 @@ public class Cybermoney_breakdownService {
 		return listCount;
 	}
 
-	public ArrayList<Cybermoney_breakdown> selectList(int currentPage, int limit) {
+	public ArrayList<Cybermoney_breakdown> selectList(int currentPage, int limit, int uNo, String userDiv) {
 		Connection con = getConnection();
 		
-		ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownDao().selectList(con,currentPage,limit);
+		ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownDao().selectList(con,currentPage,limit,uNo,userDiv);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public ArrayList<Cybermoney_breakdown> selectList(int currentPage, int limit, int uNo, String userDiv, String div) {
+		Connection con = getConnection();
+		
+		ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownDao().selectList(con,currentPage,limit,uNo,userDiv,div);
 		
 		close(con);
 		

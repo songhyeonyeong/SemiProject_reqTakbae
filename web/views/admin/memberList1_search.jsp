@@ -39,14 +39,14 @@
 						<option value="choose" name="searchCondition" seleted>선택</option>
 						<option value="userId" name="searchCondition">아이디</option>
 						<option value="userName" name="searchCondition">이름</option>
-					</select> 	
+					</select> 
 				</span>
+								
 		
 				<span>
-					<label for="Keyword"></label><input type="text" id="Keyword" name="searchTxt" class="wth240" >
-					<a class="sch" href="#"><img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a>
+					<label for="Keyword"></label><input id="Keyword" name="Keyword" class="wth240" type="text">
+					<a class="sch" href="#INSERT"><img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a> 
 				</span>
-			
 			</div>			
 			
 			<div class="flo_left mt30 mb30">
@@ -163,7 +163,6 @@
 			 
 				$("input[name=memCheck]:checked").each(function() {
 
-					
 					var test =$(this).val();
 
 					console.log(test);
@@ -198,7 +197,6 @@
 		 
 		 $(document).ready(function() {
 			
-				String  value = $("#txt_name").val(); 
 				$( "#select" ).change(function() {
 					 var optVal= $("#select option:selected").val();
 					   console.log(optVal);

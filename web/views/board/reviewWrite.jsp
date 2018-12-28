@@ -1,5 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+import = "java.util.Calendar" %>
 
+<%
+Calendar cal = Calendar.getInstance();
+
+	int year= cal.get(Calendar.YEAR);
+	int month =cal.get(Calendar.MONTH)+1;
+	int date = cal.get(Calendar.DATE);
+	String tyear = String.valueOf(year);
+	String tmonth = String.valueOf(month);
+	String tdate = String.valueOf(date);
+	String Todat =tyear+tmonth+tdate;
+%>
 <%@ include file="/views/include/common.jsp" %>
 
 <title>후기게시판</title>
@@ -32,7 +44,6 @@
 			</colgroup>
 			
 			<form action="<%=request.getContextPath()%>/insertReview" method="post">
-			
 			<tbody>
 			<tr>
 				<th scope="row">제목</th>
@@ -45,7 +56,7 @@
 				<td><input id="driname" name="driname" class="" type="text" value="" ></td>
 				<th scope="row">신청자</th>
 				<td>
-					<input type="text" value="<%=loginUser.getUser_name() %>" name="writer" readonly>
+					<input type="text" value="<%=loginUser.getUser_id() %>" name="writer" readonly>
 				</td>
 			</tr>
 			<tr>
@@ -62,7 +73,9 @@
 					</select> 
 				</td>
 				<th scope="row">작성일</th>
-				<td>2018-12-12</td>
+				<td>
+					<input type="text" value="<%=Todat%>" name="date" readonly>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="4">
@@ -78,6 +91,7 @@
 			<span><a class="mbtn gy" href="reviewList.jsp">목록</a></span>
 			<button type="submit">등록하기</button>
 		</div><!--// btnbox E-->
+		
 		</form>
 		
 

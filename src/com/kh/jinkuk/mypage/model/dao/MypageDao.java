@@ -146,6 +146,7 @@ public class MypageDao {
 				m.setUSER_ID(rset.getString("USER_ID"));
 				m.setD_STATUS(rset.getString("B_STATUS"));
 				list.add(m);
+
 			}
 
 		} catch (SQLException e) {

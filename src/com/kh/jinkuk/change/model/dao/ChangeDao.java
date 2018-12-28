@@ -52,7 +52,7 @@ public class ChangeDao {
 
 	public int UpdateMoney(Connection con, Change c) {
 		PreparedStatement pstmt = null;
-		int up = 0;
+		int result = 0;
 		
 		String query = prop.getProperty("updateMoney");
 		try {
@@ -60,7 +60,7 @@ public class ChangeDao {
 			pstmt.setInt(1, c.getCh_cmoney());
 			pstmt.setInt(2, c.getU_no());
 			
-			up = pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,7 +69,33 @@ public class ChangeDao {
 		}
 		
 		
-		return up;
+		return result;
+	}
+
+	public int CyberInsert(Connection con, Change c) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMoney");
+				
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1,"충전");
+			pstmt.setInt(2, c.getCh_cmoney());
+			pstmt.setInt(3, c.getU_no());
+			pstmt.setInt(4, c.getCh_no());
+			
+			pstmt.executeQuery();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }

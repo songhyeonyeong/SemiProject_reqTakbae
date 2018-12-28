@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.jinkuk.cybermoney_breakdown.model.service.Cybermoney_breakdownService;
 import com.kh.jinkuk.cybermoney_breakdown.model.vo.Cybermoney_breakdown;
 import com.kh.jinkuk.cybermoney_breakdown.model.vo.PageInfo;
+import com.kh.jinkuk.member.model.vo.Member;
 
 /**
  * Servlet implementation class Cybermoney_breakdownServlet
@@ -38,7 +39,9 @@ public class Cybermoney_breakdownServlet extends HttpServlet {
 		int maxPage;	//전체 페이지에서 가장 마지막 페이지
 		int startPage;	//한번에 표시될 페이지가 시작할 페이지
 		int endPage;	//한번에 표시될 페이지가 끝나는 페이지
-		
+		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
+		int uNo = loginUser.getU_no();
+		String userDiv = loginUser.getUser_div();
 		//현재 페이지 처리
 		currentPage = 1;
 		
@@ -70,11 +73,11 @@ public class Cybermoney_breakdownServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownService().selectList(currentPage, limit);
+		ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownService().selectList(currentPage, limit, uNo, userDiv);
 		System.out.println(list);
 		String page ="";
 		if(list != null) {
-			page = "views/notice/noticeList.jsp";
+			page = "views/mypage/pointList.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		}else {
