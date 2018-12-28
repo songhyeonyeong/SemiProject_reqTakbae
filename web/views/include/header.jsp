@@ -22,7 +22,7 @@
 				<li class="mt5">
 					<span>5000p</span>
 					<span class="sbtn db" onclick="chargeMoney()">충전</span>
-					<span class="sbtn db" onclick="logout()">로그아웃</span>
+					<span class="sbtn rd" onclick="logout()">로그아웃</span>
 				</li>
 			</ul>
 		</div> 

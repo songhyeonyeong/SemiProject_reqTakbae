@@ -1,8 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<% 
-	String bigtabon="3";
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="com.kh.jinkuk.mypage.model.vo.*, com.kh.jinkuk.cybermoney_breakdown.model.vo.*,java.sql.*, java.util.*"%>
+<%
+	String bigtabon = "3";
+	ArrayList<MyDeliverNotice> list = (ArrayList<MyDeliverNotice>) request.getAttribute("list");
+	PageInfo pi = (PageInfo) request.getAttribute("pi");
+
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
-<%@ include file="/views/include/common.jsp" %>
+<%@ include file="/views/include/common.jsp"%>
 
 <title>배송중 공고목록</title>
 
@@ -10,43 +20,84 @@
 <body>
 
 
-<div id="wrap"><!-- Wrap S -->
+	<div id="wrap">
+		<!-- Wrap S -->
 
-<%@ include file="/views/include/header.jsp" %>
+		<%@ include file="/views/include/header.jsp"%>
 
-<div id="subvisual">마이페이지</div>
+		<div id="subvisual">마이페이지</div>
 
-<div id="subContainer">
-	<div class="contBox inner"><!-- inner S -->
-	 
-		<%@ include file="/views/include/tabMypage.jsp" %>
+		<div id="subContainer">
+			<div class="contBox inner">
+				<!-- inner S -->
 
-		<table class="boardList mt20">
-			<caption>전체공고 리스트입니다.</caption>
-			<colgroup>
-				<col style="width:7%;"><!-- No -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-				<col style="width:%;"><!--  -->
-			</colgroup>
-			<thead>
-				<tr>
-					<th scope="col">No</th>
-					<th scope="col">구분</th>
-					<th scope="col">공고번호</th>
-					<th scope="col">공고내용</th>
-					<th scope="col">배송날짜</th>
-					<th scope="col">선택기사</th>
-					<th scope="col">상태</th>
-					<th scope="col">상세</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
+				<%@ include file="/views/include/tabMypage.jsp"%>
+
+				<table class="boardList mt20">
+					<caption>배송공고 리스트입니다.</caption>
+					<colgroup>
+						<col style="width: 7%;">
+						<!-- No -->
+						<col style="width: %;">
+						<!--  -->
+						<col style="width: %;">
+						<!--  -->
+						<col style="width: %;">
+						<!--  -->
+						<col style="width: %;">
+						<!--  -->
+						<col style="width: %;">
+						<!--  -->
+						<col style="width: %;">
+						<!--  -->
+						<col style="width: %;">
+						<!--  -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">No</th>
+							<th scope="col">구분</th>
+							<th scope="col">공고번호</th>
+							<th scope="col">공고내용</th>
+							<th scope="col">배송날짜</th>
+							<th scope="col">선택기사</th>
+							<th scope="col">상태</th>
+							<th scope="col">상세</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--  내공고 목록 출력 tr -->
+						<%
+							for (MyDeliverNotice m : list) {
+						%>
+						<tr>
+							<input type="hidden" value="<%=m.getG_NO()%>">
+						<tr>
+							<td><label for=""> 체크</label> <input id="" name=""
+								class="check" type="checkbox"></td>
+							<td><%=m.getG_DIV()%></td>
+							<td><%=m.getG_NO()%></td>
+							<td><%=m.getG_CONTEXT()%></td>
+							<td><%=m.getG_DAY()%></td>
+							<td><%=m.getUSER_ID()%></td>
+							<%
+								if (m.getD_STATUS().equals("배송완료")) {
+							%>
+							<td style="color: grey; font-weight: bold"><%=m.getD_STATUS()%></td>
+							<td><a class="sbtn rd" onclick=" BsOk()">배송확정</a></td>
+							<%
+								} else {
+							%>
+							<td><%=m.getD_STATUS()%></td>
+							<td><a class="sbtn db" href="deliView.jsp#">상세보기</a></td>
+							<%
+								}
+							%>
+						</tr>
+						<%
+							}
+						%>
+						<!-- <tr>
 					<td>
 						<label for=""> 체크</label>
 						<input id="" name="" class="check" type="checkbox">
@@ -71,11 +122,77 @@
 					<td>suhyun003</td>
 					<td>배송중</td>
 					<td><a class="sbtn gy" href="deliView.jsp">상세보기</a></td>
-				</tr>
-			</tbody>
-		</table>
-		
-		<div class="numbox pt40 pb50"> 
+				</tr> -->
+					</tbody>
+				</table>
+				<script type="text/javascript">
+					function BsOk(){
+					var t=confirm("배송확정 하시겠습니까?");
+					if(t==true)
+						{
+						alert("배송확정되었습니다.");
+						}
+					}
+				</script>
+
+				<div class="numbox pt40 pb50">
+					<%
+						if (currentPage <= 1) {
+					%>
+					<span><a class="num" disabled>&lt;</a></span>
+					<%
+						} else {
+					%>
+					<span><a class="num"
+						href="<%=request.getContextPath()%>/SelectMydeliverlist.mp?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+					<%-- 			<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage - 1%>'"><</button> --%>
+					<%
+						}
+					%>
+
+					<%
+						for (int p = startPage; p <= endPage; p++) {
+							if (p == currentPage) {
+					%>
+					<span><a class="num on" disabled><%=p%></a></span>
+					<%-- 					<button disabled><%= p %></button> --%>
+					<%
+						} else {
+					%>
+					<span><a class="num"
+						href="<%=request.getContextPath()%>/SelectMydeliverlist.mp?currentPage=<%=p%>"><%=p%></a></span>
+					<%-- 					<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%= p %>'"><%= p %></button> --%>
+					<%
+						}
+					%>
+
+					<%
+						}
+					%>
+
+
+					<%
+						if (currentPage >= maxPage) {
+					%>
+					<span><a class="num" disabled>></a></span>
+					<!-- 			<button disabled>></button> -->
+					<%
+						} else {
+					%>
+					<span><a class="num"
+						href="<%=request.getContextPath()%>/SelectMydeliverlist.mp?currentPage=<%=currentPage + 1%>">></a></span>
+					<%-- 			<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage + 1%>'">></button> --%>
+					<%
+						}
+					%>
+
+
+				</div>
+
+
+
+
+				<!-- <div class="numbox pt40 pb50"> 
 			<span><a class="num" href="#">&lt;</a></span>
 			<span><a class="num on" href="#">1</a></span>
 			<span><a class="num" href="#">2</a></span>
@@ -87,18 +204,21 @@
 			<span><a class="num" href="#">8</a></span>
 			<span><a class="num" href="#">9</a></span>
 			<span><a class="num" href="#">&gt;</a></span>
+		</div> -->
+
+			</div>
+			<!--// inner E-->
 		</div>
 
-	</div><!--// inner E-->
-</div>
-
-<%@ include file="/views/include/footer.jsp" %>
+		<%@ include file="/views/include/footer.jsp"%>
 
 
-</div><!--// Wrap E-->
+	</div>
+	<!--// Wrap E-->
 
 
-<%@ include file="/views/include/myNav.jsp" %>
+	<%@ include file="/views/include/myNav.jsp"%>
 
 </body>
+
 </html>
