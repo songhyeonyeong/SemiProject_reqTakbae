@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 function fn_open() {
-   window.open('reportPop.jsp','reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=600,height=600');
+   window.open('/reqtakbae/views/board/reportPop.jsp','reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=600,height=600');
 }
 </script>
 
@@ -55,7 +55,7 @@ function fn_open() {
 						<select id="" name="" class="wth150">
 						<option value="" selected="selected">서울시 전체</option>
 						<option value="">강남구</option>
-						<option value="">---</option>
+						<option value="">동대문</option>
 					</td>
 					<th scope="col">크기</th>
 					<td>
@@ -79,7 +79,8 @@ function fn_open() {
 						<select id="" name="" class="wth150">
 						<option value="" selected="selected">전체</option>
 						<option value="">모집중</option>
-						<option value="">배송중</option>					
+						<option value="">배송중</option>
+						<option value="">취소</option>	
 					</td>
 				</tr>
 			</tbody>
@@ -90,7 +91,7 @@ function fn_open() {
 		</div>
 
 		<p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p><!-- user에게만 보임 -->
-		<p class="flo_right mb10"><a class="mbtn or" href="allNoticeWrite.jsp">공고등록하기</a></p><!-- user에게만 보임 -->
+		<p class="flo_right mb10"><a class="mbtn or" href="/reqtakbae/views/board/allNoticeWrite.jsp">공고등록하기</a></p><!-- user에게만 보임 -->
 
 		<table class="boardList mt20">
 			<caption>전체공고 리스트입니다.</caption>
@@ -125,46 +126,15 @@ function fn_open() {
 					<td><%= a.getG_S_DATE() %></td>
 					<td><%= a.getG_S_AREA() %></td>
 					<td><%= a.getG_E_AREA() %></td>
-					<td><%= a.getG_CONTEXT() %></td>
-					<td><%= a.getG_E_DATE() %></td>
+					<td><%= a.getG_TITLE() %></td>
+					<td><%= a.getG_DAY() %></td>
 					<td><%= a.getG_SIZE() %></td>
-					<td><%= a.getG_SUM() %></td>
-					<td><%= a.getSTATUS() %></td>
+					<td><%= a.getG_PRICE() %></td>
+					<td><%= a.getG_P_DIV() %></td>
+					<td><a class="sbtn gy" href="/reqtakbae/views/board/allNoticeView.jsp">상세보기</a></td>
 				</tr>
 				<% } %>
 			</thead>
-			<!-- <tbody>
-				<tr>
-					<td>
-						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
-					</td>
-					<td>20181217</td>
-					<td>강서구</td>
-					<td>강남구</td>
-					<td>맥북 배송</td>
-					<td>2018-12-03</td>
-					<td>중</td>
-					<td>8000</td>
-					<td class="darkblue bold">모집중</td>
-					<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
-				</tr>
-				<tr>
-					<td>
-						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
-					</td>
-					<td>20181217</td>
-					<td>강서구</td>
-					<td>강남구</td>
-					<td>맥북 배송</td>
-					<td>2018-12-03</td>
-					<td>중</td>
-					<td>8000</td>
-					<td class="orange bold">배송중</td>
-					<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
-				</tr>
-				</tbody> -->
 		</table>
 		
 		<div class="numbox pt40 pb50"> 

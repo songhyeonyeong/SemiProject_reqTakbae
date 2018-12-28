@@ -40,37 +40,29 @@ public class AnnouncmentDao {
 			
 			try {
 				pstmt = con.prepareStatement(query);
-			
+				
 				int startRow = (currentPage - 1) * limit + 1;
 				int endRow = startRow + limit - 1;
 				
 				pstmt.setString(1, "일반");
-				
-				/*pstmt.setInt(1, startRow);
-				pstmt.setInt(2, endRow);*/
-				
-				rset = pstmt.executeQuery();
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
 				
 				list = new ArrayList<Announcment>();
+				rset = pstmt.executeQuery();
 				
 				while(rset.next()) {
 					Announcment a = new Announcment();
 					
 					a.setG_NO(rset.getInt("G_NO"));
 					a.setG_TITLE(rset.getString("G_TITLE"));
-					a.setG_CONTEXT(rset.getString("G_CONTEXT"));
-					a.setG_DIV(rset.getString("G_DIV"));
 					a.setG_S_DATE(rset.getDate("G_S_DATE"));
-					a.setG_E_DATE(rset.getDate("G_E_DATE"));
 					a.setG_S_AREA(rset.getString("G_S_AREA"));
 					a.setG_E_AREA(rset.getString("G_E_AREA"));
-					a.setG_TYPE(rset.getString("G_TYPE"));
-					a.setG_SUM(rset.getInt("G_SUM"));
 					a.setG_PRICE(rset.getInt("G_PRICE"));
 					a.setG_SIZE(rset.getString("G_SIZE"));
 					a.setG_DAY(rset.getDate("G_DAY"));
-					a.setSTATUS(rset.getString("STATUS"));
-					a.setU_NO(rset.getInt("U_NO"));
+					a.setG_P_DIV(rset.getString("G_P_DIV"));
 																		
 					list.add(a);
 				}
@@ -114,7 +106,70 @@ public class AnnouncmentDao {
 			
 			
 			return listCount;
+	}
+
+		public int updateCount(Connection con, int num) {
+			
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = prop.getProperty("updateCount");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, num);
+				pstmt.setInt(2, num);
+				
+				result = pstmt.executeUpdate();
+				
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
 		}
 
-
+		public Announcment selectOne(Connection con, int num) {
+			
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			Announcment a = null;
+			
+			String query = prop.getProperty("selectOne");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, num);
+				
+				rset = pstmt.executeQuery();
+				
+				if(rset.next()) {
+					a = new Announcment();
+					
+					a.setG_NO(rset.getInt("G_NO"));
+					a.setG_TITLE(rset.getString("G_TITLE"));
+					a.setG_S_DATE(rset.getDate("G_S_DATE"));
+					a.setG_S_AREA(rset.getString("G_S_AREA"));
+					a.setG_E_AREA(rset.getString("G_E_AREA"));
+					a.setG_PRICE(rset.getInt("G_PRICE"));
+					a.setG_SIZE(rset.getString("G_SIZE"));
+					a.setG_DAY(rset.getDate("G_DAY"));
+					a.setG_P_DIV(rset.getString("G_P_DIV"));
+					
+				}
+			
+			
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(rset);
+				close(pstmt);
+			}
+			
+			return a;
+		}
 }

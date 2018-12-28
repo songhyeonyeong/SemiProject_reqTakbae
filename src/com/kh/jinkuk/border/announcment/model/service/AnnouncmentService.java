@@ -1,7 +1,9 @@
 package com.kh.jinkuk.border.announcment.model.service;
 
 import static com.kh.jinkuk.common.JDBCTemplate.close;
+import static com.kh.jinkuk.common.JDBCTemplate.commit;
 import static com.kh.jinkuk.common.JDBCTemplate.getConnection;
+import static com.kh.jinkuk.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -29,5 +31,26 @@ public class AnnouncmentService {
 		int listCount = new AnnouncmentDao().getListCount(con);
 		close(con);
 		return listCount;
+	}
+	
+	//상세페이지
+	public Announcment selectOne(int num) {
+		
+		Connection con = getConnection();
+		
+		Announcment a = null;
+		
+		int result = new AnnouncmentDao().updateCount(con, num);
+		
+		if(result > 0) {
+			commit(con);
+			a = new AnnouncmentDao().selectOne(con, num);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return a;
 	}
 }
