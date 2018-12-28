@@ -2,7 +2,14 @@
 	import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
 <%
 	ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");
-%>
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>	
+	
 <%@ include file="/views/include/common.jsp" %>
 
 
@@ -112,9 +119,22 @@ function fn_open() {
 					<th scope="col">상태</th>
 					<th scope="col">상세</th>
 				</tr>
+				<% for(Announcment a : list){ %>
+				<tr>
+					<td><%= a.getG_NO() %></td>
+					<td><%= a.getG_S_DATE() %></td>
+					<td><%= a.getG_S_AREA() %></td>
+					<td><%= a.getG_E_AREA() %></td>
+					<td><%= a.getG_CONTEXT() %></td>
+					<td><%= a.getG_E_DATE() %></td>
+					<td><%= a.getG_SIZE() %></td>
+					<td><%= a.getG_SUM() %></td>
+					<td><%= a.getSTATUS() %></td>
+				</tr>
+				<% } %>
 			</thead>
-			<tbody>
-				<!-- <tr>
+			<!-- <tbody>
+				<tr>
 					<td>
 						<label for=""> 체크</label>
 						<input id="" name="" class="check" type="checkbox">
@@ -143,28 +163,38 @@ function fn_open() {
 					<td>8000</td>
 					<td class="orange bold">배송중</td>
 					<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
-				</tr> -->
-				<% for(Announcment a : list){ %>
-				<tr>
-					<td><%= a.getG_NO() %></td>
-					<td><%= a.getG_S_DATE() %></td>
-					<td><%= a.getG_S_AREA() %></td>
-					<td><%= a.getG_E_AREA() %></td>
-					<td><%= a.getG_CONTEXT() %></td>
-					<td><%= a.getG_DAY() %></td>
-					<td><%= a.getG_SIZE() %></td>
-					<td><%= a.getG_PRICE() %></td>
-					<td><%= a.getG_PRICE() %></td>
-					<td><%= a.getSTATUS() %></td>
-					<td><a class="sbtn gy" href="allNoticeView.jsp">상세보기</a></td>
-
 				</tr>
-				<% } %>
-			</tbody>
+				</tbody> -->
 		</table>
 		
 		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=1'"><<</button>
+			<% if(currentPage <= 1){ %>
+			<button disabled><</button>
+			<% }else{ %>
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage - 1%>'"><</button>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){ 
+					if(p == currentPage){
+			%>
+					<button disabled><%= p %></button>
+			<%      }else{ %>
+					<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%= p %>'"><%= p %></button>
+			<%      } %>
+	
+			<% } %>
+			
+			
+			<% if(currentPage >= maxPage){ %>
+			<button disabled>></button>
+			<% }else{ %>
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage + 1%>'">></button>
+			<% } %>
+			
+			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=maxPage%>'">>></button>
+		
+			<!-- <span><a class="num" href="#">&lt;</a></span>
 			<span><a class="num on" href="#">1</a></span>
 			<span><a class="num" href="#">2</a></span>
 			<span><a class="num" href="#">3</a></span>
@@ -174,7 +204,7 @@ function fn_open() {
 			<span><a class="num" href="#">7</a></span>
 			<span><a class="num" href="#">8</a></span>
 			<span><a class="num" href="#">9</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+			<span><a class="num" href="#">&gt;</a></span> -->
 		</div>
 
 
