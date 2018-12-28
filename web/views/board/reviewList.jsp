@@ -56,7 +56,7 @@
 				</div>
 
 
-				<table class="boardList mt20">
+				<table class="boardList mt20" id="listArea">
 					<caption>후기게시판 리스트입니다.</caption>
 					<colgroup>
 						<col style="width: 7%;">
@@ -87,8 +87,8 @@
 						<tr>
 							<td><%=r.getHno()%></td>
 							<td><%=r.gethTitle()%></td>
-							<td><%=r.getGno()%></td>
-							<td><%=r.getUno()%></td>
+							<td><%=r.getDriname()%></td>
+							<td><%=r.getUname()%></td>
 							<td><%=r.gethGrade()%></td>
 							<td><%=r.gethDate()%></td>
 						</tr>
@@ -100,61 +100,43 @@
 
 
 				<p class="flo_right mt10">
-					<a class="mbtn or" href="reviewWrite.jsp">후기작성하기</a>
+					<a class="mbtn or" href="views/board/reviewWrite.jsp">후기작성하기</a>
 				</p>
 
 
 
-				<div class="pagingArea" align="center">
-					<button
-						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=1'"><<</button>
-					<%
-						if (currentPage <= 1) {
-					%>
-					<button disabled><</button>
-					<%
-						} else {
-					%>
-					<button
-						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=currentPage - 1%>'"><</button>
-					<%
-						}
-					%>
+				<div class="numbox pt40 pb50" align="center">
+					<span><a class="num" href="#" 
+					onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=1'"><<</a></span>
+					<% if (currentPage <= 1) {%>
+					<span disabled><a class="num" href="#" ><</a></span>
+					<%} else {%>
+					<span><a class="num" href="#" 
+						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=currentPage - 1%>'"><</a></span>
+					<%}%>
 
 					<%
 						for (int p = startPage; p <= endPage; p++) {
 							if (p == currentPage) {
 					%>
-					<button disabled><%=p%></button>
-					<%
-						} else {
-					%>
-					<button
-						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=p%>'"><%=p%></button>
-					<%
-						}
-					%>
-
-					<%
-						}
-					%>
-
+					<span disabled><a class="num" href="#" ><%=p%></a></span>
+					<%} else {%>
+					<span><a class="num" href="#" 
+						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=p%>'"><%=p%></a></span>
+					<%}%>
+					<%}%>
 
 					<%
 						if (currentPage >= maxPage) {
 					%>
-					<button disabled>></button>
-					<%
-						} else {
-					%>
-					<button
-						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=currentPage + 1%>'">></button>
-					<%
-						}
-					%>
+					<span disabled><a class="num" href="#" >></a></span>
+					<%} else {%>
+					<span><a class="num" href="#" 
+						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=currentPage + 1%>'">></a></span>
+					<%}%>
 
-					<button
-						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=maxPage%>'">>></button>
+					<span><a class="num" href="#" 
+						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=maxPage%>'">>></a></span>
 				</div>
 
 

@@ -51,6 +51,7 @@ public class ReviewService {
 		ArrayList<Review> list 
 			= new ReviewDao().selectList(con, currentPage, limit);
 		System.out.println("reviewService 확인"+list);
+		
 		close(con);
 		
 		return list;
