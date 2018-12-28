@@ -11,6 +11,7 @@ import com.kh.jinkuk.admin.model.vo.Admin;
 import static com.kh.jinkuk.common.JDBCTemplate.*;
 
 
+
 public class AdminService {
 
 	public ArrayList<Admin> selectAll() {
@@ -85,6 +86,17 @@ public class AdminService {
 		
 		return result;
 	}
+	
+	
+	public int deleteBlack(Admin m) {
+		Connection con = getConnection();
+		System.out.println(con);
+		int result = new AdminDao().deleteBlack(con,m);
+	
+		close(con);
+		
+		return result;
+	}
 
 
 	public int getListCount() {
@@ -101,6 +113,15 @@ public class AdminService {
 		close(con);
 		return listCount;
 	}
+	
+	
+	public int getListCount3() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCount3(con);
+		close(con);
+		return listCount;
+	}
+
 	
 
 	public ArrayList<Admin> selectList(int currentPage, int limit) {
@@ -122,6 +143,45 @@ public class AdminService {
 		
 		return list;
 	}
+
+	public ArrayList<Admin> selectBlackList(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Admin> list = new AdminDao().selectBlackList(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int cancleBlack(Admin m) {
+		Connection con = getConnection();
+		System.out.println(con);
+		int result = new AdminDao().cancleBlack(con,m);
+	
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<Admin> searchId(String userId) {
+		Connection con = getConnection();
+		ArrayList<Admin> list = new AdminDao().searchId(con, userId);
+		
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Admin> searchName(String userName) {
+		Connection con = getConnection();
+		ArrayList<Admin> list = new AdminDao().searchName(con, userName);
+		
+		close(con);
+		return list;
+	}
+
+
+
 
 
 
