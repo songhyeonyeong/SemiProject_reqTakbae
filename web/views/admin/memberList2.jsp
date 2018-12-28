@@ -31,17 +31,22 @@
 			<div class="topsearch mt30 mb30"><!-- topsearch S -->
 				<span>
 					<label for="col01"></label>
-					<select id="col01" name="col01" class="wth140">
-						<option value="">아이디</option>
-						<option value="">이름</option>
-						<option value="">휴대폰번호</option>
-						<option value="">이메일주소</option>
-					</select> 
+					<form action="<%=request.getContextPath() %>/search.de" method="post">
+					<select id="select" name="select" class="wth140">
+						<option value="choose" name="searchCondition" selected disabled hidden>선택</option>
+						<option value="userId" name="searchCondition">아이디</option>
+						<option value="userName" name="searchCondition">이름</option>
+					</select>
+						
 				</span>
+		
 				<span>
-					<label for="Keyword"></label><input id="Keyword" name="Keyword" class="wth240" type="text">
-					<a class="sch" href="#"><img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색"></a> 
+					<label for="Keyword"></label><input type="text" id="Keyword" name="searchTxt" class="wth240" >
+					<input type="submit" value="검색">
+					<!-- <a class="sch" href="#"> -->
+					<!-- <img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a> -->
 				</span>
+				</form> 
 			</div>			
 			
 			<div class="flo_left mt30 mb30">

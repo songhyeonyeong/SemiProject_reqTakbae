@@ -1,19 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
+	import="java.util.*,com.kh.jinkuk.admin.model.vo.*"%>
 <% 
-	String tabon="3";
+	String tabon="";
 	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");	
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	String optVal = (String)request.getAttribute("optVal");
+/* 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+	int endPage = pi.getEndPage(); */
 %>
+	
 <%@ include file="/views/admin/include/common.jsp" %>
 
 
 <title>택배를 부탁해 관리자페이지</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -22,16 +26,16 @@
 
 	<div id="container"><!-- container S -->
 
-		<div class="tit">&bull; 회원관리 - 블랙리스트 관리</div>
+		<div class="tit">&bull; 회원관리 - 기사 회원 관리</div>
 
 		<div class="contBox mt30"><!-- contBox S -->
 	
 			<%@ include file="include/tab_member.jsp" %>
 			
-		<div class="topsearch mt30 mb30"><!-- topsearch S -->
+			<div class="topsearch mt30 mb30"><!-- topsearch S -->
 				<span>
 					<label for="col01"></label>
-					<form action="<%=request.getContextPath() %>/search.bl" method="post">
+					<form action="<%=request.getContextPath() %>/search.de" method="post">
 					<select id="select" name="select" class="wth140">
 						<option value="choose" name="searchCondition" selected disabled hidden>선택</option>
 						<option value="userId" name="searchCondition">아이디</option>
@@ -51,7 +55,7 @@
 			
 			<div class="flo_left mt30 mb30">
 				<span><a class="mbtn wh" href="#">전체선택</a></span>
-				<span><a class="mbtn bk" href="#">블랙리스트 취소</a></span>
+				<span><a class="mbtn bk" href="#">블랙리스트로 이동</a></span>
 				<span><a class="mbtn rd" href="#">회원삭제</a></span>
 			</div>
 
@@ -63,7 +67,6 @@
 					<col style="width:%;"><!--  -->
 					<col style="width:%;"><!--  -->
 					<col style="width:10%;"><!--  -->
-					<col style="width:10%;"><!--  -->					
 					<col style="width:%;"><!--  -->
 					<col style="width:10%;"><!--  -->
 					<col style="width:10%;"><!--  -->
@@ -84,38 +87,39 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% for(Admin m : list){ %>
-					<tr>
-						<td>
-							<label for=""> 체크</label>
-							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getUserId()%>">
-						</td>
+				<% if(list != null){
+	
+					 for(Admin m : list){ %>
+						<tr class="parent">
+							<td>
+								<form action="<%=request.getContextPath() %>/goBLack" method="post">
+								<label for=""> 체크</label>
+								<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getUserId()%>" >
+								</form>
 					
-						
-							
-							<td><%= m.getUserId() %></td>
-							<td><%= m.getUserName() %></td>
-							<td><%= m.getPhone()%></td>
-							<td><%= m.getEmail()%></td>
-							<td><%= m.getU_date() %></td>
-							<td><%= m.getBlackList() %></td>
-							<td><%= m.getC_money() %></td>
-							<td><%= m.getC_point() %></td>
+							</td>
 
-							
-						
-						
-					</tr>
+								<td><%= m.getUserId() %></td>
+								<td><%= m.getUserName() %></td>
+								<td><%= m.getPhone()%></td>
+								<td><%= m.getEmail()%></td>
+								<td><%= m.getU_date() %></td>
+								<td><%= m.getBlackList() %></td>
+								<td><%= m.getC_money() %></td>
+								<td><%= m.getC_point() %></td>
+				
+						</tr>
+					<% } %> 
 				<% } %> 
 				</tbody>
 			</table>
-
-			<div class="numbox pt40 pb50" align="center"> 
-			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.bl?currentPage=1'"><<</a></span>
+<%-- 
+		<div class="numbox pt40 pb50" align="center"> 
+			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/admin.no?currentPage=1'"><<</a></span>
 			<% if(currentPage <=1){ %>
 				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
 			<%}else{%>
-				<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.bl?currentPage=<%=currentPage - 1 %>'"><</a></span> <!-- 하나 이전페이지로 이동 -->
+				<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/admin.no?currentPage=<%=currentPage - 1 %>'"><</a></span> <!-- 하나 이전페이지로 이동 -->
 			<%} %>
 			
 			<% for(int p = startPage; p <= endPage; p++){
@@ -123,7 +127,7 @@
 				
 				<span><a class="num" href="#" disable><%= p %></a></span> <!-- 비활성화 -->
 			<%  }else{ %>
-				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.bl?currentPage=<%= p %>'"><%= p %></a></span>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/admin.no?currentPage=<%= p %>'"><%= p %></a></span>
 			
 			
 			<%         } %>
@@ -132,12 +136,13 @@
 			<%if(currentPage >= maxPage){ %>
 				<span><a class="num" href="#" disable>></a></span> <!-- 비활성화 -->
 			<%}else{%>
-				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.bl?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/admin.no?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
 			<%} %>
-				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.bl?currentPage=<%=maxPage%>'">>></a></span>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/admin.no?currentPage=<%=maxPage%>'">>></a></span>
 			
 			
-		</div>
+		</div> --%>
+	
 		</div><!--// contBox E-->
 
 	</div><!--// container E-->
@@ -146,9 +151,9 @@
 
 
 </div><!--// Wrap E-->
-
 	<script>
-	 $('span').eq(2).click(function() {
+	
+		 $('span').eq(2).click(function() {
 
 			$("input[name=memCheck]:checkbox").each(function() {
 
@@ -158,27 +163,21 @@
 
 		});
 		 
-
-			
-
-		 
 		 $('span').eq(3).click(function() {
 			 
 				$("input[name=memCheck]:checked").each(function() {
 
-					
 					var test =$(this).val();
 
 					console.log(test);
 					
-					location.href="<%=request.getContextPath()%>/cancle.bl?name=" + test; 
+					location.href="<%=request.getContextPath()%>/goBlack?name=" + test; 
 
 				});
 				
 			
 
 			});
-		 
 		 
 		 $('span').eq(4).click(function() {
 			 
@@ -189,18 +188,40 @@
 
 					console.log(test);
 					
-					location.href="<%=request.getContextPath()%>/delete.bl?name=" + test; 
-
+					location.href="<%=request.getContextPath()%>/delete.me?name=" + test; 
+ 
 				});
 				
 			
 
 			});
 
-		 
+			
+	
+		
+			
 
+	
+			 
 		 
+		
+		
+		
 	</script>
+
+
+
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

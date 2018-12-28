@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="java.util.*,com.kh.jinkuk.admin.model.vo.*"%>
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="1";
 	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");	
-	String searchCondition = (String)request.getAttribute("searchCondition");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -11,13 +10,10 @@
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 %>
-	
 <%@ include file="/views/admin/include/common.jsp" %>
 
 
 <title>택배를 부탁해 관리자페이지</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -31,22 +27,26 @@
 		<div class="contBox mt30"><!-- contBox S -->
 	
 			<%@ include file="include/tab_member.jsp" %>
-			
+		
 			<div class="topsearch mt30 mb30"><!-- topsearch S -->
 				<span>
 					<label for="col01"></label>
+					<form action="<%=request.getContextPath() %>/search.me" method="post">
 					<select id="select" name="select" class="wth140">
-						<option value="choose" name="searchCondition" seleted>선택</option>
+						<option value="choose" name="searchCondition" selected disabled hidden>선택</option>
 						<option value="userId" name="searchCondition">아이디</option>
 						<option value="userName" name="searchCondition">이름</option>
-					</select> 	
+					</select>
+						
 				</span>
 		
 				<span>
 					<label for="Keyword"></label><input type="text" id="Keyword" name="searchTxt" class="wth240" >
-					<a class="sch" href="#"><img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a>
+					<input type="submit" value="검색">
+					<!-- <a class="sch" href="#"> -->
+					<!-- <img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a> -->
 				</span>
-			
+				</form> 
 			</div>			
 			
 			<div class="flo_left mt30 mb30">
@@ -83,33 +83,33 @@
 					</tr>
 				</thead>
 				<tbody>
-				<% if(list != null){
-	
-					 for(Admin m : list){ %>
-						<tr class="parent">
-							<td>
-								<form action="<%=request.getContextPath() %>/goBLack" method="post">
-								<label for=""> 체크</label>
-								<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getUserId()%>" >
-								</form>
+					<% for(Admin m : list){ %>
+					<tr>
+						<td>
+							<label for=""> 체크</label>
+							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getUserId()%>">
+						</td>
 					
-							</td>
+						
+							
+							<td><%= m.getUserId() %></td>
+							<td><%= m.getUserName() %></td>
+							<td><%= m.getPhone()%></td>
+							<td><%= m.getEmail()%></td>
+							<td><%= m.getU_date() %></td>
+							<td><%= m.getBlackList() %></td>
+							<td><%= m.getC_money() %></td>
+							<td><%= m.getC_point() %></td>
 
-								<td><%= m.getUserId() %></td>
-								<td><%= m.getUserName() %></td>
-								<td><%= m.getPhone()%></td>
-								<td><%= m.getEmail()%></td>
-								<td><%= m.getU_date() %></td>
-								<td><%= m.getBlackList() %></td>
-								<td><%= m.getC_money() %></td>
-								<td><%= m.getC_point() %></td>
-				
-						</tr>
-					<% } %> 
+							
+						
+						
+					</tr>
 				<% } %> 
 				</tbody>
 			</table>
 
+			
 		<div class="numbox pt40 pb50" align="center"> 
 			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/admin.no?currentPage=1'"><<</a></span>
 			<% if(currentPage <=1){ %>
@@ -147,6 +147,7 @@
 
 
 </div><!--// Wrap E-->
+
 	<script>
 	
 		 $('span').eq(2).click(function() {
@@ -186,56 +187,20 @@
 					console.log(test);
 					
 					location.href="<%=request.getContextPath()%>/delete.me?name=" + test; 
- 
+
 				});
 				
 			
 
 			});
 
-			
-	
-		 
-		 $(document).ready(function() {
-			
-				String  value = $("#txt_name").val(); 
-				$( "#select" ).change(function() {
-					 var optVal= $("#select option:selected").val();
-					   console.log(optVal);
-					   $('.sch').click(function(){
-						   
-						   location.href="<%=request.getContextPath()%>/searchMember?name=" + optVal; 
-					
-					});
-			});
-			 
-			 
-		 
-	});
-			
-			
-
-	
-			 
 		 
 		
 		
 		
 	</script>
 
-
-
+	
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

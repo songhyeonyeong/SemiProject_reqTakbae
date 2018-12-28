@@ -1,14 +1,13 @@
 package com.kh.jinkuk.admin.model.service;
 
+import static com.kh.jinkuk.common.JDBCTemplate.close;
+import static com.kh.jinkuk.common.JDBCTemplate.getConnection;
+
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.kh.jinkuk.admin.model.dao.AdminDao;
 import com.kh.jinkuk.admin.model.vo.Admin;
-
-
-import static com.kh.jinkuk.common.JDBCTemplate.*;
 
 
 
@@ -175,6 +174,38 @@ public class AdminService {
 	public ArrayList<Admin> searchName(String userName) {
 		Connection con = getConnection();
 		ArrayList<Admin> list = new AdminDao().searchName(con, userName);
+		
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Admin> DeliversearchId(String userId) {
+		Connection con = getConnection();
+		ArrayList<Admin> list = new AdminDao().DeliversearchId(con, userId);
+		
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Admin> DeliversearchName(String userName) {
+		Connection con = getConnection();
+		ArrayList<Admin> list = new AdminDao().DeliversearchName(con, userName);
+		
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Admin> BlacksearchId(String userId) {
+		Connection con = getConnection();
+		ArrayList<Admin> list = new AdminDao().BlackSearchId(con, userId);
+		
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Admin> BlackrsearchName(String userName) {
+		Connection con = getConnection();
+		ArrayList<Admin> list = new AdminDao().BlackSearchName(con, userName);
 		
 		close(con);
 		return list;

@@ -618,7 +618,186 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = prop.getProperty("searchName");
+		String query ="SELECT USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
+					+ "FROM MEMBER "
+					+ "WHERE USER_NAME LIKE '%'||?||'%' AND USER_DIV='신청자'";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userName);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Admin>();
+			
+			while(rset.next()) {
+				Admin m = new Admin();
+				
+				
+				m.setUserId(rset.getString("USER_ID"));
+				m.setUserName(rset.getString("USER_NAME"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setU_date(rset.getDate("U_DATE"));
+				m.setBlackList(rset.getString("BLACKLIST"));
+				m.setC_money(rset.getInt("C_MONEY"));
+				m.setC_point(rset.getInt("C_POINT"));
+	
+				
+				
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+	
+		return list;
+	}
+
+	public ArrayList<Admin> DeliversearchId(Connection con, String userId) {
+		ArrayList<Admin> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query ="SELECT USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
+					+ "FROM MEMBER "
+					+ "WHERE USER_ID LIKE '%'||?||'%' AND USER_DIV='기사'";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Admin>();
+			
+			while(rset.next()) {
+				Admin m = new Admin();
+				
+				
+				m.setUserId(rset.getString("USER_ID"));
+				m.setUserName(rset.getString("USER_NAME"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setU_date(rset.getDate("U_DATE"));
+				m.setBlackList(rset.getString("BLACKLIST"));
+				m.setC_money(rset.getInt("C_MONEY"));
+				m.setC_point(rset.getInt("C_POINT"));
+	
+			
+				
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+	
+		return list;
+	}
+	
+
+	public ArrayList<Admin> DeliversearchName(Connection con, String userName) {
+		ArrayList<Admin> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query ="SELECT USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
+					+ "FROM MEMBER "
+					+ "WHERE USER_NAME LIKE '%'||?||'%' AND USER_DIV='기사'";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userName);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Admin>();
+			
+			while(rset.next()) {
+				Admin m = new Admin();
+				
+				
+				m.setUserId(rset.getString("USER_ID"));
+				m.setUserName(rset.getString("USER_NAME"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setU_date(rset.getDate("U_DATE"));
+				m.setBlackList(rset.getString("BLACKLIST"));
+				m.setC_money(rset.getInt("C_MONEY"));
+				m.setC_point(rset.getInt("C_POINT"));
+	
+				
+				
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+	
+		return list;
+	}
+
+	public ArrayList<Admin> BlackSearchId(Connection con, String userId) {
+		ArrayList<Admin> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("searchId");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Admin>();
+			
+			while(rset.next()) {
+				Admin m = new Admin();
+				
+				
+				m.setUserId(rset.getString("USER_ID"));
+				m.setUserName(rset.getString("USER_NAME"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setU_date(rset.getDate("U_DATE"));
+				m.setBlackList(rset.getString("BLACKLIST"));
+				m.setC_money(rset.getInt("C_MONEY"));
+				m.setC_point(rset.getInt("C_POINT"));
+	
+			
+				
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+	
+		return list;
+	}
+
+	public ArrayList<Admin> BlackSearchName(Connection con, String userName) {
+		ArrayList<Admin> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("searchName");
 		
 		try {
 			pstmt = con.prepareStatement(query);

@@ -16,7 +16,7 @@ import com.kh.jinkuk.admin.model.vo.Admin;
 /**
  * Servlet implementation class SearchMember
  */
-@WebServlet("/searchMember")
+@WebServlet("/search.me")
 public class SearchMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,7 +36,7 @@ public class SearchMemberServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		
-		String optVal = request.getParameter("name");
+		String optVal = request.getParameter("select");
 		System.out.println("print : " + optVal);
 		
 		ArrayList<Admin> list = null;
@@ -47,7 +47,7 @@ public class SearchMemberServlet extends HttpServlet {
 			list = new AdminService().searchId(userId);
 			System.out.println(list);
 		}else{
-			String userName = request.getParameter("search Txt");
+			String userName = request.getParameter("searchTxt");
 			System.out.println(userName);
 			list = new AdminService().searchName(userName);
 			System.out.println(list);
@@ -59,7 +59,7 @@ public class SearchMemberServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("optVal", optVal);
 			
-			page = "/views/admin/memberList1.jsp";
+			page = "/views/admin/memberList1_search.jsp";
 		}else {
 			request.setAttribute("msg", "검색 실패!");
 			

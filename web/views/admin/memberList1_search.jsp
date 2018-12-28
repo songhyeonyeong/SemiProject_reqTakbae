@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="java.util.*,com.kh.jinkuk.admin.model.vo.*"%>
+	import="java.util.*,com.kh.jinkuk.admin..model.vo.*"%>
 <% 
 	String tabon="1";
 	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");	
-	String searchCondition = (String)request.getAttribute("searchCondition");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	String optVal = (String)request.getAttribute("optVal");
+/* 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+	int endPage = pi.getEndPage(); */
 %>
 	
 <%@ include file="/views/admin/include/common.jsp" %>
@@ -35,18 +35,22 @@
 			<div class="topsearch mt30 mb30"><!-- topsearch S -->
 				<span>
 					<label for="col01"></label>
+					<form action="<%=request.getContextPath() %>/search.me" method="">
 					<select id="select" name="select" class="wth140">
-						<option value="choose" name="searchCondition" seleted>선택</option>
+						<option value="choose" name="searchCondition" selected disabled hidden>선택</option>
 						<option value="userId" name="searchCondition">아이디</option>
 						<option value="userName" name="searchCondition">이름</option>
-					</select> 
+					</select>
+						
 				</span>
-								
 		
 				<span>
-					<label for="Keyword"></label><input id="Keyword" name="Keyword" class="wth240" type="text">
-					<a class="sch" href="#INSERT"><img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a> 
+					<label for="Keyword"></label><input type="text" id="Keyword" name="searchTxt" class="wth240" >
+					<input type="submit" value="검색">
+					<!-- <a class="sch" href="#"> -->
+					<!-- <img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a> -->
 				</span>
+				</form> 
 			</div>			
 			
 			<div class="flo_left mt30 mb30">
@@ -109,7 +113,7 @@
 				<% } %> 
 				</tbody>
 			</table>
-
+<%-- 
 		<div class="numbox pt40 pb50" align="center"> 
 			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/admin.no?currentPage=1'"><<</a></span>
 			<% if(currentPage <=1){ %>
@@ -137,7 +141,7 @@
 				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/admin.no?currentPage=<%=maxPage%>'">>></a></span>
 			
 			
-		</div>
+		</div> --%>
 	
 		</div><!--// contBox E-->
 
@@ -194,23 +198,7 @@
 
 			
 	
-		 
-		 $(document).ready(function() {
-			
-				$( "#select" ).change(function() {
-					 var optVal= $("#select option:selected").val();
-					   console.log(optVal);
-					   $('.sch').click(function(){
-						   
-						   location.href="<%=request.getContextPath()%>/searchMember?name=" + optVal; 
-					
-					});
-			});
-			 
-			 
-		 
-	});
-			
+		
 			
 
 	

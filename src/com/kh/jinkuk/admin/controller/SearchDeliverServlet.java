@@ -1,6 +1,7 @@
 package com.kh.jinkuk.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,16 +14,16 @@ import com.kh.jinkuk.admin.model.service.AdminService;
 import com.kh.jinkuk.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class goBlackServlet
+ * Servlet implementation class SearchDeliverServlet
  */
-@WebServlet("/goBlack")
-public class goBlackServlet extends HttpServlet {
+@WebServlet("/search.de")
+public class SearchDeliverServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public goBlackServlet() {
+    public SearchDeliverServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,25 +35,39 @@ public class goBlackServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		//request객체에서 parameter꺼내기
-		String userId = request.getParameter("name");
 		
-		System.out.println(userId);
-		Admin m = new Admin();
-		m.setUserId(userId);
+		String optVal = request.getParameter("select");
+		System.out.println("print : " + optVal);
 		
-
-		int result = new AdminService().goBlack(m);
-		System.out.println(result);
+		ArrayList<Admin> list = null;
 		
-		String page="";
-		if(result > 0) {
-			RequestDispatcher view = request.getRequestDispatcher("/selectAll.bl");
-			view.forward(request, response);
-	
+		if(optVal.equals("userId")) {
+			String userId = request.getParameter("searchTxt");
+			System.out.println(userId);
+			list = new AdminService().DeliversearchId(userId);
+			System.out.println(list);
+		}else{
+			String userName = request.getParameter("searchTxt");
+			System.out.println(userName);
+			list = new AdminService().DeliversearchName(userName);
+			System.out.println(list);
 		}
-
 		
+		
+		String page = "";
+		if(list != null) {
+			request.setAttribute("list", list);
+			request.setAttribute("optVal", optVal);
+			
+			page = "/views/admin/memberList2_search.jsp";
+		}else {
+			request.setAttribute("msg", "검색 실패!");
+			
+			page = "/views/common/errorPage.jsp";
+		}
+		
+		RequestDispatcher view  = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**
