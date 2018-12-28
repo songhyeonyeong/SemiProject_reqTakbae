@@ -131,13 +131,13 @@ function fn_open() {
 					<td><%= a.getG_SIZE() %></td>
 					<td><%= a.getG_PRICE() %></td>
 					<td><%= a.getG_P_DIV() %></td>
-					<td><a class="sbtn gy" href="/reqtakbae/views/board/allNoticeView.jsp">상세보기</a></td>
+					<td><botton class="sbtn gy" onclick="location.href='<%=request.getContextPath()%>/selectOnt.bo=?'">상세보기</button></td>
 				</tr>
 				<% } %>
 			</thead>
 		</table>
 		
-		<div class="numbox pt40 pb50"> 
+		<div class="numbox pt40 pb50">
 			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=1'"><<</button>
 			<% if(currentPage <= 1){ %>
 			<button disabled><</button>

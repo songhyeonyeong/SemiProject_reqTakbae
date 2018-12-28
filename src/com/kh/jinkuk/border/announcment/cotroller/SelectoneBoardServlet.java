@@ -42,7 +42,7 @@ public class SelectoneBoardServlet extends HttpServlet {
 		String page = "";
 		
 		if(a != null) {
-			page = "views/board/boardDetail.jsp";
+			page = "views/board/allNoticeView.jsp";
 			request.setAttribute("a", a);
 		}else {
 			page = "views/common/errorPage.jsp";
