@@ -9,14 +9,21 @@ public class Review implements java.io.Serializable{
 	private int hGrade;			// 평점
 	private Date hDate;			//글 작성 날짜 
 	private String status;		//상태
-	private int uno;				//회원번호
-	private int gno;				//공고 번호
+	private int uno;					//회원번호
+	private String uname;			//회원이름
+	private int gno;					//공고 번호
+	private String driname;			//매칭된 기사 이름
+	
+	
 	
 	
 	public Review() {}
 
 
-	public Review(int hno, String hTitle, String hContext, int hGrade, Date hDate, String status, int uno, int gno) {
+
+
+	public Review(int hno, String hTitle, String hContext, int hGrade, Date hDate, String status, int uno, String uname,
+			int gno, String driname) {
 		super();
 		this.hno = hno;
 		this.hTitle = hTitle;
@@ -25,8 +32,12 @@ public class Review implements java.io.Serializable{
 		this.hDate = hDate;
 		this.status = status;
 		this.uno = uno;
+		this.uname = uname;
 		this.gno = gno;
+		this.driname = driname;
 	}
+
+
 
 
 	public int getHno() {
@@ -34,9 +45,13 @@ public class Review implements java.io.Serializable{
 	}
 
 
+
+
 	public void setHno(int hno) {
 		this.hno = hno;
 	}
+
+
 
 
 	public String gethTitle() {
@@ -44,9 +59,13 @@ public class Review implements java.io.Serializable{
 	}
 
 
+
+
 	public void sethTitle(String hTitle) {
 		this.hTitle = hTitle;
 	}
+
+
 
 
 	public String gethContext() {
@@ -54,9 +73,13 @@ public class Review implements java.io.Serializable{
 	}
 
 
+
+
 	public void sethContext(String hContext) {
 		this.hContext = hContext;
 	}
+
+
 
 
 	public int gethGrade() {
@@ -64,9 +87,13 @@ public class Review implements java.io.Serializable{
 	}
 
 
+
+
 	public void sethGrade(int hGrade) {
 		this.hGrade = hGrade;
 	}
+
+
 
 
 	public Date gethDate() {
@@ -74,9 +101,13 @@ public class Review implements java.io.Serializable{
 	}
 
 
+
+
 	public void sethDate(Date hDate) {
 		this.hDate = hDate;
 	}
+
+
 
 
 	public String getStatus() {
@@ -84,9 +115,13 @@ public class Review implements java.io.Serializable{
 	}
 
 
+
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
 
 
 	public int getUno() {
@@ -94,9 +129,27 @@ public class Review implements java.io.Serializable{
 	}
 
 
+
+
 	public void setUno(int uno) {
 		this.uno = uno;
 	}
+
+
+
+
+	public String getUname() {
+		return uname;
+	}
+
+
+
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+
 
 
 	public int getGno() {
@@ -104,19 +157,42 @@ public class Review implements java.io.Serializable{
 	}
 
 
+
+
 	public void setGno(int gno) {
 		this.gno = gno;
 	}
 
 
+
+
+	public String getDriname() {
+		return driname;
+	}
+
+
+
+
+	public void setDriname(String driname) {
+		this.driname = driname;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "Review [hno=" + hno + ", hTitle=" + hTitle + ", hContext=" + hContext + ", hGrade=" + hGrade
-				+ ", hDate=" + hDate + ", status=" + status + ", uno=" + uno + ", gno=" + gno + "]";
+				+ ", hDate=" + hDate + ", status=" + status + ", uno=" + uno + ", uname=" + uname + ", gno=" + gno
+				+ ", driname=" + driname + "]";
 	}
-	
-	
-	
-	
-}
 
+
+
+	
+
+
+	
+
+
+}

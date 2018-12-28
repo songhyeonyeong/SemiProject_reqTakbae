@@ -3,13 +3,14 @@ package com.kh.jinkuk.border.review.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.servlet4preview.RequestDispatcher;
+
 
 import com.kh.jinkuk.border.review.model.service.ReviewService;
 import com.kh.jinkuk.border.review.model.vo.Review;
@@ -70,16 +71,22 @@ public class SelectReviewListServlet extends HttpServlet {
 		
 		ArrayList<Review> list = new ReviewService().selectList(currentPage, limit);
 		
-		String page = "";
-		if(list!=null) {
-		request.setAttribute("list", list);
-		System.out.println(list);
+		System.out.println("서블릿 종료 후 list"+list);
 		
-		page = "views/board/reviewList.jsp";
+		
+		String page = "";
+	
+		if(list!=null) {
+			page = "views/board/reviewList.jsp";
+			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
+		
 		}else {
 			page="views/board/errorPage.jsp";
+			
 		}
-		javax.servlet.RequestDispatcher view = request.getRequestDispatcher(page);
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 		
 		

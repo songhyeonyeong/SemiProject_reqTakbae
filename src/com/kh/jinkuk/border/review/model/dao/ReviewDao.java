@@ -53,8 +53,10 @@ public class ReviewDao {
 			r.sethGrade(rset.getInt("H_GRADE"));
 			r.sethDate(rset.getDate("H_DATE"));
 			r.setStatus(rset.getString("STATUS"));
-			r.setUno(rset.getInt("USER_NAME"));
 			r.setGno(rset.getInt("G_NO"));
+			r.setDriname(rset.getString("USER_NAME"));
+			r.setUname(rset.getString("USER_ID"));
+			r.setUno(rset.getInt("U_NO"));
 			
 			list.add(r);
 			
@@ -88,11 +90,14 @@ public class ReviewDao {
 			pstmt.setInt(3, r.gethGrade());
 			pstmt.setInt(4, r.getUno());
 			
+		
 			
-			System.out.println("쿼리 조회 후 확인문"+r);
+			
+			
 			result=pstmt.executeUpdate();
+			System.out.println("후기 작성 쿼리문 확인"+result);
 			
-			System.out.println(result);
+		
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -134,8 +139,9 @@ public class ReviewDao {
 				r.sethGrade(rset.getInt("H_GRADE"));
 				r.sethDate(rset.getDate("H_DATE"));
 				r.setStatus(rset.getString("STATUS"));
-				r.setUno(rset.getInt("U_NO"));
 				r.setGno(rset.getInt("G_NO"));
+				r.setUname(rset.getString("USER_ID"));
+				r.setDriname(rset.getString("USER_NAME"));
 				
 				list.add(r);
 			}
@@ -148,7 +154,7 @@ public class ReviewDao {
 		}
 		
 	
-		
+		System.out.println("dao 확인");
 		return list;
 	}
 

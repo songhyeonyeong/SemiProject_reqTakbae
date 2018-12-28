@@ -32,27 +32,39 @@ public class InsertReviewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 제목 별점 내용
+		// 제목 별점 내용 기사명 작성자아이디
 		String title = request.getParameter("title");
 		String starScore = request.getParameter("starScore");
 		String context = request.getParameter("reviewContext");
 		String driname = request.getParameter("driname");
+		String u_id = request.getParameter("writer");
+		
 
 		int score = Integer.parseInt(starScore);
 
 		System.out.println(title);
-		System.out.println(context);
 		System.out.println(score);
+		System.out.println(context);
 		System.out.println(driname);
+		System.out.println(u_id);
+	
 
 		Review r = new Review();
 		r.sethTitle(title);
 		r.sethGrade(score);
 		r.sethContext(context);
-		r.setUno((((Member) (request.getSession().getAttribute("loginUser"))).getU_no()));
+		r.setDriname(driname);
+		r.setUname(u_id);
 
 		int result = new ReviewService().insertReview(r);
-
+		
+		String page = "";
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/selectReview");
+		}else {
+			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	}
 
 	/**
