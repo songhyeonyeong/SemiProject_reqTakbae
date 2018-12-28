@@ -85,7 +85,25 @@
 						</select>
 						
 					</span>
-					<span><a class="sbtn db" href="/reqtakbae/emailCheck.me">이메일 인증</a></span>
+					<span>
+						<a class="sbtn db" id="sendEmail">인증코드 발송</a>
+					</span>
+					
+					<%!
+						public int getRandom(){
+							int random=0;
+							random = (int)Math.floor((Math.random()*99999-10000+1))+10000;
+							return random;
+					}
+					%>
+					
+					<span>
+						<%-- <input type="hidden" value="<%=getRandom()%>" id="randomCode"> --%>
+						<input type="hidden" value="<%=getRandom()%>" id="randomCode">
+						<input type="hidden" value="takbububu@gmail.com" id="from">
+						<!-- <input type="hidden" value="유솔이" id="adName"> -->
+					</span>
+					
 				</td>
 			</tr>
 			<tr>
@@ -134,6 +152,8 @@
 <%@ include file="/views/include/myNav.jsp" %>
 
 <script>
+
+	//아이디 중복체크
 	$("#idCheckBtn").click(function(){
 		var SId = $("#SId").val();
 		
@@ -158,11 +178,7 @@
 	});
 	
 	
-	
-	
-	
-	
-	
+	//이메일 select 선택시 값 변경
 	 $("#email").change(function(){
 		if($("#email option:selected").val() == "naver"){
 			$("#Semail2").attr("value","naver.com");
@@ -176,105 +192,36 @@
 	});
 	
 	
+	//이메일 인증번호 발송
+	$("#sendEmail").click(function(){
+		var email1 = $("#Semail1").val();
+		var email2 = $("#Semail2").val();
+		var fullEmail = email1 + "@" +email2;
+		var randomCode = $("#randomCode").val();
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	 
-	 /* var token;
-	 $("#testtest").click(function(){
-			var cId="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed";
-			var cSecret="2b229cffd50b45c08f0cde6158ab69c1";
-			
 		$.ajax({
-			url:"https://testapi.open-platform.or.kr/oauth/2.0/token",
-			type:"POST",
-			contenttype:"application/x-www-form-urlencoded; charset=UTF-8",
-			data:{client_id:cId, client_secret:cSecret, scope:"oob", grant_type:"client_credentials"},
+			url:"/reqtakbae/sendEmail",
+			type:"post",
+			data:{fullEmail:fullEmail,randomCode:randomCode},
 			success:function(data){
-				console.log(data);
-				token=data.access_token;
-				console.log(token);
-				bankbank();
-			},
-			error:function(data){
-				alert("오류");
-			}
-			
-		});
-		
-	}); */
-	 
-	
-	/* $("#bankCheck").click(function(){
-		var accountNum = $("#accountNum").val();
-		var depositor = $("#depositor").val();
-		var birth = $("#birth").val();
-		var bankName = $("#bankName option:selected").val();
-		var today = $("#today").val();
-		
-		var bankNum="0";
-		
-		
-		if(bankName=="nongHyup"){
-			bankNum="011";
-		}else if(bankName=="shinHan"){
-			bankNum="088";
-		}else if(bankName=="ibk"){
-			bankNum="003";
-		}
-		console.log("bankNum: "+bankNum);
-		
-		console.log("accountNum: "+accountNum);
-		console.log("depositor: "+depositor);
-		console.log("birth: "+birth);
-		console.log("bankName: "+bankName);
-		console.log("today: "+today); 
-		
-		
-		var data={
-				"bank_code_std": bankNum,"account_num": accountNum, "account_holder_info": birth, "tran_dtime": today
-				
-		}
-		
-		
-		$.ajax({
-			url:"https://testapi.open-platform.or.kr/inquiry/real_name",
-			type:"POST",
-			ContentType:"application/json; charset=UTF-8",
-			redirect_uri:"http://localhost:8880/html/callback.html",
-		    headers: {'Authorization': ('Bearer ' + token)},
-			data:JSON.stringify(data),
-			success:function(data){
-				console.log(data);
-				if(depositor==data.account_holder_name && accountNum==data.account_num && bankNum==data.bank_code_std){
-					alert("계좌 인증 성공");
+				if(data == "YES"){
+					alert("인증코드 발송");
 				}else{
-					alert("계좌 인증 실패");
+					alert("인증코드실패");
 				}
 			},
 			error:function(data){
-				alert("오류");
+				console.log("이메일 통신 실패");
 			}
 			
 		});
-
-		
-	}); */
+	});
 	
 	
+	
+	
+	
+	//계좌 인증
 	var token;
 	function testtest(){
 		
@@ -352,9 +299,6 @@
 				}
 				
 			});
-
-			
-
 	}
 	
 	
