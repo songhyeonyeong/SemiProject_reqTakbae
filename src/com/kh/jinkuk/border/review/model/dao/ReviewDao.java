@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.jinkuk.border.review.model.vo.Review;
 
 
+
 public class ReviewDao {
 	
 	private Properties prop = new Properties();
@@ -88,12 +89,10 @@ public class ReviewDao {
 			pstmt.setString(1, r.gethTitle());
 			pstmt.setString(2, r.gethContext());
 			pstmt.setInt(3, r.gethGrade());
-			pstmt.setInt(4, r.getUno());
+			pstmt.setInt(4, Integer.parseInt(r.getUname()));//로그인 한 유저번호 
+			
 			
 		
-			
-			
-			
 			result=pstmt.executeUpdate();
 			System.out.println("후기 작성 쿼리문 확인"+result);
 			
@@ -185,6 +184,47 @@ public class ReviewDao {
 		
 		return listCount;
 	}
+	//후기 상세보기 메소드
+	public Review selectOne(Connection con, int num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Review r = null;
+		
+		String query = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				r=new Review();
+				
+				r.setHno(rset.getInt("H_NO"));
+				r.sethTitle(rset.getString("H_TITLE"));
+				r.sethContext(rset.getString("H_CONTEXT"));
+				r.sethGrade(rset.getInt("H_GRADE"));
+				r.sethDate(rset.getDate("H_DATE"));
+				r.setStatus(rset.getString("STATUS"));
+				r.setGno(rset.getInt("G_NO"));
+				r.setUname("USER_ID");
+				r.setDriname(rset.getString("USER_NAME"));
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		return r;
+	
+	}
+
 
 
 	

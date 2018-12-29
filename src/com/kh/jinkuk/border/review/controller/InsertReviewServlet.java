@@ -37,8 +37,9 @@ public class InsertReviewServlet extends HttpServlet {
 		String starScore = request.getParameter("starScore");
 		String context = request.getParameter("reviewContext");
 		String driname = request.getParameter("driname");
-		String u_id = request.getParameter("writer");
 		
+		String u_id = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getU_no());
+		//로그인한 회원의 u_no받아오기
 
 		int score = Integer.parseInt(starScore);
 
@@ -57,6 +58,7 @@ public class InsertReviewServlet extends HttpServlet {
 		r.setUname(u_id);
 
 		int result = new ReviewService().insertReview(r);
+		System.out.println("insertReview 최종 result"+result);
 		
 		String page = "";
 		if(result > 0) {
