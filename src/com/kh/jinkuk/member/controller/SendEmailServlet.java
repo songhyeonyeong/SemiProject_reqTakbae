@@ -70,11 +70,11 @@ public class SendEmailServlet extends HttpServlet {
             msg.setRecipient(Message.RecipientType.TO, to);
              
             // 이메일 제목
-            msg.setSubject("택배를 부탁해 인증코드 발송", "UTF-8");
+            msg.setSubject("[택배를 부탁해] 인증번호 발송", "UTF-8");
              
             // 이메일 내용
             request.setAttribute("randomCode", randomCode);
-            msg.setText("인증코드 : "+randomCode, "UTF-8");
+            msg.setText("인증번호 : "+randomCode, "UTF-8");
        
              
             // 이메일 헤더
