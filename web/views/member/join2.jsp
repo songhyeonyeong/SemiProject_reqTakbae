@@ -21,7 +21,8 @@
 			회원가입
 			<span>홈 &gt; 회원가입</span>
 		</div>
-
+		
+		<form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="post">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원가입 리스트입니다.</caption>
 			<colgroup>
@@ -31,76 +32,63 @@
 			<tbody>
 			<tr>
 				<th scope="row">아이디</th>
-				<td >
-					<label for=""></label>
-					<input id="SId" name="" type="text" value="" >
+				<td>
+					<input name="userDiv" value="신청자" type="hidden">
+					<input id="SId" name="userId" type="text">
 					<span>
 						<a id="idCheckBtn" class="sbtn db" >중복확인</a>
 						<span id="idCheckMsg"></span>
 					</span>
 				</td>
-				<td><img id="idCheckImg" src=""></td>
+				<td><img id="idCheckImg" class="checkTest" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">비밀번호</th>
 				<td>
-					<label for=""></label>
-					<input id="SPwd" name="" type="password" value="" > 
+					<input id="SPwd" name="userPwd" type="password"> 
 					<span id="pwdCheckMsg"></span>
 				</td>
-				<td><img id="pwdCheckImg" src=""></td>
+				<td><img id="pwdCheckImg" class="checkTest" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">비밀번호 확인</th>
 				<td>
-					<label for=""></label>
-					<input id="SPwd2" name="" type="password" value="" > 
+					<input id="SPwd2" type="password"> 
 				</td>
-				<td><img id="pwdCheckImg2" src=""></td>
+				<td><img id="pwdCheckImg2" class="checkTest" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">이름</th>
 				<td>
 					<label for=""></label>
-					<input id="SName" name="" type="text" value="" > 
+					<input id="SName" name="userName" type="text"> 
 				</td>
-				<td><img id="nameCheckImg" src=""></td>
+				<td><img id="nameCheckImg" class="checkTest" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">휴대폰번호</th>
 				<td>
-					<!-- <span><label for=""></label><input id="Sphone1" name="" class="wth50" type="text" value="" ></span>
-					<span> - </span>
-					<span><label for=""></label><input id="Sphone2" name="" class="wth60" type="text" value="" ></span>
-					<span> - </span>
-					<span><label for=""></label><input id="Sphone3" name="" class="wth60" type="text" value="" ></span>
-				 -->
-				 <span><label for=""></label><input id="Sphone" name="" type="text" value="" placeholder="-없이 입력"></span>
+					<span>
+						<input id="Sphone" name="phone" type="text" placeholder="-없이 입력">
+					</span>
 				 </td>
-				<td><img id="phoneCheckImg" src=""></td>
+				<td><img id="phoneCheckImg" class="checkTest" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">이메일</th>
 				<td>
-					<span><label for=""></label><input id="Semail1" name="" class="wth100" type="text" value="" ></span>
+					<input id="Semail1" name="email1" class="wth100" type="text">
 					<span>@</span>
-					<span><label for=""></label>
-						<input id="Semail2" type="text" class="wth100">
-						<select id="email">
-								<option value="self" selected>직접입력</option>
-								<option value="naver">naver.com</option>
-								<option value="daum">daum.net</option>
-								<option value="google">google.com</option>
-						</select>
-					</span>
+					<input id="Semail2" name="email2" class="wth100" type="text">
+					<select id="email">
+							<option value="self" selected>직접입력</option>
+							<option value="naver">naver.com</option>
+							<option value="daum">daum.net</option>
+							<option value="google">google.com</option>
+					</select>
 					<span>
 						<a class="sbtn db" id="sendEmail">인증번호 발송</a>
 					</span>
-					
-					
-					<%
-						//인증시 인증하기 버튼 보이게
-					%>
 					
 					<%!
 						public int getRandom(){
@@ -110,34 +98,30 @@
 						}
 					%>
 					
-					<span>
-						<input type="hidden" value="<%=getRandom()%>" id="randomCode">
-						<input type="hidden" value="takbububu@gmail.com" id="from">
-					</span>
+					<input type="hidden" value="<%=getRandom()%>" id="randomCode">
 					
-					<br><br>
-					<span>
+					<span id="sendEmailClick">
+						<br><br>
 						<input id="authCode" type="text" placeholder="인증번호를 입력하세요">
 						<a class="sbtn db" onclick="auth();">인증하기</a>
 					</span>
-					
 				</td>
-				<td><img id="emailCheckImg" src=""></td>
+				<td><img id="emailCheckImg" class="checkTest" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row" rowspan="3">계좌번호</th>
-				<td >
-					<span>
-						<label for=""></label>
-						은행명  <select id="bankName" name="bankName">
-								<option value="nongHyup">농협</option>
-								<option value="shinHan">신한은행</option>
-								<option value="ibk">기업은행</option>
-							</select><br>
-						계좌번호 <input id="accountNum" name="" type="text"><br>
-						생년월일 <input id="birth" type="text" placeholder="951015형식으로 입력"><br>
-						예금주  <input id="depositor" type="text">
-						<span id="bankCheck" class="sbtn db" onclick="testtest();">계좌 인증</span>
+				<td>
+					은행명  <select id="bankName" name="bankCode">
+							<option value="kb">국민은행</option>
+							<option value="ibk">기업은행</option>
+							<option value="nongHyup">농협</option>
+							<option value="shinHan">신한은행</option>
+							<option value="woori">우리은행</option>
+						</select><br>
+					계좌번호 <input id="accountNum" name="accountNum" type="text"><br>
+					생년월일 <input id="birth" type="text" placeholder="940101형식으로 입력">
+					<span id="bankCheck" class="sbtn db" onclick="testtest();">계좌 인증</span>
+						
 						<!-- <span id="accountCheck"> </span> -->
 						<%
 							Calendar cal = Calendar.getInstance();
@@ -145,17 +129,18 @@
 							String today = (new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(date));
 						%>
 						<input id="today" type="hidden" value="<%= today %>" ><br>
-					</span>
+					
 				</td>
-				<td><img id="accountCheck" src=""></td>
+				<td><img id="accountCheckImg" class="checkTest" src=""></td>
 			</tr>
 			</tbody>
 		</table><!--// boardWrite E-->
 
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" href="join3.jsp">회원가입하기</a></span>
+			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
 		</div><!--// btnbox E-->
+	</form>
 
 	</div><!--// inner E-->
 </div>
@@ -170,6 +155,11 @@
 
 <script>
 	var checkImgPath="/reqtakbae/views/common/images/contents/check.PNG";
+	
+	$(function(){
+		$("#sendEmailClick").hide();
+	});
+	
 	
 	//아이디 정규표현식 && 중복체크
 	$("#idCheckBtn").click(function(){
@@ -277,22 +267,6 @@
 	});
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//이메일 select 선택시 값 변경
 	 $("#email").change(function(){
 		if($("#email option:selected").val() == "naver"){
@@ -308,12 +282,11 @@
 	}); 
 	
 	
-	
-	
-	
 	var randomCode = $("#randomCode").val();
 	//이메일 인증번호 발송
 	$("#sendEmail").click(function(){		
+		$("#sendEmailClick").show();
+		
 		var email1 = $("#Semail1").val();
 		var email2 = $("#Semail2").val();
 		var fullEmail = email1 + "@" +email2;
@@ -326,30 +299,21 @@
 				if(data == "YES"){
 					alert("인증코드 발송");
 				}else{
-					alert("인증코드실패");
+					alert("인증코드 발송 실패");
 				}
-			},
-			error:function(data){
-				console.log("이메일 통신 실패");
 			}
 			
 		});
 	});
 	
-	
-	
-	
 	//이메일 인증코드 확인
 	function auth(){
 		if($("#authCode").val() == randomCode){
 			alert("이메일 인증 성공");
-			//$("#emailCheck").html("인증 성공");
-			//$("#emailCheck").css("color","black");
-			$("#emailCheck").attr("src","/reqtakbae/views/common/images/contents/check.PNG");
+			$("#emailCheckImg").attr("src",checkImgPath);
 		}else{
 			alert("이메일 인증 실패");
-			$("#emailCheck").html("인증 실패");
-			$("#emailCheck").css("color","red");
+			$("#emailCheckImg").attr("src","");
 		}
 		
 	}
@@ -357,10 +321,20 @@
 	
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//계좌 인증
 	var token;
+	
 	function testtest(){
-		
 		var cId="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed";
 		var cSecret="2b229cffd50b45c08f0cde6158ab69c1";
 		
@@ -376,63 +350,59 @@
 				console.log(token);
 				
 				bankbank();
-			},
-			error:function(data){
-				alert("오류");
 			}
 		});
 	}
 	
 	function bankbank(){
 			var accountNum = $("#accountNum").val();
-			var depositor = $("#depositor").val();
+			var depositor = $("#SName").val();
 			var birth = $("#birth").val();
-			var bankName = $("#bankName option:selected").val();
 			var today = $("#today").val();
+			var bankName = $("#bankName option:selected").val();
 			
 			var bankNum="0";
-			
-			
 			if(bankName=="nongHyup"){
 				bankNum="011";
 			}else if(bankName=="shinHan"){
 				bankNum="088";
 			}else if(bankName=="ibk"){
 				bankNum="003";
+			}else if(bankName=="kb"){
+				bankNum="004";
+			}else if(bankName=="woori"){
+				bankNum="020";
 			}
-			console.log("bankNum: "+bankNum);
 			
+			console.log("bankName: "+bankName);
+			console.log("bankNum: "+bankNum);
 			console.log("accountNum: "+accountNum);
 			console.log("depositor: "+depositor);
 			console.log("birth: "+birth);
-			console.log("bankName: "+bankName);
 			console.log("today: "+today); 
 			
-			
 			var data={
-					"bank_code_std": bankNum,"account_num": accountNum, "account_holder_info": birth, "tran_dtime": today
-					
+					"bank_code_std": bankNum,"account_num": accountNum, "account_holder_info": birth, "tran_dtime": today		
 			}
 			
 			
+			
+		
 			$.ajax({
 				url:"https://testapi.open-platform.or.kr/inquiry/real_name",
 				type:"POST",
 				ContentType:"application/json; charset=UTF-8",
-				redirect_uri:"http://localhost:8880/html/callback.html",
+				//redirect_uri:"http://localhost:8880/html/callback.html",
 			    headers: {'Authorization': ('Bearer ' + token)},
 				data:JSON.stringify(data),
 				success:function(data){
 					console.log(data);
-					if(depositor==data.account_holder_name && accountNum==data.account_num && bankNum==data.bank_code_std){
+					if(bankNum==data.bank_code_std && accountNum==data.account_num && depositor==data.account_holder_name && birth == data.account_holder_info){
 						alert("계좌 인증 성공");
-						//$("#accountCheck").html("인증 성공");
-						//$("#accountCheck").css("color","black");
-						$("#accountCheck").attr("src","/reqtakbae/views/common/images/contents/check.PNG");
+						$("#accountCheckImg").attr("src", checkImgPath);
 					}else{
 						alert("계좌 인증 실패");
-						$("#accountCheck").html("인증 실패");
-						$("#accountCheck").css("color","red");
+						$("#accountCheckImg").attr("src","");
 					}
 				},
 				error:function(data){
@@ -442,6 +412,47 @@
 			});
 	}
 	
+	//회원가입 버튼 클릭시 && 널값
+	function insertMember(){
+		if($("#SId").val() == ""){
+			alert("아이디를 입력하세요");
+		}else if($("#idCheckImg").attr("src") == ""){
+			alert("아이디 중복을 확인하세요");
+		}else if($("#SPwd").val() == ""){
+			alert("비밀번호를 입력하세요");
+		}else if($("#SPwd2").val() == ""){
+			alert("비밀번호확인을 입력하세요");
+		}else if($("#SPwd").val() != $("#SPwd2").val()){
+			alert("비밀번호가 일치하지 않습니다");
+			$("#SPwd").val("");
+			$("#SPwd2").val("");
+			$("#pwdCheckImg").attr("src","");
+			$("#pwdCheckImg2").attr("src","");
+		}else if($("#SName").val() == ""){
+			alert("이름 입력하세요");
+		}else if($("#Sphone").val() == ""){
+			alert("휴대폰 번호를 입력하세요");
+		}else if($("#Semail1").val() == ""){
+			alert("이메일을 입력하세요");
+		}else if($("#Semail2").val() == ""){
+			alert("이메일을 입력하세요");
+		}else if($("#emailCheckImg").attr("src") == ""){
+			alert("이메일을 인증하세요");
+		}else if($("#accountNum").val() == ""){
+			alert("계좌번호를 입력하세요");
+		}else if($("#birth").val() == ""){
+			alert("생년월일을 입력하세요");
+		}else if($("#accountCheckImg").attr("src") == ""){
+			alert("계좌번호를 입력 입력하세요");
+		}else{
+			$("#joinForm").submit();
+		}
+		
+		
+		
+		
+		
+	}
 	
 	
 	</script>

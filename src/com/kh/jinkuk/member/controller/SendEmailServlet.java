@@ -40,8 +40,6 @@ public class SendEmailServlet extends HttpServlet {
 		
 		String fullEmail = request.getParameter("fullEmail");
 		String randomCode = request.getParameter("randomCode");
-		//String from = request.getParameter("from");
-		//String adName = request.getParameter("adName");
 		
 		Properties p = new Properties();// 정보를 담을 객체
 		p.put("mail.smtp.user", "takbububu@gmail.com");
@@ -70,13 +68,12 @@ public class SendEmailServlet extends HttpServlet {
             msg.setRecipient(Message.RecipientType.TO, to);
              
             // 이메일 제목
-            msg.setSubject("[택배를 부탁해] 인증번호 발송", "UTF-8");
+            msg.setSubject("[택배를 부탁해] 인증번호", "UTF-8");
              
             // 이메일 내용
             request.setAttribute("randomCode", randomCode);
             msg.setText("인증번호 : "+randomCode, "UTF-8");
        
-             
             // 이메일 헤더
             msg.setHeader("content-Type", "text/html");
              
