@@ -3,8 +3,8 @@
 %>
 	<div class="tabBigBox btab_8ea mt50 mb50">
 		<ul>
-			<li <%if(bigtabon.equals("1")){%>class="on"<%}%>><a href="/reqtakbae/selectMypageMain.mp">마이페이지 메인</a></li>
 			<!--신청자일 떄  -->
+			<li <%if(bigtabon.equals("1")){%>class="on"<%}%>><a href="/reqtakbae/selectMypageMain.mp">마이페이지 메인</a></li>
 			<%if(loginUser.getUser_div().equals("신청자")){ %>
 			<li <%if(bigtabon.equals("2")){%>class="on"<%}%>><a href="/reqtakbae/selectMyNoticeList.mp">내 공고목록</a></li>
 			<li <%if(bigtabon.equals("3")){%>class="on"<%}%>><a href="/reqtakbae/SelectMydeliverlist.mp">배송중 공고목록</a></li>

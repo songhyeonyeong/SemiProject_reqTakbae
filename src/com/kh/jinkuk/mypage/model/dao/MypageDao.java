@@ -287,5 +287,30 @@ public class MypageDao {
 		return list;
 	}
 
+	public int updateB_status(Connection con, String value, int gno) {
+		PreparedStatement pstmt =null;
+		int result =0;
+		String query =prop.getProperty("updateB_status");
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1,value);
+			pstmt.setInt(2, gno);
+			result =pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		
+		
+		
+		return result;
+	}
+
 
 }

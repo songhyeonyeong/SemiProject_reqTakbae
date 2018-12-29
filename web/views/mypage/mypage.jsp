@@ -5,6 +5,7 @@
 
 	String bigtabon = "1";
 	ArrayList<Mynotice> list = (ArrayList<Mynotice>) request.getAttribute("list");
+	ArrayList<MyR_M_article> d_list = (ArrayList<MyR_M_article>) request.getAttribute("list");
 %>
 
 <%@ include file="/views/include/common.jsp"%>
@@ -43,7 +44,6 @@
 						<%
 							for (int i=0; i<4; i++) {
 						%>
-							<input type="hidden" value="<%=list.get(i).getG_NO()%>">
 							<li>&bull; <a href="#"><%=list.get(i).getG_CONTEXT()%></a></li>
 					
 						<%
@@ -53,17 +53,23 @@
 					</li>
 						<!--기사부분 -->
 			<%}else{ %>
-			
+			</li>
+					<!--내공고목록 최신 4개 출력  -->
 						<ul class="mypgBox mt50">
-					<li class="bx">
-						<p class="font24">내 배송 목록</p>
+						<li class="bx">
+						<p class="font24">내 공고 목록</p>
 						<ul class="boardShort">
-							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
-						</ul -->
+						<%
+							for (int i=0; i<4; i++) {
+						%>
+							<input type="hidden" value="<%=d_list.get(i).getG_no()%>">
+							<li>&bull;<a href="#"><%=d_list.get(i).getG_context()%>&nbsp;&nbsp;<%=d_list.get(i).getB_status()%></a></li>
 					
+						<%
+							}
+						%>
+						</ul>
+					</li>
 					
 					<%} %>
 					

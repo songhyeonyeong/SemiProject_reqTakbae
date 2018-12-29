@@ -100,4 +100,18 @@ public class MypageService {
 		return list;
 	}
 
+	public int updateB_status(String value, int gno) {
+		Connection con =getConnection();
+		int result =0;
+		result=new MypageDao().updateB_status(con,value,gno);
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
 }
