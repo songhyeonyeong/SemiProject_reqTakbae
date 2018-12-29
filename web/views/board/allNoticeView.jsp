@@ -2,9 +2,7 @@
 		import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
 
 <% 
-
 	Announcment a = (Announcment)request.getAttribute("a"); 
-
 %>
 
 <%@ include file="/views/include/common.jsp" %>
