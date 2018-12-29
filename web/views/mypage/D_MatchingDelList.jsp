@@ -14,7 +14,6 @@ int startPage = pi.getStartPage();
 int endPage = pi.getEndPage();
 %>
 <%@ include file="/views/include/common.jsp" %>
-
 <title>배송중 공고목록</title>
 
 </head>
@@ -55,14 +54,13 @@ int endPage = pi.getEndPage();
 					<th scope="col" colspan="2">배송상태</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="listArea">
 				<!--  내공고 목록 출력 tr -->
 						<%
 							for (MyR_M_article m : list) {
 						%>
 						<tr>
 							<input type="hidden" value="<%=m.getG_no()%>">
-							<tr>
 							<td><label for=""> 체크</label> <input id="" name=""
 								class="check" type="checkbox"></td>
 							<td><%=m.getG_div()%></td>
@@ -71,14 +69,14 @@ int endPage = pi.getEndPage();
 							<td><%=m.getUser_id()%></td>
 							<td><a class="sbtn gy" href="#">상세보기</a></td>
 							<td>
-							<form 
 							<select id="selectDel" name="selectDel">
-							<option value="default ">선택</option>
+							<option value="선택">선택</option>
 							<option value="인수중">인수중</option>
 							<option value="배송중">배송중</option>
 							<option value="배송완료">배송완료</option>
 							</select>
-							&nbsp;&nbsp;<button onclick="changeST()">적용</button></td>
+							&nbsp;&nbsp;<button>적용</button>
+							</td>
 							<td style="color:blue"><%=m.getB_status()%></td>
 						</tr>
 						<%
@@ -86,13 +84,42 @@ int endPage = pi.getEndPage();
 						%>
 			</tbody>
 		</table>
-				<script type="text/javascript">
-					function changeST(){
-						var t=$("option:selected").val();
-						$("option").attr("default");
-						console.log(t);
-					}
-				
+			<script type="text/javascript">
+					 $(function(){
+						$("#listArea td button").click(function(){
+							var value = $(this).prev().val();
+							var select=$(this).prev();
+							 var t=$(this).parent().next();
+							 var num = $(this).parent().parent().children("input").val();
+							 console.log(num);
+							if(value==="선택"){
+								alert("선택하세요!");
+							}else{ 
+							var num = $(this).parent().parent().children("input").val();
+						$.ajax({
+								url:"/reqtakbae/updatebstatus.mp",
+								data:{value:value,gno:num},
+								type:"get",
+								success:function(data){
+									console.log(data);
+									if(data>0)
+										{
+										  t.text(value);
+										}
+									
+								},
+								error:function(request,status,error){
+							        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							       },
+
+
+								
+							}); 
+								select.val("선택").prop("selected", true);
+							}  
+						});
+					});
+				  
 				</script>
 		<div class="numbox pt40 pb50"> 
 			<% if(currentPage <= 1){ %>
