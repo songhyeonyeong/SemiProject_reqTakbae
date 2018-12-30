@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="java.util.*,com.kh.jinkuk.admin..model.vo.*"%>
+	import="java.util.*,com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="1";
 	ArrayList<Admin> list = (ArrayList<Admin>)request.getAttribute("list");	

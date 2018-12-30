@@ -1,11 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="1";
+	Inquiry n = (Inquiry)request.getAttribute("n");	
+	Inquiry m = (Inquiry)request.getAttribute("m");	
+
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
 
 <title>택배를 부탁해 관리자페이지</title>
+<style>
+	textarea{
+		width:100px;
+		height:100px;
+	}
+</style>
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -26,22 +36,20 @@
 			</colgroup>
 			<tbody>
 			<tr>
-				<th scope="row">문의 분류</th>
-				<td>배송문의</td>
-			</tr>
+				<th scope="row">글번호</th>
+				<td id="inquiryNo"><%=n.getM_no()%></td>
+			</tr> 
+		 	<tr>
+				<th scope="row">작성자</th>
+				<td id="answer"><%=n.getU_no()%></td>
+			</tr> 
 			<tr>
 				<th scope="row">문의 제목</th>
-				<td>배송이 안와요</td>
+				<td><%=n.getM_title()%></td>
 			</tr>
 			<tr>
 				<th scope="row">문의 내용</th>
-				<td class="minh100 clfix">
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-				</td>
+				<td class="minh100 clfix"><%=n.getM_context() %></td>
 			</tr>
 			<tr>
 				<th scope="row">파일 첨부</th>
@@ -49,35 +57,54 @@
 					<p><a href="#">12351251255.jpg</a></p>
 				</td>
 			</tr>
-			</tbody>
-		</table><!--// boardWrite E-->
-
-		<table class="boardWrite"><!-- boardWrite S-->
-			<caption>답변내역 리스트입니다.</caption>
-			<colgroup>
-				<col style="width:20%;">
-				<col style="width:%;">
-			</colgroup>
-			<tbody>
 			<tr>
-				<th scope="row" class="blue80">답변 내용</th>
-				<td class="minh100 clfix">
-					안녕하십니까 홍길동회원님<br>
-					1:1문의 담당자 둘리입니다.<br><br>
-
-					문의하신사항 확인 후 안내드리려 하였으나, 고객님께서 문의 남겨주신 후 배송받으신것으로 확인됩니다.<br>
-					빠른도움드리지 못한점 진심으로 사과드립니다.<br><br>
-					
-					좋은하루되시길바랍니다.<br>
-					감사합니다
+				<th scope="row">답변</th>
+				<% if(m.getM_context() != null){ %>
+				<td>
+						<%=m.getM_context()%>
+				
+				<div id="replySelectArea">
+					<table>
+						<td scope="row" id="replySelectTable"></td>
+						
+					</table>
+				</div>
 				</td>
+				<%}else{%>
+				<td>
+				<div id="replySelectArea">
+					<table>
+						<td scope="row" id="replySelectTable"></td>
+						
+					</table>
+				</div>
+				</td>
+				<%} %>
+			
+				
 			</tr>
-			</tbody>
+		</tbody>
 		</table><!--// boardWrite E-->
+		
+		
+			<table class="boardWrite"><!-- boardWrite S-->
+				<caption>답변내역 리스트입니다.</caption>
+				<colgroup>
+					<col style="width:20%;">
+				</colgroup>
+				<tbody>
+				<tr style="width:100%; height:100%;">
+					<th scope="row" class="blue80">답변 내용</th>
+					<td class="clfix">
+						<textarea cols="20" rows="5" id="replyContent" style="width:100%;" class="minh100"></textarea>
+					</td>
+				</tr>
+				</tbody>
+	</table><!--// boardWrite E-->
 
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn bk" href="qnaList.jsp">목록</a></span>
-			<span><a class="mbtn db" href="qnaWrite.jsp">답변하기</a></span>
+			<span><a class="mbtn db" id="addReply">답변하기</a></span>
 			<span><a class="mbtn gy" href="#">수정</a></span>
 			<span><a class="mbtn rd" href="#">삭제</a></span>
 		</div><!--// btnbox E-->
@@ -91,6 +118,47 @@
 
 
 </div><!--// Wrap E-->
+
+	<script>
+	$(function(){
+		$("#addReply").click(function(){ //댓글등록클릭시
+			var content = $("#replyContent").val(); //유저가 작성한 댓글내용
+			var inquiryNo = $("#inquiryNo").text();
+			console.log(content +" " + inquiryNo);
+			$.ajax({
+				url:"/reqtakbae/insertReply.in", //댓글삽입 서블릿으로 전송
+				data:{content:content,inquiryNo:inquiryNo},
+				type:"post",
+				success:function(data){
+					console.log(data);
+					
+					var $replySelectTable = $("#replySelectTable");
+	
+				
+					//새로작성된 댓글만가져오는게아니라, 이전댓글까지 DB에서 통째로 가져오기때문에 
+					//초기화해준다 생각
+					
+					for(var key in data){
+						var $tr = $("<tr>");
+						var $contentTd = $("<td>").text(data[key].m_context).css("width","400px");
+						var $inquiryNoTd = $("<td>").text(data[key].m_date).css("width","400px");
+						$tr.append($contentTd);
+						$tr.append($inquiryNoTd);
+						$replySelectTable.append($tr);
+						
+					}
+					
+				},
+				error:function(){
+					console.log("실패");
+				}
+			});
+		});
+	});
+</script>
+
+
+
 
 </body>
 </html>

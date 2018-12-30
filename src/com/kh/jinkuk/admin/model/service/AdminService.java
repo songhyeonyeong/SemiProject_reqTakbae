@@ -1,13 +1,15 @@
 package com.kh.jinkuk.admin.model.service;
 
-import static com.kh.jinkuk.common.JDBCTemplate.close;
-import static com.kh.jinkuk.common.JDBCTemplate.getConnection;
+import static com.kh.jinkuk.common.JDBCTemplate.*;
+
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.jinkuk.admin.model.dao.AdminDao;
 import com.kh.jinkuk.admin.model.vo.Admin;
+import com.kh.jinkuk.admin.model.vo.Announcment;
+import com.kh.jinkuk.admin.model.vo.Inquiry;
 
 
 
@@ -96,7 +98,28 @@ public class AdminService {
 		
 		return result;
 	}
+	
+	public int deleteNotice(Announcment m) {
+		Connection con = getConnection();
+		System.out.println(con);
+		int result = new AdminDao().deleteNotice(con,m);
+	
+		close(con);
+		
+		return result;
+	}
 
+	public int deleteToday(Announcment m) {
+		Connection con = getConnection();
+		System.out.println(con);
+		int result = new AdminDao().deleteToday(con,m);
+	
+		close(con);
+		
+		return result;
+	}
+	
+	
 
 	public int getListCount() {
 		Connection con = getConnection();
@@ -120,7 +143,21 @@ public class AdminService {
 		close(con);
 		return listCount;
 	}
+	
+	public int getListCountAn() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCountAn(con);
+		close(con);
+		return listCount;
+	}
 
+	
+	public int getListCountTo() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCountTo(con);
+		close(con);
+		return listCount;
+	}
 	
 
 	public ArrayList<Admin> selectList(int currentPage, int limit) {
@@ -152,6 +189,30 @@ public class AdminService {
 		
 		return list;
 	}
+	
+	
+	public ArrayList<Announcment> selectListAn(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Announcment> list = new AdminDao().selectListAn(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	
+	public ArrayList<Announcment> selectListTo(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Announcment> list = new AdminDao().selectListTo(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
+
+	
 
 	public int cancleBlack(Admin m) {
 		Connection con = getConnection();
@@ -210,6 +271,82 @@ public class AdminService {
 		close(con);
 		return list;
 	}
+
+	public int getListCountIn() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCountIn(con);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Inquiry> selectListIn(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Inquiry> list = new AdminDao().selectListIn(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public Inquiry selectOne(String num) {
+		Connection con = getConnection();
+		
+		Inquiry n = new AdminDao().selectOne(con, num);
+		
+		int result = 0;
+		
+		close(con);
+	
+		return n;
+	}
+
+	public ArrayList<Inquiry> insertReply(Inquiry b) {
+		System.out.println("서비스 board"+b);
+		
+		Connection con = getConnection();
+		ArrayList<Inquiry> replyList = null;
+		
+		//inert -> commit -> select조회
+		int result = new AdminDao().insertReply(con,b);
+		
+		if(result>0) {
+			commit(con);
+			replyList = new AdminDao().selectReplyList(con,b.getRef_mno());
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return replyList;
+
+
+
+	}
+
+	public Inquiry selectOneReply(String num) {
+		Connection con = getConnection();
+		
+		Inquiry n = new AdminDao().selectOneReply(con, num);
+		
+		int result = 0;
+		
+		close(con);
+	
+		return n;
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 
 

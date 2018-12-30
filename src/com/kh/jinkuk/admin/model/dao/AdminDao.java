@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.jinkuk.admin.model.vo.Admin;
+import com.kh.jinkuk.admin.model.vo.Announcment;
+import com.kh.jinkuk.admin.model.vo.Inquiry;
 
 
 public class AdminDao {
@@ -284,6 +286,54 @@ public class AdminDao {
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, m.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteNotice(Connection con, Announcment m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, m.getG_NO());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteToday(Connection con, Announcment m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteNotice");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, m.getG_NO());
 			
 			result = pstmt.executeUpdate();
 			
@@ -834,6 +884,400 @@ public class AdminDao {
 	
 		return list;
 	}
+
+	public int getListCountAn(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("AnnounceCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Announcment> selectListAn(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Announcment> list = null;
+		
+		String query = "SELECT RNUM,G_NO, G_S_AREA, G_E_AREA,G_TITLE, G_DAY, G_SIZE, G_PRICE, G_P_DIV "
+				+ "		FROM (SELECT ROWNUM RNUM,G_NO, G_S_AREA, G_E_AREA, G_TITLE, G_DAY, G_SIZE, G_PRICE, G_P_DIV "
+				+ "			  FROM (SELECT A.G_NO, A.G_S_AREA, A.G_E_AREA, A.G_TITLE, A.G_DAY, A.G_SIZE, A.G_PRICE, AP.G_P_DIV "
+				+ "					FROM ANNOUNCEMENT A "
+				+ "					JOIN ANNOUNCEMENT_PAYMENT AP ON(A.G_NO = AP.G_NO) "
+				+ "					WHERE A.STATUS='Y' "
+				+ "					AND A.G_DIV='일반' "
+				+ "					ORDER BY G_NO ASC)) "
+				+ "WHERE RNUM BETWEEN ? AND ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Announcment>();
+			
+			while(rset.next()) {
+				Announcment m = new Announcment();
+				
+				
+			m.setG_NO(rset.getInt("G_NO"));
+			m.setG_S_AREA(rset.getString("G_S_AREA"));
+			m.setG_E_AREA(rset.getString("G_E_AREA"));
+			m.setG_TITLE(rset.getString("G_TITLE"));
+			m.setG_DAY(rset.getDate("G_DAY"));
+			m.setG_SIZE(rset.getString("G_SIZE"));
+			m.setG_PRICE(rset.getInt("G_PRICE"));
+			m.setG_P_DIV(rset.getString("G_P_DIV"));
+	
+			
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
+	
+	
+	public int getListCountTo(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("AnnounceCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Announcment> selectListTo(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Announcment> list = null;
+		
+		String query = "SELECT RNUM,G_NO, G_S_AREA, G_E_AREA,G_TITLE, G_DAY, G_SIZE, G_PRICE, G_P_DIV "
+				+ "		FROM (SELECT ROWNUM RNUM,G_NO, G_S_AREA, G_E_AREA, G_TITLE, G_DAY, G_SIZE, G_PRICE, G_P_DIV "
+				+ "			  FROM (SELECT A.G_NO, A.G_S_AREA, A.G_E_AREA, A.G_TITLE, A.G_DAY, A.G_SIZE, A.G_PRICE, AP.G_P_DIV "
+				+ "					FROM ANNOUNCEMENT A "
+				+ "					JOIN ANNOUNCEMENT_PAYMENT AP ON(A.G_NO = AP.G_NO) "
+				+ "					WHERE A.STATUS='Y' "
+				+ "					AND A.G_DIV='당일' "
+				+ "					ORDER BY G_NO ASC)) "
+				+ "WHERE RNUM BETWEEN ? AND ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Announcment>();
+			
+			while(rset.next()) {
+				Announcment m = new Announcment();
+				
+				
+			m.setG_NO(rset.getInt("G_NO"));
+			m.setG_S_AREA(rset.getString("G_S_AREA"));
+			m.setG_E_AREA(rset.getString("G_E_AREA"));
+			m.setG_TITLE(rset.getString("G_TITLE"));
+			m.setG_DAY(rset.getDate("G_DAY"));
+			m.setG_SIZE(rset.getString("G_SIZE"));
+			m.setG_PRICE(rset.getInt("G_PRICE"));
+			m.setG_P_DIV(rset.getString("G_P_DIV"));
+	
+			
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
+
+	public int getListCountIn(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("InquiryCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Inquiry> selectListIn(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Inquiry> list = null;
+		
+		String query = prop.getProperty("selectInquiry");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Inquiry>();
+			
+			while(rset.next()) {
+				Inquiry m = new Inquiry();
+				
+				m.setM_no(rset.getInt("M_NO"));
+				m.setM_title(rset.getString("M_TITLE"));
+				m.setM_context(rset.getString("M_CONTEXT"));
+				m.setM_date(rset.getDate("M_DATE"));
+				m.setU_no(rset.getString("USER_ID"));
+				
+			
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
+
+	public Inquiry selectOne(Connection con, String num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Inquiry n = null;
+		
+		String query = prop.getProperty("selectOne");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			System.out.println(query);
+			pstmt.setInt(1, Integer.parseInt(num));
+			
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new Inquiry();
+				
+				n.setM_no(rset.getInt("M_NO"));
+				n.setM_title(rset.getString("M_TITLE"));
+				n.setM_context(rset.getString("M_CONTEXT"));
+				n.setM_date(rset.getDate("M_DATE"));
+				n.setU_no(rset.getString("USER_ID"));
+				
+			}
+		
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return n;
+	}
+
+	public int insertReply(Connection con, Inquiry b) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		
+		String query = prop.getProperty("insertReply");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, b.getM_context());
+			pstmt.setInt(2, b.getRef_mno());
+	
+
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+
+
+
+	}
+
+	public ArrayList<Inquiry> selectReplyList(Connection con, int i) {
+		PreparedStatement pstmt= null;
+		ResultSet rset = null;
+		ArrayList<Inquiry> list = null;
+		
+		String query = prop.getProperty("selectReplyList");
+				
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, i);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Inquiry>();
+			
+			while(rset.next()) {
+				Inquiry b = new Inquiry();
+				
+
+				b.setM_context(rset.getString("M_CONTEXT"));
+				b.setM_date(rset.getDate("M_DATE"));
+				
+				
+				list.add(b);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return list;
+
+
+
+	}
+
+	public Inquiry selectOneReply(Connection con, String num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Inquiry n = null;
+		
+		String query = prop.getProperty("selectOneReply");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			System.out.println(query);
+			pstmt.setInt(1, Integer.parseInt(num));
+			
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new Inquiry();
+				
+
+				n.setM_context(rset.getString("M_CONTEXT"));
+				n.setM_date(rset.getDate("M_DATE"));
+
+				
+			}
+		
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return n;
+	}
+
+
+
+
+
 
 
 
