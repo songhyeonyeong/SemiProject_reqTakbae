@@ -63,11 +63,10 @@ public class Cybermoney_breakdownDao {
 		}
 		
 		try {
-			pstmt = con.prepareStatement(query);
-			
 			int startRow = (currentPage -1) * limit + 1;
 			int endRow = startRow + limit - 1;
-			
+
+			pstmt = con.prepareStatement(query);
 			if(userDiv.equals("신청자")) {
 				pstmt.setInt(1, uNo);
 				pstmt.setString(2, "충전");
@@ -77,6 +76,11 @@ public class Cybermoney_breakdownDao {
 				pstmt.setString(6, "포인트사용");
 				pstmt.setInt(7, startRow);
 				pstmt.setInt(8, endRow);
+			}else {
+				pstmt.setInt(1, uNo);
+				pstmt.setString(2, "배송료");
+				pstmt.setInt(3, startRow);
+				pstmt.setInt(4, endRow);
 			}
 			
 			rset = pstmt.executeQuery();
