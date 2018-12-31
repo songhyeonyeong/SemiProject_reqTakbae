@@ -45,11 +45,27 @@ public class MemberService {
 	public String find(String name, String email, String userDiv) {
 		Connection con = getConnection();
 		
-		String idOrPwd = new MemberDao().find(con, name, email, userDiv);
+		String id = new MemberDao().find(con, name, email, userDiv);
 		
 		close(con);
 
-		return idOrPwd;
+		return id;
+	}
+
+	public int findPw(String name, String email, String userDiv, String id, String userPwd) {
+		Connection con = getConnection();
+		
+		int pwUpdate = new MemberDao().findPw(con, name, email, userDiv,id, userPwd);
+		
+		if(pwUpdate>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		System.out.println("service result:"+pwUpdate);
+		return pwUpdate;
 	}
 
 }

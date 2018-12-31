@@ -8,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.jinkuk.member.model.service.MemberService;
-import com.kh.jinkuk.member.model.vo.Member;
 
 /**
- * Servlet implementation class IdPwFindServlet
+ * Servlet implementation class PwFindServlet
  */
-@WebServlet("/find")
-public class IdPwFindServlet extends HttpServlet {
+@WebServlet("/findPw.me")
+public class PwFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IdPwFindServlet() {
+    public PwFindServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +32,26 @@ public class IdPwFindServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String userDiv = request.getParameter("userDiv");
 		String findDiv = request.getParameter("findDiv");
+		String id = request.getParameter("id");
+		String userPwd = request.getParameter("userPwd");
 		
-		String id = new MemberService().find(name, email, userDiv);
+		System.out.println("비밀번호찾기 findDiv : " + findDiv);
+		System.out.println("비밀번호찾기 userPwd : " + userPwd);
 		
-		if(id != "") {
-			System.out.println("아이디 : "+id);
-			System.out.println();
-			
-			request.setAttribute("id", id);
+		int pwUpdate = new MemberService().findPw(name, email, userDiv,id,userPwd);
+		
+		if(pwUpdate>0) {			
+			request.setAttribute("userPwd", userPwd);
 			request.setAttribute("findDiv", findDiv);
 			
+
 			request.getRequestDispatcher("/sendId").forward(request, response);
+			
+			response.getWriter().print("YES");
 			
 		}else {
 			response.getWriter().print("NO");
 		}
-		
 	}
 
 	/**

@@ -8,18 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.jinkuk.member.model.service.MemberService;
+import com.kh.jinkuk.member.model.vo.Member;
 
 /**
- * Servlet implementation class IdCheckServlet
+ * Servlet implementation class IdPwFindServlet
  */
-@WebServlet("/idCheck.me")
-public class IdCheckServlet extends HttpServlet {
+@WebServlet("/find")
+public class IdFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IdCheckServlet() {
+    public IdFindServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,29 +29,25 @@ public class IdCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String SId = request.getParameter("SId");
-		boolean flag = true;
-		String str ="";
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String userDiv = request.getParameter("userDiv");
+		String findDiv = request.getParameter("findDiv");
 		
-		/*if(SId == "") { 
-			SId="";
-		}else if(!SId.equals("")) {
-			flag = new MemberService().idCheck(SId);
-		}*/
-		if(!SId.equals("")) { 
-			flag = new MemberService().idCheck(SId);
-		}
+		String id = new MemberService().find(name, email, userDiv);
 		
-		if(flag) {
-			str="NO";
-			response.getWriter().print(str);
+		if(id != "") {			
+			request.setAttribute("id", id);
+			request.setAttribute("findDiv", findDiv);
+			
+			request.getRequestDispatcher("/sendId").forward(request, response);
+			response.getWriter().print("YES");
+			
 		}else {
-			str="YES";
-			response.getWriter().print(str);
+			response.getWriter().print("NO");
 		}
 		
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

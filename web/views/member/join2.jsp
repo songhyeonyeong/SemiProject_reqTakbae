@@ -108,6 +108,9 @@
 				</td>
 				<td><img id="emailCheckImg" class="checkTest" src=""></td>
 			</tr>
+			
+			
+			<%-- 계좌 원본  --%>
 			<tr>
 				<th scope="row" rowspan="3">계좌번호</th>
 				<td>
@@ -118,11 +121,10 @@
 							<option value="shinHan">신한은행</option>
 							<option value="woori">우리은행</option>
 						</select><br>
-					계좌번호 <input id="accountNum" name="accountNum" type="text"><br>
+					계좌번호 <input id="accountNum" name="accountNum" type="text" placeholder="-없이 입력"><br>
 					생년월일 <input id="birth" type="text" placeholder="940101형식으로 입력">
 					<span id="bankCheck" class="sbtn db" onclick="testtest();">계좌 인증</span>
 						
-						<!-- <span id="accountCheck"> </span> -->
 						<%
 							Calendar cal = Calendar.getInstance();
 							java.util.Date date = cal.getTime();
@@ -133,6 +135,7 @@
 				</td>
 				<td><img id="accountCheckImg" class="checkTest" src=""></td>
 			</tr>
+			
 			</tbody>
 		</table><!--// boardWrite E-->
 
@@ -164,7 +167,7 @@
 	//아이디 정규표현식 && 중복체크
 	$("#idCheckBtn").click(function(){
 		var SId = $("#SId").val();
-		var regExp = /^[a-z0-9]{3,}$/;
+		var regExp = /\w{3,}/;
 		
 		if(regExp.test(SId)){
 			$.ajax({
@@ -187,9 +190,8 @@
 				
 			})
 		}else{
-			alert("아이디 : 영문소문자/숫자 조합 3자리 이상");
+			alert("아이디 : 영어/숫자 조합 3자리 이상");
 			$("#idCheckMsg").html("");
-			//$("#idCheckMsg").css("color","red");
 			$("#idCheckImg").attr("src","");
 		}
 	});
@@ -199,16 +201,14 @@
 	$("#SPwd").change(function(){
 		var pwd1 = $("#SPwd").val();
 		
-		var regExp=/^[a-z0-9]{3,}$/;
+		var regExp=/\w{3,}/;
 		
 		if(!regExp.test(pwd1)){
-			alert("비밀번호 : 영문소문자/숫자 조합 3자리 이상");
+			alert("비밀번호 : 영어/숫자 조합 3자리 이상");
 			$("#SPwd").val("");
 			$("#SPwd2").val("");
 			$("#pwdCheckImg").attr("src","");
 			$("#pwdCheckImg2").attr("src","");
-		}else{
-			
 		}
 	});
 	
@@ -241,7 +241,7 @@
 	//이름 체크
 	$("#SName").change(function(){
 		var name = $("#SName").val();
-		var regExp =/^[ㄱ-ㅎㅏ-ㅣ가-힣]{1,}$/;
+		var regExp =/[ㄱ-ㅎㅏ-ㅣ가-힣]{1,}/;
 		
 		if(regExp.test(name)){
 			$("#nameCheckImg").attr("src",checkImgPath);
@@ -331,9 +331,18 @@
 	
 	
 	
+	
+	
+	
+	 
+	 
+	 
+	 
+	//원본 
 	//계좌 인증
 	var token;
-	
+	 $.support.cors = true;
+	 
 	function testtest(){
 		var cId="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed";
 		var cSecret="2b229cffd50b45c08f0cde6158ab69c1";
@@ -410,7 +419,29 @@
 				}
 				
 			});
-	}
+	} 
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//회원가입 버튼 클릭시 && 널값
 	function insertMember(){
