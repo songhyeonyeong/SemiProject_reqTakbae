@@ -62,7 +62,7 @@ public class Cybermoney_breakdown_search extends HttpServlet {
 			
 			Cybermoney_breakdownService ns = new Cybermoney_breakdownService();
 			//전체 게시글 수 조회
-			int listCount = ns.getListCount();
+			int listCount = ns.getListCountSearch(uNo, div);
 			
 			//총 페이지 수 계산
 			//예를 들어, 목록 수가 123개면 페이지수는 13페이지가 필요하다.
@@ -81,7 +81,7 @@ public class Cybermoney_breakdown_search extends HttpServlet {
 			
 			PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 			
-			ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownService().selectList(currentPage, limit, uNo, userDiv,div);
+			ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownService().selectListSearch(currentPage, limit, uNo,div);
 			System.out.println(list);
 			
 			if(list != null) {
