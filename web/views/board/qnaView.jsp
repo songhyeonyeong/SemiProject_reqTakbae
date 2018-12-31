@@ -1,7 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+import ="com.kh.jinkuk.border.inquire.model.vo.*"%>
+
+<% Inquire i=(Inquire)request.getAttribute("i"); %>
 
 <%@ include file="/views/include/common.jsp" %>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <title>내 문의내역</title>
 
 </head>
@@ -30,28 +33,23 @@
 			</colgroup>
 			<tbody>
 			<tr>
-				<th scope="row">문의 분류</th>
-				<td>배송문의</td>
+				<th scope="row">제목</th>
+				<td colspan="3"><span><%=i.getM_title() %></span></td>
 			</tr>
 			<tr>
-				<th scope="row">문의 제목</th>
-				<td>배송이 안와요</td>
+				<th scope="row">내용</th>
+				<td colspan="3"><span><%=i.getM_context() %></span></td>
 			</tr>
 			<tr>
-				<th scope="row">문의 내용</th>
-				<td class="minh100 clfix">
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-					배송 왜 안오나요!!!!!!!!!!!!!<br>
-				</td>
+				<th scope="row">작성자</th>
+				<td colspan="3"><span><%=i.getUser_id() %></span></td>
 			</tr>
 			<tr>
-				<th scope="row">파일 첨부</th>
-				<td>
-					<p><a href="#"></a></p>
-				</td>
+				<th scope="row">등록일</th>
+				<td colspan="3"><span><%=i.getM_date() %></span></td>
+			</tr>
+			<tr>
+			
 			</tr>
 			</tbody>
 		</table><!--// boardWrite E-->

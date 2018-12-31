@@ -11,7 +11,7 @@ Calendar cal = Calendar.getInstance();
 	String tmonth = String.valueOf(month);
 	String tdate = String.valueOf(date);
 	String Todat =tyear+"-"+tmonth+"-"+tdate;
-	String delId =request.getParameter("delId");
+	String delId =request.getParameter("delId");//기사 아아디 받기 
 	
 %>
 <%@ include file="/views/include/common.jsp" %>

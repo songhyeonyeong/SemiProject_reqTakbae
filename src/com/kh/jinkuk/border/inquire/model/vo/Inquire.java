@@ -11,11 +11,12 @@ public class Inquire {
 	private String status;
 	private Date m_date;
 	private int u_no; 
+	private String user_id;
 	
 	public Inquire() {}
 
 	public Inquire(int m_no, String m_title, String m_context, int ref_mno, int reply_level, String status, Date m_date,
-			int u_no) {
+			int u_no, String user_id) {
 		super();
 		this.m_no = m_no;
 		this.m_title = m_title;
@@ -25,6 +26,7 @@ public class Inquire {
 		this.status = status;
 		this.m_date = m_date;
 		this.u_no = u_no;
+		this.user_id = user_id;
 	}
 
 	public int getM_no() {
@@ -91,11 +93,21 @@ public class Inquire {
 		this.u_no = u_no;
 	}
 
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
 	@Override
 	public String toString() {
 		return "Inquire [m_no=" + m_no + ", m_title=" + m_title + ", m_context=" + m_context + ", ref_mno=" + ref_mno
-				+ ", reply_level=" + reply_level + ", status=" + status + ", m_date=" + m_date + ", u_no=" + u_no + "]";
+				+ ", reply_level=" + reply_level + ", status=" + status + ", m_date=" + m_date + ", u_no=" + u_no
+				+ ", user_id=" + user_id + "]";
 	}
+
 	
 	
 }

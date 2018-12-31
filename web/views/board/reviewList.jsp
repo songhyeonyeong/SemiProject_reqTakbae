@@ -102,12 +102,9 @@
 				</table>
 
 
-				<p class="flo_right mt10">
-					<a class="mbtn or" href="views/board/reviewWrite.jsp">후기작성하기</a>
-				</p>
+				
 
-
-
+				<!-- paging -->
 				<div class="numbox pt40 pb50" align="center">
 					<span><a class="num" href="#" 
 					onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=1'"><<</a></span>
@@ -141,7 +138,7 @@
 					<span><a class="num" href="#" 
 						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=maxPage%>'">>></a></span>
 				</div>
-
+			<!-- //paging -->
 
 
 			</div>
