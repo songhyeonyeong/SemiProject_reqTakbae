@@ -14,13 +14,13 @@ import com.kh.jinkuk.member.model.vo.Member;
  * Servlet implementation class IdPwFindServlet
  */
 @WebServlet("/find")
-public class IdPwFindServlet extends HttpServlet {
+public class IdFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IdPwFindServlet() {
+    public IdFindServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +36,12 @@ public class IdPwFindServlet extends HttpServlet {
 		
 		String id = new MemberService().find(name, email, userDiv);
 		
-		if(id != "") {
-			System.out.println("아이디 : "+id);
-			System.out.println();
-			
+		if(id != "") {			
 			request.setAttribute("id", id);
 			request.setAttribute("findDiv", findDiv);
 			
 			request.getRequestDispatcher("/sendId").forward(request, response);
+			response.getWriter().print("YES");
 			
 		}else {
 			response.getWriter().print("NO");

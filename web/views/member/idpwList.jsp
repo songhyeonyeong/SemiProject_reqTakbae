@@ -67,7 +67,7 @@
 				<li class="mt10">
 					<span>
 						<img src="/reqtakbae/views/common/images/contents/name.PNG" width="35px" height="35px" align="center">&nbsp;&nbsp;
-						<input id="PwFindName" name="name" class="pt5 pl5 pr5 pb5" type="text" value="" placeholder="이름">
+						<input id="PwdFindName" name="name" class="pt5 pl5 pr5 pb5" type="text" value="" placeholder="이름">
 					</span>
 				</li>
 				<li class="mt10">
@@ -104,15 +104,15 @@
 <%@ include file="/views/include/myNav.jsp" %>
 
 <script>
+	var userDiv;
+	if($("input:radio:checked").val()=="기사"){
+		userDiv="기사";
+	}else if($("input:radio:checked").val()=="신청자"){
+		userDiv="신청자";
+	}
+	
 	function idFind(){
 		var findDiv="id";
-		
-		var userDiv;
-		if($("input:radio:checked").val()=="기사"){
-			userDiv="기사";
-		}else{
-			userDiv="신청자";
-		}
 		
 		var name = $("#IdFindName").val();
 		var email = $("#IdFindEmail").val();
@@ -127,20 +127,37 @@
 				}else{
 					alert("이름과 아이디를 다시 확인해주세요")
 				}
-				
 			}
-			
+		});
+	}
+	
+	
+	function pwdFind(){
+		var randomCode = Math.floor((Math.random()*9999999-999999))+1000000;
+		
+		var findDiv="pw";
+		
+		var name = $("#PwdFindName").val();
+		var email = $("#PwdFindEmail").val();
+		var id = $("#PwdFindId").val();
+		
+		$.ajax({
+			url:"/reqtakbae/findPw.me",
+			type:"post",
+			data:{name:name,email:email,id:id,userDiv:userDiv,findDiv:findDiv,randomCode:randomCode,userPwd:userPwd},
+			success:function(data){
+				if(data=="YES"){
+					alert("이메일로 임시비밀번호 전송")
+				}else{
+					alert("이름, 이메일, 아이디를 다시 확인해주세요")
+				}
+			}
 			
 		});
 		
 		
-		
-		
-		
-		
-		<%-- location.href="<%=request.getContextPath()%>/find?name="+name+"&email="+email+"&userDiv="+userDiv; --%>
-		
 	}
+	
 </script>
 
 </body>

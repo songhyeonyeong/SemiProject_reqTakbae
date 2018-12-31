@@ -20,13 +20,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class SendIdServlet
  */
 @WebServlet("/sendId")
-public class SendIdServlet extends HttpServlet {
+public class SendIdPwServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendIdServlet() {
+    public SendIdPwServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,8 +41,10 @@ public class SendIdServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String id = (String) request.getAttribute("id");
 		String findDiv = (String) request.getAttribute("findDiv");
+		String userPwd = (String) request.getAttribute("userPwd");
 		
 		System.out.println("findDiv : "+findDiv);
+		System.out.println("userPwd : " + userPwd);
 
 		
 		Properties p = new Properties();// 정보를 담을 객체
@@ -73,7 +75,7 @@ public class SendIdServlet extends HttpServlet {
             // 이메일 제목
             if(findDiv.equals("id")) {
             	msg.setSubject("[택배를 부탁해] 아이디 찾기", "UTF-8");
-            }else if(findDiv =="pw") {
+            }else if(findDiv.equals("pw")) {
             	msg.setSubject("[택배를 부탁해] 비밀번호 찾기", "UTF-8");
             }
             
@@ -81,8 +83,9 @@ public class SendIdServlet extends HttpServlet {
             if(findDiv.equals("id")) {
             	 request.setAttribute("id", id);
                  msg.setText("아이디 : "+ id, "UTF-8");
-            }else if(findDiv =="pw") {
-            	
+            }else if(findDiv.equals("pw")) {
+            	request.setAttribute("userPwd", userPwd);
+                msg.setText("임시 비밀번호 : "+ userPwd, "UTF-8");
             }
            
             // 이메일 헤더

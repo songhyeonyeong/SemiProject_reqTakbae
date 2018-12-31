@@ -115,6 +115,8 @@ public class MemberDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
@@ -149,6 +151,34 @@ public class MemberDao {
 		
 		
 		return member;
+	}
+
+	public int findPw(Connection con, String name, String email, String userDiv, String id, String userPwd) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updatePw");
+		System.out.println(query);
+		System.out.println(userPwd);
+		System.out.println(id);
+		System.out.println(name);
+		System.out.println(email);
+	
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, userPwd);
+			pstmt.setString(2, id);
+			pstmt.setString(3, name);
+			pstmt.setString(4, email);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		System.out.println("dao result:"+result);
+		return result;
 	}
 }
 

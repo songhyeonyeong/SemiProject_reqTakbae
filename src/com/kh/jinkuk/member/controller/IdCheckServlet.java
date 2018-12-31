@@ -32,9 +32,12 @@ public class IdCheckServlet extends HttpServlet {
 		boolean flag = true;
 		String str ="";
 		
-		if(SId == null) { 
+		/*if(SId == "") { 
 			SId="";
 		}else if(!SId.equals("")) {
+			flag = new MemberService().idCheck(SId);
+		}*/
+		if(!SId.equals("")) { 
 			flag = new MemberService().idCheck(SId);
 		}
 		
