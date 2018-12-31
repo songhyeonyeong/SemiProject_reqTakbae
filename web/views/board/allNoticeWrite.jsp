@@ -58,7 +58,7 @@
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
-	 
+	<% if(loginUser != null){%> 
 		<div class="titNavi">
 			전체 공고
 			<span>홈 &gt; 전체 공고</span>
@@ -95,9 +95,10 @@
 							<label for=""></label>
 							<select id="" name="" class="input wth200">
 								<option selected="selected">선택하세요</option>
-								<option value="#">----</option>
-								<option value="#">----</option>
-								<option value="#">----</option>
+								<option value="#">전자제품</option>
+								<option value="#">생활용품</option>
+								<option value="#">식품</option>
+								<option value="#">기타</option>
 							</select> 
 						</td>
 					</tr>
@@ -107,9 +108,9 @@
 							<label for=""></label>
 							<select id="" name="" class="input wth200">
 								<option selected="selected">선택하세요</option>
-								<option value="#">----</option>
-								<option value="#">----</option>
-								<option value="#">----</option>
+								<option value="#">소</option>
+								<option value="#">중</option>
+								<option value="#">대</option>
 							</select> 
 						</td>
 						<th scope="row">물품 가액</th>
@@ -121,9 +122,31 @@
 							<label for=""></label>
 							<select id="" name="" class="input wth200">
 								<option selected="selected">선택하세요</option>
-								<option value="#">----</option>
-								<option value="#">----</option>
-								<option value="#">----</option>
+								<option value="#">강남구</option>
+								<option value="#">강동구</option>
+								<option value="#">강북구</option>
+								<option value="#">강서구</option>
+								<option value="#">관악구</option>
+								<option value="#">광진구</option>
+								<option value="#">구로구</option>
+								<option value="#">금천</option>
+								<option value="#">노원구</option>
+								<option value="#">도봉구</option>
+								<option value="#">동대문구</option>
+								<option value="#">동작구</option>
+								<option value="#">마포구</option>
+								<option value="#">서대문구</option>
+								<option value="#">서초구</option>
+								<option value="#">성동구</option>
+								<option value="#">성북구</option>
+								<option value="#">송파구</option>
+								<option value="#">양천구</option>
+								<option value="#">영등포구</option>
+								<option value="#">용산구</option>
+								<option value="#">은평구</option>
+								<option value="#">종로구</option>
+								<option value="#">중구</option>
+								<option value="#">중랑구</option>
 							</select> 
 						</td>
 						<th scope="row">도착지</th>
@@ -131,9 +154,31 @@
 							<label for=""></label>
 							<select id="" name="" class="input wth200">
 								<option selected="selected">선택하세요</option>
-								<option value="#">----</option>
-								<option value="#">----</option>
-								<option value="#">----</option>
+								<option value="#">강남구</option>
+								<option value="#">강동구</option>
+								<option value="#">강북구</option>
+								<option value="#">강서구</option>
+								<option value="#">관악구</option>
+								<option value="#">광진구</option>
+								<option value="#">구로구</option>
+								<option value="#">금천</option>
+								<option value="#">노원구</option>
+								<option value="#">도봉구</option>
+								<option value="#">동대문구</option>
+								<option value="#">동작구</option>
+								<option value="#">마포구</option>
+								<option value="#">서대문구</option>
+								<option value="#">서초구</option>
+								<option value="#">성동구</option>
+								<option value="#">성북구</option>
+								<option value="#">송파구</option>
+								<option value="#">양천구</option>
+								<option value="#">영등포구</option>
+								<option value="#">용산구</option>
+								<option value="#">은평구</option>
+								<option value="#">종로구</option>
+								<option value="#">중구</option>
+								<option value="#">중랑구</option>
 							</select> 
 						</td>
 					</tr>
@@ -177,7 +222,10 @@
 			<span><a class="mbtn or wth60" href="#">등록</a></span>
 			<span><a class="mbtn gy wth60" href="#">취소</a></span>
 		</div>
-
+	<% }else{
+		request.setAttribute("msg", "잘못된 경로로 접근하셨습니다.");
+		request.getRequestDispatcher("../common/errorPage.jsp");
+	} %>
 
 
 	</div><!--// inner E-->

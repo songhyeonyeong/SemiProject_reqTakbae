@@ -163,7 +163,6 @@ public class AnnouncmentDao {
 					a.setG_CONTEXT(rset.getString("G_CONTEXT"));
 					a.setG_P_DIV(rset.getString("G_P_DIV"));
 					
-					
 				}
 			
 			
@@ -175,5 +174,43 @@ public class AnnouncmentDao {
 			}
 			
 			return a;
+		}
+		//게시판 작성 
+		public int insertBoard(Connection con, Announcment a) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = prop.getProperty("insertBoard");
+			System.out.println(query);
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, a.getG_NO());
+				pstmt.setString(2, a.getG_TITLE());
+				pstmt.setString(3, a.getG_CONTEXT());
+				pstmt.setString(4, a.getG_P_DIV());
+				pstmt.setDate(5, a.getG_S_DATE());
+				pstmt.setDate(6, a.getG_E_DATE());
+				pstmt.setString(7, a.getG_S_AREA());
+				pstmt.setString(8, a.getG_E_AREA());
+				pstmt.setString(9, a.getG_TYPE());
+				pstmt.setInt(10, a.getG_SUM());
+				pstmt.setInt(11, a.getG_PRICE());
+				pstmt.setString(12, a.getG_SIZE());
+				pstmt.setDate(13, a.getG_DAY());
+				pstmt.setString(14, a.getSTATUS());
+				pstmt.setInt(15, a.getU_NO());
+				
+				System.out.println(a);
+				result = pstmt.executeUpdate();
+				System.out.println(result);
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
 		}
 }

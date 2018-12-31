@@ -54,4 +54,19 @@ public class AnnouncmentService {
 		
 		return result;
 	}
+	//게시판 작성페이지
+	public int insertBoard(Announcment a) {
+		
+		Connection con = getConnection();
+		
+		int result = new AnnouncmentDao().insertBoard(con, a);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		return result;
+	}
 }
