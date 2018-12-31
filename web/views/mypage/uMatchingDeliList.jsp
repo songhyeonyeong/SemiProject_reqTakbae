@@ -85,7 +85,7 @@
 							<td style="color: grey; font-weight: bold"><%=m.getD_STATUS()%></td>
 							<td><a class="sbtn rd">배송확정</a></td>
 							<%}else if(m.getD_STATUS().equals("배송확정")){ %>
-								<td style="color: grey; font-weight: bold"><%=m.getD_STATUS()%></td>
+								<td style="color: ; font-weight: bold"><%=m.getD_STATUS()%></td>
 							<td><a class="sbtn yl">리뷰쓰기</a></td>
 							<%
 								} else {
