@@ -47,7 +47,7 @@
 						<form name="form" action="/reqtakbae/csearch" method="post">
 						<select id="" name="select" class="wth140">
 							<option selected="selected" value="all">전체</option>
-							<option value="충전">충전내역</option>
+							<option value="충전">충전</option>
 							<option value="공고등록">공고등록</option>
 							<option value="공고취소">공고취소</option>
 							<option value="포인트적립">포인트적립</option>
