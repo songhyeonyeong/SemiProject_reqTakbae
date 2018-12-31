@@ -10,7 +10,9 @@ Calendar cal = Calendar.getInstance();
 	String tyear = String.valueOf(year);
 	String tmonth = String.valueOf(month);
 	String tdate = String.valueOf(date);
-	String Todat =tyear+tmonth+tdate;
+	String Todat =tyear+"-"+tmonth+"-"+tdate;
+	String delId =request.getParameter("delId");
+	
 %>
 <%@ include file="/views/include/common.jsp" %>
 
@@ -53,7 +55,11 @@ Calendar cal = Calendar.getInstance();
 			</tr>
 			<tr>
 				<th scope="row">기사명</th>
+				<%if(delId==null){ %>
 				<td><input id="driname" name="driname" class="" type="text" value="" ></td>
+				<%}else{ %>
+				<td><input id="driname" name="driname" class="" type="text" value="<%=delId %>" readonly></td>
+				<%} %>
 				<th scope="row">신청자</th>
 				<td>
 					<input type="text" value="<%=loginUser.getUser_id()%>" name="writer" readonly>

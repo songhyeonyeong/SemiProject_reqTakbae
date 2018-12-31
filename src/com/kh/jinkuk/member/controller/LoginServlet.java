@@ -1,6 +1,8 @@
 package com.kh.jinkuk.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,6 +30,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		PrintWriter out =response.getWriter();
+
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
 
@@ -38,15 +42,19 @@ public class LoginServlet extends HttpServlet {
 		Member loginUser = new MemberService().loginCheck(reqMember);
 		if (loginUser != null) {
 			request.getSession().setAttribute("loginUser", loginUser);
+
 			if (loginUser.getUser_id().equals("admin")) {
 				response.sendRedirect("/reqtakbae/admin.no");
 			} else {
 				response.sendRedirect("index.jsp");
 			}
 		} else {
-			// request.setAttribute("msg", "로그인 실패!");
-			// request.getRequestDispatcher("views/common/errorPage.jsp").forward(request,
-			// response);
+			out.print("<script>");
+			out.print("alert('로그인실패!');");
+			out.print("history.go(-1);");
+			out.print("</script>");
+			out.flush();
+
 
 		}
 
