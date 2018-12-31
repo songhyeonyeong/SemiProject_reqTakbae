@@ -89,7 +89,7 @@ int endPage = pi.getEndPage();
 			<% if(currentPage <= 1){ %>
 			<span><a class="num" disabled>&lt;</a></span>
 			<% }else{ %>
-			<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+			<span><a class="num" href="<%=request.getContextPath()%>/reqList.mp?currentPage=<%=currentPage - 1%>">&lt;</a></span>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){ 
@@ -97,7 +97,7 @@ int endPage = pi.getEndPage();
 			%>
 						<span><a class="num on" disabled><%= p %></a></span>
 			<%      }else{ %>
-								<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%= p %>"><%= p %></a></span>
+								<span><a class="num" href="<%=request.getContextPath()%>/reqList.mp?currentPage=<%= p %>"><%= p %></a></span>
 			<%      } %>
 	
 			<% } %>
@@ -106,7 +106,7 @@ int endPage = pi.getEndPage();
 			<% if(currentPage >= maxPage){ %>
 			<span><a class="num" disabled>></a></span>
 			<% }else{ %>
-				<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage + 1%>">></a></span>
+				<span><a class="num" href="<%=request.getContextPath()%>/reqList.mp?currentPage=<%=currentPage + 1%>">></a></span>
 			<% } %>
 			
 			

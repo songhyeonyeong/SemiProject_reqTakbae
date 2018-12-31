@@ -76,8 +76,6 @@ public class SelectMyReqnoticeListServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		}else {
-////			page = "views/common/errorPage.jsp";
-////			request.setAttribute("msg", "게시판 조회 실패!");
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

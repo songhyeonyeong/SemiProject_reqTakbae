@@ -28,6 +28,14 @@
 				<!-- inner S -->
 
 				<%@ include file="/views/include/tabMypage.jsp"%>
+				
+				
+				
+				
+				
+				
+				
+				
 				<!--신청자부분 -->
 				<%if(loginUser.getUser_div().equals("신청자")){ %>
 				<!-- <div class="titNavi">
@@ -63,7 +71,7 @@
 							for (int i=0; i<4; i++) {
 						%>
 							<input type="hidden" value="<%=d_list.get(i).getG_no()%>">
-							<li>&bull;<a href="#"><%=d_list.get(i).getG_context()%>&nbsp;&nbsp;<%=d_list.get(i).getB_status()%></a></li>
+							<li>&bull;<a href="#"><%=d_list.get(i).getG_context()%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color:blue"><%=d_list.get(i).getB_status()%></a></a></li>
 					
 						<%
 							}

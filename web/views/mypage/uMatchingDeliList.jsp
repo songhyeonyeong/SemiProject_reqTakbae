@@ -65,14 +65,13 @@
 							<th scope="col">상세</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
 						<!--  내공고 목록 출력 tr -->
 						<%
 							for (MyDeliverNotice m : list) {
 						%>
 						<tr>
 							<input type="hidden" value="<%=m.getG_NO()%>">
-						<tr>
 							<td><label for=""> 체크</label> <input id="" name=""
 								class="check" type="checkbox"></td>
 							<td><%=m.getG_DIV()%></td>
@@ -84,7 +83,10 @@
 								if (m.getD_STATUS().equals("배송완료")) {
 							%>
 							<td style="color: grey; font-weight: bold"><%=m.getD_STATUS()%></td>
-							<td><a class="sbtn rd" onclick=" BsOk()">배송확정</a></td>
+							<td><a class="sbtn rd">배송확정</a></td>
+							<%}else if(m.getD_STATUS().equals("배송확정")){ %>
+								<td style="color: grey; font-weight: bold"><%=m.getD_STATUS()%></td>
+							<td><a class="sbtn yl">리뷰쓰기</a></td>
 							<%
 								} else {
 							%>
@@ -97,42 +99,40 @@
 						<%
 							}
 						%>
-						<!-- <tr>
-					<td>
-						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
-					</td>
-					<td>당일</td>
-					<td>20181217002</td>
-					<td>맥북 배송</td>
-					<td>2018-12-03</td>
-					<td>ddeded112</td>
-					<td>인수</td>
-					<td><a class="sbtn gy" href="deliView.jsp">상세보기</a></td>
-				</tr>
-				<tr>
-					<td>
-						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
-					</td>
-					<td>일반</td>
-					<td>20181217004</td>
-					<td>나이키 신발</td>
-					<td>2018-12-03</td>
-					<td>suhyun003</td>
-					<td>배송중</td>
-					<td><a class="sbtn gy" href="deliView.jsp">상세보기</a></td>
-				</tr> -->
+				
 					</tbody>
 				</table>
 				<script type="text/javascript">
-					function BsOk(){
-					var t=confirm("배송확정 하시겠습니까?");
-					if(t==true)
-						{
-						alert("배송확정되었습니다.");
-						}
-					}
+					$(function(){
+						$("#tbody td .sbtn.rd").click(function(){
+							var t=confirm("배송확정 하시겠습니까?");
+							var num = $(this).parent().parent().children("input").val();
+							var value="배송확정";
+							if(t==true)
+								{
+								alert("배송확정 되었습니다!");
+								location.href="<%=request.getContextPath()%>/updatebstatusU.mp?num="+num+"&&value="+value;
+								}
+							
+						});
+						
+						$("#tbody td .sbtn.yl").click(function(){
+							alert("리뷰쓰기");
+							var num = $(this).parent().parent().children("input").val();
+							var delId=$(this).parent().prev().prev().text();
+							
+ 							location.href="/reqtakbae/views/board/reviewWrite.jsp?delId="+delId;
+							
+						});
+						
+						
+						
+						
+					});
+					
+					
+					
+					
 				</script>
 
 				<div class="numbox pt40 pb50">

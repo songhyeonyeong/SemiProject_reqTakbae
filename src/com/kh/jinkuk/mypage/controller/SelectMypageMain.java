@@ -1,6 +1,7 @@
 package com.kh.jinkuk.mypage.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -22,20 +23,34 @@ import com.kh.jinkuk.mypage.model.vo.Mynotice;
 @WebServlet("/selectMypageMain.mp")
 public class SelectMypageMain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SelectMypageMain() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public SelectMypageMain() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out =response.getWriter();
+		
+		
 		Member loginUser =(Member) request.getSession().getAttribute("loginUser");
+		if(loginUser ==null) {
+			out.print("<script>");
+			out.print("alert('로그인을 먼저 해주세요!');");
+			out.print("history.go(-1);");
+			out.print("</script>");
+			out.flush();
+			
+		}
+		
+		else {
 		if(loginUser.getUser_div().equals("신청자")) {
 		int currentPage;	//현재 페이지를 표시할 변수
 		int limit;			//한 페이지에 게시글이 몇 개가 보여질 것인지 표시
@@ -147,7 +162,7 @@ public class SelectMypageMain extends HttpServlet {
 		
 		
 		
-		
+		}
 		
 		
 		
@@ -158,9 +173,11 @@ public class SelectMypageMain extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
