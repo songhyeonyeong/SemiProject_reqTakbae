@@ -42,4 +42,14 @@ public class MemberService {
 		return result;
 	}
 
+	public String find(String name, String email, String userDiv) {
+		Connection con = getConnection();
+		
+		String idOrPwd = new MemberDao().find(con, name, email, userDiv);
+		
+		close(con);
+
+		return idOrPwd;
+	}
+
 }

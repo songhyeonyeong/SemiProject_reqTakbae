@@ -73,6 +73,7 @@ public class SimpleCORSFilter implements Filter {
         // pass the request along the filter chain
         chain.doFilter(request, servletResponse);
         
+        System.out.println("cors filter");
     }
  
     /**
