@@ -1,8 +1,8 @@
-package com.kh.jinkuk.border.inquire.model.vo;
+package com.kh.jinkuk.admin.model.vo;
 
 import java.sql.Date;
 
-public class Inquire {
+public class Inquiry {
 	private int m_no;
 	private String m_title;
 	private String m_context;
@@ -10,12 +10,12 @@ public class Inquire {
 	private int reply_level;
 	private String status;
 	private Date m_date;
-	private int u_no; 
+	private String u_no; 
 	
-	public Inquire() {}
+	public Inquiry() {}
 
-	public Inquire(int m_no, String m_title, String m_context, int ref_mno, int reply_level, String status, Date m_date,
-			int u_no) {
+	public Inquiry(int m_no, String m_title, String m_context, int ref_mno, int reply_level, String status, Date m_date,
+			String u_no) {
 		super();
 		this.m_no = m_no;
 		this.m_title = m_title;
@@ -83,11 +83,11 @@ public class Inquire {
 		this.m_date = m_date;
 	}
 
-	public int getU_no() {
+	public String getU_no() {
 		return u_no;
 	}
 
-	public void setU_no(int u_no) {
+	public void setU_no(String u_no) {
 		this.u_no = u_no;
 	}
 
