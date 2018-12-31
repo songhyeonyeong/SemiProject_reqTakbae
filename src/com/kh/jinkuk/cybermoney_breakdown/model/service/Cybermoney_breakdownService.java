@@ -12,10 +12,10 @@ import com.kh.jinkuk.cybermoney_breakdown.model.vo.Cybermoney_breakdown;
 
 public class Cybermoney_breakdownService {
 
-	public int getListCount() {
+	public int getListCount(int uNo) {
 		Connection con = getConnection();
 		
-		int listCount = new Cybermoney_breakdownDao().getListCount(con);
+		int listCount = new Cybermoney_breakdownDao().getListCount(con, uNo);
 		close(con);
 		
 		return listCount;
@@ -31,14 +31,23 @@ public class Cybermoney_breakdownService {
 		return list;
 	}
 
-	public ArrayList<Cybermoney_breakdown> selectList(int currentPage, int limit, int uNo, String userDiv, String div) {
+	public ArrayList<Cybermoney_breakdown> selectListSearch(int currentPage, int limit, int uNo, String div) {
 		Connection con = getConnection();
 		
-		ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownDao().selectList(con,currentPage,limit,uNo,userDiv,div);
+		ArrayList<Cybermoney_breakdown> list = new Cybermoney_breakdownDao().selectListSearch(con,currentPage,limit,uNo,div);
 		
 		close(con);
 		
 		return list;
+	}
+
+	public int getListCountSearch(int uNo, String div) {
+		Connection con = getConnection();
+		
+		int listCount = new Cybermoney_breakdownDao().getListCountSearch(con, uNo, div);
+		close(con);
+		
+		return listCount;
 	}
 
 }

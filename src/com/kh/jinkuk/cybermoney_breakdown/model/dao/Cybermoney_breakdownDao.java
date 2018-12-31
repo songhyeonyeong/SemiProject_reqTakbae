@@ -26,25 +26,26 @@ public class Cybermoney_breakdownDao {
 		}
 	}
 
-	public int getListCount(Connection con) {
-		Statement stmt =null;
+	public int getListCount(Connection con, int uNo) {
+		PreparedStatement pstmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
-		
 		String query = prop.getProperty("listCount");
-			
+		
 		try {
-			stmt = con.createStatement();
-			rset = stmt.executeQuery(query);
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, uNo);
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				listCount = rset.getInt(1);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
-			close(stmt);
+			close(pstmt);
 		}
 		
 		return listCount;
@@ -114,7 +115,34 @@ public class Cybermoney_breakdownDao {
 		return list;
 	}
 
-	public ArrayList<Cybermoney_breakdown> selectList(Connection con, int currentPage, int limit, int uNo, String userDiv, String div) {
+	public int getListCountSearch(Connection con, int uNo, String div) {
+		PreparedStatement pstmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		String query = prop.getProperty("listCountSearch");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, uNo);
+			pstmt.setString(2, div);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
+	
+	public ArrayList<Cybermoney_breakdown> selectListSearch(Connection con, int currentPage, int limit, int uNo, String div) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Cybermoney_breakdown> list = null;
@@ -128,12 +156,10 @@ public class Cybermoney_breakdownDao {
 			int startRow = (currentPage -1) * limit + 1;
 			int endRow = startRow + limit - 1;
 			
-			if(userDiv.equals("신청자")) {
-				pstmt.setInt(1, uNo);
-				pstmt.setString(2, div);
-				pstmt.setInt(3, startRow);
-				pstmt.setInt(4, endRow);
-			}
+			pstmt.setInt(1, uNo);
+			pstmt.setString(2, div);
+			pstmt.setInt(3, startRow);
+			pstmt.setInt(4, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -165,6 +191,8 @@ public class Cybermoney_breakdownDao {
 		
 		return list;
 	}
+
+	
 
 	
 

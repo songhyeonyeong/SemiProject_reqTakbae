@@ -5,6 +5,7 @@
  	ArrayList<Cybermoney_breakdown> list = (ArrayList<Cybermoney_breakdown>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
+	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -45,13 +46,25 @@
 						<span>
 						<label for=""></label>
 						<form name="form" action="/reqtakbae/csearch" method="post">
+						
 						<select id="" name="select" class="wth140">
 							<option selected="selected" value="all">전체</option>
+							<% 
+							String userDiv = loginUser.getUser_div();
+							if(userDiv.equals("신청자")){
+							%>
 							<option value="충전">충전</option>
 							<option value="공고등록">공고등록</option>
 							<option value="공고취소">공고취소</option>
 							<option value="포인트적립">포인트적립</option>
 							<option value="포인트사용">포인트사용</option>
+							<%
+							}else{
+							%>	
+							<option value="배송료">배송료</option>
+							<%	
+							}
+							%>
 						</select>
 						 
 						</span>
@@ -63,8 +76,9 @@
 				</tr>
 			</tbody>
 		</table>
+		<%if(userDiv.equals("신청자")){ %>
 		<p class="flo_right mb10"><a class="mbtn or" href="/reqtakbae/views/mypage/chargeMoney.jsp">충전하기</a></p>
-		
+		<%} %>
 		<table class="boardList mt20">
 			<caption>충전적립 리스트입니다.</caption>
 			<colgroup>
