@@ -92,4 +92,70 @@ public class MemberDao {
 		
 		return flag;
 	}
+
+	public int insertMember(Connection con, Member reqMember) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertMember");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, reqMember.getBank_name());
+			pstmt.setString(2, reqMember.getBank_num());
+			pstmt.setString(3, reqMember.getUser_id());
+			pstmt.setString(4, reqMember.getUser_pwd());
+			pstmt.setString(5, reqMember.getPhone());
+			pstmt.setString(6, reqMember.getEmail());
+			pstmt.setString(7, reqMember.getUser_div());
+			pstmt.setString(8, reqMember.getLogin_div());
+			pstmt.setString(9, reqMember.getUser_name());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	public String find(Connection con, String name, String email, String userDiv) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String member="";
+		
+		String query = prop.getProperty("findId");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, name);
+			pstmt.setString(2, email);
+			pstmt.setString(3, userDiv);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				member = rset.getString("USER_ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		
+		return member;
+	}
 }
+
+
+
+
+
+
+
+

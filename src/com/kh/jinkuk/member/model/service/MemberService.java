@@ -29,4 +29,27 @@ public class MemberService {
 		return flag;
 	}
 
+	public int insertMember(Member reqMember) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().insertMember(con, reqMember);
+		
+		if(result>0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public String find(String name, String email, String userDiv) {
+		Connection con = getConnection();
+		
+		String idOrPwd = new MemberDao().find(con, name, email, userDiv);
+		
+		close(con);
+
+		return idOrPwd;
+	}
+
 }

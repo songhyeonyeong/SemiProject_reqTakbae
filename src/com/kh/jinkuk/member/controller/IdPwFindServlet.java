@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.jinkuk.member.model.service.MemberService;
+import com.kh.jinkuk.member.model.vo.Member;
+
 /**
- * Servlet implementation class EmailCheckServlet
+ * Servlet implementation class IdPwFindServlet
  */
-@WebServlet("/emailCheck.me")
-public class EmailCheckServlet extends HttpServlet {
+@WebServlet("/find")
+public class IdPwFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EmailCheckServlet() {
+    public IdPwFindServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,27 +29,25 @@ public class EmailCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String Semail1 = request.getParameter("Semail1");
-		String Semail2 = request.getParameter("Semail2");
-		String email = Semail1 + Semail2;
+		String name = request.getParameter("name");
+		String email = request.getParameter("email");
+		String userDiv = request.getParameter("userDiv");
+		String findDiv = request.getParameter("findDiv");
 		
-		String RNum =RandomNum();
+		String id = new MemberService().find(name, email, userDiv);
 		
-		sendEmail(email, RNum);
-	
-	}
-
-	private String RandomNum() {
-		StringBuffer buffer = new StringBuffer();
-		for(int i=0;i<=6;i++) {
-			int n = (int)(Math.random()*10);
-			buffer.append(n);
+		if(id != "") {
+			System.out.println("아이디 : "+id);
+			System.out.println();
+			
+			request.setAttribute("id", id);
+			request.setAttribute("findDiv", findDiv);
+			
+			request.getRequestDispatcher("/sendId").forward(request, response);
+			
+		}else {
+			response.getWriter().print("NO");
 		}
-		return buffer.toString();
-	}
-
-	private void sendEmail(String email, String rNum) {
-		// TODO Auto-generated method stub
 		
 	}
 

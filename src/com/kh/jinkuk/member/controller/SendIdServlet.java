@@ -17,16 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class SendEmailServlet
+ * Servlet implementation class SendIdServlet
  */
-@WebServlet("/sendEmail")
-public class SendEmailServlet extends HttpServlet {
+@WebServlet("/sendId")
+public class SendIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendEmailServlet() {
+    public SendIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,8 +38,12 @@ public class SendEmailServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=UTF-8");
 		
-		String fullEmail = request.getParameter("fullEmail");
-		String randomCode = request.getParameter("randomCode");
+		String email = request.getParameter("email");
+		String id = (String) request.getAttribute("id");
+		String findDiv = (String) request.getAttribute("findDiv");
+		
+		System.out.println("findDiv : "+findDiv);
+
 		
 		Properties p = new Properties();// 정보를 담을 객체
 		p.put("mail.smtp.user", "takbububu@gmail.com");
@@ -50,30 +54,37 @@ public class SendEmailServlet extends HttpServlet {
 		p.put("mail.smtp.socketFactory.port", "465");
 		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 		p.put("mail.smtp.socketFactory.fallback", "false");
-
+		
 		try{
 		    Authenticator auth = new SMTPAuthenticator();
 		    Session ses = Session.getDefaultInstance(p, auth);
 		    
 		    MimeMessage msg = new MimeMessage(ses); // 메일의 내용을 담을 객체
 		    
-		    msg.setSentDate(new Date());
 		    InternetAddress from = new InternetAddress("takbububu@gmail.com");
              
             // 이메일 발신자
             msg.setFrom(from);
             
             // 이메일 수신자
-            InternetAddress to = new InternetAddress(fullEmail);
+            InternetAddress to = new InternetAddress(email);
             msg.setRecipient(Message.RecipientType.TO, to);
              
             // 이메일 제목
-            msg.setSubject("[택배를 부탁해] 인증번호", "UTF-8");
-             
+            if(findDiv.equals("id")) {
+            	msg.setSubject("[택배를 부탁해] 아이디 찾기", "UTF-8");
+            }else if(findDiv =="pw") {
+            	msg.setSubject("[택배를 부탁해] 비밀번호 찾기", "UTF-8");
+            }
+            
             // 이메일 내용
-            request.setAttribute("randomCode", randomCode);
-            msg.setText("인증번호 : "+randomCode, "UTF-8");
-       
+            if(findDiv.equals("id")) {
+            	 request.setAttribute("id", id);
+                 msg.setText("아이디 : "+ id, "UTF-8");
+            }else if(findDiv =="pw") {
+            	
+            }
+           
             // 이메일 헤더
             msg.setHeader("content-Type", "text/html");
              
