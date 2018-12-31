@@ -3,7 +3,7 @@
 <% 
 	String tabon="1";
 	Inquiry n = (Inquiry)request.getAttribute("n");	
-	Inquiry m = (Inquiry)request.getAttribute("m");	
+ 	Inquiry m = (Inquiry)request.getAttribute("m");	
 
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
@@ -59,32 +59,34 @@
 			</tr>
 			<tr>
 				<th scope="row">답변</th>
-				<% if(m.getM_context() != null){ %>
 				<td>
-						<%=m.getM_context()%>
-				
-				<div id="replySelectArea">
-					<table>
-						<td scope="row" id="replySelectTable"></td>
-						
-					</table>
-				</div>
+				<%if(m != null){ %>
+					<%=m.getM_context()%>
+							
+					<div id="replySelectArea">
+						<table>
+							<td scope="row" id="replySelectTable"></td>
+							
+							<br><br>
+							<p align="right">작성날짜 : <%=m.getM_date() %></p>
+						</table>
+					</div>
+					<%}else{ %>
+					<div id="replySelectArea">
+						<table>
+							<td scope="row" id="replySelectTable"></td>
+							<td><%=m.getM_date() %></td>
+						</table>
+					</div>
+					<%} %>
+					
 				</td>
-				<%}else{%>
-				<td>
-				<div id="replySelectArea">
-					<table>
-						<td scope="row" id="replySelectTable"></td>
-						
-					</table>
-				</div>
-				</td>
-				<%} %>
-			
-				
+
 			</tr>
+
 		</tbody>
 		</table><!--// boardWrite E-->
+		
 		
 		
 			<table class="boardWrite"><!-- boardWrite S-->
@@ -93,20 +95,33 @@
 					<col style="width:20%;">
 				</colgroup>
 				<tbody>
+				<%if(m !=null){ %>
+				<tr style="width:100%; height:100%;" hidden>
+					<th scope="row" class="blue80">답변 내용</th>
+					<td class="clfix">
+						<textarea cols="20" rows="5" id="replyContent" style="width:100%;" class="minh100"></textarea>
+					</td>
+				</tr>
+				<%}else{%>
 				<tr style="width:100%; height:100%;">
 					<th scope="row" class="blue80">답변 내용</th>
 					<td class="clfix">
 						<textarea cols="20" rows="5" id="replyContent" style="width:100%;" class="minh100"></textarea>
 					</td>
 				</tr>
+				
+				<%} %>
 				</tbody>
-	</table><!--// boardWrite E-->
+		</table><!--// boardWrite E-->
 
 		<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn bk" href="qnaList.jsp">목록</a></span>
-			<span><a class="mbtn db" id="addReply">답변하기</a></span>
-			<span><a class="mbtn gy" href="#">수정</a></span>
-			<span><a class="mbtn rd" href="#">삭제</a></span>
+			<span><a class="mbtn bk" href="<%=request.getContextPath()%>/selectAll.in">목록</a></span>
+			<span><a class="mbtn rd" href="#">삭제하기</a></span>
+			<%if(m != null){ %>
+				<span hidden><a class="mbtn db" id="addReply" >답변하기</a></span>
+			<%}else{%>
+				<span><a class="mbtn db" id="addReply" >답변하기</a></span>
+			<%} %>
 		</div><!--// btnbox E-->
 		
 
@@ -155,6 +170,22 @@
 			});
 		});
 	});
+	
+	
+	
+	
+	 $('span').eq(1).click(function() {
+		 		
+				var test =<%=n.getM_no()%>;
+
+				console.log(test);
+				
+				 location.href="<%=request.getContextPath()%>/delete.in?name=" + test;
+
+			});
+			
+		
+
 </script>
 
 

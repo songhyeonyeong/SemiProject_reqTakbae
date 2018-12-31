@@ -119,6 +119,18 @@ public class AdminService {
 		return result;
 	}
 	
+	public int deleteInquiry(Inquiry m) {
+		Connection con = getConnection();
+		System.out.println(con);
+		int result = new AdminDao().deleteInquiry(con,m);
+	
+		if(result > 0)commit(con);
+		else rollback(con);
+		close(con);
+		
+		return result;
+	}
+	
 	
 
 	public int getListCount() {
@@ -289,12 +301,11 @@ public class AdminService {
 		return list;
 	}
 
-	public Inquiry selectOne(String num) {
+	public Inquiry selectOne(int num) {
 		Connection con = getConnection();
 		
 		Inquiry n = new AdminDao().selectOne(con, num);
 		
-		int result = 0;
 		
 		close(con);
 	
@@ -325,17 +336,17 @@ public class AdminService {
 
 	}
 
-	public Inquiry selectOneReply(String num) {
+	public Inquiry selectOneReply(int num) {
 		Connection con = getConnection();
 		
 		Inquiry n = new AdminDao().selectOneReply(con, num);
-		
-		int result = 0;
-		
+
 		close(con);
 	
 		return n;
 	}
+
+
 
 
 

@@ -31,7 +31,9 @@ public class SelectInquiryOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String num = request.getParameter("num");
+		//문의 게시글  + 댓글이 존재하는 게시글의 댓글 내용 불러오는 서블릿
+		try {
+		int num = Integer.parseInt(request.getParameter("num"));
 		
 		System.out.println(num);
 		
@@ -47,21 +49,21 @@ public class SelectInquiryOneServlet extends HttpServlet {
 			request.setAttribute("n", n);
 			request.setAttribute("m", m);
 		
-		}else if(n != null && m == null){
+		}else {
 			page = "/views/admin/qnaView.jsp";
 			request.setAttribute("n", n);
 			request.setAttribute("m", m);
 			
-		}else {
-
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "문의게시글 상세보기 실패!");
-
 		}
-		
+
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
+		
+		}catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

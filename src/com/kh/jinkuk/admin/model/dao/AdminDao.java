@@ -349,6 +349,31 @@ public class AdminDao {
 		return result;
 	}
 
+	
+	
+	public int deleteInquiry(Connection con, Inquiry m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteInquiry");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, m.getM_no());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 	
 	
@@ -1132,17 +1157,17 @@ public class AdminDao {
 		return list;
 	}
 
-	public Inquiry selectOne(Connection con, String num) {
+	public Inquiry selectOne(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Inquiry n = null;
-		
+		int result = 0;
 		String query = prop.getProperty("selectOne");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			System.out.println(query);
-			pstmt.setInt(1, Integer.parseInt(num));
+			pstmt.setInt(1, num);
 			
 
 			rset = pstmt.executeQuery();
@@ -1156,12 +1181,16 @@ public class AdminDao {
 				n.setM_date(rset.getDate("M_DATE"));
 				n.setU_no(rset.getString("USER_ID"));
 				
+				result = pstmt.executeUpdate();
+				
 			}
 		
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+		}finally {
 			close(rset);
 			close(pstmt);
 		}
@@ -1205,7 +1234,7 @@ public class AdminDao {
 		ResultSet rset = null;
 		ArrayList<Inquiry> list = null;
 		
-		String query = prop.getProperty("selectReplyList");
+		String query = "SELECT I.M_CONTEXT, I.M_DATE FROM INQUIRY I WHERE I.REPLY_LEVEL=1 AND I.REF_MNO = ? AND I.STATUS ='Y'";
 				
 		try {
 			pstmt = con.prepareStatement(query);
@@ -1237,19 +1266,18 @@ public class AdminDao {
 
 	}
 
-	public Inquiry selectOneReply(Connection con, String num) {
+	public Inquiry selectOneReply(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Inquiry n = null;
+		int result = 0;
 		
 		String query = prop.getProperty("selectOneReply");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			System.out.println(query);
-			pstmt.setInt(1, Integer.parseInt(num));
-			
-
+			pstmt.setInt(1,num);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -1261,6 +1289,8 @@ public class AdminDao {
 
 				
 			}
+
+
 		
 		
 		} catch (SQLException e) {
@@ -1273,6 +1303,8 @@ public class AdminDao {
 		
 		return n;
 	}
+
+
 
 
 
