@@ -7,20 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.jinkuk.member.model.service.MemberService;
-import com.kh.jinkuk.member.model.vo.Member;
-
 /**
- * Servlet implementation class IdPwFindServlet
+ * Servlet implementation class InsertMemberGisaServlet
  */
-@WebServlet("/find")
-public class IdFindServlet extends HttpServlet {
+@WebServlet("/insertGisa.me")
+public class InsertMemberGisaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IdFindServlet() {
+    public InsertMemberGisaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,25 +26,6 @@ public class IdFindServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
-		String email = request.getParameter("email");
-		String userDiv = request.getParameter("userDiv");
-		String findDiv = request.getParameter("findDiv");
-		
-		String id = new MemberService().find(name, email, userDiv);
-		
-		if(id != "") {			
-			request.setAttribute("id", id);
-			request.setAttribute("findDiv", findDiv);
-			
-			System.out.println("1");
-			request.getRequestDispatcher("/sendId").forward(request, response);
-			
-			response.getWriter().print("YES");
-			
-		}else {
-			response.getWriter().print("NO");
-		}
 		
 	}
 

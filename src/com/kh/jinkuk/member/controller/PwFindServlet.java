@@ -28,22 +28,22 @@ public class PwFindServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("name");
+		//String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String userDiv = request.getParameter("userDiv");
 		String findDiv = request.getParameter("findDiv");
 		String id = request.getParameter("id");
 		String userPwd = request.getParameter("userPwd");
+		String randomCode = request.getParameter("randomCode");
 		
 		System.out.println("비밀번호찾기 findDiv : " + findDiv);
 		System.out.println("비밀번호찾기 userPwd : " + userPwd);
 		
-		int pwUpdate = new MemberService().findPw(name, email, userDiv,id,userPwd);
+		int result = new MemberService().findPw(email, userDiv,id,userPwd);
 		
-		if(pwUpdate>0) {			
-			request.setAttribute("userPwd", userPwd);
+		if(result>0) {			
 			request.setAttribute("findDiv", findDiv);
-			
+			request.setAttribute("randomCode", randomCode);
 
 			request.getRequestDispatcher("/sendId").forward(request, response);
 			
