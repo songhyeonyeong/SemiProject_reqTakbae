@@ -47,10 +47,7 @@
 			<tbody>
 			<% for(Inquiry m : list){ %>
 					<tr id="listArea">
-						<td>
-							<label for=""> 체크</label>
-							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%= m.getM_no()%>">
-						</td>
+						<td><%= m.getM_no()%></td>
 						<td><a><%= m.getM_title()%></a></td>
 						<td><%= m.getM_context() %></td>
 						<td><%=m.getM_date()%></td>
@@ -60,8 +57,9 @@
 				<% } %> 
 
 			</tbody>
-		</table>
 
+		</table>
+		
 		<div class="numbox pt40 pb50" align="center"> 
 			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.in?currentPage=1'"><<</a></span>
 			<% if(currentPage <=1){ %>
@@ -105,18 +103,24 @@
 		$(function(){
 			$("#listArea td").mouseenter(function(){
 				$(this).parent().css({"background":"darkgray","cursor":"pointer"});//td의 부모는 tr -> tr에 css적용
+
 			}).mouseout(function(){
 				$(this).parent().css({"background":"white"});
 			}).click(function(){
-				var num = $(this).parent().children().eq(0).children().eq(1).val();
+				var num = $(this).parent().children().eq(0).text();
 				
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/selectOne.in?num=" + num;
+				location.href="<%=request.getContextPath()%>/selectOne.in?num=" + num; 
 	
 				
 			});
 			
 		});
+		
+		
+		
+		
+		
 	</script>
 
 </body>
