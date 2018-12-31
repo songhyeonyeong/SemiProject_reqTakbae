@@ -32,13 +32,14 @@ public class SelectoneBoardServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		try {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		System.out.println(num);
 		
 		Announcment a = new AnnouncmentService().selectOne(num);
 		
-		
+		System.out.println(a);
 		String page = "";
 		
 		if(a != null) {
@@ -50,7 +51,9 @@ public class SelectoneBoardServlet extends HttpServlet {
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
+		view.forward(request, response);}catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

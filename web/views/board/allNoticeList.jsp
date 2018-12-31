@@ -131,7 +131,7 @@ function fn_open() {
 					<td><%= a.getG_SIZE() %></td>
 					<td><%= a.getG_PRICE() %></td>
 					<td><%= a.getG_P_DIV() %></td>
-					<td><botton class="sbtn gy" onclick="location.href='<%=request.getContextPath()%>/selectOnt.bo=?'">상세보기</button></td>
+					<td><a class="sbtn gy">상세보기</a></td>
 				</tr>
 				<% } %>
 			</thead>
@@ -187,6 +187,16 @@ function fn_open() {
 
 </div><!--// Wrap E-->
 
+	<script>
+		$(function(){
+			$(".sbtn").click(function(){
+				
+				var num = $(this).parent().parent().children("td").eq(0).text();
+				console.log(num);
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
+			});
+		});
+	</script>
 
 <%@ include file="/views/include/myNav.jsp" %>
 

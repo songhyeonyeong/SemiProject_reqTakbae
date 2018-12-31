@@ -40,17 +40,18 @@ public class AnnouncmentService {
 		
 		Announcment a = null;
 		
-		int result = new AnnouncmentDao().updateCount(con, num);
+		Announcment result = new AnnouncmentDao().selectOne(con, num);
+				
+				/*new AnnouncmentDao().updateCount(con, num);*/
 		
-		if(result > 0) {
+		if(result  !=null ) {
 			commit(con);
-			a = new AnnouncmentDao().selectOne(con, num);
 		}else {
 			rollback(con);
 		}
 		
 		close(con);
 		
-		return a;
+		return result;
 	}
 }
