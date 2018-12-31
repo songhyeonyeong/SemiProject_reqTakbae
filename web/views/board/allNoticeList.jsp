@@ -91,7 +91,7 @@ function fn_open() {
 		</div>
 
 		<p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p><!-- user에게만 보임 -->
-		<p class="flo_right mb10"><a class="mbtn or" href="/reqtakbae/views/board/allNoticeWrite.jsp">공고등록하기</a></p><!-- user에게만 보임 -->
+		<p class="flo_right mb10"><a class="mbtn or" href='<%=request.getContextPath()%>/insert.bo'">공고등록하기</a></p><!-- user에게만 보임 -->
 
 		<table class="boardList mt20">
 			<caption>전체공고 리스트입니다.</caption>

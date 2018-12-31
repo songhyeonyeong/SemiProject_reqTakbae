@@ -131,7 +131,7 @@
 		</div>
 
 		<div class="clear btnbox mt30 mb30">
-			<span><a class="mbtn gy wth60" href="location.href='<%=request.getContextPath()%>/selectList.bo'">목록</a></span>
+			<span><a class="mbtn gy wth60" href='<%=request.getContextPath()%>/selectList.bo'>목록</a></span>
 			<span><a class="mbtn gy wth60" href="#">수정</a></span>
 			<span><a class="mbtn rd wth60" href="#">삭제</a></span>
 			<span><a class="mbtn db wth60" href="#">신청하기</a></span>
