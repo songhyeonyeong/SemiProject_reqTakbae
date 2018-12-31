@@ -10,6 +10,7 @@ import com.kh.jinkuk.mypage.model.dao.MypageDao;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
+import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
 
 public class MypageService {
 
@@ -113,5 +114,22 @@ public class MypageService {
 		
 		return result;
 	}
+
+	public ArrayList<SelectReqGisa> SelectReqGisaList(int gno) {
+		ArrayList<SelectReqGisa> list =null;
+		Connection con =getConnection();
+		
+		list=new MypageDao().SelectReqGisaList(gno,con);
+		close(con);
+		return list;
+	}
+
+	public SelectReqGisa SelectDetailGisa(int num) {
+		Connection con =getConnection();
+		SelectReqGisa srg=new MypageDao().SelectDetailGisa(con,num);
+		close(con);
+		return srg;
+	}
+
 
 }

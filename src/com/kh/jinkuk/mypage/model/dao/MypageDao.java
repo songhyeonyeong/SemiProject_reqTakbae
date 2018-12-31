@@ -15,6 +15,7 @@ import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
+import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
 
 public class MypageDao {
 
@@ -305,11 +306,74 @@ public class MypageDao {
 		
 		
 		
-		
-		
-		
-		
 		return result;
+	}
+
+	public ArrayList<SelectReqGisa> SelectReqGisaList(int gno, Connection con) {
+		PreparedStatement pstmt =null;
+		ResultSet rset =null;
+		ArrayList<SelectReqGisa> list =null;
+		SelectReqGisa sg=null;
+		String query =prop.getProperty("SelectMyReqGisa");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, gno);
+			rset=pstmt.executeQuery();
+			list=new ArrayList<>();
+			while(rset.next()) {
+				sg =new SelectReqGisa();
+				sg.setUser_id(rset.getString("USER_ID"));
+				sg.setUser_name(rset.getString("USER_NAME"));
+				sg.setGrade(rset.getInt("GRADE"));
+				sg.setU_no(rset.getInt("U_NO"));
+				list.add(sg);
+				
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		return list;
+	}
+
+	public SelectReqGisa SelectDetailGisa(Connection con, int num) {
+		PreparedStatement pstmt =null;
+		ResultSet rset =null;
+		SelectReqGisa srg =null;
+		
+		String query =prop.getProperty("SelectDetailGisa");
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setString(1,"배송확정");
+			pstmt.setInt(2,num);
+			pstmt.setInt(3,num);
+			rset=pstmt.executeQuery();
+			
+			if(rset.next()) {
+				srg=new  SelectReqGisa();
+				srg.setUser_id(rset.getString("USER_ID"));
+				srg.setPhone(rset.getString("PHONE"));
+				srg.setBasongnujuk(rset.getInt("COUNT"));
+				srg.setGrade(rset.getInt("GRADE"));
+				srg.setUser_name(rset.getString("USER_NAME"));
+				
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return srg;
 	}
 
 

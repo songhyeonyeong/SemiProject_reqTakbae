@@ -5,7 +5,6 @@
 	String bigtabon = "2";
 	ArrayList<Mynotice> list = (ArrayList<Mynotice>) request.getAttribute("list");
 	PageInfo pi = (PageInfo) request.getAttribute("pi");
-	
 
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -71,14 +70,13 @@
 							<th scope="col">선택기사</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
 						<!--  내공고 목록 출력 tr -->
 						<%
 							for (Mynotice m : list) {
 						%>
 						<tr>
 							<input type="hidden" value="<%=m.getG_NO()%>">
-							<tr>
 							<td><label for=""> 체크</label> <input id="" name=""
 								class="check" type="checkbox"></td>
 							<td><%=m.getG_DIV()%></td>
@@ -86,64 +84,95 @@
 							<td><%=m.getG_CONTEXT()%></td>
 							<td><%=m.getG_DAY()%></td>
 							<td><a class="sbtn gy" href="deliView.jsp#">상세보기</a></td>
-							<%if(m.getUSER_ID()==null){ %>
-							<td><a class="sbtn db" href="deliDetail.jsp#">기사선택</a></td>
+							<%
+								if (m.getUSER_ID() == null) {
+							%>
+							<td><a class="sbtn db">기사선택</a></td>
 							<td>기사미지정</td>
-							<%}else{ %>
+							<%
+								} else {
+							%>
 							<td><a class="sbtn gy">선택완료</a></td>
 							<td><%=m.getUSER_ID()%></td>
-							<%} %>
+							<%
+								}
+							%>
 						</tr>
 						<%
 							}
 						%>
-					
+
 					</tbody>
 				</table>
-				<!--페이징 부분  -->
-				<!--  <div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
-		</div> -->
-	 		<div class="numbox pt40 pb50"> 
-			<% if(currentPage <= 1){ %>
-			<span><a class="num" disabled>&lt;</a></span>
-			<% }else{ %>
-			<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage - 1%>">&lt;</a></span>
-			<% } %>
-			
-			<% for(int p = startPage; p <= endPage; p++){ 
-					if(p == currentPage){
-			%>
-						<span><a class="num on" disabled><%= p %></a></span>
-			<%      }else{ %>
-								<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%= p %>"><%= p %></a></span>
-			<%      } %>
-	
-			<% } %>
-			
-			
-			<% if(currentPage >= maxPage){ %>
-			<span><a class="num" disabled>></a></span>
-			<% }else{ %>
-				<span><a class="num" href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage + 1%>">></a></span>
-			<% } %>
-			
-			
-		</div>
+
+
+				<script type="text/javascript">
+					$(function(){
+						$("#tbody td .sbtn.db").click(function(){
+							var num = $(this).parent().parent().children("input").val();
+							console.log(num);
+						/* 	location.href="/reqtakbae/views/mypage/deliDetail.jsp"; */
+							location.href="/reqtakbae/selectreqGisa.mp?gno="+num; 
+						});
+					});
+					
+				</script>
 
 
 
- <!--  -->
+
+				<div class="numbox pt40 pb50">
+					<%
+						if (currentPage <= 1) {
+					%>
+					<span><a class="num" disabled>&lt;</a></span>
+					<%
+						} else {
+					%>
+					<span><a class="num"
+						href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+					<%
+						}
+					%>
+
+					<%
+						for (int p = startPage; p <= endPage; p++) {
+							if (p == currentPage) {
+					%>
+					<span><a class="num on" disabled><%=p%></a></span>
+					<%
+						} else {
+					%>
+					<span><a class="num"
+						href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=p%>"><%=p%></a></span>
+					<%
+						}
+					%>
+
+					<%
+						}
+					%>
+
+
+					<%
+						if (currentPage >= maxPage) {
+					%>
+					<span><a class="num" disabled>></a></span>
+					<%
+						} else {
+					%>
+					<span><a class="num"
+						href="<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage + 1%>">></a></span>
+					<%
+						}
+					%>
+
+
+				</div>
+
+
+
+				<!--  -->
 
 			</div>
 			<!--// inner E-->

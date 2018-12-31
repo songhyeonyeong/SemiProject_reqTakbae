@@ -1,4 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="com.kh.jinkuk.mypage.model.vo.*, com.kh.jinkuk.cybermoney_breakdown.model.vo.*,java.sql.*, java.util.*"%>
+
+<%ArrayList<SelectReqGisa> list =(ArrayList<SelectReqGisa>)request.getAttribute("list"); %>
 
 <%@ include file="/views/include/common.jsp" %>
 
@@ -6,8 +10,10 @@
 
 <script type="text/javascript">
 function fn_open() {
-   window.open('deliDetailPop.jsp','deliDetailPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=700,height=600');
+   window.open('deliDetailPop.jsp?num=3','deliDetailPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=700,height=600');
 }
+
+
 </script>
 
 </head>
@@ -46,8 +52,30 @@ function fn_open() {
 					<th scope="col">상세</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
+			<tbody id="tbody">
+				<%			if(list!=null){
+							for (SelectReqGisa m : list) {
+						%>
+							<tr>
+							<input type="hidden" value="<%=m.getU_no()%>">
+							<td><label for=""> 체크</label> <input id="" name=""
+								class="check" type="checkbox"></td>
+							<td><%=m.getUser_id()%></td>
+							<td><%=m.getUser_name()%></td>
+							<td>
+								<%for(int i=0; i<m.getGrade(); i++){%>
+								<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
+							<%}for(int i=0; i<5-m.getGrade(); i++){	%>
+							<span><img src="/reqtakbae/views/common/images/contents/starOff.png" alt="별off"></span>
+							<%}%>
+							</td>
+							<td><a class="sbtn or">상세보기</a></td>
+						</tr>
+						<%
+							}
+				}
+						%>
+			<!-- 	<tr>
 					<td>
 						<label for=""> 체크</label>
 						<input id="" name="" class="check" type="checkbox">
@@ -61,7 +89,6 @@ function fn_open() {
 						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
 						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
 					</td>
-					<td><a class="sbtn or" href="#fn_open" onclick="fn_open()">상세보기</a></td>
 				</tr>
 				<tr>
 					<td>
@@ -78,9 +105,26 @@ function fn_open() {
 						<span><img src="../common/images/contents/starOff.png" alt="별off"></span>
 					</td>
 					<td><a class="sbtn or" href="#fn_open" onclick="fn_open()">상세보기</a></td>
-				</tr>
+				</tr> -->
 			</tbody>
 		</table>
+		
+		<script type="text/javascript">
+			$(function(){
+				$("#tbody .sbtn.or").click(function(){
+					var num = $(this).parent().parent().children("input").val();
+					location.href="/reqtakbae//selectdetailgisa.mp?num="+num;
+					
+				});
+				
+				
+				
+			});
+			
+		
+		
+		
+		</script>
 
 		<p class="tcen mt30"><a class="mbtn or" href="deliList.jsp">선택하기</a></p>
 

@@ -37,7 +37,11 @@
 				
 				
 				<!--신청자부분 -->
-				<%if(loginUser.getUser_div().equals("신청자")){ %>
+				
+				<%
+					
+				if(loginUser.getUser_div().equals("신청자")){
+					if(list!=null){	%>
 				<!-- <div class="titNavi">
 						마이페이지
 					<span>홈 &gt; 마이페이지</span>
@@ -56,11 +60,13 @@
 					
 						<%
 							}
+					}
 						%>
 						</ul>
 					</li>
 						<!--기사부분 -->
-			<%}else{ %>
+			<%}else{
+				if(d_list!=null){%>
 			</li>
 					<!--내공고목록 최신 4개 출력  -->
 						<ul class="mypgBox mt50">
@@ -75,6 +81,7 @@
 					
 						<%
 							}
+						}
 						%>
 						</ul>
 					</li>
