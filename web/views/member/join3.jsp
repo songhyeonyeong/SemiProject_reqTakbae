@@ -22,7 +22,7 @@
 			<span>홈 &gt; 회원가입</span>
 		</div>
 		
-		<form id="joinForm" action="<%=request.getContextPath()%>/insertGisa.me" method="multipart/form-data">
+		<form id="joinForm" action="<%=request.getContextPath()%>/insertGisa.me" method="post" encType="multipart/form-data">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원가입 리스트입니다.</caption>
 			<colgroup>
@@ -77,8 +77,16 @@
 			<tr>
 				<th scope="row">신분증</th>
 				<td>
-					<div id="showImgArea">
-						<img id="showImg" name="idCard" width="350" height="200"> 
+					<div id="showImgArea1">
+						<img id="showImg1" name="showImg1" width="350" height="200"> 
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">본인 얼굴사진</th>
+				<td>
+					<div id="showImgArea2">
+						<img id="showImg2" name="showImg2" width="350" height="200"> 
 					</div>
 				</td>
 			</tr>
@@ -161,7 +169,8 @@
 			</tbody>
 		</table><!--// boardWrite E-->
 		<div id="fileArea">
-			<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this)">
+			<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
+			<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
 		</div>
 
 		<div class="btnbox mt20"><!-- btnbox S-->
@@ -188,6 +197,8 @@
 		$("#sendEmailClick").hide();
 		$("#fileArea").hide();
 	});
+	
+	
 	
 	
 	//아이디 정규표현식 && 중복체크
@@ -367,7 +378,6 @@
 	//원본 
 	//계좌 인증
 	var token;
-	 $.support.cors = true;
 	 
 	function testtest(){
 		var cId="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed";
@@ -415,6 +425,7 @@
 			console.log("depositor: "+depositor);
 			console.log("birth: "+birth);
 			console.log("today: "+today); 
+			console.log("token: "+token); 
 			
 			var data={
 					"bank_code_std": bankNum,"account_num": accountNum, "account_holder_info": birth, "tran_dtime": today		
@@ -449,19 +460,27 @@
 	
 	
 	
-	$("#showImgArea").click(function(){
+	$("#showImgArea1").click(function(){
 		$("#IdCardImg").click();
-	})
+	});
+	
+	$("#showImgArea2").click(function(){
+		$("#faceImg").click();
+	});
+	
 
 	
-	function loadImg(value){
+	function loadImg(value, num){
 		if(value.files && value.files[0]){
 			var reader = new FileReader();
 			reader.onload = function(e){
-				$("#showImg").attr("src",e.target.result);
+				switch(num){
+				case 1 : $("#showImg1").attr("src",e.target.result); break;
+				case 2 : $("#showImg2").attr("src",e.target.result); break;
+				}
 			}
-		}
 		reader.readAsDataURL(value.files[0]);
+		}
 	}
 	
 	
@@ -478,7 +497,7 @@
 	
 	
 	
-	
+/* 	
 	//회원가입 버튼 클릭시 && 널값
 	function insertMember(){
 		if($("#SId").val() == ""){
@@ -513,15 +532,16 @@
 			alert("계좌번호를 입력 입력하세요");
 		}else{
 			$("#joinForm").submit();
+		} */
+		
+		function insertMember(){
+			$("#joinForm").submit();
 		}
 		
 		
-		
-		
-		
-	}
 	
 	
+
 	</script>
 
 

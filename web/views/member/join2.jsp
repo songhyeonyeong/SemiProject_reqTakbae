@@ -144,7 +144,10 @@
 			
 			</tbody>
 		</table><!--// boardWrite E-->
-		
+		 	</form>
+
+	</div>
+</div> 
 		
 		
 		
@@ -159,29 +162,17 @@
 						style="border: 1px solid #ddd; background: #f8f8f8; padding: 10px; margin-left: 10px; width: 440px; height: 50px;">
 						은행명 &nbsp; <select name="bankcode" id="bankcode">
 							<option value=''>선택하세요
-							
 							<option value='004'>국민은행
-							
 							<option value='003'>기업은행
-							
 							<option value='088'>신한은행
-								
-							<option value='011'>농협
-								
+							<option value='011'>농협	
 							<option value='020'>우리은행
-								
 							<option value='045'>새마을금고
-								
 							<option value='027'>한국씨티은행
-								
 							<option value='007'>수협
-								
 							<option value='048'>신협
-								
 							<option value='071'>우체국
-								
 							<option value='081'>하나은행
-							
 						</select>
 						</div>
 					</td>
@@ -202,10 +193,10 @@
 							&nbsp;
 							<input type="checkbox" id="sbm-flag" name="checkacc"
 							style="display:none">
-							<label id="sbm-no"
+							<!-- <label id="sbm-no"
 							style="background:red;color:white;border-radius:3px;padding:3px;">미인증</label>
 							<label id="sbm-ok"
-							style="background:green;color:white;border-radius:3px;padding:3px;display:none">인증됨</label>
+							style="background:green;color:white;border-radius:3px;padding:3px;display:none">인증됨</label> -->
 						</div>
 						<div align="center">
 						<br>
@@ -233,30 +224,28 @@
 				<col style="width: *" />
 			</colgroup>
 			<tbody>
-				<form name="authCodeFrm" id="authCodeFrm" method="GET"
-												action="https://testapi.open-platform.or.kr/oauth/2.0/authorize">
-					<input type="hidden" id="response_type" name="response_type"
-													value="code" /> <input type="hidden" id="scope"
-													name="scope" value="inquiry" /> <input type="hidden"
-													id="redirect_uri" name="redirect_uri"
-													value="http://localhost:8880/html/callback.html" />
+			
+				<form name="authCodeFrm" id="authCodeFrm" method="GET" action="https://testapi.open-platform.or.kr/oauth/2.0/authorize">
+					<input type="hidden" id="response_type" name="response_type" value="code" /> 
+					<input type="hidden" id="scope" name="scope" value="inquiry" /> 
+					<input type="hidden" id="redirect_uri" name="redirect_uri" value="http://localhost:8880/html/callback.html" />
 					<tr>
 						<th>
 							<!-- <span class="ess">Client ID</span> -->
 						</th>
-						<td><span><input type="hidden" id="client_id"
-															name="client_id" style="width: 200px"
-															value="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed"></span>
-					
-												</tr>
+						<td><span>
+						<input type="hidden" id="client_id" name="client_id" style="width: 200px" value="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed">
+						</span></td>
+					</tr>
 				</form>
+				
 				<tr>
 					<th>
 						<!-- <span>Client Secret</span> -->
 					</th>
-					<td><span><input type="hidden" id="client_secret"
-														name="client_secret" style="width: 200px"
-														value="2b229cffd50b45c08f0cde6158ab69c1"></span></td>
+					<td><span>
+					<input type="hidden" id="client_secret" name="client_secret" style="width: 200px" value="2b229cffd50b45c08f0cde6158ab69c1">
+					</span></td>
 				</tr>
 				<tr>
 					<th>
@@ -285,7 +274,7 @@
 					</th>
 					<td><span><input type="hidden" class="txt"
 														id="account_holder_info" name="account_holder_info"
-														value="951015" /></span>
+														value="991111" /></span>
 				
 											</tr>
 				<tr>
@@ -316,10 +305,10 @@
 			<span><a class="mbtn gy" href="#">새로입력</a></span>
 			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
 		</div><!--// btnbox E-->
-	</form>
+<!-- 	</form>
 
-	</div><!--// inner E-->
-</div>
+	</div>// inner E
+</div> -->
 
 <%@ include file="/views/include/footer.jsp" %>
 
@@ -673,10 +662,7 @@
 							console.log(data)
 							if (data.account_holder_name == $("#accpnm").val()) {
 
-								$("#sbm-flag").attr("checked", true);
-								$("#sbm-ok").show();
-								$("#sbm-no").hide();
-								var checkacc = "인증됨";
+								alert("인증됨")
 								var pro_no = $
 								{
 									pro_no

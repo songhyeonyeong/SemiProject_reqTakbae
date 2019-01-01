@@ -42,6 +42,7 @@ public class InsertMemberServlet extends HttpServlet {
 		String bankCode = request.getParameter("bankCode");
 		String bankName = "";
 		
+		String mainWay = request.getParameter("mainWay");
 		String accountNum = request.getParameter("accountNum");
 		
 		if(bankCode.equals("kb")) {
@@ -67,6 +68,9 @@ public class InsertMemberServlet extends HttpServlet {
 		reqMember.setUser_div(userDiv);
 		reqMember.setLogin_div("자회원");
 		
+		if(userDiv.equals("기사")) {
+			reqMember.setK_trans(mainWay);
+		}
 		int result = new MemberService().insertMember(reqMember);
 		
 		if(result>0) {

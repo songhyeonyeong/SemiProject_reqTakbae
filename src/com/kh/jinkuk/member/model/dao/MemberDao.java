@@ -87,6 +87,9 @@ public class MemberDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
 		}
 		
 		
@@ -96,8 +99,13 @@ public class MemberDao {
 	public int insertMember(Connection con, Member reqMember) {
 		PreparedStatement pstmt = null;
 		int result = 0;
+		String query="";
 		
-		String query = prop.getProperty("insertMember");
+		if(reqMember.getUser_div().equals("신청자")) {
+			query = prop.getProperty("insertMember");
+		}else if(reqMember.getUser_div().equals("기사")) {
+			query = prop.getProperty("insertGisa");
+		}
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -110,6 +118,10 @@ public class MemberDao {
 			pstmt.setString(7, reqMember.getUser_div());
 			pstmt.setString(8, reqMember.getLogin_div());
 			pstmt.setString(9, reqMember.getUser_name());
+			
+			if(reqMember.getUser_div().equals("기사")) {
+				pstmt.setString(10, reqMember.getK_trans());
+			}
 			
 			result = pstmt.executeUpdate();
 			
