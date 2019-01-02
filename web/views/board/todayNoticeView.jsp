@@ -1,4 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+		import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
+
+<% 
+	Announcment a = (Announcment)request.getAttribute("a"); 
+%>
 
 <%@ include file="/views/include/common.jsp" %>
 
@@ -83,41 +88,40 @@
 					<tbody>
 					<tr>
 						<th scope="row">제목</th>
-						<td colspan="3"><span class="sbtn or mr10">당일</span>노트북배송하실분</td>
+						<td colspan="3"><span><%= a.getG_TITLE() %></span></td>
 					</tr>
 					<tr>
 						<th scope="row">작성자</th>
-						<td>testid12</td>
+						<td><%= a.getUSER_ID() %></td>
 						<th scope="row" class="gray80">등록일</th>
-						<td>2018-12-02</td>
+						<td><%= a.getG_S_DATE() %></td>
 					</tr>
 					<tr>
 						<th scope="row">제품 종류</th>
-						<td>전자 제품</td>
+						<td><%= a.getG_TYPE() %></td>
 						<th scope="row" class="red100">마감일</th>
-						<td>2018-12-11</td>
+						<td><%= a.getG_E_DATE() %></td>
 					</tr>
 					<tr>
 						<th scope="row">물품 크기</th>
-						<td>중</td>
+						<td><%= a.getG_SIZE() %></td>
 						<th scope="row">물품 가액</th>
-						<td>700,000</td>
+						<td><%= a.getG_PRICE() %></td>
 					</tr>
 					<tr>
 						<th scope="row">출발지</th>
-						<td>강남구 태보 역삼아이타워</td>
+						<td><%= a.getG_S_AREA() %></td>
 						<th scope="row">도착지</th>
-						<td>강동구 성내동 319</td>
+						<td><%= a.getG_E_AREA() %></td>
 					</tr>
 					<tr>
 						<th scope="row">배송날짜</th>
-						<td colspan="3">2018-12-11 16:00</td>
+						<td colspan="3"><%= a.getG_DAY() %></td>
 					</tr>
 					<tr>
 						<th scope="row">상세내용</th>
 						<td colspan="3">
-							11일 오후4시까지 성내동으로 배송해주실 기사분 모집합니다~<br>
-							가격이 있으니 조심해주세요^^
+						<%= a.getG_CONTEXT() %>
 						</td>
 					</tr>
 					</tbody>
@@ -127,7 +131,7 @@
 		</div>
 
 		<div class="clear btnbox mt30 mb30">
-			<span><a class="mbtn gy wth60" href="todayNoticeView.jsp">목록</a></span>
+			<span><a class="mbtn gy wth60" href='<%=request.getContextPath()%>/selectTodayList.bo'>목록</a></span>
 			<span><a class="mbtn gy wth60" href="#">수정</a></span>
 			<span><a class="mbtn rd wth60" href="#">삭제</a></span>
 			<span><a class="mbtn db wth60" href="#">신청하기</a></span>
