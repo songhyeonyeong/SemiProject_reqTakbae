@@ -38,22 +38,26 @@ public class SelectOneInquireServlet extends HttpServlet {
 		
 		
 		Inquire i = new InquireService().selectOne(num);
-		//관리자가 댓글을 달지 않았을 경우 실행하지 않고 진행
+
 		System.out.println("i객체의 댓글상태 확인 :"+i.getReply_level());
 		
 		
-		if(i.getReply_level()==1) {
 		Inquire ai=new InquireService().selectAdminOne(num);
-		request.setAttribute("ai", ai);
-		System.out.println("문의 상세보기 댓글 ai"+ai);
-		}
 		
-		String page = "";
+		//관리자가 댓글을 달지 않았을 경우 
+		if(ai!=null) {
+		request.setAttribute("ai", ai);
+		}
+			System.out.println("문의 상세보기 댓글 ai"+ai);
+		
+		
+			String page = "";
 		
 		
 		
 			page="views/board/qnaView.jsp";
 			request.setAttribute("i", i);
+		
 			System.out.println("문의 상세보기  i"+i);
 			
 		

@@ -53,7 +53,7 @@ public class SelectInquireListServlet extends HttpServlet {
 		InquireService is = new InquireService();
 		int listCount = is.getListCount();
 		
-System.out.println("열 개수"+listCount);
+		System.out.println("열 개수"+listCount);
 		
 		maxPage = (int)((double)listCount / limit + 0.9);
 		
