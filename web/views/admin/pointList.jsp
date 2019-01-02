@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="2";
+	ArrayList<Point> list = (ArrayList<Point>)request.getAttribute("list");	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -33,6 +41,7 @@
 			<thead>
 			<tr>
 				<th scope="col">no</th>
+				<th scope="col">아이디</th>
 				<th scope="col">구분</th>
 				<th scope="col">날짜</th>
 				<th scope="col">이용 포인트</th>
@@ -41,37 +50,46 @@
 			</tr>
 			</thead>
 			<tbody>
+			<% for(Point m : list){ %>
 			<tr>
-				<td>1</td>
+				<td><%=m.getP_no() %></td>
+				<td><%=m.getUserId() %></td>
 				<td>충전</td>
-				<td>2018-12-12 12:44:24</td>
-				<td>500,000</td>
-				<td>504,155</td>
-				<td>&nbsp;</td>
+				<td><%=m.getP_date() %></td>
+				<td><%=m.getP_usePoint() %></td>
+				<td><%=m.getUser_point() %></td>
+				<td><%=m.getP_note() %></td>
 			</tr>
-			<tr>
-				<td>2</td>
-				<td>사용</td>
-				<td>2018-12-13 22:44:24</td>
-				<td>-50,000</td>
-				<td>454,155</td>
-				<td>금천구 배송 부탁드립니다!</td>
-			</tr>
-			</tbody>
+			<%} %>
 		</table>
 
-		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+		<div class="numbox pt40 pb50" align="center"> 
+			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/select.po?currentPage=1'"><<</a></span>
+			<% if(currentPage <=1){ %>
+				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/select.po?currentPage=<%=currentPage - 1 %>'"><</a></span> <!-- 하나 이전페이지로 이동 -->
+			<%} %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){%>
+				
+				<span><a class="num" href="#" disable><%= p %></a></span> <!-- 비활성화 -->
+			<%  }else{ %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/select.po?currentPage=<%= p %>'"><%= p %></a></span>
+			
+			
+			<%         } %>
+			<%} %>
+			
+			<%if(currentPage >= maxPage){ %>
+				<span><a class="num" href="#" disable>></a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/select.po?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
+			<%} %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/select.po?currentPage=<%=maxPage%>'">>></a></span>
+			
+			
 		</div>
 
 

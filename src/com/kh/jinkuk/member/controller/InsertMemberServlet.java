@@ -57,6 +57,18 @@ public class InsertMemberServlet extends HttpServlet {
 			bankName="우리은행";
 		}
 		
+		
+		System.out.println("userDiv : "+userDiv);
+		System.out.println("userId : "+userId);
+		System.out.println("userPwd : "+userPwd);
+		System.out.println("userName : "+userName);
+		System.out.println("phone : "+phone);
+		System.out.println("email : "+email);
+		System.out.println("bankName : "+bankName);
+		System.out.println("mainWay : "+mainWay);
+		System.out.println("accountNum : "+accountNum);
+		
+		
 		Member reqMember = new Member();
 		reqMember.setUser_id(userId);
 		reqMember.setUser_pwd(userPwd);
@@ -74,11 +86,18 @@ public class InsertMemberServlet extends HttpServlet {
 		int result = new MemberService().insertMember(reqMember);
 		
 		if(result>0) {
-			response.sendRedirect("index.jsp");//회원가입 환영페이지
+			if(userDiv.equals("신청자")) {
+				response.sendRedirect("/views/member/index.jsp");//회원가입 환영페이지
+			}else {
+				request.setAttribute("userId", userId);
+				request.getRequestDispatcher("/views/member/join4.jsp").forward(request, response);
+				//response.sendRedirect("/reqtakbae/views/member/join4.jsp");
+			}
 		}else {
-			request.setAttribute("msg", "회원가입에 실패했습니다");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			//request.setAttribute("msg", "회원가입에 실패했습니다");
+			//request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
+		System.out.println("join서블릿");
 		
 	}
 

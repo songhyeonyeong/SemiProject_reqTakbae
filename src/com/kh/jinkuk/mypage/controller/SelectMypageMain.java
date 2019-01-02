@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.jinkuk.cybermoney_breakdown.model.vo.PageInfo;
 import com.kh.jinkuk.member.model.vo.Member;
 import com.kh.jinkuk.mypage.model.service.MypageService;
+import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
 
@@ -91,11 +92,19 @@ public class SelectMypageMain extends HttpServlet {
 		
 		ArrayList<Mynotice> list = new MypageService().selectList(currentPage, limit,uno);
 		
+		
+		
+		//충전내역 불러오기
+		/*ArrayList<MyCharge> Clist = new  MypageService().ChargeList(uno);
+		System.out.println(Clist);*/
+		
+		
 		String page = "";
 		if(list != null) {
 			page = "views/mypage/mypage.jsp";
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
+		/*	request.setAttribute("Clist", Clist);*/
 		}else {
 //			page = "views/common/errorPage.jsp";
 //			request.setAttribute("msg", "게시판 조회 실패!");

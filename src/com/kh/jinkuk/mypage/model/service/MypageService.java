@@ -9,6 +9,7 @@ import com.kh.jinkuk.admin.model.dao.AdminDao;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.mypage.model.dao.MypageDao;
+import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
@@ -143,6 +144,7 @@ public class MypageService {
 		return srg;
 	}
 
+
 	public int upReqInserMAT(int uno, int gno) {
 		Connection con =getConnection();
 		int result1=0;
@@ -172,6 +174,12 @@ public class MypageService {
 Connection con =  getConnection();
 		
 		ArrayList<Inquiry> list = new MypageDao().selectListIn(con, currentPage, limit,uno);
+
+	public ArrayList<MyCharge> ChargeList(int uno) {
+		Connection con = getConnection();
+		
+		ArrayList<MyCharge> list = new MypageDao().ChargeList(con, uno);
+
 		
 		close(con);
 		

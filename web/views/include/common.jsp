@@ -13,7 +13,7 @@
 <script type="text/javascript" src="/reqtakbae/views/common/js/jquery.bxslider.min.js"></script><!-- main small banner -->
 
 <style>
-	 .sbtn, .menuAll:hover {
+	 .sbtn, .menuAll,.bbtn:hover {
 		cursor:pointer;
 	} 
 </style>

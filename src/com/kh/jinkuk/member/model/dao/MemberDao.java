@@ -1,15 +1,18 @@
 package com.kh.jinkuk.member.model.dao;
 
+import static com.kh.jinkuk.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
-import static com.kh.jinkuk.common.JDBCTemplate.*;
+
+import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.member.model.vo.Member;
-import com.kh.jinkuk.member.model.dao.MemberDao;
 
 public class MemberDao {
 	private Properties prop = new Properties();
@@ -184,6 +187,77 @@ public class MemberDao {
 
 		return result;
 	}
+
+	public int findUno(Connection con, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int uno=0;
+		
+		String query = prop.getProperty("finduno");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				uno = rset.getInt("U_NO");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return uno;
+	}
+
+	public int insertImg(Connection con, int uno, ArrayList<Images> fileList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertimg");
+		
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, fileList.get(i).getI_div());
+				pstmt.setString(2, "N");
+				pstmt.setString(3, fileList.get(i).getI_o_name());
+				pstmt.setString(4, fileList.get(i).getI_c_name());
+				pstmt.setString(5, fileList.get(i).getI_path());
+				pstmt.setInt(6, uno);
+				
+				result += pstmt.executeUpdate();
+	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

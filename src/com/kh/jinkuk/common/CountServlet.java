@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class UserMoneySearchReset
+ * Servlet implementation class CountServlet
  */
-@WebServlet("/reset")
-public class UserMoneySearchReset extends HttpServlet {
+@WebServlet("/CountServlet")
+public class CountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserMoneySearchReset() {
+    public CountServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,18 +26,12 @@ public class UserMoneySearchReset extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String p = request.getParameter("p");
-		String page="";
-		if(p.equals("charge")) {
-			page = "views/mypage/chargeMoney.jsp";
-		}else if (p.equals("info")) {
-			page = "views/info/info.jsp";
-		}else if (p.equals("fare")) {
-			page = "views/info/fare_inquiry.jsp";
-		}else if(p.equals("comInfo")) {
-			page = "views/company/comInfo.jsp";
-		}
+		System.out.println("연결");
+	
+		int count = 1;
+		String page = "/index.jsp";
 		
+		request.setAttribute("count", count);
 		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
