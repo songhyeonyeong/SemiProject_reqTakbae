@@ -9,10 +9,12 @@ public class Cybermoney_breakdown {
 	private int cm_use;
 	private String cm_note;
 	private int c_money;
+	private int c_point;
 	
 	public Cybermoney_breakdown() {}
-	
-	public Cybermoney_breakdown(int r_num, String cm_div, Date cm_date, int cm_use, String cm_note, int c_money) {
+
+	public Cybermoney_breakdown(int r_num, String cm_div, Date cm_date, int cm_use, String cm_note, int c_money,
+			int c_point) {
 		super();
 		this.r_num = r_num;
 		this.cm_div = cm_div;
@@ -20,6 +22,7 @@ public class Cybermoney_breakdown {
 		this.cm_use = cm_use;
 		this.cm_note = cm_note;
 		this.c_money = c_money;
+		this.c_point = c_point;
 	}
 
 	public int getR_num() {
@@ -70,11 +73,21 @@ public class Cybermoney_breakdown {
 		this.c_money = c_money;
 	}
 
+	public int getC_point() {
+		return c_point;
+	}
+
+	public void setC_point(int c_point) {
+		this.c_point = c_point;
+	}
+
 	@Override
 	public String toString() {
 		return "Cybermoney_breakdown [r_num=" + r_num + ", cm_div=" + cm_div + ", cm_date=" + cm_date + ", cm_use="
-				+ cm_use + ", cm_note=" + cm_note + ", c_money=" + c_money + "]";
+				+ cm_use + ", cm_note=" + cm_note + ", c_money=" + c_money + ", c_point=" + c_point + "]";
 	}
+	
+	
 	
 	
 }

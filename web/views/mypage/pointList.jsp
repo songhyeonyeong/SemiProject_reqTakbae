@@ -108,7 +108,17 @@
 			<td><%=c.getCm_div() %></td>
 			<td><%=c.getCm_date() %></td>
 			<td><%=c.getCm_use() %></td>
+			<%
+				if(c.getCm_div().equals("포인트사용") || c.getCm_div().equals("포인트적립")){
+			%>
+			<td><%=c.getC_point() %></td>
+			<%
+				}else{
+			%>
 			<td><%=c.getC_money()%></td>
+			<% 
+			}
+			%>
 			<td><%=c.getCm_note() %></td>
 			</tr>
 			<%

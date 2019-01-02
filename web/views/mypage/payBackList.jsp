@@ -2,11 +2,13 @@
 	import="java.util.*, com.kh.jinkuk.exchange.model.vo.*, java.sql.*"%>
 <% 
 	String bigtabon="5";
-
+	
+	
 	ArrayList<Exchange> list = (ArrayList<Exchange>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-
-
+	Member member = (Member)request.getSession().getAttribute("loginUser");
+	int money1 = member.getC_money();
+	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
@@ -14,7 +16,18 @@
 	int endPage = pi.getEndPage(); 
 
 %>
+<%-- <%! public boolean isNumber(String s){
+	for()
+	
+	return true;
+}	
+	%> --%>
+
+
 <%@ include file="/views/include/common.jsp" %>
+
+
+
 
 <title>환전내역</title>
 
@@ -32,8 +45,38 @@
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<%@ include file="/views/include/tabMypage.jsp" %>
-
+		
 		<p class="flo_right mb10"><a class="mbtn or" href="#">환전하기</a></p>
+		
+	<script>
+		$(function(){
+			$(".mbtn").click(function(){
+				$.ajax({
+					url:"ExchangeAjaxServlet",
+					type:"get",
+					success:function(data){
+						$("#p1").text(data);
+						var exmoney = prompt('환전 가능 금액 : ' + data + '원 ','환전은 10000원 이상부터 가능합니다.');
+						
+						if(exmoney==null){
+							alert("환전신청을 취소 했습니다.");
+						}else if(isNaN(exmoney)){
+							alert("숫자로만 작성해주세요.");
+						}else if(exmoney < 10000){
+							alert("환전은 10000원 이상부터 가능 합니다.");
+						}else if(data >= exmoney){
+							location.href="<%=request.getContextPath()%>/ExchangeInsertServlet?exmoney="+exmoney;
+						}else{
+							alert("보유 잔액보다 많은 금액을 환전 할 수 없습니다!");
+						}
+					},
+					error:function(data){
+						console.log("실패");	
+					}
+				});
+			});
+		});
+	</script>
 
 		<table class="boardList mt20">
 			<caption>충전적립 리스트입니다.</caption>

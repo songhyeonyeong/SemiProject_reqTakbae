@@ -101,4 +101,87 @@ public class ExchangeDao {
 		return list;	
 	}
 
+
+	public int InsertExchange(Connection con, int uno, int money, int rmoney) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("InsertExchange");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, money);
+			pstmt.setInt(2, rmoney);
+			pstmt.setInt(3, uno);
+			pstmt.setString(4, "환전신청");
+			
+			result = pstmt.executeUpdate();
+						
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+	}
+
+
+	public int Update(Connection con, int uno, int money) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("UpdateMoney");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, money);
+			pstmt.setInt(2, uno);
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+			
+		return result;
+	}
+
+
+	public int SearchMoney(Connection con, int uNo) {
+		PreparedStatement pstmt = null;
+		int money = 0;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("searchmoney");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, uNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				money = rset.getInt("C_MONEY");
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return money;
+	}
+
 }

@@ -9,7 +9,6 @@
 
 
 <div id="wrap"><!-- Wrap S -->
-
 <%@ include file="/views/include/header.jsp" %>
 
 <div id="subvisual">회사소개</div>
