@@ -2,9 +2,12 @@ package com.kh.jinkuk.member.model.service;
 
 
 import java.sql.Connection;
+import java.util.ArrayList;
+
 import static com.kh.jinkuk.common.JDBCTemplate.*;
 
 import com.kh.jinkuk.member.model.dao.MemberDao;
+import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.member.model.vo.Member;
 
 public class MemberService {
@@ -66,6 +69,37 @@ public class MemberService {
 		close(con);
 		
 		return result;
+	}
+
+	public int insertImg(int uno, ArrayList<Images> fileList) {
+		Connection con = getConnection();
+		
+		/*int uno = new MemberDao().findUno(con,userId);
+		
+		for(int i = 0; i < fileList.size(); i++) {
+			fileList.get(i).setU_no(uno);
+		}*/
+		
+		int result = new MemberDao().insertImg(con,uno, fileList);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
+	public int findUno(String userId) {
+		Connection con = getConnection();
+		
+		int uno = new MemberDao().findUno(con,userId);
+		
+		close(con);
+		
+		return uno;
 	}
 
 }
