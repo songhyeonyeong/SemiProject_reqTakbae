@@ -16,6 +16,7 @@ import com.kh.jinkuk.border.inquire.model.dao.InquireDao;
 import com.kh.jinkuk.border.inquire.model.vo.Inquire;
 
 
+
 public class InquireService {
 	
 	public ArrayList<Inquire>selectList(){
@@ -80,17 +81,67 @@ public class InquireService {
 
 
 
-	//문의 글 삭제 메소드
+	//사용자 문의 글 삭제 메소드
 	public int deleteInquire(Inquire i) {
 		Connection con = getConnection();
-		int result = new InquireDao().deleteInquire(con, i);
+		int iresult = new InquireDao().deleteInquire(con, i);
 		
-		if(result>0)
+		if(iresult>0)
 			commit(con);
 		else
 			rollback(con);
 		
 		close(con);
+		return iresult;
+	}
+
+
+
+	//관리자 문의 댓글 삭제 메소드
+	public int deleteAdminInquire(Inquire i) {
+		Connection con = getConnection();
+		int aresult = new InquireDao().deleteAdminInquire(con, i);
+		
+		if(aresult>0)
+			commit(con);
+		else
+			rollback(con);
+		
+		close(con);
+		return aresult;
+	}
+
+
+
+	//문의 작성 메소드
+	public int insertInquire(Inquire i) {
+		Connection con = getConnection();
+		
+		int result = new InquireDao().insertInquire(con, i);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		return result;
+	}
+
+
+
+	//문의 수정 메소드
+	public int updateInquire(Inquire i) {
+		
+		Connection con = getConnection();
+		
+		int result = new InquireDao().updateInquire(con, i);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
 		return result;
 	}
 

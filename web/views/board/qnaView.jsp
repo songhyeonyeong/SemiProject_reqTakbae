@@ -31,23 +31,23 @@ import ="com.kh.jinkuk.border.inquire.model.vo.*"%>
 			<tbody>
 			<tr>
 				<th scope="row">글번호</th>
-				<td colspan="3"><span><%=i.getM_no()%></span></td>
+				<td colspan="3"><a name="mno" value="<%=i.getM_no()%>"><%=i.getM_no()%></a></td>
 			</tr>
 			<tr>
 				<th scope="row">제목</th>
-				<td colspan="3"><span><%=i.getM_title() %></span></td>
+				<td colspan="3"><a title="mno" value="<%=i.getM_title()%>"><%=i.getM_title()%></a></td>
 			</tr>
 			<tr>
 				<th scope="row">내용</th>
-				<td colspan="3"><span><%=i.getM_context() %></span></td>
+				<td colspan="3"><a context="mno" value="<%=i.getM_context() %>"><%=i.getM_context() %></a></td>
 			</tr>
 			<tr>
 				<th scope="row">작성자</th>
-				<td colspan="3"><span><%=i.getUser_id() %></span></td>
+				<td colspan="3"><a writer="mno" value="<%=i.getUser_id()%>"><%=i.getUser_id()%></a></td>
 			</tr>
 			<tr>
 				<th scope="row">등록일</th>
-				<td colspan="3"><span><%=i.getM_date() %></span></td>
+				<td colspan="3"><a date="mno" value="<%=i.getM_date() %>"><%=i.getM_date()%></a></td>
 			</tr>
 			<tr>
 			
@@ -77,7 +77,7 @@ import ="com.kh.jinkuk.border.inquire.model.vo.*"%>
 
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn bk" href='<%=request.getContextPath()%>/selectInquireList'>목록</a></span>
-			<span><a class="mbtn gy" href="#">수정</a></span>
+			<span><a class="mbtn gy" href='<%=request.getContextPath()%>/updateInquire?mno=<%=i.getM_no()%>'>수정</a></span>
 			<span><a class="mbtn rd" href='<%=request.getContextPath()%>/deleteInquire?mno=<%=i.getM_no()%>'>삭제</a></span>
 		</div><!--// btnbox E-->
 		

@@ -49,21 +49,26 @@ import="java.util.*,
 				<th scope="col">답변여부</th>
 			</tr>
 			<%
+				int num=1;
 				for(Inquire i : list){
+					
 			%>
 			<tr>
 			<input type="hidden" value="<%=i.getM_no() %>">
-				<td><%=i.getM_no() %></td>
+			<td><%=num %></td>
 				<td><%=i.getM_title() %></td>
 				<td><%=i.getM_context()%></td>
 				<td><%=i.getUser_id() %></td>
 				<td><%=i.getM_date() %></td>
 				<td><%=i.getStatus() %></td>
 			</tr>
-				<%}%>
+				<%
+				num++;
+				}%>
 		
 		</thead>
 		</table>
+		<p class="flo_right mb10"><button class="mbtn or" onclick="location.href='views/board/qnaWrite.jsp'">후기 작성</button></p>
 
 	
 

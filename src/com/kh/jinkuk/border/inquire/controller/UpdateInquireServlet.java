@@ -1,6 +1,8 @@
 package com.kh.jinkuk.border.inquire.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,16 +13,16 @@ import com.kh.jinkuk.border.inquire.model.service.InquireService;
 import com.kh.jinkuk.border.inquire.model.vo.Inquire;
 
 /**
- * Servlet implementation class DeleteInquireServlet
+ * Servlet implementation class UpdateInquireServlet
  */
-@WebServlet("/deleteInquire")
-public class DeleteInquireServlet extends HttpServlet {
+@WebServlet("/updateInquire")
+public class UpdateInquireServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteInquireServlet() {
+    public UpdateInquireServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,39 +32,25 @@ public class DeleteInquireServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		int num = Integer.parseInt(request.getParameter("mno"));//수정 하기 게시글 번호
 		
-		int result = 0;
-		int mno=Integer.parseInt(request.getParameter("mno"));
-		System.out.println("삭제할 글번호 : "+mno);
+		Inquire i =new InquireService().selectOne(num);
 		
-		//문의 글 삭제
-		Inquire i = new Inquire();
-		i.setM_no(mno);
+		String page = "";
 		
-		int iresult = new InquireService().deleteInquire(i);
-		int aresult = new InquireService().deleteAdminInquire(i);
-		
-		if(aresult!=0) {
-			result = iresult+aresult;
+		if(i!= null) {
+			page = "views/board/qnaUpdate.jsp";
+			request.setAttribute("i", i);
 		}else {
-			result = iresult;
-		}
-		
-		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/selectInquireList");
-		}else {
+			page="views/common/errorPage.jsp";
 			
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
+		
+		
 	}
-		
-		
-		
-	
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

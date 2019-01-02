@@ -69,7 +69,7 @@ public class InquireDao {
 			while(rset.next()) {
 				Inquire i = new Inquire();
 				
-				i.setM_no(rset.getInt("M_NO"));
+				i.setM_no(rset.getInt("RNUM"));
 				i.setM_title(rset.getString("M_TITLE"));
 				i.setM_context(rset.getString("M_CONTEXT"));
 				i.setRef_mno(rset.getInt("REF_MNO"));
@@ -95,6 +95,7 @@ public class InquireDao {
 		
 		
 	}
+	//페이징 처리 리스트카운트 메소드
 	public int getListCount(Connection con) {
 		Statement stmt = null;
 		int listCount = 0;
@@ -120,7 +121,7 @@ public class InquireDao {
 		return listCount;
 	}
 
-	//신청자 문의 상세보기  부분 메소드
+	//신청자 문의작성 상세보기 메소드
 	public Inquire selectOne(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -151,6 +152,7 @@ public class InquireDao {
 				i.setU_no(rset.getInt("U_NO"));
 				i.setUser_id(rset.getString("USER_ID"));
 				
+				
 			
 				
 			}
@@ -167,7 +169,7 @@ public class InquireDao {
 		return i;
 	}
 
-
+	//관리자 문의댓글 작성 상세보기 메소드
 	public Inquire selectAdminOne(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -197,10 +199,105 @@ public class InquireDao {
 		return ai;
 	}
 
-	//문의 글 삭제 메소드
+	//사용자 문의 글삭제 메소드
 	public int deleteInquire(Connection con, Inquire i) {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement pstmt = null;
+		int iresult = 0;
+		
+		String query = prop.getProperty("deleteInquire");
+		//String query2=prop.getProperty("deleteAdminInquire");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, i.getM_no());
+			//pstmt.setInt(1, i.getM_no());
+			iresult = pstmt.executeUpdate();
+			//result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return iresult;
+	}
+
+	//관리자 문의 댓글 삭제 메소드
+	public int deleteAdminInquire(Connection con, Inquire i) {
+		PreparedStatement pstmt = null;
+		int aresult = 0;
+		
+		String query=prop.getProperty("deleteAdminInquire");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setInt(1, i.getM_no());
+		
+			aresult = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return aresult;
+	}
+
+	//문의 글 작성 메소드
+	public int insertInquire(Connection con, Inquire i) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertInquire");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, i.getM_title());
+			pstmt.setString(2, i.getM_context());
+			pstmt.setInt(3, i.getU_no());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	//문의 수정 메소드
+	public int updateInquire(Connection con, Inquire i) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateInquire");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, i.getM_title());
+			pstmt.setString(2, i.getM_context());
+			pstmt.setInt(3,i.getM_no());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println("InquireDao확인본"+result);
+		return result;
 	}
 
 

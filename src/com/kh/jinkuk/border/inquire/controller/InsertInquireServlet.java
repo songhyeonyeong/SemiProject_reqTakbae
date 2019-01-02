@@ -9,18 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.jinkuk.border.inquire.model.service.InquireService;
 import com.kh.jinkuk.border.inquire.model.vo.Inquire;
+import com.kh.jinkuk.member.model.vo.Member;
 
 /**
- * Servlet implementation class DeleteInquireServlet
+ * Servlet implementation class InsertInquireServlet
  */
-@WebServlet("/deleteInquire")
-public class DeleteInquireServlet extends HttpServlet {
+@WebServlet("/insertInquire")
+public class InsertInquireServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteInquireServlet() {
+    public InsertInquireServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,40 +30,40 @@ public class DeleteInquireServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		String title=request.getParameter("title");
+		String context=request.getParameter("context");
+		String writer = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getUser_id());
+		String uno = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getU_no());
+		String date=request.getParameter("date");
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
+		int u_no = Integer.valueOf(uno);
 		
-		int result = 0;
-		int mno=Integer.parseInt(request.getParameter("mno"));
-		System.out.println("삭제할 글번호 : "+mno);
+		System.out.println(title);
+		System.out.println(context);
+		System.out.println(writer);
+		System.out.println(uno);
+		System.out.println(date);
 		
-		//문의 글 삭제
-		Inquire i = new Inquire();
-		i.setM_no(mno);
+		Inquire i=new Inquire();
+		i.setM_title(title);
+		i.setM_context(context);
+		i.setU_no(u_no);
+		i.setUser_id(writer);
 		
-		int iresult = new InquireService().deleteInquire(i);
-		int aresult = new InquireService().deleteAdminInquire(i);
+		int result = new InquireService().insertInquire(i);
 		
-		if(aresult!=0) {
-			result = iresult+aresult;
+		String page = "";
+		if(result>0) {
+			response.sendRedirect(request.getContextPath()+"/selectInquireList");
 		}else {
-			result = iresult;
-		}
-		
-		
-		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/selectInquireList");
-		}else {
-			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
+		
+		
+	
+	
 	}
-		
-		
-		
-	
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

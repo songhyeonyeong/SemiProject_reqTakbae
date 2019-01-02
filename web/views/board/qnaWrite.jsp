@@ -1,10 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+import ="java.util.Calendar"%>
 
 <%@ include file="/views/include/common.jsp" %>
 
+<%
+
+Calendar cal = Calendar.getInstance();
+int year= cal.get(Calendar.YEAR);
+int month =cal.get(Calendar.MONTH)+1;
+int date = cal.get(Calendar.DATE);
+String tyear = String.valueOf(year);
+String tmonth = String.valueOf(month);
+String tdate = String.valueOf(date);
+String Todat =tyear+"-"+tmonth+"-"+tdate;
+%>
+
 <title>문의하기</title>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
 (function($){
   
@@ -45,7 +58,7 @@
 
 
 
-</script>
+</script> -->
 </head>
 <body>
 
@@ -66,68 +79,53 @@
 
 		<table class="boardWrite mt30"><!-- boardWrite S-->
 			<caption>문의하기 리스트입니다.</caption>
+			<%if(loginUser!=null){ %>
 			<colgroup>
 				<col style="width:20%;">
 				<col style="width:%;">
 			</colgroup>
+			<form action="<%= request.getContextPath() %>/insertInquire" method="post">
 			<tbody>
 			<tr>
-				<th scope="row">문의 분류*</th>
-				<td>
-					<span>
-						<label for=""></label>
-						<select id="" name="" class="input wth200">
-							<option selected="selected">카테고리 선택</option>
-							<option value="#">회원가입문의</option>
-							<option value="#">아이디/비밀번호문의</option>
-							<option value="#">배송문의</option>
-							<option value="#">기사 신고</option>
-							<option value="#">공고자 신고</option>
-							<option value="#">구매/결제문의</option>
-							<option value="#">기타</option>
-						</select> 
-					</span>
-					<!-- <span>
-						<label for=""></label>
-						<select id="" name="" class="input wth200">
-							<option selected="selected">2차 선택</option>
-							<option value="#">이용자</option>
-						</select> 
-					</span> -->
-				</td>
-			</tr>
-			<tr>
-				<th scope="row">문의 제목*</th>
+				<th scope="row">작성일</th>
 				<td>
 					<label for=""></label>
-					<input id="" name="" class="inputText" type="text" value="" > 
+					<input id="date" name="date" class="inputText" value="<%=Todat %>"readonly > 
 				</td>
 			</tr>
 			<tr>
-				<th scope="row">문의 내용 *</th>
+				<th scope="row">제목 </th>
 				<td>
 					<label for=""></label>
-					<textarea class="inp_info tf_info" cols="24" id="" name=""></textarea>
+					<textarea class="inp_info tf_info" cols="24" id="title" name="title"></textarea>
 				</td>
 			</tr>
 			<tr>
-				<th scope="row">파일 첨부</th>
+				<th scope="row">내용 </th>
 				<td>
-					<div class="input-file"> 
-						<input type="text" readonly="readonly" class="file-name wth600" /> 
-						<label for="upload01" class="file-label">파일 업로드</label> 
-						<input type="file" name="" id="upload01" class="file-upload" /> 
-					</div>
+					<label for=""></label>
+					<textarea class="inp_info tf_info" cols="24" id="context" name="context"></textarea>
 				</td>
 			</tr>
+			<tr>
+				<th scope="row">작성자 </th>
+				<td><input type="text" value="<%=loginUser.getUser_id()%>" name="writer" readonly>
+					<input type="hidden" value="<%=loginUser.getU_no() %>" name="uno">
+				</td>
+			</tr>
+			
 			</tbody>
 		</table><!--// boardWrite E-->
 
 		<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn bk" href="qnaList.jsp">접수하기</a></span>
-			<!-- <span><a class="mbtn rd" href="#">삭제</a></span> -->
+			<span><button class="mbtn bk" type="submit">접수하기</button></span>
+			
 		</div><!--// btnbox E-->
-		
+		</form>
+		<%}else{
+			request.getRequestDispatcher("../common/errorPage.jsp");
+		}%>
+			
 
 
 
