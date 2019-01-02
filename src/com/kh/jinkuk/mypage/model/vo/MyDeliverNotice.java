@@ -10,10 +10,12 @@ public class MyDeliverNotice implements java.io.Serializable{
 	private Date G_DAY;
 	private String USER_ID;
 	private String D_STATUS;
+	private int u_no;
 	public MyDeliverNotice() {
 		super();
 	}
-	public MyDeliverNotice(int g_NO, String g_DIV, String g_CONTEXT, Date g_DAY, String uSER_ID, String d_STATUS) {
+	public MyDeliverNotice(int g_NO, String g_DIV, String g_CONTEXT, Date g_DAY, String uSER_ID, String d_STATUS,
+			int u_no) {
 		super();
 		G_NO = g_NO;
 		G_DIV = g_DIV;
@@ -21,6 +23,7 @@ public class MyDeliverNotice implements java.io.Serializable{
 		G_DAY = g_DAY;
 		USER_ID = uSER_ID;
 		D_STATUS = d_STATUS;
+		this.u_no = u_no;
 	}
 	public int getG_NO() {
 		return G_NO;
@@ -58,12 +61,16 @@ public class MyDeliverNotice implements java.io.Serializable{
 	public void setD_STATUS(String d_STATUS) {
 		D_STATUS = d_STATUS;
 	}
+	public int getU_no() {
+		return u_no;
+	}
+	public void setU_no(int u_no) {
+		this.u_no = u_no;
+	}
 	@Override
 	public String toString() {
 		return "MyDeliverNotice [G_NO=" + G_NO + ", G_DIV=" + G_DIV + ", G_CONTEXT=" + G_CONTEXT + ", G_DAY=" + G_DAY
-				+ ", USER_ID=" + USER_ID + ", D_STATUS=" + D_STATUS + "]";
+				+ ", USER_ID=" + USER_ID + ", D_STATUS=" + D_STATUS + ", u_no=" + u_no + "]";
 	}
-	
-	
 
 }

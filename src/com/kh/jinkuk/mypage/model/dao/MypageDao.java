@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
@@ -147,6 +148,7 @@ public class MypageDao {
 				m.setG_DAY(rset.getDate("G_DAY"));
 				m.setUSER_ID(rset.getString("USER_ID"));
 				m.setD_STATUS(rset.getString("B_STATUS"));
+				m.setU_no(rset.getInt("U_NO"));
 				list.add(m);
 
 			}
@@ -290,52 +292,51 @@ public class MypageDao {
 	}
 
 	public int updateB_status(Connection con, String value, int gno) {
-		PreparedStatement pstmt =null;
-		int result =0;
-		String query =prop.getProperty("updateB_status");
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("updateB_status");
+		System.out.println("updateB_status실행");
 		try {
-			pstmt=con.prepareStatement(query);
-			pstmt.setString(1,value);
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, value);
 			pstmt.setInt(2, gno);
-			result =pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 		}
-		
-		
-		
+		System.out.println("updateB_status :"+result);
+
 		return result;
 	}
 
 	public ArrayList<SelectReqGisa> SelectReqGisaList(int gno, Connection con) {
-		PreparedStatement pstmt =null;
-		ResultSet rset =null;
-		ArrayList<SelectReqGisa> list =null;
-		SelectReqGisa sg=null;
-		String query =prop.getProperty("SelectMyReqGisa");
-		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<SelectReqGisa> list = null;
+		SelectReqGisa sg = null;
+		String query = prop.getProperty("SelectMyReqGisa");
+
 		try {
-			pstmt=con.prepareStatement(query);
+			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, gno);
-			rset=pstmt.executeQuery();
-			list=new ArrayList<>();
-			while(rset.next()) {
-				sg =new SelectReqGisa();
+			rset = pstmt.executeQuery();
+			list = new ArrayList<>();
+			while (rset.next()) {
+				sg = new SelectReqGisa();
 				sg.setUser_id(rset.getString("USER_ID"));
 				sg.setUser_name(rset.getString("USER_NAME"));
 				sg.setGrade(rset.getInt("GRADE"));
 				sg.setU_no(rset.getInt("U_NO"));
 				list.add(sg);
-				
-				
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			close(pstmt);
 			close(rset);
 		}
@@ -343,38 +344,227 @@ public class MypageDao {
 	}
 
 	public SelectReqGisa SelectDetailGisa(Connection con, int num) {
-		PreparedStatement pstmt =null;
-		ResultSet rset =null;
-		SelectReqGisa srg =null;
-		
-		String query =prop.getProperty("SelectDetailGisa");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		SelectReqGisa srg = null;
+
+		String query = prop.getProperty("SelectDetailGisa");
 		try {
-			pstmt =con.prepareStatement(query);
-			pstmt.setString(1,"배송확정");
-			pstmt.setInt(2,num);
-			pstmt.setInt(3,num);
-			rset=pstmt.executeQuery();
-			
-			if(rset.next()) {
-				srg=new  SelectReqGisa();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "배송확정");
+			pstmt.setInt(2, num);
+			pstmt.setInt(3, num);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				srg = new SelectReqGisa();
 				srg.setUser_id(rset.getString("USER_ID"));
 				srg.setPhone(rset.getString("PHONE"));
 				srg.setBasongnujuk(rset.getInt("COUNT"));
 				srg.setGrade(rset.getInt("GRADE"));
 				srg.setUser_name(rset.getString("USER_NAME"));
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return srg;
+	}
+
+	public int upReq(int uno, int gno, Connection con) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query =prop.getProperty("upReq");
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setInt(1, gno);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		if(result>0) {
+			System.out.println("result1 성공");
+		}
+		return result;
+	}
+
+	public int InserMAT(int uno, int gno, Connection con) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query =prop.getProperty("InserMAT");
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setInt(1, uno);
+			pstmt.setInt(2, gno);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		if(result>0) {
+			System.out.println("result2 성공");
+		}
+		return result;
+	}
+
+	public int InserShipping(int uno, int gno, Connection con) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query =prop.getProperty("InserShipping");
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setString(1,"매칭완료");
+			pstmt.setInt(2, gno);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		if(result>0) {
+			System.out.println("result3 성공");
+		}
+		return result;
+	}
+
+	public int up_AP(int uno, int gno, Connection con) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query =prop.getProperty("up_AP");
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setString(1,"매칭완료");
+			pstmt.setInt(2, gno);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		if(result>0) {
+			System.out.println("result4 성공");
+		}
+		return result;
+	}
+
+	public int selectmoney(Connection con, int gno) {
+		PreparedStatement pstmt = null;
+		int money = 0;
+		ResultSet rset =null;
+		String query =prop.getProperty("selectmoney");
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setInt(1, gno);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+			money=rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+			
+		}
+		System.out.println(money);
+		return money;
+	}
+
+	public int update_cmoneybd(Connection con, String value, int gno, int uno, int money) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		String query =prop.getProperty("update_cmoneybd");
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setString(1,"지급받은배송료");
+			pstmt.setInt(2,money);
+			pstmt.setString(3, gno+"번 공고배송");
+			pstmt.setInt(4, uno);
+			pstmt.setInt(5, gno);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			
+		}
+		System.out.println("싸머인썰:"+result);
+		return result;
+	}
+
+	public int update_gisainfo(Connection con, String value, int gno, int uno, int money) {
+		PreparedStatement pstmt = null;
+		int result =0;
+		String query =prop.getProperty("update_gisainfo");
+		System.out.println(query);
+		try {
+			pstmt =con.prepareStatement(query);
+			pstmt.setInt(1,money);
+			pstmt.setInt(2,uno);
+			result=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}	System.out.println("멤버싸머업뎃:"+result);
+		return result;
+	}
+
+	public ArrayList<Inquiry> selectListIn(Connection con, int currentPage, int limit, int uno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Inquiry> list = null;
+		
+		String query = prop.getProperty("selectInquiryMP");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, uno);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Inquiry>();
+			
+			while(rset.next()) {
+				Inquiry m = new Inquiry();
 				
-				
-				
+				m.setM_no(rset.getInt("M_NO"));
+				m.setM_title(rset.getString("M_TITLE"));
+				m.setM_context(rset.getString("M_CONTEXT"));
+				m.setM_date(rset.getDate("M_DATE"));
+				m.setU_no(rset.getString("USER_ID"));
+				list.add(m);
 			}
 			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 			close(rset);
 		}
 		
-		return srg;
+	
+		
+		return list;
 	}
 
 	public ArrayList<MyCharge> ChargeList(Connection con, int uno) {
@@ -413,6 +603,5 @@ public class MypageDao {
 		
 		return list;
 	}
-
 
 }
