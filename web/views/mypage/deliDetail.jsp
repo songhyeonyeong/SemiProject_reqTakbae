@@ -9,10 +9,15 @@
 <title>기사 선택</title>
 
 <script type="text/javascript">
-function fn_open() {
-   window.open('deliDetailPop.jsp?num=3','deliDetailPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=700,height=600');
-}
+$(document).ready(function(){
+	  window.resizeTo(620, 690);
+	 });
 
+function fn_open(id,name,phone,count,grade) {
+	console.log(id+" "+name+" "+phone+" "+count+" "+grade);
+   window.open('/reqtakbae/views/mypage/deliDetailPop.jsp?id='+id+"&&name="+name+"&&phone="+phone+"&&count="+count+"&&grade="+grade,'deliDetailPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=700,height=600');
+}
+	
 
 </script>
 
@@ -59,7 +64,7 @@ function fn_open() {
 							<tr>
 							<input type="hidden" value="<%=m.getU_no()%>">
 							<td><label for=""> 체크</label> <input id="" name=""
-								class="check" type="checkbox"></td>
+								class="radiobox" type="radio"></td>
 							<td><%=m.getUser_id()%></td>
 							<td><%=m.getUser_name()%></td>
 							<td>
@@ -113,7 +118,21 @@ function fn_open() {
 			$(function(){
 				$("#tbody .sbtn.or").click(function(){
 					var num = $(this).parent().parent().children("input").val();
-					location.href="/reqtakbae//selectdetailgisa.mp?num="+num;
+				
+			/* 		location.href="/reqtakbae/selectdetailgisa.mp?num="+num; */
+			
+				$.ajax({
+								url:"/reqtakbae/selectdetailgisa.mp",
+								data:{num:num},
+								type:"get",
+								success:function(data){
+											fn_open(data.user_id,data.user_name,data.phone,data.basongnujuk,data.grade);
+									
+								},
+								error:function(request,status,error){
+							        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+							       },
+					});
 					
 				});
 				

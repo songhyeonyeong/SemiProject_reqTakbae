@@ -1,13 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="com.kh.jinkuk.mypage.model.vo.*, com.kh.jinkuk.cybermoney_breakdown.model.vo.*,java.sql.*, java.util.*"%>
+	<%
+		String userid=(String)request.getParameter("id");
+		String username=(String)request.getParameter("name");
+		String phone =(String)request.getParameter("phone");
+		int count=Integer.parseInt(request.getParameter("count"));
+		int grade=Integer.parseInt(request.getParameter("grade"));
+	%>
 <%@ include file="/views/include/common.jsp" %>
 
 <title>기사정보</title>
-
+<script type="text/javascript">
+ $(function(){
+	
+	 
+	 
+	 
+	 
+ });
+ 
+ 
+</script>
 </head>
-<body>
-
-
+<body onload="window.resizeTo(700,600)">
 <div id="pop"><!-- Wrap S -->
 
 	<div class="tit">기사정보</div>
@@ -31,29 +47,29 @@
 				<tbody>
 				<tr>
 					<th scope="row">아이디</th>
-					<td colspan="3">testid1111</td>
+					<td colspan="3"><%=userid %></td>
 				</tr>				
 				<tr>
 					<th scope="row">이름</th>
-					<td>홍길동</td>
+					<td><%=username %></td>
 				</tr>
 				<tr>
 					<th scope="row">휴대폰번호</th>
-					<td>010-1234-5678</td>
+					<td><%=phone %></td>
 				</tr>
 				<tr>
 					<th scope="row">배송 누적 횟수</th>
-					<td>45회</td>
+					<td><%=count %></td>
 				</tr>
 				<tr>
 					<th scope="row">별점</th>
 					<td>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					</td>
+								<%for(int i=0; i<grade; i++){%>
+								<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
+							<%}for(int i=0; i<5-grade; i++){	%>
+							<span><img src="/reqtakbae/views/common/images/contents/starOff.png" alt="별off"></span>
+							<%}%>
+							</td>
 				</tr>
 				</tbody>
 			</table><!--// boardWrite E-->
@@ -75,28 +91,20 @@
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
+	<!-- 		<tr>
 				<td class="tleft pl10">배송기사님 너무 친절하세요</td>
 				<td>te****</td>
 				<td>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
+				<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
 				</td>
 			</tr>
 			<tr>
 				<td class="tleft pl10">무난합니다</td>
 				<td>st****</td>
 				<td>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOff.png" alt="별off"></span>
-					<span><img src="../common/images/contents/starOff.png" alt="별off"></span>
+					<span><img src="/reqtakbae/views/common/images/contents/starOff.png" alt="별on"></span>
 				</td>
-			</tr>
+			</tr> -->
 			</tbody>
 		</table>
 
