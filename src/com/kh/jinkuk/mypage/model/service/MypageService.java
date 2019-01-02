@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.mypage.model.dao.MypageDao;
+import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
@@ -129,6 +130,16 @@ public class MypageService {
 		SelectReqGisa srg=new MypageDao().SelectDetailGisa(con,num);
 		close(con);
 		return srg;
+	}
+
+	public ArrayList<MyCharge> ChargeList(int uno) {
+		Connection con = getConnection();
+		
+		ArrayList<MyCharge> list = new MypageDao().ChargeList(con, uno);
+		
+		close(con);
+		
+		return list;
 	}
 
 

@@ -20,11 +20,11 @@ header {position:relative; height:115px;}
 header h1 {position:absolute; top:10px; left:0; right:0; text-align:center; z-index:2}
 header h1 a {font-weight:bold; font-size:30px; color:#3c456b;}
 header .gnbMenu {overflow:hidden; height:45px; padding-top:70px; z-index:-1}
-header .gnbMenu li {float:left; width:14.25%;}
+header .gnbMenu li {float:left; width:12%;}
 header .gnbMenu li:first-child {border-left:1px solid #5e6890;}
 header .gnbMenu li a {display:block; text-align:center; height:45px; line-height:45px; font-size:16px; font-weight:bold; color:#fff; border-right:1px solid #5e6890;}
 header .gnbMenu li a:hover {color:#fffb45;}
-
+ 
 footer {width:100%; text-align:center; background:#e5e5e5; border-top:1px solid #b1b1b1; padding:20px 0;}
 
 
