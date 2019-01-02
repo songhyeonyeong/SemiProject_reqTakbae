@@ -8,11 +8,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <link rel="stylesheet" type="text/css" href="/reqtakbae/views/common/css/style.css"/>
-
 <script type="text/javascript" src="/reqtakbae/views/common/js/jquery.min.js"></script><!-- mainbanner -->
 <script type="text/javascript" src="/reqtakbae/views/common/js/jquery.cycle.all.js"></script><!-- mainbanner -->
 <script type="text/javascript" src="/reqtakbae/views/common/js/jquery.bxslider.min.js"></script><!-- main small banner -->
 
+<style>
+	 .sbtn, .menuAll:hover {
+		cursor:pointer;
+	} 
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 	  $('.bxslider').bxSlider({

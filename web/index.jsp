@@ -12,7 +12,9 @@
 		pager: true,
 		pagerType: 'full',
 	  });
+
 	});
+
 </script>
 </head>
 <body>

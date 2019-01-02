@@ -96,6 +96,7 @@ public class Cybermoney_breakdownDao {
 				cyber.setCm_date(rset.getDate("CM_DATE"));
 				cyber.setCm_use(rset.getInt("CM_USE"));
 				cyber.setC_money(rset.getInt("C_MONEY"));
+				cyber.setC_point(rset.getInt("C_POINT"));
 				cyber.setCm_note(rset.getString("CM_NOTE"));
 				
 				list.add(cyber);

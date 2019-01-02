@@ -1,7 +1,6 @@
 package com.kh.jinkuk.exchange.model.service;
 
-import static com.kh.jinkuk.common.JDBCTemplate.close;
-import static com.kh.jinkuk.common.JDBCTemplate.getConnection;
+import static com.kh.jinkuk.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -28,6 +27,34 @@ public class ExchangeService {
 		close(con);
 		
 		return list;
+	}
+
+	public int InsertExchange(int uno, int money, int rmoney) {
+		Connection con = getConnection();
+		
+		int result = new ExchangeDao().InsertExchange(con, uno, money, rmoney);
+		
+		int up = new ExchangeDao().Update(con, uno, money);
+		
+		if(result > 0 && up > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int SearchMoney(int uNo) {
+		Connection con = getConnection();
+		
+		int money = new ExchangeDao().SearchMoney(con, uNo);
+		
+		close(con);
+		
+		return money;
 	}
 
 }

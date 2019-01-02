@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import ="com.kh.jinkuk.member.model.vo.*"%>
-<%Member loginUser =(Member)session.getAttribute("loginUser");%>
+<%
+	Member loginUser =(Member)session.getAttribute("loginUser");
+%>
+
 
 
 <header>
@@ -23,7 +26,7 @@
 					
 				</li>
 				<li class="mt5">
-					<span>5000p</span>
+					<span class="aaa"></span>
 					<span class="sbtn db" onclick="chargeMoney()">충전</span>
 					<span class="sbtn rd" onclick="logout()">로그아웃</span>
 				</li>
@@ -34,7 +37,7 @@
 		<div class="multBoxR">
 			<span class="mu1"><a href="/reqtakbae/views/board/allNoticeList.jsp">공고신청</a></span>
 			<span class="mu2"><a href="#">배송조회</a></span>
-			<span class="mu3"><a href="/reqtakbae/views/info/info.jsp">이용안내</a></span>
+			<span class="mu3"><a href="<%=request.getContextPath()%>/reset?p=info">이용안내</a></span>
 		</div>
 
 		<span class="menuAll" onclick="openNav()"><img src="/reqtakbae/views/common/images/gnb/ico_menu.png" alt="menu"></span><!-- gnbmenu S -->
@@ -42,8 +45,8 @@
 		<div id="myNav" class="overlay">
 		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 		  <div class="overlay-content">
-			<p class="clear"><a href="/reqtakbae/views/company/comInfo.jsp">회사 소개</a></p>
-			<p><a href="/reqtakbae/views/info/info.jsp">이용 안내</a></p>
+			<p class="clear"><a href="<%=request.getContextPath()%>/reset?p=comInfo">회사 소개</a></p>
+			<p><a href="<%=request.getContextPath()%>/reset?p=info">이용 안내</a></p>
 			<p><a href="<%=request.getContextPath() %>/selectList.bo">전체 공고</a></p>
 			<p><a href="/reqtakbae/views/board/todayNoticeList.jsp">오늘의 공고</a></p>
 			<p><a href="<%= request.getContextPath() %>/selectReview">후기게시판</a></p>
@@ -60,7 +63,20 @@
 
 	</div><!--// inner E-->
 </header>
-
+<script>
+	$(function(){
+		$.ajax({
+			url:"ExchangeAjaxServlet",
+			type:"get",
+			success:function(data){
+				$(".aaa").text(data+"p");
+			},
+			error:function(data){
+				console.log("실패");
+			}
+		});
+	});
+</script>
 
 <script type="text/javascript"> 
 //<![CDATA[
@@ -113,7 +129,7 @@ function openpop()
 					location.href="<%=request.getContextPath()%>/logout.me";
 			}
 			function chargeMoney(){
-					location.href="/reqtakbae/views/mypage/chargeMoney.jsp";
+					location.href="<%=request.getContextPath()%>/reset?p=charge";
 			}
 		</script>
 	</div><!--// layerWrap E-->	

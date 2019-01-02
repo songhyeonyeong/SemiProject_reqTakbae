@@ -46,7 +46,7 @@
 			<tr>
 				<td>규격</td>
 				<td>
-					<p><img src="../common/images/contents/boxS.png" alt="box small"></p>
+					<p><img src="../common/images/contents/boxM.png" alt="box small"></p>
 					<p class="mt20">가로:100cm<br>세로:100cm</p>
 				</td>
 				<td>
