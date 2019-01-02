@@ -56,7 +56,7 @@ public class InquireService {
 
 	}
 
-	//신청자 문의 상세보기 메소드
+	//신청자 문의 상세보기 부분 메소드
 	public Inquire selectOne(int num) {
 		Connection con = getConnection();
 		
@@ -69,7 +69,7 @@ public class InquireService {
 
 
 
-	//관리자 
+	//관리자 문의 상세보기 부분 메소드
 	public Inquire selectAdminOne(int num) {
 		Connection con = getConnection();
 		
@@ -77,5 +77,30 @@ public class InquireService {
 		close(con);
 		return ai;
 	}
+
+
+
+	//문의 글 삭제 메소드
+	public int deleteInquire(Inquire i) {
+		Connection con = getConnection();
+		int result = new InquireDao().deleteInquire(con, i);
+		
+		if(result>0)
+			commit(con);
+		else
+			rollback(con);
+		
+		close(con);
+		return result;
+	}
+
+
+
+
+
+
+
+
+
 
 }
