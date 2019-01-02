@@ -119,7 +119,13 @@
 			<% 
 			}
 			%>
+			<%
+				if(c.getCm_note()!=null){
+			%>
 			<td><%=c.getCm_note() %></td>
+			<%}else{ %>
+			<td></td>
+			<%} %>
 			</tr>
 			<%
 				}

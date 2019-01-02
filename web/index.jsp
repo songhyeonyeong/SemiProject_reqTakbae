@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%-- <% int count = (int)request.getAttribute("count"); %>  --%>
 <%@ include file="/views/include/common.jsp" %>
 
 <title>택배를 부탁해 홈</title>
@@ -18,7 +18,16 @@
 </script>
 </head>
 <body>
-
+<script>
+	$(function(){
+		if(<%=request.getAttribute("count")%>==null){
+			console.log(0);
+			location.href="<%=request.getContextPath()%>/CountServlet";
+		}else{
+			console.log(<%=request.getAttribute("count")%>);
+		}	
+	});
+</script>
 
 <div id="wrap"><!-- Wrap S -->
 

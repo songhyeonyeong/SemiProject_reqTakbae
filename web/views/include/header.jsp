@@ -66,7 +66,7 @@
 <script>
 	$(function(){
 		$.ajax({
-			url:"ExchangeAjaxServlet",
+				url:"ExchangeAjaxServlet",
 			type:"get",
 			success:function(data){
 				$(".aaa").text(data+"p");
@@ -74,7 +74,7 @@
 			error:function(data){
 				console.log("실패");
 			}
-		});
+		});								
 	});
 </script>
 
