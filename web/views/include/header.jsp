@@ -48,7 +48,7 @@
 			<p class="clear"><a href="<%=request.getContextPath()%>/reset?p=comInfo">회사 소개</a></p>
 			<p><a href="<%=request.getContextPath()%>/reset?p=info">이용 안내</a></p>
 			<p><a href="<%=request.getContextPath() %>/selectList.bo">전체 공고</a></p>
-			<p><a href="/reqtakbae/views/board/todayNoticeList.jsp">오늘의 공고</a></p>
+			<p><a href="<%=request.getContextPath() %>/selectTodayList.bo">오늘의 공고</a></p>
 			<p><a href="<%= request.getContextPath() %>/selectReview">후기게시판</a></p>
 			<p><a href="<%=request.getContextPath() %>/selectInquireList">문의하기</a></p>
 			<p class="smMenu mt20">
