@@ -23,7 +23,7 @@
 
 		<ul class="joinSortBox mt50">
 		 	<li class="mr20"><a class="orange500" href="join1.jsp">개인</a></li>
-			<li><a class="blue500" href="join1.jsp">택배기사</a></li> 
+			<li><a class="blue500" href="join3.jsp">택배기사</a></li> 
 		</ul>
 
 	</div><!--// inner E-->

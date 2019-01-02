@@ -41,11 +41,7 @@ public class SendIdPwServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String id = (String) request.getAttribute("id");
 		String findDiv = (String) request.getAttribute("findDiv");
-		String userPwd = (String) request.getAttribute("userPwd");
-		
-		System.out.println("findDiv : "+findDiv);
-		System.out.println("userPwd : " + userPwd);
-
+		String randomCode = (String) request.getAttribute("randomCode");
 		
 		Properties p = new Properties();// 정보를 담을 객체
 		p.put("mail.smtp.user", "takbububu@gmail.com");
@@ -84,8 +80,8 @@ public class SendIdPwServlet extends HttpServlet {
             	 request.setAttribute("id", id);
                  msg.setText("아이디 : "+ id, "UTF-8");
             }else if(findDiv.equals("pw")) {
-            	request.setAttribute("userPwd", userPwd);
-                msg.setText("임시 비밀번호 : "+ userPwd, "UTF-8");
+            	request.setAttribute("randomCode", randomCode);
+                msg.setText("임시 비밀번호 : "+ randomCode, "UTF-8");
             }
            
             // 이메일 헤더
@@ -93,8 +89,6 @@ public class SendIdPwServlet extends HttpServlet {
              
             //메일보내기   
             Transport.send(msg);
-       
-            System.out.println("보냄");
             
             response.getWriter().print("YES");
             

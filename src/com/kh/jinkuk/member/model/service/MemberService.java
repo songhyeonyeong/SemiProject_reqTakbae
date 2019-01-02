@@ -52,20 +52,20 @@ public class MemberService {
 		return id;
 	}
 
-	public int findPw(String name, String email, String userDiv, String id, String userPwd) {
+	public int findPw(String email, String userDiv, String id, String userPwd) {
 		Connection con = getConnection();
 		
-		int pwUpdate = new MemberDao().findPw(con, name, email, userDiv,id, userPwd);
+		int result = new MemberDao().findPw(con, email, userDiv,id, userPwd);
 		
-		if(pwUpdate>0) {
+		if(result>0) {
 			commit(con);
 		}else {
 			rollback(con);
 		}
 		
 		close(con);
-		System.out.println("service result:"+pwUpdate);
-		return pwUpdate;
+		
+		return result;
 	}
 
 }

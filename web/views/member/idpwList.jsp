@@ -22,30 +22,24 @@
 		</div>
 
 
-		<div class="mr_auto wth550" align="center">
+		<div class="mr_auto wth250" align="center" >
 			<ul>
-				<li>
-					<input type="radio" name="userDiv" value="신청자" >신청자
-					<input type="radio" name="userDiv" value="기사" >기사
+				<li style="margin-top: 10px;">
+					<input type="radio" name="userDiv" value="신청자" style="width:20px; height:20px" checked>신청자 &nbsp; &nbsp;
+					<input type="radio" name="userDiv" value="기사" style="width:20px; height:20px">기사
 				</li>
 			</ul>
 		</div>
 		
 		<div class="mr_auto wth550">
-			
-			
 			<ul class="flo_left wth250 mt50">
-				<li class="font24 bold tcen ">아이디찾기</li><br>
+				<li class="font22 bold tcen ">아이디찾기</li><br>
 				<li class="mt10">
 					<span>
 						<img src="/reqtakbae/views/common/images/contents/name.PNG" width="35px" height="35px" align="center">&nbsp;&nbsp;
 						<input id="IdFindName" name="name" class="pt5 pl5 pr5 pb5" type="text" value="" placeholder="이름" >
 					</span>
 				</li>
-				<!-- <li class="mt10">
-					<span class="wth50 inline"><img src="/reqtakbae/views/common/images/contents/email.PNG"></span>
-					<span><label for=""></label><input id="IdFindEmail" name="email" class="pt5 pl5 pr5 pb5" type="text" value="" ></span> 
-				</li> -->
 				
 				<li class="mt10">
 					<span>
@@ -63,13 +57,7 @@
 			
 			
 			<ul class="flo_right wth250 mt50 ml50">
-				<li class="font24 bold tcen ">비밀번호찾기</li><br>
-				<li class="mt10">
-					<span>
-						<img src="/reqtakbae/views/common/images/contents/name.PNG" width="35px" height="35px" align="center">&nbsp;&nbsp;
-						<input id="PwdFindName" name="name" class="pt5 pl5 pr5 pb5" type="text" value="" placeholder="이름">
-					</span>
-				</li>
+				<li class="font22 bold tcen ">비밀번호찾기</li><br>
 				<li class="mt10">
 					<span>
 						<img src="/reqtakbae/views/common/images/contents/id.PNG" width="35px" height="35px" align="center">&nbsp;&nbsp;
@@ -105,13 +93,15 @@
 
 <script>
 	var userDiv;
-	if($("input:radio:checked").val()=="기사"){
+	if($("input:radio[name=userDiv]:checked").val()=="기사"){
 		userDiv="기사";
-	}else if($("input:radio:checked").val()=="신청자"){
+	}else{
 		userDiv="신청자";
 	}
 	
+	//아이디찾기
 	function idFind(){
+		
 		var findDiv="id";
 		
 		var name = $("#IdFindName").val();
@@ -131,9 +121,19 @@
 		});
 	}
 	
-	
+	//비밀번호찾기
 	function pwdFind(){
-		var randomCode = Math.floor((Math.random()*9999999-999999))+1000000;
+		//var randomCode = Math.floor((Math.random()*9999999-999999))+1000000;
+		
+		
+		var randomCode ="";
+		var word="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		for(var i=0;i<10;i++){
+			randomCode += word.charAt(Math.floor(Math.random()*word.length));
+		}
+		console.log("과연 :"+randomCode);
+		
+		
 		
 		var findDiv="pw";
 		
@@ -144,7 +144,7 @@
 		$.ajax({
 			url:"/reqtakbae/findPw.me",
 			type:"post",
-			data:{name:name,email:email,id:id,userDiv:userDiv,findDiv:findDiv,randomCode:randomCode,userPwd:userPwd},
+			data:{email:email,id:id,userDiv:userDiv,findDiv:findDiv,randomCode:randomCode,userPwd:randomCode},
 			success:function(data){
 				if(data=="YES"){
 					alert("이메일로 임시비밀번호 전송")

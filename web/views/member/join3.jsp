@@ -22,7 +22,7 @@
 			<span>홈 &gt; 회원가입</span>
 		</div>
 		
-		<form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="post">
+		<form id="joinForm" action="<%=request.getContextPath()%>/insertGisa.me" method="post" encType="multipart/form-data">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원가입 리스트입니다.</caption>
 			<colgroup>
@@ -33,7 +33,7 @@
 			<tr>
 				<th scope="row">아이디</th>
 				<td>
-					<input name="userDiv" value="신청자" type="hidden">
+					<input name="userDiv" value="기사" type="hidden">
 					<input id="SId" name="userId" type="text">
 					<span>
 						<a id="idCheckBtn" class="sbtn db" >중복확인</a>
@@ -75,6 +75,36 @@
 				<td><img id="phoneCheckImg" class="checkTest" src=""></td>
 			</tr>
 			<tr>
+				<th scope="row">신분증</th>
+				<td>
+					<div id="showImgArea1">
+						<img id="showImg1" name="showImg1" width="350" height="200"> 
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">본인 얼굴사진</th>
+				<td>
+					<div id="showImgArea2">
+						<img id="showImg2" name="showImg2" width="350" height="200"> 
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">주 교통수단</th>
+				<td>
+					<span>
+						<select name="mainWay">
+							<option value="차">차</option>
+							<option value="오토바이">오토바이</option>
+							<option value="대중교통">대중교통</option>
+							<option value="자전거">자전거</option>
+							<option value="기타">기타</option>
+						</select>
+					</span>
+				</td>
+			</tr>
+			<tr>
 				<th scope="row">이메일</th>
 				<td>
 					<input id="Semail1" name="email1" class="wth100" type="text">
@@ -108,6 +138,9 @@
 				</td>
 				<td><img id="emailCheckImg" class="checkTest" src=""></td>
 			</tr>
+			
+			
+			<%-- 계좌 원본  --%>
 			<tr>
 				<th scope="row" rowspan="3">계좌번호</th>
 				<td>
@@ -118,11 +151,10 @@
 							<option value="shinHan">신한은행</option>
 							<option value="woori">우리은행</option>
 						</select><br>
-					계좌번호 <input id="accountNum" name="accountNum" type="text"><br>
+					계좌번호 <input id="accountNum" name="accountNum" type="text" placeholder="-없이 입력"><br>
 					생년월일 <input id="birth" type="text" placeholder="940101형식으로 입력">
 					<span id="bankCheck" class="sbtn db" onclick="testtest();">계좌 인증</span>
 						
-						<!-- <span id="accountCheck"> </span> -->
 						<%
 							Calendar cal = Calendar.getInstance();
 							java.util.Date date = cal.getTime();
@@ -133,8 +165,13 @@
 				</td>
 				<td><img id="accountCheckImg" class="checkTest" src=""></td>
 			</tr>
+			
 			</tbody>
 		</table><!--// boardWrite E-->
+		<div id="fileArea">
+			<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
+			<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
+		</div>
 
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn gy" href="#">새로입력</a></span>
@@ -158,13 +195,16 @@
 	
 	$(function(){
 		$("#sendEmailClick").hide();
+		$("#fileArea").hide();
 	});
+	
+	
 	
 	
 	//아이디 정규표현식 && 중복체크
 	$("#idCheckBtn").click(function(){
 		var SId = $("#SId").val();
-		var regExp = /^[a-z0-9]{3,}$/;
+		var regExp = /\w{3,}/;
 		
 		if(regExp.test(SId)){
 			$.ajax({
@@ -187,9 +227,8 @@
 				
 			})
 		}else{
-			alert("아이디 : 영문소문자/숫자 조합 3자리 이상");
+			alert("아이디 : 영어/숫자 조합 3자리 이상");
 			$("#idCheckMsg").html("");
-			//$("#idCheckMsg").css("color","red");
 			$("#idCheckImg").attr("src","");
 		}
 	});
@@ -199,16 +238,14 @@
 	$("#SPwd").change(function(){
 		var pwd1 = $("#SPwd").val();
 		
-		var regExp=/^[a-z0-9]{3,}$/;
+		var regExp=/\w{3,}/;
 		
 		if(!regExp.test(pwd1)){
-			alert("비밀번호 : 영문소문자/숫자 조합 3자리 이상");
+			alert("비밀번호 : 영어/숫자 조합 3자리 이상");
 			$("#SPwd").val("");
 			$("#SPwd2").val("");
 			$("#pwdCheckImg").attr("src","");
 			$("#pwdCheckImg2").attr("src","");
-		}else{
-			
 		}
 	});
 	
@@ -241,7 +278,7 @@
 	//이름 체크
 	$("#SName").change(function(){
 		var name = $("#SName").val();
-		var regExp =/^[ㄱ-ㅎㅏ-ㅣ가-힣]{1,}$/;
+		var regExp =/[ㄱ-ㅎㅏ-ㅣ가-힣]{1,}/;
 		
 		if(regExp.test(name)){
 			$("#nameCheckImg").attr("src",checkImgPath);
@@ -331,9 +368,17 @@
 	
 	
 	
+	
+	
+	
+	 
+	 
+	 
+	 
+	//원본 
 	//계좌 인증
 	var token;
-	
+	 
 	function testtest(){
 		var cId="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed";
 		var cSecret="2b229cffd50b45c08f0cde6158ab69c1";
@@ -380,12 +425,15 @@
 			console.log("depositor: "+depositor);
 			console.log("birth: "+birth);
 			console.log("today: "+today); 
+			console.log("token: "+token); 
 			
 			var data={
 					"bank_code_std": bankNum,"account_num": accountNum, "account_holder_info": birth, "tran_dtime": today		
 			}
 			
 			
+			
+		
 			$.ajax({
 				url:"https://testapi.open-platform.or.kr/inquiry/real_name",
 				type:"POST",
@@ -408,28 +456,94 @@
 				}
 				
 			});
+	} 
+	
+	
+	
+	$("#showImgArea1").click(function(){
+		$("#IdCardImg").click();
+	});
+	
+	$("#showImgArea2").click(function(){
+		$("#faceImg").click();
+	});
+	
+
+	
+	function loadImg(value, num){
+		if(value.files && value.files[0]){
+			var reader = new FileReader();
+			reader.onload = function(e){
+				switch(num){
+				case 1 : $("#showImg1").attr("src",e.target.result); break;
+				case 2 : $("#showImg2").attr("src",e.target.result); break;
+				}
+			}
+		reader.readAsDataURL(value.files[0]);
+		}
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/* 	
+	//회원가입 버튼 클릭시 && 널값
 	function insertMember(){
-		/* if($("#SPwd").val() != $("#SPwd2").val()){
+		if($("#SId").val() == ""){
+			alert("아이디를 입력하세요");
+		}else if($("#idCheckImg").attr("src") == ""){
+			alert("아이디 중복을 확인하세요");
+		}else if($("#SPwd").val() == ""){
+			alert("비밀번호를 입력하세요");
+		}else if($("#SPwd2").val() == ""){
+			alert("비밀번호확인을 입력하세요");
+		}else if($("#SPwd").val() != $("#SPwd2").val()){
 			alert("비밀번호가 일치하지 않습니다");
-			$("#accountCheckImg").attr("src","");
-			$("#accountCheckImg").attr("src","");	
-		}
-		if($(".checkTest").attr("src") != ""){
-			$("#joinForm").submit();			
-		}
-		else{
-			alert("모든 항목을 올바르게 입력하세요");
+			$("#SPwd").val("");
+			$("#SPwd2").val("");
+			$("#pwdCheckImg").attr("src","");
+			$("#pwdCheckImg2").attr("src","");
+		}else if($("#SName").val() == ""){
+			alert("이름 입력하세요");
+		}else if($("#Sphone").val() == ""){
+			alert("휴대폰 번호를 입력하세요");
+		}else if($("#Semail1").val() == ""){
+			alert("이메일을 입력하세요");
+		}else if($("#Semail2").val() == ""){
+			alert("이메일을 입력하세요");
+		}else if($("#emailCheckImg").attr("src") == ""){
+			alert("이메일을 인증하세요");
+		}else if($("#accountNum").val() == ""){
+			alert("계좌번호를 입력하세요");
+		}else if($("#birth").val() == ""){
+			alert("생년월일을 입력하세요");
+		}else if($("#accountCheckImg").attr("src") == ""){
+			alert("계좌번호를 입력 입력하세요");
+		}else{
+			$("#joinForm").submit();
 		} */
 		
-		$("#joinForm").submit();	
+		function insertMember(){
+			$("#joinForm").submit();
+		}
 		
-	}
+		
 	
 	
+
 	</script>
+
 
 </body>
 </html>

@@ -40,7 +40,9 @@ public class IdFindServlet extends HttpServlet {
 			request.setAttribute("id", id);
 			request.setAttribute("findDiv", findDiv);
 			
+			System.out.println("1");
 			request.getRequestDispatcher("/sendId").forward(request, response);
+			
 			response.getWriter().print("YES");
 			
 		}else {

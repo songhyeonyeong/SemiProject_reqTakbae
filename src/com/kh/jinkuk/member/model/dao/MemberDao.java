@@ -87,6 +87,9 @@ public class MemberDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
 		}
 		
 		
@@ -96,8 +99,13 @@ public class MemberDao {
 	public int insertMember(Connection con, Member reqMember) {
 		PreparedStatement pstmt = null;
 		int result = 0;
+		String query="";
 		
-		String query = prop.getProperty("insertMember");
+		if(reqMember.getUser_div().equals("신청자")) {
+			query = prop.getProperty("insertMember");
+		}else if(reqMember.getUser_div().equals("기사")) {
+			query = prop.getProperty("insertGisa");
+		}
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -110,6 +118,10 @@ public class MemberDao {
 			pstmt.setString(7, reqMember.getUser_div());
 			pstmt.setString(8, reqMember.getLogin_div());
 			pstmt.setString(9, reqMember.getUser_name());
+			
+			if(reqMember.getUser_div().equals("기사")) {
+				pstmt.setString(10, reqMember.getK_trans());
+			}
 			
 			result = pstmt.executeUpdate();
 			
@@ -125,7 +137,7 @@ public class MemberDao {
 	public String find(Connection con, String name, String email, String userDiv) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String member="";
+		String id="";
 		
 		String query = prop.getProperty("findId");
 		
@@ -138,7 +150,7 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				member = rset.getString("USER_ID");
+				id = rset.getString("USER_ID");
 			}
 			
 		} catch (SQLException e) {
@@ -147,29 +159,21 @@ public class MemberDao {
 			close(pstmt);
 			close(rset);
 		}
-		
-		
-		
-		return member;
+
+		return id;
 	}
 
-	public int findPw(Connection con, String name, String email, String userDiv, String id, String userPwd) {
+	public int findPw(Connection con, String email, String userDiv, String id, String userPwd) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
 		String query = prop.getProperty("updatePw");
-		System.out.println(query);
-		System.out.println(userPwd);
-		System.out.println(id);
-		System.out.println(name);
-		System.out.println(email);
 	
 		try {
 			pstmt=con.prepareStatement(query);
 			pstmt.setString(1, userPwd);
 			pstmt.setString(2, id);
-			pstmt.setString(3, name);
-			pstmt.setString(4, email);
+			pstmt.setString(3, email);
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -177,7 +181,7 @@ public class MemberDao {
 		} finally {
 			close(pstmt);
 		}
-		System.out.println("dao result:"+result);
+
 		return result;
 	}
 }
