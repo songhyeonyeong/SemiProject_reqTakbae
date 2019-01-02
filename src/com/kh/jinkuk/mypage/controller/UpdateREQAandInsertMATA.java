@@ -1,8 +1,6 @@
 package com.kh.jinkuk.mypage.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.jinkuk.mypage.model.service.MypageService;
 
 /**
- * Servlet implementation class UpdateB_StatusServlet
+ * Servlet implementation class UpdateREQAandInsertMATA
  */
-@WebServlet("/updatebstatusU.mp")
-public class UpdateB_StatusServletU extends HttpServlet {
+@WebServlet("/updateinsertGisa.mp")
+public class UpdateREQAandInsertMATA extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateB_StatusServletU() {
+    public UpdateREQAandInsertMATA() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +28,18 @@ public class UpdateB_StatusServletU extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String value = request.getParameter("value");
-		int gno =Integer.parseInt(request.getParameter("num"));
 		int uno =Integer.parseInt(request.getParameter("uno"));
-		int result =new MypageService().updateB_status(value,gno,uno);
+		int gno =Integer.parseInt(request.getParameter("gno"));
+		
+		int result = new MypageService().upReqInserMAT(uno,gno);
 		
 		if(result >0) {
-			response.sendRedirect("/reqtakbae/SelectMydeliverlist.mp");
+			response.sendRedirect("/reqtakbae/selectMyNoticeList.mp");
+		}else {
+			
 		}
+	
+	
 	}
 
 	/**

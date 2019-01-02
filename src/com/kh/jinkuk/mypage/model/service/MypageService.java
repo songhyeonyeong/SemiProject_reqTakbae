@@ -5,6 +5,8 @@ import static com.kh.jinkuk.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.jinkuk.admin.model.dao.AdminDao;
+import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.mypage.model.dao.MypageDao;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
@@ -101,14 +103,24 @@ public class MypageService {
 		return list;
 	}
 
-	public int updateB_status(String value, int gno) {
+	public int updateB_status(String value, int gno, int uno) {
 		Connection con =getConnection();
-		int result =0;
-		result=new MypageDao().updateB_status(con,value,gno);
-		if(result>0) {
+		int result1 =0;
+		int result2 =0;
+		int result3 =0;
+		int result=0;
+		int money=0;
+		money =new MypageDao().selectmoney(con,gno);
+		result1=new MypageDao().updateB_status(con,value,gno);
+		result2=new MypageDao().update_cmoneybd(con,value,gno,uno,money);
+		result3=new MypageDao().update_gisainfo(con,value,gno,uno,money);
+		
+		if(money>0&&result1>0&&result2>0&&result3>0) {
 			commit(con);
+			result=1;
 		}else {
 			rollback(con);
+			result=0;
 		}
 		close(con);
 		
@@ -129,6 +141,41 @@ public class MypageService {
 		SelectReqGisa srg=new MypageDao().SelectDetailGisa(con,num);
 		close(con);
 		return srg;
+	}
+
+	public int upReqInserMAT(int uno, int gno) {
+		Connection con =getConnection();
+		int result1=0;
+		int result2=0;
+		int result3=0;
+		int result4=0;
+		int result=0;
+		
+		result1=new MypageDao().upReq(uno,gno,con);
+		result2=new MypageDao().InserMAT(uno,gno,con);
+		result3=new MypageDao().InserShipping(uno,gno,con);
+		result4=new MypageDao().up_AP(uno,gno,con);
+		if(result1>0&&result2>0&&result3>0&&result4>0) {
+			commit(con);
+			result=1;
+		}else {
+			rollback(con);
+			result=0;
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<Inquiry> selectListInMp(int currentPage, int limit, int uno) {
+Connection con =  getConnection();
+		
+		ArrayList<Inquiry> list = new MypageDao().selectListIn(con, currentPage, limit,uno);
+		
+		close(con);
+		
+		return list;
 	}
 
 

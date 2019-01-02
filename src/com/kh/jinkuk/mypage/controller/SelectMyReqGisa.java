@@ -38,6 +38,7 @@ public class SelectMyReqGisa extends HttpServlet {
 		/*if(list!=null) {*/
 			page="views/mypage/deliDetail.jsp";
 			request.setAttribute("list", list);
+			request.setAttribute("gno", gno);
 			request.getRequestDispatcher(page).forward(request, response);
 	/*	}
 		*/

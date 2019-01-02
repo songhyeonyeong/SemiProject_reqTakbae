@@ -72,6 +72,7 @@
 						%>
 						<tr>
 							<input type="hidden" value="<%=m.getG_NO()%>">
+							<input type="hidden" value="<%=m.getU_no()%>">
 							<td><label for=""> 체크</label> <input id="" name=""
 								class="check" type="checkbox"></td>
 							<td><%=m.getG_DIV()%></td>
@@ -106,12 +107,13 @@
 					$(function(){
 						$("#tbody td .sbtn.rd").click(function(){
 							var t=confirm("배송확정 하시겠습니까?");
-							var num = $(this).parent().parent().children("input").val();
+							var num = $(this).parent().parent().children("input").eq(0).val();
+							var uno = $(this).parent().parent().children("input").eq(1).val();
 							var value="배송확정";
 							if(t==true)
 								{
-								alert("배송확정 되었습니다!");
-								location.href="<%=request.getContextPath()%>/updatebstatusU.mp?num="+num+"&&value="+value;
+							alert("배송확정 되었습니다!");
+								location.href="<%=request.getContextPath()%>/updatebstatusU.mp?num="+num+"&&value="+value+"&&uno="+uno;
 								}
 							
 						});

@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"
 	import="com.kh.jinkuk.mypage.model.vo.*, com.kh.jinkuk.cybermoney_breakdown.model.vo.*,java.sql.*, java.util.*"%>
 
-<%ArrayList<SelectReqGisa> list =(ArrayList<SelectReqGisa>)request.getAttribute("list"); %>
+<%ArrayList<SelectReqGisa> list =(ArrayList<SelectReqGisa>)request.getAttribute("list");
+	int gno =(int)request.getAttribute("gno");
+%>
 
 <%@ include file="/views/include/common.jsp" %>
 
@@ -63,7 +65,7 @@ function fn_open(id,name,phone,count,grade) {
 						%>
 							<tr>
 							<input type="hidden" value="<%=m.getU_no()%>">
-							<td><label for=""> 체크</label> <input id="" name=""
+							<td><label for=""> 체크</label> <input id="" name="" value="<%=m.getU_no()%>"
 								class="radiobox" type="radio"></td>
 							<td><%=m.getUser_id()%></td>
 							<td><%=m.getUser_name()%></td>
@@ -114,6 +116,9 @@ function fn_open(id,name,phone,count,grade) {
 			</tbody>
 		</table>
 		
+
+		<p class="tcen mt30"><a id="selectgisa" class="mbtn or">선택하기</a></p>
+		
 		<script type="text/javascript">
 			$(function(){
 				$("#tbody .sbtn.or").click(function(){
@@ -135,6 +140,26 @@ function fn_open(id,name,phone,count,grade) {
 					});
 					
 				});
+				$("#selectgisa").click(function(){
+
+				
+					var ra=$("#tbody td input[type='radio']:checked").val();
+					var ok=confirm("선택하시겠습니까?");
+					if(ok==true && ra!=null){
+						
+						location.href="/reqtakbae/updateinsertGisa.mp?uno="+ra+"&&gno="+<%=gno%>;
+						
+					}else{
+						
+						alert("기사를 먼저 선택해주세요!");
+						
+					}
+					
+					
+					
+				});
+				
+				
 				
 				
 				
@@ -145,7 +170,10 @@ function fn_open(id,name,phone,count,grade) {
 		
 		</script>
 
-		<p class="tcen mt30"><a class="mbtn or" href="deliList.jsp">선택하기</a></p>
+
+
+
+
 
 	</div><!--// inner E-->
 </div>

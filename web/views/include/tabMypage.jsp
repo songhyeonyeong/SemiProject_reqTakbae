@@ -15,7 +15,7 @@
 			<%} %>
 			<li <%if(bigtabon.equals("4")){%>class="on"<%}%>><a href="/reqtakbae/Cybermoney_breakdownServlet">충전/적립 내역</a></li>
 			<li <%if(bigtabon.equals("5")){%>class="on"<%}%>><a href="/reqtakbae/ExchangeServlet">환전내역</a></li>
-			<li <%if(bigtabon.equals("6")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/myQnaList.jsp">나의 문의내역</a></li>
+			<li <%if(bigtabon.equals("6")){%>class="on"<%}%>><a href="/reqtakbae//SelectMyInquiry.mp">나의 문의내역</a></li>
 			<li <%if(bigtabon.equals("7")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memModify.jsp">회원정보수정</a></li>
 			<li <%if(bigtabon.equals("8")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memLeave.jsp">탈퇴하기</a></li>
 		</ul>

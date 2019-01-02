@@ -1,9 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String bigtabon="6";
 %>
 <%@ include file="/views/include/common.jsp" %>
 
+<% 
+	String tabon="1";
+	ArrayList<Inquiry> list = (ArrayList<Inquiry>)request.getAttribute("list");	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+%>	
 <title>나의 문의내역</title>
 
 </head>
@@ -33,43 +44,74 @@
 			<thead>
 			<tr>
 				<th scope="col">No</th>
-				<th scope="col">문의유형</th>
-				<th scope="col">제목</th>
-				<th scope="col">등록일</th>
-				<th scope="col">답변여부</th>
+				<th scope="col">문의제목</th>
+				<th scope="col">문의내용</th>
+				<th scope="col">등록날짜</th>
+				<th scope="col">작성자</th>
 			</tr>
 			</thead>
 			<tbody>
-			<tr>
-				<td>1</td>
-				<td>배송문의</td>
-				<td class="tleft"><a href="myQnaView.jsp">택배가 안와요!!</a></td>
-				<td>2018-11-11</td>
-				<td>답변완료</td>
-			</tr>
-			<tr>
-				<td>2</td>
-				<td>아이디/비밀번호문의</td>
-				<td class="tleft"><a href="myQnaView.jsp">비밀번호가 생각이안나요</a></td>
-				<td>2018-11-11</td>
-				<td>대기중</td>
-			</tr>
+			<% for(Inquiry m : list){ %>
+					<tr id="listArea">
+						<td><%= m.getM_no()%></td>
+						<td><a><%= m.getM_title()%></a></td>
+						<td><%= m.getM_context() %></td>
+						<td><%=m.getM_date()%></td>
+						<td><%= m.getU_no()%></td>
+
+					</tr>
+				<% } %> 
+
 			</tbody>
 		</table>
 
-		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+			<div class="numbox pt40 pb50" align="center"> 
+			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/SelectMyInquiry.mp?currentPage=1'"><<</a></span>
+			<% if(currentPage <=1){ %>
+				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/SelectMyInquiry.mp?currentPage=<%=currentPage - 1 %>'"><</a></span> <!-- 하나 이전페이지로 이동 -->
+			<%} %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){%>
+				
+				<span><a class="num on" href="#" disable><%= p %></a></span> <!-- 비활성화 -->
+			<%  }else{ %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/SelectMyInquiry.mp?currentPage=<%= p %>'"><%= p %></a></span>
+			
+			
+			<%         } %>
+			<%} %>
+			
+			<%if(currentPage >= maxPage){ %>
+				<span><a class="num" href="#" disable>></a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.in?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
+			<%} %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.in?currentPage=<%=maxPage%>'">>></a></span>
+			
+			
 		</div>
+		<script>
+		$(function(){
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"darkgray","cursor":"pointer"});//td의 부모는 tr -> tr에 css적용
+
+			}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+			}).click(function(){
+				var num = $(this).parent().children().eq(0).text();
+				
+				console.log(num);
+				location.href="<%=request.getContextPath()%>/selectMyinquiredetail.mp?num=" + num; 
+	
+				
+			});
+			
+		});
+		
+	</script>
 
 
 	</div><!--// inner E-->

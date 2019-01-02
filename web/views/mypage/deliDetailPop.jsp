@@ -76,12 +76,12 @@
 
 		</div><!--// flo_right E-->
 		</div>
-		<table class="boardList mt10">
+		<!-- <table class="boardList mt10">
 			<caption>후기 리스트입니다.</caption>
 			<colgroup>
-				<col style="width:33.33%;"><!--  -->
-				<col style="width:33.33%;"><!--  -->
-				<col style="width:33.33%;"><!--  -->
+				<col style="width:33.33%;">
+				<col style="width:33.33%;">
+				<col style="width:33.33%;">
 			</colgroup>
 			<thead>
 			<tr>
@@ -90,7 +90,7 @@
 				<th scope="col">별점</th>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody> -->
 	<!-- 		<tr>
 				<td class="tleft pl10">배송기사님 너무 친절하세요</td>
 				<td>te****</td>
@@ -109,7 +109,7 @@
 		</table>
 
 		<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn gy" href="#">닫기</a></span>
+			<span><a class="mbtn gy" onclick="window.close()">닫기</a></span>
 		</div><!--// btnbox E-->
 
 	</div>
