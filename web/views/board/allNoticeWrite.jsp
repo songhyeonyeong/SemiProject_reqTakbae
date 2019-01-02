@@ -3,7 +3,12 @@
 <%@ include file="/views/include/common.jsp" %>
 
 <title>오늘의 공고</title>
-
+<!--  jQuery UI CSS파일  -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+<!-- jQuery 기본 js파일 -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
+<!-- jQuery UI 라이브러리 js파일 -->
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
 <script type="text/javascript">
 
 (function($){
@@ -39,6 +44,27 @@
       
     })
   }
+  //날짜 선택
+  $(function() {
+    $( "#dateP" ).datepicker({
+      dateFormat: 'yy.mm.dd',
+      prevText: '이전 달',
+      nextText: '다음 달',
+      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+      monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+      dayNames: ['일','월','화','수','목','금','토'],
+      dayNamesShort: ['일','월','화','수','목','금','토'],
+      dayNamesMin: ['일','월','화','수','목','금','토'],
+      showMonthAfterYear: true,
+      changeMonth: true,
+      changeYear: true,
+      yearSuffix: '년'
+    });
+  });
+  $("#timeP").timepicker({
+		step: 5,            //시간간격 : 5분
+		timeFormat: "H:i"    //시간:분 으로표시
+	});
   
   
 })(jQuery);
@@ -185,12 +211,11 @@
 					<tr>
 						<th scope="row">배송날짜</th>
 						<td colspan="3">
-							<span><label for=""></label><input id="" name="" class="wth150" type="text" value="" ></span><!-- 클릭하면 달력 -->
+							<span><label for=""></label><input id="dateP" name="" class="wth150" type="text" value="" ></span><!-- 클릭하면 달력 -->
 							<span>
 								<label for=""></label>
-								<select id="" name="" class="input wth100">
+								<select id="timeP" name="" class="input wth100">
 									<option selected="selected">시간 선택</option>
-									<option value="#">08:00</option>
 								</select> 
 							</span>
 						</td>
@@ -217,7 +242,7 @@
 		</div>
 
 		<div class="clear btnbox mt30 mb30">
-			<span><a class="mbtn or wth60" href="#">등록</a></span>
+			<span><a class="mbtn or wth60" onclick="location.href='<%=request.getContextPath()%>/insert.bo'">등록</a></span>
 			<span><a class="mbtn gy wth60" href="#">취소</a></span>
 		</div>
 	<% }else{

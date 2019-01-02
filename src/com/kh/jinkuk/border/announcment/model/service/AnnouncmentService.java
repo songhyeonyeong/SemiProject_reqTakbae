@@ -13,7 +13,7 @@ import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 
 public class AnnouncmentService {
 
-	//페이징처리 적용한 전체게시물 조회용 메소드
+	//페이징처리 적용한 전체 게시물 조회용 메소드
 	public ArrayList<Announcment> selectList(int currentPage, int limit) {
 		Connection con = getConnection();
 		
@@ -24,6 +24,17 @@ public class AnnouncmentService {
 		
 		return list;
 	}
+	//페이징처리 적용한 당일 게시물 조회용 메소드
+		public ArrayList<Announcment> selectTodayList(int currentPage, int limit) {
+			Connection con = getConnection();
+			
+			ArrayList<Announcment> list 
+				= new AnnouncmentDao().selectTodayList(con, currentPage, limit);
+			
+			close(con);
+			
+			return list;
+		}
 
 	public int getListCount() {	
 		
@@ -33,7 +44,7 @@ public class AnnouncmentService {
 		return listCount;
 	}
 	
-	//상세페이지
+	//전체 상세페이지
 	public Announcment selectOne(int num) {
 		
 		Connection con = getConnection();
@@ -54,6 +65,29 @@ public class AnnouncmentService {
 		
 		return result;
 	}
+	
+	//당일 상세페이지
+		public Announcment selectOneToday(int num) {
+			
+			Connection con = getConnection();
+			
+			Announcment a = null;
+			
+			Announcment result = new AnnouncmentDao().selectOneToday(con, num);
+					
+					/*new AnnouncmentDao().updateCount(con, num);*/
+			
+			if(result  !=null ) {
+				commit(con);
+			}else {
+				rollback(con);
+			}
+			
+			close(con);
+			
+			return result;
+		}
+	
 	//게시판 작성페이지
 	public int insertBoard(Announcment a) {
 		

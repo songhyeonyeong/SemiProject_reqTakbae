@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
+import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
@@ -374,6 +375,43 @@ public class MypageDao {
 		}
 		
 		return srg;
+	}
+
+	public ArrayList<MyCharge> ChargeList(Connection con, int uno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<MyCharge> list = null;
+		
+		String query = prop.getProperty("chargelist");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, uno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				MyCharge m = new MyCharge();
+				
+				m.setR_num(rset.getInt("RNUM"));
+				m.setCm_div(rset.getString("CM_DIV"));
+				m.setCm_date(rset.getDate("CM_DATE"));
+				m.setCm_use(rset.getInt("CM_USE"));
+				m.setC_money(rset.getInt("C_MONEY"));
+				m.setCm_note(rset.getString("CM_NOTE"));
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
 	}
 
 

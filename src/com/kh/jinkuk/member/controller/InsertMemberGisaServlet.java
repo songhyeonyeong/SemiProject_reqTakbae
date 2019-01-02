@@ -1,5 +1,6 @@
 package com.kh.jinkuk.member.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -13,13 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.jinkuk.common.MyFileRenamePolicy;
+import com.kh.jinkuk.member.model.dao.MemberDao;
+import com.kh.jinkuk.member.model.service.MemberService;
+import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
 /**
  * Servlet implementation class InsertMemberGisaServlet
  */
-@WebServlet("/insertGisa.me")
+@WebServlet("/GisaJoinImg")
 public class InsertMemberGisaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,13 +40,11 @@ public class InsertMemberGisaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		if(ServletFileUpload.isMultipartContent(request)) {
-			System.out.println("isMultipartContent 수행");
 			int maxSize = 1024*1024*10;
 			
 			String root = request.getSession().getServletContext().getRealPath("/");
-			System.out.println(root);
-			
-			String filePath = root + "GisaImg/";
+			String filePath = root + "GisaJoinImg/";
+			System.out.println("filePath : "+filePath);
 			
 			MultipartRequest multiRequest
 			 = new MultipartRequest(request, filePath, maxSize,
@@ -56,6 +58,7 @@ public class InsertMemberGisaServlet extends HttpServlet {
 			while(files.hasMoreElements()) {
 				String name = files.nextElement();
 				
+				System.out.println();
 				System.out.println("name  : " + name);
 				
 				saveFiles.add(multiRequest.getFilesystemName(name));
@@ -66,26 +69,66 @@ public class InsertMemberGisaServlet extends HttpServlet {
 				
 			}
 			
-			String userDiv = multiRequest.getParameter("userDiv");
-			String userId = multiRequest.getParameter("userId");
-		 	String userPwd = multiRequest.getParameter("userPwd");
-			String userName = multiRequest.getParameter("userName");
-			String phone = multiRequest.getParameter("phone");
+			String userId = multiRequest.getParameter("id");
+			System.out.println("userId : " + userId);
 			
-			String email1 = multiRequest.getParameter("email1");
-			String email2 = multiRequest.getParameter("email2");
-			String email = email1 + "@" + email2;
-			String mainWay = multiRequest.getParameter("mainWay");
-			String bankCode = multiRequest.getParameter("bankCode");
-			String accountNum = multiRequest.getParameter("accountNum");
-			
-			System.out.println(userPwd);
 
+			ArrayList<Images> fileList = new ArrayList<Images>();
 			
-			Member member = new Member();
-			member.setUser_div(userDiv);
+			for(int i = originFiles.size()-1; i>=0; i--) {
+				Images image = new Images();
+				image.setI_path(filePath);
+				image.setI_o_name(originFiles.get(i));
+				image.setI_c_name(saveFiles.get(i));
+				
+				int uno = new MemberService().findUno(userId);
+				image.setU_no(uno);
+				
+				if(i==originFiles.size()-1) {
+					image.setI_div("신분증");
+				}else {
+					image.setI_div("기사얼굴");
+				}
+				
+				
+				
+				
+				System.out.println();
+				System.out.println("getI_div() : " + image.getI_div());
+				System.out.println("getI_o_name() : " + image.getI_o_name());
+				System.out.println("getI_c_name() : " + image.getI_c_name());
+				System.out.println("getI_path() : " + image.getI_path());
+				System.out.println("getU_no() : " + image.getU_no());
+
+				
+				
+				
+				
+				
+				fileList.add(image);
+				
+				int result = new MemberService().insertImg(uno,fileList);
+				
+				if(result > 0) {
+					response.sendRedirect("index.jsp");
+				}else {
+					//실패시 저장된 사진 삭제
+					for(int j = 0; j < saveFiles.size(); j++) {
+						//파일시스템에 저장된 이름으로 파일 객체 생성
+						File failedFile = new File(filePath + saveFiles.get(j));
+						
+						//true false를 리턴함
+						failedFile.delete();
+					}
+					request.setAttribute("msg", "사진게시판 등록 실패!");
+					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+				
+			}
 			
-		}
+			
+			
+			
+			}}
 		
 	}
 

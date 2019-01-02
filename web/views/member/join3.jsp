@@ -10,7 +10,7 @@
 
 <div id="wrap"><!-- Wrap S -->
 
-<%@ include file="/views/include/header.jsp" %>
+<%-- <%@ include file="/views/include/header.jsp" %> --%>
 
 <div id="subvisual">회원가입</div>
 
@@ -22,7 +22,7 @@
 			<span>홈 &gt; 회원가입</span>
 		</div>
 		
-		<form id="joinForm" action="<%=request.getContextPath()%>/insertGisa.me" method="post" encType="multipart/form-data">
+		<form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="post">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원가입 리스트입니다.</caption>
 			<colgroup>
@@ -74,6 +74,10 @@
 				 </td>
 				<td><img id="phoneCheckImg" class="checkTest" src=""></td>
 			</tr>
+			
+			
+			
+			<!-- 
 			<tr>
 				<th scope="row">신분증</th>
 				<td>
@@ -90,6 +94,12 @@
 					</div>
 				</td>
 			</tr>
+			 -->
+			
+			
+			
+			
+			
 			<tr>
 				<th scope="row">주 교통수단</th>
 				<td>
@@ -165,23 +175,83 @@
 				</td>
 				<td><img id="accountCheckImg" class="checkTest" src=""></td>
 			</tr>
-			
 			</tbody>
-		</table><!--// boardWrite E-->
-		<div id="fileArea">
-			<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
-			<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
+			</table>
+			
+		
+			<div id="fileArea">
+				<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
+				<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
+			</div>
+			
+			<div class="btnbox mt20"><!-- btnbox S-->
+			<span><a class="mbtn gy" href="#">새로입력</a></span>
+			<span><a class="mbtn db" onclick="insertMember();">다음</a></span>
 		</div>
+		</form>
+		</div>
+		</div>
+		
 
-		<div class="btnbox mt20"><!-- btnbox S-->
+		<!-- <div class="btnbox mt20">btnbox S
 			<span><a class="mbtn gy" href="#">새로입력</a></span>
 			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
-		</div><!--// btnbox E-->
-	</form>
+		</div>
+		
+		
+	<%-- 	<form id="insertGisaImg" action="<%=request.getContextPath() %>/GisaJoinImg" method="post" encType="multipart/form-data">
+			<table>
+				<tr>
+					<th scope="row">신분증</th>
+					<td>
+						<div id="showImgArea1">
+							<img id="showImg1" name="showImg1" width="350" height="200"> 
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th scope="row">본인 얼굴사진</th>
+					<td>
+						<div id="showImgArea2">
+							<img id="showImg2" name="showImg2" width="350" height="200"> 
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="hidden" id="userNo" name="userId" value=""></td>
+					<td></td>
+				</tr>
+				<tr><td>
+					<div id="fileArea">
+					<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
+					<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
+					</div></td>
+				</tr>
+				
+				
+		</table>
+				<div class="btnbox mt20"><!-- btnbox S-->
+			<span><a class="mbtn gy" href="#">새로입력</a></span>
+			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
+		</div>
+		</form> --%>
+		
+		<!-- <div id="fileArea">
+			<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
+			<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
+		</div> -->
 
-	</div><!--// inner E-->
+		<!-- <div class="btnbox mt20">btnbox S
+			<span><a class="mbtn gy" href="#">새로입력</a></span>
+			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
+		</div>// btnbox E -->
+		
+	<!--// boardWrite E-->
+		
+<!-- 
+	</div>// inner E
 </div>
-
+ -->
 <%@ include file="/views/include/footer.jsp" %>
 
 
@@ -534,12 +604,61 @@
 			$("#joinForm").submit();
 		} */
 		
-		function insertMember(){
+		/* var SId = $("#SId").val();
+		$("#userNo").val(SId);
+		
+		 function insertMember(){
 			$("#joinForm").submit();
+			//$("#insertGisaImg").submit();
+		} */
+		 
+		
+		/* var userDiv = $("#userDiv").val();
+		var SId = $("#SId").val();
+		var SPwd = $("#SPwd").val();
+		var SName = $("#SName").val();
+		var Sphone = $("#Sphone").val();
+		var mainWay = $("#mainWay").val();
+		
+		var Semail1 = $("#Semail1").val();
+		var Semail2 = $("#Semail2").val();
+		var email = Semail1+Semail2;
+		
+		var bankName = $("#bankName").val();
+		var accountNum = $("#accountNum").val();
+		
+		var data={
+				"userDiv": userDiv,"SId": SId, "SPwd": SPwd, "SName": SName,"Sphone": Sphone,"mainWay": mainWay, "email": email, "bankName": bankName,"accountNum":accountNum	
+		} */
+		
+
+		
+
+
+		
+		function insertMember(){
+			/* var form = $("#insertGisaImg")[0];
+			var formData = new FormData(form);
+			console.log("form : " + form);
+			console.log("formData : " + formData);
+
+			$.ajax({
+					url : "/reqtakbae/GisaJoinImg",
+					type : "POST",
+					processData: false,
+                    contentType: false,
+               		data: formData,
+					success : function(data) {
+						alert("업로드 성공!!");
+
+					},
+					error : function(data) {
+					}
+				});  */
+				
+				$("#joinForm").submit();
+			
 		}
-		
-		
-	
 	
 
 	</script>

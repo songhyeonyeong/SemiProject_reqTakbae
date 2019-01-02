@@ -46,15 +46,15 @@
 			<tr>
 				<td>규격</td>
 				<td>
-					<p><img src="../common/images/contents/boxM.png" alt="box small"></p>
+					<p><img src="/reqtakbae/views/common/images/contents/boxM.png" alt="box small"></p>
 					<p class="mt20">가로:100cm<br>세로:100cm</p>
 				</td>
 				<td>
-					<p class="mt10"><img src="../common/images/contents/boxM.png" alt="box middle"></p>
+					<p class="mt10"><img src="/reqtakbae/views/common/images/contents/boxM.png" alt="box middle"></p>
 					<p class="mt20">가로:120cm<br>세로:120cm</p>
 				</td>
 				<td>
-					<p class="mt10"><img src="../common/images/contents/boxB.png" alt="box big"></p>
+					<p class="mt10"><img src="/reqtakbae/views/common/images/contents/boxB.png" alt="box big"></p>
 					<p class="mt20">가로:160cm<br>세로:160cm</p>
 				</td>
 			</tr>
