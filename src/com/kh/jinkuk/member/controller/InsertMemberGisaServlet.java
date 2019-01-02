@@ -40,23 +40,23 @@ public class InsertMemberGisaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
 		if(ServletFileUpload.isMultipartContent(request)) {
-			int maxSize = 1024*1024*10;
+			int maxSize = 1024*1024*100;
 			
-			String root = request.getSession().getServletContext().getRealPath("/");
-			String filePath = root + "GisaJoinImg/";
-			System.out.println("filePath : "+filePath);
+			String root = request.getSession().getServletContext().getRealPath("/upload/");
+			/*String filePath = root + "GisaJoinImg/";*/
+			System.out.println("root : "+root);
 			
 			MultipartRequest multiRequest
-			 = new MultipartRequest(request, filePath, maxSize,
+			 = new MultipartRequest(request, root, maxSize,
 					 "UTF-8", new MyFileRenamePolicy());
 			
 			ArrayList<String> saveFiles = new ArrayList<String>();
 			ArrayList<String> originFiles = new ArrayList<String>();
 			
-			Enumeration<String> files = multiRequest.getFileNames();
+			Enumeration files = multiRequest.getFileNames();//input type=file
 			
 			while(files.hasMoreElements()) {
-				String name = files.nextElement();
+				String name = (String) files.nextElement();
 				
 				System.out.println();
 				System.out.println("name  : " + name);
@@ -75,22 +75,21 @@ public class InsertMemberGisaServlet extends HttpServlet {
 
 			ArrayList<Images> fileList = new ArrayList<Images>();
 			
+			
 			for(int i = originFiles.size()-1; i>=0; i--) {
 				Images image = new Images();
-				image.setI_path(filePath);
+				image.setI_path(root);
 				image.setI_o_name(originFiles.get(i));
 				image.setI_c_name(saveFiles.get(i));
 				
 				int uno = new MemberService().findUno(userId);
 				image.setU_no(uno);
 				
-				if(i==originFiles.size()-1) {
-					image.setI_div("신분증");
-				}else {
+				if(i==1) {
 					image.setI_div("기사얼굴");
+				}else {
+					image.setI_div("신분증");
 				}
-				
-				
 				
 				
 				System.out.println();
@@ -101,36 +100,36 @@ public class InsertMemberGisaServlet extends HttpServlet {
 				System.out.println("getU_no() : " + image.getU_no());
 
 				
-				
-				
-				
-				
 				fileList.add(image);
-				
-				int result = new MemberService().insertImg(uno,fileList);
-				
+			}	
+				int result = new MemberService().insertImg(fileList);
+				String page="";
 				if(result > 0) {
-					response.sendRedirect("index.jsp");
+					page="/reqtakbae/index.jsp";
+					response.sendRedirect(page);
+					return;
 				}else {
 					//실패시 저장된 사진 삭제
+					page="views/common/errorPage.jsp";
 					for(int j = 0; j < saveFiles.size(); j++) {
 						//파일시스템에 저장된 이름으로 파일 객체 생성
-						File failedFile = new File(filePath + saveFiles.get(j));
+						File failedFile = new File(root + saveFiles.get(j));
 						
 						//true false를 리턴함
 						failedFile.delete();
 					}
 					request.setAttribute("msg", "사진게시판 등록 실패!");
-					request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-				
-			}
+					request.getRequestDispatcher(page).forward(request, response);
+					
+				}
 			
+				//
 			
 			
 			
 			}}
 		
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

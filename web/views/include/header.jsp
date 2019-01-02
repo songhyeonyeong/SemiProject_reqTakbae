@@ -15,7 +15,7 @@
 		<% if(loginUser  == null) { %>
 		<div class="multBoxL1">
 			<span class="mu11"><a href="javascript:openpop();">로그인</a></span>
-			<span class="mu12"><a href="/reqtakbae/views/member/joinSort.jsp">회원가입</a></span>
+			<span class="mu12"><a href="/reqtakbae/views/member/join1.jsp">회원가입</a></span>
 		</div>
 		<%}else{ %>
 		<!-- 로그인 후 -->
