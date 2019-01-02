@@ -1,7 +1,9 @@
 package com.kh.jinkuk.admin.model.service;
 
-import static com.kh.jinkuk.common.JDBCTemplate.*;
-
+import static com.kh.jinkuk.common.JDBCTemplate.close;
+import static com.kh.jinkuk.common.JDBCTemplate.commit;
+import static com.kh.jinkuk.common.JDBCTemplate.getConnection;
+import static com.kh.jinkuk.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -9,7 +11,10 @@ import java.util.ArrayList;
 import com.kh.jinkuk.admin.model.dao.AdminDao;
 import com.kh.jinkuk.admin.model.vo.Admin;
 import com.kh.jinkuk.admin.model.vo.Announcment;
+import com.kh.jinkuk.admin.model.vo.Change;
+import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
+import com.kh.jinkuk.admin.model.vo.Point;
 
 
 
@@ -171,6 +176,26 @@ public class AdminService {
 		return listCount;
 	}
 	
+	
+	public int getListCountMo() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCountMo(con);
+		close(con);
+		return listCount;
+	}
+
+	
+	
+	public ArrayList<Change> selectListMo(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Change> list = new AdminDao().selectListMo(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
+
 
 	public ArrayList<Admin> selectList(int currentPage, int limit) {
 		Connection con =  getConnection();
@@ -345,6 +370,41 @@ public class AdminService {
 	
 		return n;
 	}
+
+	public int getListCountPo() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCountPo(con);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Point> selectListPo(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Point> list = new AdminDao().selectListPo(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int getListCountEx() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCountEx(con);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Exchange> selectListEx(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Exchange> list = new AdminDao().selectListEx(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
+
 
 
 

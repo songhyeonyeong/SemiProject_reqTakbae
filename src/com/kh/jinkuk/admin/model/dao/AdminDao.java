@@ -15,7 +15,10 @@ import java.util.Properties;
 
 import com.kh.jinkuk.admin.model.vo.Admin;
 import com.kh.jinkuk.admin.model.vo.Announcment;
+import com.kh.jinkuk.admin.model.vo.Change;
+import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
+import com.kh.jinkuk.admin.model.vo.Point;
 
 
 public class AdminDao {
@@ -1304,13 +1307,221 @@ public class AdminDao {
 		return n;
 	}
 
+	public int getListCountMo(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("ChargeCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
 
+	public ArrayList<Change> selectListMo(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Change> list = null;
+		
+		String query = prop.getProperty("selectCharge");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
 
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Change>();
+			
+			while(rset.next()) {
+				Change m = new Change();
+				
+				m.setCh_no(rset.getInt("CH_NO"));
+				m.setUser_id(rset.getString("USER_ID"));
+				m.setUser_name(rset.getString("USER_NAME"));
+				m.setCh_rmoney(rset.getInt("CH_RMONEY"));
+				m.setCh_cmoney(rset.getInt("CH_CMONEY"));
+				m.setBank_num(rset.getString("BANK_NUM"));
+				m.setBank_name(rset.getString("BANK_NAME"));
+				m.setCh_date(rset.getDate("CH_DATE"));
 
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
 
+	public int getListCountPo(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("PointCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
 
+	public ArrayList<Point> selectListPo(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Point> list = null;
+		
+		String query = prop.getProperty("selectPoint");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Point>();
+			
+			while(rset.next()) {
+				Point m = new Point();
+				
+				m.setP_no(rset.getInt("RNUM"));
+				m.setUserId(rset.getString("USER_ID"));
+				m.setP_date(rset.getDate("P_DATE"));
+				m.setP_usePoint(rset.getInt("P_USEPOINT"));
+				m.setUser_point(rset.getInt("C_POINT"));
+				m.setP_note(rset.getString("G_TITLE"));
 
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
+
+	public int getListCountEx(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("ExchangeCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Exchange> selectListEx(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Exchange> list = null;
+		
+		String query = prop.getProperty("selectExchange");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Exchange>();
+			
+			while(rset.next()) {
+				Exchange m = new Exchange();
+				m.setC_no(rset.getInt("RNUM"));
+				m.setUser_id(rset.getString("USER_ID"));
+				m.setUser_name(rset.getString("USER_NAME"));
+				m.setcMoney(rset.getInt("C_CMONEY"));
+				m.setrMoney(rset.getInt("C_RMONEY"));
+				m.setBankNum(rset.getString("BANK_NUM"));
+				m.setBankName(rset.getString("BANK_NAME"));
+				m.setcDate(rset.getDate("C_DATE"));
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
 
 
 
@@ -1318,14 +1529,6 @@ public class AdminDao {
 
 
 }
-
-
-
-
-
-
-
-
 
 
 

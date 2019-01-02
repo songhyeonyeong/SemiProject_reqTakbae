@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="3";
+	ArrayList<Exchange> list = (ArrayList<Exchange>)request.getAttribute("list");	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -34,6 +42,7 @@
 				<col style="width:%;"><!--  -->
 			</colgroup>
 			<thead>
+			
 			<tr>
 				<th scope="col">no</th>
 				<th scope="col">구분</th>
@@ -44,47 +53,60 @@
 				<th scope="col">계좌번호</th>
 				<th scope="col">은행명</th>
 				<th scope="col">일시</th>
+				<th scope="col">상태</th>
 			</tr>
+
 			</thead>
 			<tbody>
+			<%for(Exchange m : list){ %>
 			<tr>
-				<td>1</td>
-				<td>일반</td>
-				<td>ssss11234</td>
-				<td>홍길동</td>
-				<td>50,000</td>
-				<td>45,000</td>
-				<td>123-45-678900</td>
-				<td>우리</td>
-				<td>2018-12-12 18:05:33</td>
+				<td><%=m.getC_no() %></td>
+				<td>환전</td>
+				<td><%=m.getUser_id() %></td>
+				<td><%=m.getUser_name() %></td>
+				<td><%=m.getcMoney() %></td>
+				<td><%=m.getrMoney() %></td>
+				<td><%=m.getBankNum() %></td>
+				<td><%=m.getBankName() %></td>
+				<td><%=m.getcDate() %></td>
+				<td><span><a class="mbtn rd">환전완료</a></span></td>
 			</tr>
-			<tr>
-				<td>2</td>
-				<td>일반</td>
-				<td>ssss11234</td>
-				<td>홍길동</td>
-				<td>50,000</td>
-				<td>45,000</td>
-				<td>123-45-678900</td>
-				<td>우리</td>
-				<td>2018-12-12 18:05:33</td>
-			</tr>
+			<%} %>
 			</tbody>
 		</table>
-
-		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+		
+		<br>
+		<span><a class="mbtn bk" onclick="printExchange();">인쇄하기</a></span>
+		
+	<div class="numbox pt40 pb50" align="center"> 
+			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.ex?currentPage=1'"><<</a></span>
+			<% if(currentPage <=1){ %>
+				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.ex?currentPage=<%=currentPage - 1 %>'"><</a></span> <!-- 하나 이전페이지로 이동 -->
+			<%} %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){%>
+				
+				<span><a class="num" href="#" disable><%= p %></a></span> <!-- 비활성화 -->
+			<%  }else{ %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.ex?currentPage=<%= p %>'"><%= p %></a></span>
+			
+			
+			<%         } %>
+			<%} %>
+			
+			<%if(currentPage >= maxPage){ %>
+				<span><a class="num" href="#" disable>></a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.ex?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
+			<%} %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.ex?currentPage=<%=maxPage%>'">>></a></span>
+			
+			
 		</div>
+
 
 		</div><!--// contBox E-->
 
@@ -94,6 +116,17 @@
 
 
 </div><!--// Wrap E-->
+
+	<script>
+		function printExchange(){
+			window.print();
+		}
+		
+
+	
+
+
+	</script>
 
 </body>
 </html>
