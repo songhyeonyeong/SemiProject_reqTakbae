@@ -1,29 +1,26 @@
 package com.kh.jinkuk.border.inquire.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import com.kh.jinkuk.border.inquire.model.service.InquireService;
 import com.kh.jinkuk.border.inquire.model.vo.Inquire;
 
 /**
- * Servlet implementation class SelectOneInquireServlet
+ * Servlet implementation class DeleteInquireServlet
  */
-@WebServlet("/selectOneIn")
-public class SelectOneInquireServlet extends HttpServlet {
+@WebServlet("/deleteInquire")
+public class DeleteInquireServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneInquireServlet() {
+    public DeleteInquireServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,36 +29,22 @@ public class SelectOneInquireServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
-	
-		System.out.println("selectOneIn num 번호 :"+num);
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
-		Inquire i = new InquireService().selectOne(num);
-		//관리자가 댓글을 달지 않았을 경우 실행하지 않고 진행
-		System.out.println("i객체의 댓글상태 확인 :"+i.getReply_level());
+		int mno=Integer.parseInt(request.getParameter("mno"));
+		System.out.println("삭제할 글번호 : "+mno);
 		
+		//문의 글 삭제
+		Inquire i = new Inquire();
 		
-		if(i.getReply_level()==1) {
-		Inquire ai=new InquireService().selectAdminOne(num);
-		request.setAttribute("ai", ai);
-		System.out.println("문의 상세보기 댓글 ai"+ai);
-		}
-		
-		String page = "";
+		int result = new InquireService().deleteInquire(i);
 		
 		
 		
-			page="views/board/qnaView.jsp";
-			request.setAttribute("i", i);
-			System.out.println("문의 상세보기  i"+i);
-			
-		
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
 		
 		
-	
 	}
 
 	/**

@@ -120,11 +120,12 @@ public class InquireDao {
 		return listCount;
 	}
 
-	//문의 상세보기 메소드
+	//신청자 문의 상세보기  부분 메소드
 	public Inquire selectOne(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Inquire i = null;
+	
 		
 		String query = prop.getProperty("selectOne");
 		
@@ -137,21 +138,23 @@ public class InquireDao {
 			
 			rset = pstmt.executeQuery();
 			
+			
+			
 			if(rset.next()) {
 				i=new Inquire();
 				
 				i.setM_no(rset.getInt("M_NO"));
 				i.setM_title(rset.getString("M_TITLE"));
-				i.setM_context(rset.getString("MCONTEXT"));
-				i.setRef_mno(rset.getInt("REF_MNO"));
-				i.setReply_level(rset.getInt("REPLY_LEVEL"));
+				i.setM_context(rset.getString("M_CONTEXT"));
 				i.setStatus(rset.getString("STATUS"));
 				i.setM_date(rset.getDate("M_DATE"));
 				i.setU_no(rset.getInt("U_NO"));
 				i.setUser_id(rset.getString("USER_ID"));
 				
+			
 				
 			}
+		
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -160,7 +163,7 @@ public class InquireDao {
 			close(pstmt);
 		}
 		
-		
+		System.out.println("inquireDao-selectOne "+i);
 		return i;
 	}
 
@@ -171,7 +174,36 @@ public class InquireDao {
 		Inquire ai = null;
 		
 		String query = prop.getProperty("selectAdminOne");
-		return null;
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			 pstmt.setInt(1, num);
+			 rset=pstmt.executeQuery();
+			 
+			 if(rset.next()) {
+				 ai=new Inquire();
+				 
+				 ai.setM_context(rset.getString("M_CONTEXT"));
+				 ai.setM_date(rset.getDate("M_DATE"));
+			 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return ai;
 	}
+
+	//문의 글 삭제 메소드
+	public int deleteInquire(Connection con, Inquire i) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	
 
 }
