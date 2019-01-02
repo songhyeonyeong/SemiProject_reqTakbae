@@ -5,6 +5,7 @@ import static com.kh.jinkuk.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -189,15 +190,15 @@ public class AnnouncmentDao {
 				pstmt.setString(2, a.getG_TITLE());
 				pstmt.setString(3, a.getG_CONTEXT());
 				pstmt.setString(4, a.getG_P_DIV());
-				pstmt.setDate(5, a.getG_S_DATE());
-				pstmt.setDate(6, a.getG_E_DATE());
+				pstmt.setDate(5, (Date) a.getG_S_DATE());
+				pstmt.setDate(6, (Date) a.getG_E_DATE());
 				pstmt.setString(7, a.getG_S_AREA());
 				pstmt.setString(8, a.getG_E_AREA());
 				pstmt.setString(9, a.getG_TYPE());
 				pstmt.setInt(10, a.getG_SUM());
 				pstmt.setInt(11, a.getG_PRICE());
 				pstmt.setString(12, a.getG_SIZE());
-				pstmt.setDate(13, a.getG_DAY());
+				pstmt.setDate(13, (Date) a.getG_DAY());
 				pstmt.setString(14, a.getSTATUS());
 				pstmt.setInt(15, a.getU_NO());
 				

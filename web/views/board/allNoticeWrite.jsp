@@ -191,8 +191,6 @@
 								<select id="" name="" class="input wth100">
 									<option selected="selected">시간 선택</option>
 									<option value="#">08:00</option>
-									<option value="#">09:00</option>
-									<option value="#">10:00</option>
 								</select> 
 							</span>
 						</td>
@@ -202,7 +200,7 @@
 						<td colspan="3">
 							<span><a class="sbtn gy" href="#">계산하기</a></span>
 							<span class="red ml10">0원</span>
-							<span class="gray clfix mt5">* 출발지와 도착지를 설정 후 <em class="red">계산하기</em> 버튼을 눌러주세요.</span>
+							<span class="gray clfix mt5">출발지와 도착지를 설정 후 <em class="red">계산하기</em> 버튼을 눌러주세요.</span>
 						</td>
 					</tr>
 					<tr>

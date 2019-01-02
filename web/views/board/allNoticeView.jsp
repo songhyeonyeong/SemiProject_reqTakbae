@@ -67,8 +67,10 @@
 		<div class="titNavi">
 			전체 공고
 			<span>홈 &gt; 전체 공고</span>
+			<p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p><!-- user에게만 보임 -->
+			
 		</div>
-
+		
 		<div class="rtv of mt30">
 
 			<div class="flo_left wth300"><!-- flo_left S-->
