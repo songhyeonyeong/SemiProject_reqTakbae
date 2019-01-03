@@ -39,24 +39,25 @@ public class InsertMemberServlet extends HttpServlet {
 		String email2 = request.getParameter("email2");
 		String email = email1 + "@" + email2;
 		
-		String bankCode = request.getParameter("bankCode");
+		String bankCode = request.getParameter("bankcode");
 		String bankName = "";
 		
 		String mainWay = request.getParameter("mainWay");
-		String accountNum = request.getParameter("accountNum");
+		String accnum = request.getParameter("accnum");
 		
-		if(bankCode.equals("kb")) {
+		if(bankCode.equals("004")) {
 			bankName="국민은행";
-		}else if(bankCode.equals("ibk")) {
+		}else if(bankCode.equals("003")) {
 			bankName="기업은행";
-		}else if(bankCode.equals("nongHyup")) {
+		}else if(bankCode.equals("011")) {
 			bankName="농협";
-		}else if(bankCode.equals("shinHan")) {
+		}else if(bankCode.equals("088")) {
 			bankName="신한은행";
-		}else if(bankCode.equals("woori")) {
+		}else if(bankCode.equals("020")) {
 			bankName="우리은행";
 		}
 		
+		System.out.println("bankCode : "+bankCode);
 		
 		System.out.println("userDiv : "+userDiv);
 		System.out.println("userId : "+userId);
@@ -66,7 +67,7 @@ public class InsertMemberServlet extends HttpServlet {
 		System.out.println("email : "+email);
 		System.out.println("bankName : "+bankName);
 		System.out.println("mainWay : "+mainWay);
-		System.out.println("accountNum : "+accountNum);
+		System.out.println("accnum : "+accnum);
 		
 		
 		Member reqMember = new Member();
@@ -76,7 +77,7 @@ public class InsertMemberServlet extends HttpServlet {
 		reqMember.setPhone(phone);
 		reqMember.setEmail(email);
 		reqMember.setBank_name(bankName);
-		reqMember.setBank_num(accountNum);
+		reqMember.setBank_num(accnum);
 		reqMember.setUser_div(userDiv);
 		reqMember.setLogin_div("자회원");
 		
@@ -87,7 +88,7 @@ public class InsertMemberServlet extends HttpServlet {
 		
 		if(result>0) {
 			if(userDiv.equals("신청자")) {
-				response.sendRedirect("/views/member/index.jsp");//회원가입 환영페이지 만들긴
+				response.sendRedirect("index.jsp");//회원가입 환영페이지 만들긴
 				return;
 			}else {
 				request.setAttribute("userId", userId);

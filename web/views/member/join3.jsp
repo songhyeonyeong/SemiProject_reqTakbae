@@ -22,7 +22,7 @@
 			<span>홈 &gt; 회원가입</span>
 		</div>
 		
-		<form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="post">
+		<form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="get">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원가입 리스트입니다.</caption>
 			<colgroup>
@@ -128,19 +128,19 @@
 				<th scope="row" rowspan="3">계좌번호</th>
 				<td>
 					은행명  <select name="bankcode" id="bankcode">
-							<option value=''>선택하세요
-							<option value='004'>국민은행
-							<option value='003'>기업은행
-							<option value='088'>신한은행
-							<option value='011'>농협
-							<option value='020'>우리은행
-							<option value='045'>새마을금고
+							<option value="004">국민은행</option>
+							<option value="003">기업은행</option>
+							<option value="088">신한은행</option>
+							<option value="011">농협</option>
+							<option value="020">우리은행</option>
+						</select>
+						<!-- 	<option value='045'>새마을금고
 							<option value='027'>한국씨티은행
 							<option value='007'>수협
 							<option value='048'>신협
 							<option value='071'>우체국
-							<option value='081'>하나은행
-						</select><br>
+							<option value='081'>하나은행 -->
+						<br>
 					계좌번호<input type="text" size="25" placeholder="'-'를 제외하고 입력" name="accnum" id="accnum"><br>
 					생년월일<input type="text" size="25" placeholder="'-'를 제외하고 6자리" name="birth" id="birth">&nbsp;
 					<span class="sbtn db" id="confirmacc" onclick="fnSearchAccessToken()">계좌인증</span>

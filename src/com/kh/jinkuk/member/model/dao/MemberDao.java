@@ -226,7 +226,7 @@ public class MemberDao {
 			for(int i = 0; i < fileList.size(); i++) {
 				pstmt = con.prepareStatement(query);
 				pstmt.setString(1, fileList.get(i).getI_div());
-				pstmt.setString(2, "N");
+				pstmt.setString(2, "Y");
 				pstmt.setString(3, fileList.get(i).getI_o_name());
 				pstmt.setString(4, fileList.get(i).getI_c_name());
 				pstmt.setString(5, fileList.get(i).getI_path());
@@ -245,6 +245,17 @@ public class MemberDao {
 		
 		
 		return result;
+	}
+
+	public int snsJoinCheck(Connection con, String kakaoId) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("snsCheck");
+		
+		
+		
+		return 0;
 	}
 	
 	
