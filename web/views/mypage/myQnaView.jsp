@@ -65,8 +65,8 @@ Inquiry n = (Inquiry)request.getAttribute("n");
 					<%}else{ %>
 					<div id="replySelectArea">
 						<table>
-							<td scope="row" id="replySelectTable"></td>
-							<td><%=m.getM_date() %></td>
+						<%-- 	<td scope="row" id="replySelectTable"></td>
+							<td><%=m.getM_date() %></td> --%>
 						</table>
 					</div>
 					<%} %>

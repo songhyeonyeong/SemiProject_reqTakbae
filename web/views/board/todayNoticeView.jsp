@@ -73,7 +73,7 @@
 
 			<div class="flo_left wth300"><!-- flo_left S-->
 				<p><img src="http://via.placeholder.com/300x250" alt="상품이미지"></p>
-				<p class="font30 tcen">신청자 인원 <em class="font30 orange">3</em>명</p>
+				<p class="font30 tcen">신청자 인원 <em class="font30 orange"><%= a.getCount() %></em>명</p>
 			</div><!--// flo_left E-->
 
 			<div class="flo_right wth850"><!-- flo_right S-->
@@ -132,9 +132,14 @@
 
 		<div class="clear btnbox mt30 mb30">
 			<span><a class="mbtn gy wth60" href='<%=request.getContextPath()%>/selectTodayList.bo'>목록</a></span>
+			<%if(loginUser.getUser_div().equals("신청자")){ %>
+				<%if(loginUser.getUser_id().equals(a.getUSER_ID())) {%>
 			<span><a class="mbtn gy wth60" href="#">수정</a></span>
 			<span><a class="mbtn rd wth60" href="#">삭제</a></span>
+				<%}%>
+			<%}else{ %>
 			<span><a class="mbtn db wth60" href="#">신청하기</a></span>
+			<%} %>
 		</div>
 
 
