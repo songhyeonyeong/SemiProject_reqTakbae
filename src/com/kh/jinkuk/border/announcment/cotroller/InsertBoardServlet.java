@@ -31,7 +31,6 @@ public class InsertBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("연결");
 		String title = request.getParameter("title");
 		String product = request.getParameter("product");
 		int price = Integer.parseInt(request.getParameter("size"));
