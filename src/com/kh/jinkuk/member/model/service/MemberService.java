@@ -102,4 +102,18 @@ public class MemberService {
 		return uno;
 	}
 
+	public int snsJoinCheck(String kakaoId) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().snsJoinCheck(con, kakaoId);
+		
+		close(con);
+		
+		return result;
+	}
+
 }
+
+
+
+
