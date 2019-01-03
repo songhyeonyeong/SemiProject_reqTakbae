@@ -22,7 +22,7 @@
 		 <div class="multBoxL2">
 			<ul>
 				<li>
-					<span><a class="orange bold" href="/reqtakbae/selectMypageMain.mp"><%=loginUser.getUser_name() %></a>님이 접속하셨습니다.</span>
+					<span><a class="orange bold" href="/reqtakbae/selectMyNoticeList.mp"><%=loginUser.getUser_name() %></a>님이 접속하셨습니다.</span>
 					
 				</li>
 				<li class="mt5">
@@ -59,7 +59,7 @@
 					<span><a href="javascript:openpop();">로그인</a></span>
 					<span> / </span>
 				<% } %>
-				<span><a href="/reqtakbae/selectMypageMain.mp">마이페이지</a></span>
+				<span><a href="/reqtakbae/selectMyNoticeList.mp">마이페이지</a></span>
 			</p>
 		  </div>
 		</div><!--// gnbmenu E-->
