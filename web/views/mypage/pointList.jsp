@@ -107,7 +107,18 @@
 			<td><%=c.getR_num() %></td>
 			<td><%=c.getCm_div() %></td>
 			<td><%=c.getCm_date() %></td>
-			<td><%=c.getCm_use() %></td>
+			<%
+				if(c.getCm_div().equals("포인트사용") || c.getCm_div().equals("공고등록")){
+			%>
+				<td style="color:red">-<%=c.getCm_use() %></td>
+			<% 
+				}else{ 
+			%>
+				<td style="color:blue">+<%=c.getCm_use() %></td>
+			<%
+				}
+			%>
+			
 			<%
 				if(c.getCm_div().equals("포인트사용") || c.getCm_div().equals("포인트적립")){
 			%>

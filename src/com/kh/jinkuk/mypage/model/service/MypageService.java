@@ -11,6 +11,7 @@ import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.mypage.model.dao.MypageDao;
 import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
+import com.kh.jinkuk.mypage.model.vo.MyExchange;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
 import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
@@ -170,16 +171,28 @@ public class MypageService {
 		return result;
 	}
 
-	public ArrayList<Inquiry> selectListInMp(int currentPage, int limit, int uno) {
-Connection con =  getConnection();
+	/*public ArrayList<Inquiry> selectListInMp(int currentPage, int limit, int uno) {
+		Connection con =  getConnection();
 		
 		ArrayList<Inquiry> list = new MypageDao().selectListIn(con, currentPage, limit,uno);
 
+		*/
+		
 	public ArrayList<MyCharge> ChargeList(int uno) {
 		Connection con = getConnection();
 		
 		ArrayList<MyCharge> list = new MypageDao().ChargeList(con, uno);
 
+		
+		close(con);
+		
+		return list;
+	}
+
+	public ArrayList<MyExchange> ExchangeList(int uno) {
+		Connection con = getConnection();
+		
+		ArrayList<MyExchange> list = new MypageDao().ExchangeList(con, uno);
 		
 		close(con);
 		
