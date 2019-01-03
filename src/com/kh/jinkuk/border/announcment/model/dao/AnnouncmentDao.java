@@ -99,7 +99,9 @@ public class AnnouncmentDao {
 				pstmt.setInt(3, endRow);
 				
 				list = new ArrayList<Announcment>();
+				
 				rset = pstmt.executeQuery();
+				
 				while(rset.next()) {
 					Announcment a = new Announcment();
 					

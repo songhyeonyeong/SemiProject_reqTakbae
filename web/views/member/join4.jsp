@@ -13,7 +13,7 @@
 
 <div id="wrap"><!-- Wrap S -->
 
-<%-- <%@ include file="/views/include/header.jsp" %> --%>
+<%@ include file="/views/include/header.jsp" %>
 
 <div id="subvisual">회원가입</div>
 
@@ -62,7 +62,7 @@
 			</div>
 			
 			<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn db" onclick="insertMember();">회원가입</a></span>
+			<button type="submit" value="회원가입하기"></button>
 		</div>
 		</form>
 		</div>
@@ -108,10 +108,10 @@
 	}
 	
 	
-	function insertMember(){
+/* 	function insertMember(){
 			$("#imgForm").submit();
 		
-	}
+	} */
 	
 	
 	

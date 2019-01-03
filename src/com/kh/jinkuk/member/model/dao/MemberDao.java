@@ -197,6 +197,7 @@ public class MemberDao {
 		
 		try {
 			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, userId);
 			
 			rset = pstmt.executeQuery();
 			
@@ -215,7 +216,7 @@ public class MemberDao {
 		return uno;
 	}
 
-	public int insertImg(Connection con, int uno, ArrayList<Images> fileList) {
+	public int insertImg(Connection con, ArrayList<Images> fileList) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -229,7 +230,7 @@ public class MemberDao {
 				pstmt.setString(3, fileList.get(i).getI_o_name());
 				pstmt.setString(4, fileList.get(i).getI_c_name());
 				pstmt.setString(5, fileList.get(i).getI_path());
-				pstmt.setInt(6, uno);
+				pstmt.setInt(6, fileList.get(i).getU_no());
 				
 				result += pstmt.executeUpdate();
 	

@@ -11,6 +11,7 @@ import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.mypage.model.dao.MypageDao;
 import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
+import com.kh.jinkuk.mypage.model.vo.MyExchange;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
 import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
@@ -175,9 +176,9 @@ public class MypageService {
 		
 		close(con);
 		return list;
-		
 	}
 
+		
 	public ArrayList<MyCharge> ChargeList(int uno) {
 		Connection con = getConnection();
 
@@ -202,5 +203,15 @@ public class MypageService {
 		
 		return result ;
 	}
+	public ArrayList<MyExchange> ExchangeList(int uno) {
+		Connection con = getConnection();
+		
+		ArrayList<MyExchange> list = new MypageDao().ExchangeList(con, uno);
+		
+		close(con);
+		
+		return list;
+	}
+
 
 }

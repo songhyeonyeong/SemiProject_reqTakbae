@@ -70,7 +70,7 @@ public class SelectTodayBoardservlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Announcment> list = new AnnouncmentService().selectList(currentPage, limit);
+		ArrayList<Announcment> list = new AnnouncmentService().selectTodayList(currentPage, limit);
 		
 		System.out.println(list);
 		
