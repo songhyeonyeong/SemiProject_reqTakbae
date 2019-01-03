@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="1";
+	Review re = (Review)request.getAttribute("re");	
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -29,45 +31,35 @@
 			<tbody>
 			<tr>
 				<th scope="row">제목</th>
-				<td colspan="3">넘친절해용~~~~~~~~~~~~~~~ㅎㅎ</td>
+				<td colspan="3"><%=re.gethTitle() %></td>
 			</tr>
 			<tr>
 				<th scope="row">기사명</th>
-				<td>현빈 기사님</td>
+				<td><%=re.getDriname() %> 기사님</td>
 				<th scope="row">신청자</th>
-				<td>김**</td>
+				<td><%=re.getUname() %></td>
 			</tr>
 			<tr>
 				<th scope="row">별점</th>
-				<td>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-					<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-				</td>
+					<td>
+						<%for(int i=0; i<re.gethGrade(); i++){%>
+							<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
+						<%}for(int i=0; i<5-re.gethGrade(); i++){	%>
+							<span><img src="/reqtakbae/views/common/images/contents/starOff.png" alt="별off"></span>
+						<%}%>
+					</td>
 				<th scope="row">작성일</th>
-				<td>2018-12-12</td>
+				<td><%=re.gethDate() %></td>
 			</tr>
 			<tr>
-				<td colspan="4" class="">
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-					넘친절해용~~~~~~~~~~~~~~~ㅎㅎ<br>
-				</td>
+				<td colspan="4" class=""><%=re.gethContext() %></td>
 			</tr>
 			</tbody>
 		</table><!--// boardWrite E-->
 		
 
 		<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn bk" href="reviewList.jsp">목록</a></span>
-			<span><a class="mbtn gy" href="#">수정</a></span>
+			<span><a class="mbtn bk" href="/reqtakbae/selectAll.re">목록</a></span>
 			<span><a class="mbtn rd" href="#">삭제</a></span>
 		</div><!--// btnbox E-->
 

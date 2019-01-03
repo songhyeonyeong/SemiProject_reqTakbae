@@ -16,6 +16,7 @@
 		<div class="multBoxL1">
 			<span class="mu11"><a href="javascript:openpop();">로그인</a></span>
 			<span class="mu12"><a href="/reqtakbae/views/member/join1.jsp">회원가입</a></span>
+
 		</div>
 		<%}else{ %>
 		<!-- 로그인 후 -->
@@ -29,6 +30,8 @@
 					<span class="aaa"></span>
 					<span class="sbtn db" onclick="chargeMoney()">충전</span>
 					<span class="sbtn rd" onclick="logout()">로그아웃</span>
+					<span class="sbtn wh" onclick="myPage()">마이페이지</span>
+					
 				</li>
 			</ul>
 		</div> 
@@ -59,7 +62,7 @@
 					<span><a href="javascript:openpop();">로그인</a></span>
 					<span> / </span>
 				<% } %>
-				<span><a href="/reqtakbae/selectMyNoticeList.mp">마이페이지</a></span>
+
 			</p>
 		  </div>
 		</div><!--// gnbmenu E-->
@@ -155,7 +158,9 @@ function openpop()
 					location.href="<%=request.getContextPath()%>/reset?p=charge";
 			}
 			
-			
+			function myPage(){
+				location.href="<%=request.getContextPath()%>/selectMyNoticeList.mp";
+			}
 			
 			
 			

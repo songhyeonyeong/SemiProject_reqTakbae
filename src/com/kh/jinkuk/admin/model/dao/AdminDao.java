@@ -1598,7 +1598,8 @@ public class AdminDao {
 			
 			while(rset.next()) {
 				Review m = new Review();
-				m.setHno(rset.getInt("H_NO"));
+				m.setHno(rset.getInt("RNUM"));
+				m.setDriname(rset.getString("USER_NAME"));
 				m.sethTitle(rset.getString("H_TITLE"));
 				m.setUname(rset.getString("USER_ID"));
 				m.sethGrade(rset.getInt("H_GRADE"));
@@ -1618,6 +1619,50 @@ public class AdminDao {
 	
 		
 		return list;
+	}
+
+	public Review selectOneReview(Connection con, Review r) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Review n = null;
+		int result = 0;
+		String query = prop.getProperty("selectReviewOne");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			System.out.println(query);
+			pstmt.setInt(1, r.getHno());
+			
+
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new Review();
+				
+				n.setHno(rset.getInt("H_NO"));
+				n.setDriname(rset.getString("USER_NAME"));
+				n.sethTitle(rset.getString("H_TITLE"));
+				n.setUname(rset.getString("USER_ID"));
+				n.sethContext(rset.getString("H_CONTEXT"));
+				n.sethGrade(rset.getInt("H_GRADE"));
+				n.sethDate(rset.getDate("H_DATE"));
+				
+				result = pstmt.executeUpdate();
+				
+			}
+		
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch(NumberFormatException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return n;
 	}
 
 
