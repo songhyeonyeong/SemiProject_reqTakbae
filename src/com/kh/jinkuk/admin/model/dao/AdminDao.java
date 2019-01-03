@@ -19,6 +19,7 @@ import com.kh.jinkuk.admin.model.vo.Change;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.admin.model.vo.Point;
+import com.kh.jinkuk.admin.model.vo.Review;
 
 
 public class AdminDao {
@@ -1499,7 +1500,7 @@ public class AdminDao {
 			
 			while(rset.next()) {
 				Exchange m = new Exchange();
-				m.setC_no(rset.getInt("RNUM"));
+				m.setC_no(rset.getInt("C_NO"));
 				m.setUser_id(rset.getString("USER_ID"));
 				m.setUser_name(rset.getString("USER_NAME"));
 				m.setcMoney(rset.getInt("C_CMONEY"));
@@ -1507,6 +1508,102 @@ public class AdminDao {
 				m.setBankNum(rset.getString("BANK_NUM"));
 				m.setBankName(rset.getString("BANK_NAME"));
 				m.setcDate(rset.getDate("C_DATE"));
+				m.seteStatus(rset.getString("E_STATUS"));
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
+
+	public int updateEx(Connection con, com.kh.jinkuk.exchange.model.vo.Exchange ex) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = "UPDATE EXCHANGE SET E_STATUS='환전완료' WHERE C_NO = ?";
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, ex.getrNum());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return result;
+	}
+
+	public int getListCountRe(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("ReviewCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Review> selectListRe(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Review> list = null;
+		
+		String query = prop.getProperty("selectReview");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Review>();
+			
+			while(rset.next()) {
+				Review m = new Review();
+				m.setHno(rset.getInt("H_NO"));
+				m.sethTitle(rset.getString("H_TITLE"));
+				m.setUname(rset.getString("USER_ID"));
+				m.sethGrade(rset.getInt("H_GRADE"));
+				m.sethDate(rset.getDate("H_DATE"));
+				
 				list.add(m);
 			}
 			

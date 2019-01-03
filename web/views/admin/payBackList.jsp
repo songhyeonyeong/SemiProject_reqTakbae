@@ -14,6 +14,32 @@
 
 
 <title>택배를 부탁해 관리자페이지</title>
+<style>
+	button{
+		width:80px;
+
+   		background-color: #f8585b;
+
+    	border: none;
+
+    	color:#fff;
+
+    	padding: 10px 0;
+
+    	text-align: center;
+
+    	text-decoration: none;
+
+   		display: inline-block;
+
+    	font-size: 15px;
+
+    	margin: 4px;
+
+    	cursor: pointer;
+		border-radius:10px;
+	}
+</style>
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -69,7 +95,7 @@
 				<td><%=m.getBankNum() %></td>
 				<td><%=m.getBankName() %></td>
 				<td><%=m.getcDate() %></td>
-				<td><span><a class="mbtn rd">환전완료</a></span></td>
+				<td><button class="Exchange" value="<%=m.geteStatus() %>"><%=m.geteStatus() %></button></td>
 			</tr>
 			<%} %>
 			</tbody>
@@ -120,11 +146,43 @@
 	<script>
 		function printExchange(){
 			window.print();
+			
 		}
 		
 
+		
+		$(".Exchange").each(function(){
+		if(($(this).attr('value'))==('환전완료')){
+			$(this).prop("disabled",true);
+			$(this).css("background","lightgray");
+			$(this).css("cursor","default");
+		}
+		
 	
+		});
+		
+		$(function(){
+			$(".Exchange").click(function(){
 
+				var num = $(this).parent().parent().children().eq(0).text();
+				console.log(num);
+				location.href="<%=request.getContextPath()%>/updateEx?num=" + num; 
+	
+				
+			});
+			
+		});
+		
+		
+
+		 $('span').eq(2).click(function() {
+
+			
+
+		});
+		 
+		
+		
 
 	</script>
 
