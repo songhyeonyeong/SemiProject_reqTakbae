@@ -66,7 +66,6 @@
 		</table>
 
 			<div class="numbox pt40 pb50" align="center"> 
-			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/SelectMyInquiry.mp?currentPage=1'"><<</a></span>
 			<% if(currentPage <=1){ %>
 				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
 			<%}else{%>
@@ -89,7 +88,6 @@
 			<%}else{%>
 				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.in?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
 			<%} %>
-				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.in?currentPage=<%=maxPage%>'">>></a></span>
 			
 			
 		</div>

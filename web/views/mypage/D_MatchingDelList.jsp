@@ -67,7 +67,7 @@ int endPage = pi.getEndPage();
 							<td><%=m.getG_no()%></td>
 							<td><%=m.getG_context()%></td>
 							<td><%=m.getUser_id()%></td>
-							<td><a class="sbtn gy" href="#">상세보기</a></td>
+							<td><a class="sbtn gy">배송지도</a></td>
 							<td>
 							<select id="selectDel" name="selectDel">
 							<option value="선택">선택</option>
@@ -118,6 +118,12 @@ int endPage = pi.getEndPage();
 								select.val("선택").prop("selected", true);
 							}  
 						});
+						/*웹소켓 사용  */
+						$("#listArea .sbtn .gy").click(function(){
+							console.log("배송하기");
+						}
+						
+			
 					});
 				  
 				</script>

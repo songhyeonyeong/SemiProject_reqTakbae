@@ -36,7 +36,10 @@ public class UserMoneySearchReset extends HttpServlet {
 			page = "views/info/fare_inquiry.jsp";
 		}else if(p.equals("comInfo")) {
 			page = "views/company/comInfo.jsp";
+		}else if(p.equals("writer")) {
+			page = "views/board/allNoticeWrite.jsp";
 		}
+		
 		
 		request.getRequestDispatcher(page).forward(request, response);
 		

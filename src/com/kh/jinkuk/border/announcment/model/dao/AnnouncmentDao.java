@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
+import com.kh.jinkuk.border.announcment.model.vo.InsertAnnouncment;
 
 public class AnnouncmentDao {
 	
@@ -80,7 +81,7 @@ public class AnnouncmentDao {
 			return list;
 		}
 		
-		//페이징 처리 후 당일 게시판 조회용 메소드
+		/*//페이징 처리 후 당일 게시판 조회용 메소드
 		public ArrayList<Announcment> selectTodayList(Connection con, int currentPage, int limit) {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -99,7 +100,9 @@ public class AnnouncmentDao {
 				pstmt.setInt(3, endRow);
 				
 				list = new ArrayList<Announcment>();
+				
 				rset = pstmt.executeQuery();
+				
 				while(rset.next()) {
 					Announcment a = new Announcment();
 					
@@ -123,34 +126,32 @@ public class AnnouncmentDao {
 			}
 			System.out.println(list);
 			return list;
-		}
+		}*/
 
 
 		public int getListCount(Connection con) {
-			Statement stmt = null;
+			
+			PreparedStatement pstmt = null;
 			int listCount = 0;
 			ResultSet rset = null;
-			
+
 			String query = prop.getProperty("listCount");
-			
+
 			try {
-				stmt = con.createStatement();
-				rset = stmt.executeQuery(query);
-				
-				if(rset.next()) {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, "당일");
+				rset = pstmt.executeQuery();
+				if (rset.next()) {
 					listCount = rset.getInt(1);
 				}
-				
-			
+
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}finally {
-				close(stmt);
+			} finally {
+				close(pstmt);
 				close(rset);
 			}
-			
-			
-			
+
 			return listCount;
 	}
 
@@ -222,15 +223,14 @@ public class AnnouncmentDao {
 			return a;
 		}
 		
-		//당일공고 상세보기
+		/*//당일공고 상세보기
 		public Announcment selectOneToday(Connection con, int num) {
 			
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			Announcment a = null;
 			
-			String query = "SELECT DISTINCT A.G_TITLE, B.USER_ID, A.G_S_DATE, A.G_TYPE, A.G_E_DATE, A.G_SIZE, A.G_PRICE, A.G_S_AREA, A.G_E_AREA, A.G_DAY, A.G_CONTEXT, P.G_P_DIV FROM ANNOUNCEMENT A JOIN ANNOUNCEMENT_PAYMENT P ON(A.G_NO = P.G_NO) JOIN MEMBER B ON (A.U_NO = B.U_NO) WHERE A.G_NO=? AND A.G_DIV = '당일'";
-			System.out.println(query);
+			String query =prop.getProperty("selectOneToday");
 			try {
 				pstmt = con.prepareStatement(query);
 				pstmt.setInt(1, num);
@@ -264,10 +264,10 @@ public class AnnouncmentDao {
 			}
 			
 			return a;
-		}
+		}*/
 		
 		//게시판 작성 
-		public int insertBoard(Connection con, Announcment a) {
+		public int insertBoard(Connection con, InsertAnnouncment i) {
 			PreparedStatement pstmt = null;
 			int result = 0;
 			
@@ -276,25 +276,9 @@ public class AnnouncmentDao {
 			
 			try {
 				pstmt = con.prepareStatement(query);
-				pstmt.setInt(1, a.getG_NO());
-				pstmt.setString(2, a.getG_TITLE());
-				pstmt.setString(3, a.getG_CONTEXT());
-				pstmt.setString(4, a.getG_P_DIV());
-				pstmt.setDate(5, (Date) a.getG_S_DATE());
-				pstmt.setDate(6, (Date) a.getG_E_DATE());
-				pstmt.setString(7, a.getG_S_AREA());
-				pstmt.setString(8, a.getG_E_AREA());
-				pstmt.setString(9, a.getG_TYPE());
-				pstmt.setInt(10, a.getG_SUM());
-				pstmt.setInt(11, a.getG_PRICE());
-				pstmt.setString(12, a.getG_SIZE());
-				pstmt.setDate(13, (Date) a.getG_DAY());
-				pstmt.setString(14, a.getSTATUS());
-				pstmt.setInt(15, a.getU_NO());
+				pstmt.
 				
-				System.out.println(a);
 				result = pstmt.executeUpdate();
-				System.out.println(result);
 				
 			} catch (SQLException e) {
 				e.printStackTrace();

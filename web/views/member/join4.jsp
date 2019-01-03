@@ -39,7 +39,7 @@
 				<td>
 					<div id="showImgArea1">
 						<img id="showImg1" name="showImg1" width="350" height="200"> 
-						<td><input id="id" name="id" type="text" value="<%=userId %>"></td>
+						<td><input id="id" name="id" type="text" value="<%=userId %>" hidden></td>
 					</div>
 				</td>
 			</tr>
@@ -62,7 +62,7 @@
 			</div>
 			
 			<div class="btnbox mt20"><!-- btnbox S-->
-			<button type="submit" value="회원가입하기"></button>
+			<button type="submit">회원가입하기</button>
 		</div>
 		</form>
 		</div>
