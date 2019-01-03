@@ -162,46 +162,34 @@ function fn_open() {
 			</thead>
 		</table>
 		
-		<div class="numbox pt40 pb50">
-			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=1'"><<</button>
+	<!--페이징 처리 부분  -->
+		
+			<div class="numbox pt40 pb50"> 
 			<% if(currentPage <= 1){ %>
-			<button disabled><</button>
+			<span><a class="num" disabled>&lt;</a></span>
 			<% }else{ %>
-			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage - 1%>'"><</button>
+			<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage - 1%>">&lt;</a></span>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){ 
 					if(p == currentPage){
 			%>
-					<button disabled><%= p %></button>
+						<span><a class="num on" disabled><%= p %></a></span>
 			<%      }else{ %>
-					<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%= p %>'"><%= p %></button>
+								<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%= p %>"><%= p %></a></span>
 			<%      } %>
 	
 			<% } %>
 			
 			
 			<% if(currentPage >= maxPage){ %>
-			<button disabled>></button>
+			<span><a class="num" disabled>></a></span>
 			<% }else{ %>
-			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage + 1%>'">></button>
+				<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage + 1%>">></a></span>
 			<% } %>
 			
-			<button onclick="location.href='<%=request.getContextPath()%>/selectList.bo?currentPage=<%=maxPage%>'">>></button>
-		
-			<!-- <span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
-			<span><a class="num" href="#">&gt;</a></span> -->
+			
 		</div>
-
 
 
 	</div><!--// inner E-->
