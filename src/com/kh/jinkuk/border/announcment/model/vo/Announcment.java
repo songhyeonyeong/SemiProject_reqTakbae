@@ -3,7 +3,8 @@ package com.kh.jinkuk.border.announcment.model.vo;
 import java.util.Date;
 
 public class Announcment implements java.io.Serializable{
-	
+	private int rnum;
+	private int count;
 	private int G_NO;
 	private String G_TITLE;
 	private String G_CONTEXT;
@@ -23,10 +24,12 @@ public class Announcment implements java.io.Serializable{
 	
 	public Announcment() {}
 
-	public Announcment(int g_NO, String g_TITLE, String g_CONTEXT, Date g_S_DATE, Date g_E_DATE, String g_S_AREA,
-			String g_E_AREA, String g_TYPE, int g_SUM, int g_PRICE, String g_SIZE, Date g_DAY, String sTATUS, int u_NO,
-			String g_P_DIV, String uSER_ID) {
+	public Announcment(int rnum, int count, int g_NO, String g_TITLE, String g_CONTEXT, Date g_S_DATE, Date g_E_DATE,
+			String g_S_AREA, String g_E_AREA, String g_TYPE, int g_SUM, int g_PRICE, String g_SIZE, Date g_DAY,
+			String sTATUS, int u_NO, String g_P_DIV, String uSER_ID) {
 		super();
+		this.rnum = rnum;
+		this.count = count;
 		G_NO = g_NO;
 		G_TITLE = g_TITLE;
 		G_CONTEXT = g_CONTEXT;
@@ -43,6 +46,22 @@ public class Announcment implements java.io.Serializable{
 		U_NO = u_NO;
 		G_P_DIV = g_P_DIV;
 		USER_ID = uSER_ID;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public int getG_NO() {
@@ -175,13 +194,19 @@ public class Announcment implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Announcment [G_NO=" + G_NO + ", G_TITLE=" + G_TITLE + ", G_CONTEXT=" + G_CONTEXT + ", G_S_DATE="
-				+ G_S_DATE + ", G_E_DATE=" + G_E_DATE + ", G_S_AREA=" + G_S_AREA + ", G_E_AREA=" + G_E_AREA
-				+ ", G_TYPE=" + G_TYPE + ", G_SUM=" + G_SUM + ", G_PRICE=" + G_PRICE + ", G_SIZE=" + G_SIZE + ", G_DAY="
-				+ G_DAY + ", STATUS=" + STATUS + ", U_NO=" + U_NO + ", G_P_DIV=" + G_P_DIV + ", USER_ID=" + USER_ID
-				+ "]";
+		return "Announcment [rnum=" + rnum + ", count=" + count + ", G_NO=" + G_NO + ", G_TITLE=" + G_TITLE
+				+ ", G_CONTEXT=" + G_CONTEXT + ", G_S_DATE=" + G_S_DATE + ", G_E_DATE=" + G_E_DATE + ", G_S_AREA="
+				+ G_S_AREA + ", G_E_AREA=" + G_E_AREA + ", G_TYPE=" + G_TYPE + ", G_SUM=" + G_SUM + ", G_PRICE="
+				+ G_PRICE + ", G_SIZE=" + G_SIZE + ", G_DAY=" + G_DAY + ", STATUS=" + STATUS + ", U_NO=" + U_NO
+				+ ", G_P_DIV=" + G_P_DIV + ", USER_ID=" + USER_ID + ", getRnum()=" + getRnum() + ", getCount()="
+				+ getCount() + ", getG_NO()=" + getG_NO() + ", getG_TITLE()=" + getG_TITLE() + ", getG_CONTEXT()="
+				+ getG_CONTEXT() + ", getG_S_DATE()=" + getG_S_DATE() + ", getG_E_DATE()=" + getG_E_DATE()
+				+ ", getG_S_AREA()=" + getG_S_AREA() + ", getG_E_AREA()=" + getG_E_AREA() + ", getG_TYPE()="
+				+ getG_TYPE() + ", getG_SUM()=" + getG_SUM() + ", getG_PRICE()=" + getG_PRICE() + ", getG_SIZE()="
+				+ getG_SIZE() + ", getG_DAY()=" + getG_DAY() + ", getSTATUS()=" + getSTATUS() + ", getU_NO()="
+				+ getU_NO() + ", getG_P_DIV()=" + getG_P_DIV() + ", getUSER_ID()=" + getUSER_ID() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
-	
 	
 }

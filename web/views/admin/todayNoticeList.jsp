@@ -123,36 +123,39 @@
 				<% } %> 
 				</tbody>
 			</table>
+		<!-- 패이징 처리 부분 -->	
+	<div class="numbox pt40 pb50"> 
+			<% if(currentPage <= 1){ %>
+			<span><a class="num" disabled>&lt;</a></span>
+			<% }else{ %>
+			<span><a class="num" href="<%=request.getContextPath()%>/selectAll.to?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+			<% } %>
 			
-		<div class="numbox pt40 pb50" align="center"> 
-			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.to?currentPage=1'"><<</a></span>
-			<% if(currentPage <=1){ %>
-				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
-			<%}else{%>
-				<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.to?currentPage=<%=currentPage - 1 %>'"><</a></span> <!-- 하나 이전페이지로 이동 -->
-			<%} %>
-			
-			<% for(int p = startPage; p <= endPage; p++){
-				if(p == currentPage){%>
-				
-				<span><a class="num" href="#" disable><%= p %></a></span> <!-- 비활성화 -->
-			<%  }else{ %>
-				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.to?currentPage=<%= p %>'"><%= p %></a></span>
+			<% for(int p = startPage; p <= endPage; p++){ 
+					if(p == currentPage){
+			%>
+						<span><a class="num on" disabled><%= p %></a></span>
+			<%      }else{ %>
+								<span><a class="num" href="<%=request.getContextPath()%>/selectAll.to?currentPage=<%= p %>"><%= p %></a></span>
+			<%      } %>
+	
+			<% } %>
 			
 			
-			<%         } %>
-			<%} %>
-			
-			<%if(currentPage >= maxPage){ %>
-				<span><a class="num" href="#" disable>></a></span> <!-- 비활성화 -->
-			<%}else{%>
-				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.to?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
-			<%} %>
-				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.to?currentPage=<%=maxPage%>'">>></a></span>
+			<% if(currentPage >= maxPage){ %>
+			<span><a class="num" disabled>></a></span>
+			<% }else{ %>
+				<span><a class="num" href="<%=request.getContextPath()%>/selectAll.to?currentPage=<%=currentPage + 1%>">></a></span>
+			<% } %>
 			
 			
 		</div>
-			
+	
+	
+	
+	
+	
+		<!--          -->
 		</div><!--// contBox E-->
 
 	</div><!--// container E-->

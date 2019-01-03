@@ -80,7 +80,7 @@ public class AnnouncmentDao {
 			return list;
 		}
 		
-		//페이징 처리 후 당일 게시판 조회용 메소드
+		/*//페이징 처리 후 당일 게시판 조회용 메소드
 		public ArrayList<Announcment> selectTodayList(Connection con, int currentPage, int limit) {
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
@@ -125,7 +125,7 @@ public class AnnouncmentDao {
 			}
 			System.out.println(list);
 			return list;
-		}
+		}*/
 
 
 		public int getListCount(Connection con) {
@@ -224,15 +224,14 @@ public class AnnouncmentDao {
 			return a;
 		}
 		
-		//당일공고 상세보기
+		/*//당일공고 상세보기
 		public Announcment selectOneToday(Connection con, int num) {
 			
 			PreparedStatement pstmt = null;
 			ResultSet rset = null;
 			Announcment a = null;
 			
-			String query = "SELECT DISTINCT A.G_TITLE, B.USER_ID, A.G_S_DATE, A.G_TYPE, A.G_E_DATE, A.G_SIZE, A.G_PRICE, A.G_S_AREA, A.G_E_AREA, A.G_DAY, A.G_CONTEXT, P.G_P_DIV FROM ANNOUNCEMENT A JOIN ANNOUNCEMENT_PAYMENT P ON(A.G_NO = P.G_NO) JOIN MEMBER B ON (A.U_NO = B.U_NO) WHERE A.G_NO=? AND A.G_DIV = '당일'";
-			System.out.println(query);
+			String query =prop.getProperty("selectOneToday");
 			try {
 				pstmt = con.prepareStatement(query);
 				pstmt.setInt(1, num);
@@ -266,7 +265,7 @@ public class AnnouncmentDao {
 			}
 			
 			return a;
-		}
+		}*/
 		
 		//게시판 작성 
 		public int insertBoard(Connection con, Announcment a) {

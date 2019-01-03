@@ -24,7 +24,7 @@ public class AnnouncmentService {
 		
 		return list;
 	}
-	//페이징처리 적용한 당일 게시물 조회용 메소드
+	/*//페이징처리 적용한 당일 게시물 조회용 메소드
 		public ArrayList<Announcment> selectTodayList(int currentPage, int limit) {
 			Connection con = getConnection();
 			
@@ -34,7 +34,7 @@ public class AnnouncmentService {
 			close(con);
 			
 			return list;
-		}
+		}*/
 
 	public int getListCount() {	
 		
@@ -66,7 +66,7 @@ public class AnnouncmentService {
 		return result;
 	}
 	
-	//당일 상세페이지
+	/*//당일 상세페이지
 		public Announcment selectOneToday(int num) {
 			
 			Connection con = getConnection();
@@ -75,7 +75,7 @@ public class AnnouncmentService {
 			
 			Announcment result = new AnnouncmentDao().selectOneToday(con, num);
 					
-					/*new AnnouncmentDao().updateCount(con, num);*/
+					new AnnouncmentDao().updateCount(con, num);
 			
 			if(result  !=null ) {
 				commit(con);
@@ -86,7 +86,7 @@ public class AnnouncmentService {
 			close(con);
 			
 			return result;
-		}
+		}*/
 	
 	//게시판 작성페이지
 	public int insertBoard(Announcment a) {

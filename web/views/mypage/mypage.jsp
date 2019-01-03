@@ -60,15 +60,15 @@
 						%>
 							<li>&bull; <a href="#"><%=list.get(i).getG_CONTEXT()%></a></li>
 					
-						<%
+						<%}
 							}
-					}
 						%>
 						</ul>
 					</li>
 						<!--기사부분 -->
-			<%}else{
-				if(d_list!=null){%>
+			<%%>
+			<%-- 	else{
+				if(d_list!= null){%>
 			</li>
 					<!--내공고목록 최신 4개 출력  -->
 						<ul class="mypgBox mt50">
@@ -88,13 +88,13 @@
 						</ul>
 					</li>
 					
-					<%} %> 
+					<%} %>  --%>
 					
 					
 					<li class="bx">
 						<p class="font24">충전/적립 내역</p>
 						<ul class="boardShort">
-						<%
+					<%-- 	<%
 							for(int i = 0; i < 4; i++){
 								if(Clist.get(i).getCm_div()!=null){
 									if(Clist.get(i).getCm_div().equals("공고등록") || Clist.get(i).getCm_div().equals("포인트사용")){
@@ -112,7 +112,7 @@
 									
 						<%		}
 							}
-						%>
+						%>  --%>
 								
 								
 					
@@ -122,7 +122,7 @@
 							<li>&bull; <a href="#">배송합니다</a></li> -->
 						</ul>
 					</li>
-					<li class="bx mt30">
+				<%-- 	<li class="bx mt30">
 						<p class="font24">환전 내역</p>
 						<ul class="boardShort">
 						<%
@@ -137,14 +137,7 @@
 						<%		
 								}
 							}
-						%>
-						
-							<!-- <li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li> -->
-						</ul>
-					</li>
+						%> --%>
 					<li class="bx mt30">
 						<p class="font24">나의 문의내역</p>
 						<ul class="boardShort">
