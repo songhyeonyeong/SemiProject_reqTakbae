@@ -31,6 +31,8 @@ public class CountServlet extends HttpServlet {
 		int count = 1;
 		String page = "/index.jsp";
 		
+		
+		
 		request.setAttribute("count", count);
 		request.getRequestDispatcher(page).forward(request, response);
 		

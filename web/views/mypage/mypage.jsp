@@ -6,6 +6,8 @@
 	String bigtabon = "1";
 	ArrayList<Mynotice> list = (ArrayList<Mynotice>) request.getAttribute("list");
 	ArrayList<MyR_M_article> d_list = (ArrayList<MyR_M_article>) request.getAttribute("list");
+	ArrayList<MyCharge> Clist = (ArrayList<MyCharge>)request.getAttribute("Clist");
+	ArrayList<MyExchange> Elist = (ArrayList<MyExchange>)request.getAttribute("Elist");
 %>
 
 <%@ include file="/views/include/common.jsp"%>
@@ -92,19 +94,55 @@
 					<li class="bx">
 						<p class="font24">충전/적립 내역</p>
 						<ul class="boardShort">
+						<%
+							for(int i = 0; i < 4; i++){
+								if(Clist.get(i).getCm_div()!=null){
+									if(Clist.get(i).getCm_div().equals("공고등록") || Clist.get(i).getCm_div().equals("포인트사용")){
+						%>
+										<li>&bull; <%= Clist.get(i).getCm_div()%> -<%= Clist.get(i).getCm_use() %>원</li>	
+						<%	
+									}else{
+						%>
+										<li>&bull; <%= Clist.get(i).getCm_div()%> +<%= Clist.get(i).getCm_use() %>원</li>				
+						
+						<%			}
+								}else{
+						%>
+									<li>내역이 없습니다.</li>	
+									
+						<%		}
+							}
+						%>
+								
+								
+					
+							<!-- <li>&bull; <a href="#">배송합니다</a></li>
 							<li>&bull; <a href="#">배송합니다</a></li>
 							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
+							<li>&bull; <a href="#">배송합니다</a></li> -->
 						</ul>
 					</li>
 					<li class="bx mt30">
 						<p class="font24">환전 내역</p>
 						<ul class="boardShort">
+						<%
+							for(int i = 0; i < 4; i++){
+								if(Elist.get(i)!=null){
+						%>
+										<li>&bull; <%= Elist.get(i).getcMoney()%>원 <%= Elist.get(i).geteStatus() %></li>	
+						<%			
+								}else{
+						%>
+									<li>내역이 없습니다.</li>	
+						<%		
+								}
+							}
+						%>
+						
+							<!-- <li>&bull; <a href="#">배송합니다</a></li>
 							<li>&bull; <a href="#">배송합니다</a></li>
 							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
-							<li>&bull; <a href="#">배송합니다</a></li>
+							<li>&bull; <a href="#">배송합니다</a></li> -->
 						</ul>
 					</li>
 					<li class="bx mt30">

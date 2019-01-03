@@ -20,7 +20,8 @@
 <body>
 <script>
 	$(function(){
-		if(<%=request.getAttribute("count")%>==null){
+		boolean t = false;
+		if(!t){
 			console.log(0);
 			location.href="<%=request.getContextPath()%>/CountServlet";
 		}else{

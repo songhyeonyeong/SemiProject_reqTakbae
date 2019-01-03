@@ -15,6 +15,7 @@ import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
+import com.kh.jinkuk.mypage.model.vo.MyExchange;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
 import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
@@ -573,12 +574,13 @@ public class MypageDao {
 		ArrayList<MyCharge> list = null;
 		
 		String query = prop.getProperty("chargelist");
-		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, uno);
 			
 			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<MyCharge>();
 			
 			while(rset.next()) {
 				MyCharge m = new MyCharge();
@@ -591,6 +593,45 @@ public class MypageDao {
 				m.setCm_note(rset.getString("CM_NOTE"));
 				
 				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return list;
+	}
+
+	public ArrayList<MyExchange> ExchangeList(Connection con, int uno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<MyExchange> list = null;
+		
+		String query = prop.getProperty("exchangelist");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, uno);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<MyExchange>();
+			
+			while(rset.next()) {
+				MyExchange ex = new MyExchange();
+				
+				ex.setrNum(rset.getInt("RNUM"));
+				ex.setcDate(rset.getDate("C_DATE"));
+				ex.setcMoney(rset.getInt("C_CMONEY"));
+				ex.setrMoney(rset.getInt("C_RMONEY"));
+				ex.setBankName(rset.getString("BANK_NAME"));
+				ex.setBankNum(rset.getString("BANK_NUM"));
+				ex.seteStatus(rset.getString("E_STATUS"));
+				
+				list.add(ex);
 			}
 			
 		} catch (SQLException e) {
