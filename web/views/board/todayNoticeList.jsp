@@ -189,7 +189,7 @@ function fn_open() {
 				
 				var num = $(this).parent().parent().children("td").eq(0).text();
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/selectTodayList.bo?num=" + num;
+				location.href="<%=request.getContextPath()%>/selectoneTodayList.bo?num=" + num;
 			});
 		});
 	</script>

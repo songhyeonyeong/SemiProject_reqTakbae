@@ -4,11 +4,10 @@
 
 <title>오늘의 공고</title>
 <!--  jQuery UI CSS파일  -->
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
-<!-- jQuery 기본 js파일 -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>  
-<!-- jQuery UI 라이브러리 js파일 -->
-<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>  
+<!-- <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />  
+jQuery 기본 js파일
+jQuery UI 라이브러리 js파일
+<script src="http://code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>   -->
 <script type="text/javascript">
 
 (function($){
@@ -44,28 +43,10 @@
       
     })
   }
-  //날짜 선택
-  $(function() {
-    $( "#dateP" ).datepicker({
-      dateFormat: 'yy.mm.dd',
-      prevText: '이전 달',
-      nextText: '다음 달',
-      monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-      monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-      dayNames: ['일','월','화','수','목','금','토'],
-      dayNamesShort: ['일','월','화','수','목','금','토'],
-      dayNamesMin: ['일','월','화','수','목','금','토'],
-      showMonthAfterYear: true,
-      changeMonth: true,
-      changeYear: true,
-      yearSuffix: '년'
-    });
-  });
-  $("#timeP").timepicker({
-		step: 5,            //시간간격 : 5분
-		timeFormat: "H:i"    //시간:분 으로표시
-	});
   
+  function account(){
+		console.log($("#sizeM option:selected").append().val());
+  }
   
 })(jQuery);
 
@@ -132,11 +113,11 @@
 						<th scope="row">물품 크기</th>
 						<td>
 							<label for=""></label>
-							<select id="" name="" class="input wth200">
+							<select id="sizeM" name="" class="input wth200">
 								<option selected="selected">선택하세요</option>
-								<option value="#">소</option>
-								<option value="#">중</option>
-								<option value="#">대</option>
+								<option value="4500원">소</option>
+								<option value="4800원">중</option>
+								<option value="5500원">대</option>
 							</select> 
 						</td>
 						<th scope="row">물품 가액</th>
@@ -205,26 +186,62 @@
 								<option value="#">종로구</option>
 								<option value="#">중구</option>
 								<option value="#">중랑구</option>
-							</select> 
+							</select>   -->
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">배송날짜</th>
 						<td colspan="3">
-							<span><label for=""></label><input id="dateP" name="" class="wth150" type="text" value="" ></span><!-- 클릭하면 달력 -->
-							<span>
+							<span><label for=""></label><input id="dateP" name="" class="wth150" type="date" value="" ></span><!-- 클릭하면 달력 -->
+							<!--<span>
 								<label for=""></label>
-								<select id="timeP" name="" class="input wth100">
+								<select id="" name="" class="input wth100">
 									<option selected="selected">시간 선택</option>
+									<option value="#">01시</option>
+									<option value="#">02시</option>
+									<option value="#">03시</option>
+									<option value="#">04시</option>
+									<option value="#">05시</option>
+									<option value="#">06시</option>
+									<option value="#">07시</option>
+									<option value="#">08시</option>
+									<option value="#">09시</option>
+									<option value="#">10시</option>
+									<option value="#">11시</option>
+									<option value="#">12시</option>
+									<option value="#">13시</option>
+									<option value="#">14시</option>
+									<option value="#">15시</option>
+									<option value="#">16시</option>
+									<option value="#">17시</option>
+									<option value="#">18시</option>
+									<option value="#">19시</option>
+									<option value="#">20시</option>
+									<option value="#">21시</option>
+									<option value="#">22시</option>
 								</select> 
 							</span>
+							<span>
+								<label for=""></label>
+								<select id="" name="" class="input wth100">
+									<option selected="selected">분 선택</option>
+									<option value="#">00분</option>
+									<option value="#">10분</option>
+									<option value="#">20분</option>
+									<option value="#">30분</option>
+									<option value="#">40분</option>
+									<option value="#">50분</option>
+								</select> 
+							</span>-->
 						</td>
 					</tr>
 					<tr>
 						<th scope="row">금액 계산</th>
 						<td colspan="3">
-							<span><a class="sbtn gy" href="#">계산하기</a></span>
-							<span class="red ml10">0원</span>
+							<span><a class="sbtn gy" href="#" onclick="account()">계산하기</a></span>
+							<span class="red ml10">
+							
+							</span>
 							<span class="gray clfix mt5">출발지와 도착지를 설정 후 <em class="red">계산하기</em> 버튼을 눌러주세요.</span>
 						</td>
 					</tr>
