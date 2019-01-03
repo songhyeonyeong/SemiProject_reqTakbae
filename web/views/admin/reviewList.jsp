@@ -37,8 +37,10 @@
 				</select> 
 			</span>
 			<span>
-				<label for="Keyword"></label><input id="Keyword" name="Keyword" class="wth240" type="text">
-				<a class="sch" href="#"><img src="../common/images/contents/icoSearch.png" alt="검색" title="검색"></a> 
+					<label for="Keyword"></label><input type="text" id="Keyword" name="searchTxt" class="wth240" >
+					<input type="submit" value="검색">
+					<!-- <a class="sch" href="#"> -->
+					<!-- <img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a> -->
 			</span>
 		</div>
 
@@ -68,23 +70,23 @@
 				<tr>
 					<td><%=m.getHno() %></td>
 					<td class="tleft"><a href="reviewView.jsp"><%=m.gethTitle() %></a></td>
-					<td>현빈 기사님</td>
+					<td><%=m.getDriname() %> 기사님</td>
 					<td><%=m.getUname() %></td>
 					<td>
-						<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/reqtakbae/views//common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/reqtakbae/views//common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/reqtakbae/views//common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="/reqtakbae/views//common/images/contents/starOn.png" alt="별on"></span>
+						<%for(int i=0; i<m.gethGrade(); i++){%>
+							<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
+						<%}for(int i=0; i<5-m.gethGrade(); i++){	%>
+							<span><img src="/reqtakbae/views/common/images/contents/starOff.png" alt="별off"></span>
+						<%}%>
 					</td>
 					<td><%=m.gethDate() %></td>
 				</tr>
 			<% } %> 
 			</tbody>
 		</table>
-
+<!-- 
 		
-		<p class="flo_right mt10"><a class="mbtn or" href="/reqtakbae/views/board/reviewWrite.jsp">후기작성하기</a></p>
+		<p class="flo_right mt10"><a class="mbtn or" href="/reqtakbae/views/board/reviewWrite.jsp">dvfd</a></p> -->
 		
 		<div class="numbox pt40 pb50" align="center"> 
 			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.re?currentPage=1'"><<</a></span>
@@ -136,7 +138,7 @@
 				var num = $(this).parent().children().eq(0).text();
 				
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/selectOne.in?num=" + num; 
+				location.href="<%=request.getContextPath()%>/selectAll.reV?num="+num; 
 	
 				
 			});

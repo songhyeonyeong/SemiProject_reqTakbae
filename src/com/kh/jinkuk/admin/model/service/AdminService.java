@@ -434,6 +434,16 @@ public class AdminService {
 		return list;
 	}
 
+	public Review selectReviewV(Review r) {
+		Connection con =  getConnection();
+		
+		Review list = new AdminDao().selectOneReview(con,r);
+		
+		close(con);
+		
+		return list;
+	}
+
 
 
 
