@@ -258,7 +258,7 @@
 <script>
 	$("#agree").click(function(){
 		if($("#checkYn1").prop("checked")==true && $("#checkYn2").prop("checked")==true ){
-			location.href="join2.jsp";
+			location.href="joinSort.jsp";
 		}else{
 			alert("약관에 동의하세요");
 		}

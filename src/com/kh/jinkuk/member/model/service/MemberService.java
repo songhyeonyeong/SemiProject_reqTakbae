@@ -71,7 +71,7 @@ public class MemberService {
 		return result;
 	}
 
-	public int insertImg(int uno, ArrayList<Images> fileList) {
+	public int insertImg(ArrayList<Images> fileList) {
 		Connection con = getConnection();
 		
 		/*int uno = new MemberDao().findUno(con,userId);
@@ -80,7 +80,7 @@ public class MemberService {
 			fileList.get(i).setU_no(uno);
 		}*/
 		
-		int result = new MemberDao().insertImg(con,uno, fileList);
+		int result = new MemberDao().insertImg(con, fileList);
 		
 		if(result>0) {
 			commit(con);
