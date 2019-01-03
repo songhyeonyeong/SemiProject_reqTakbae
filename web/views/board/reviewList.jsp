@@ -92,7 +92,13 @@
 							<td><%=r.gethTitle()%></td>
 							<td><%=r.getDriname()%></td>
 							<td><%=r.getUname()%></td>
-							<td><%=r.gethGrade()%></td>
+							<td>
+								<%for(int i=0; i<r.gethGrade(); i++){%>
+								<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
+							<%}for(int i=0; i<5-r.gethGrade(); i++){	%>
+							<span><img src="/reqtakbae/views/common/images/contents/starOff.png" alt="별off"></span>
+							<%}%>
+							</td>
 							<td><%=r.gethDate()%></td>
 						</tr>
 						<%

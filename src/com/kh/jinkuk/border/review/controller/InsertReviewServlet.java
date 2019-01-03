@@ -37,32 +37,39 @@ public class InsertReviewServlet extends HttpServlet {
 		String starScore = request.getParameter("starScore");
 		String context = request.getParameter("reviewContext");
 		String driname = request.getParameter("driname");
+		String userid=request.getParameter("writer");
+		int gno = Integer.parseInt(request.getParameter("gno"));
+		int uno=Integer.parseInt(request.getParameter("uno"));
 		
-		String u_id = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getU_no());
-		//로그인한 회원의 u_no받아오기
+		
 
 		int score = Integer.parseInt(starScore);
 
-		System.out.println(title);
-		System.out.println(score);
-		System.out.println(context);
-		System.out.println(driname);
-		System.out.println(u_id);
+		System.out.println("제목"+title);
+		System.out.println("별점"+score);
+		System.out.println("내용"+context);
+		System.out.println("기사이름"+driname);//기사 이름
+		System.out.println("작성자 아이디"+userid);//작성자 아이디
+		System.out.println("공고 번호"+gno);
+		System.out.println("작성자 회원 번호"+uno);
 	
 
 		Review r = new Review();
-		r.sethTitle(title);
-		r.sethGrade(score);
-		r.sethContext(context);
-		r.setDriname(driname);
-		r.setUname(u_id);
+		r.sethTitle(title);//입력된 제목
+		r.sethGrade(score);//별점
+		r.sethContext(context);//내용
+		r.setDriname(driname);//기사명
+		r.setUname(userid);//작성자 아이디
+		r.setGno(gno);//공고 번호 
+		r.setUno(uno);
 
 		int result = new ReviewService().insertReview(r);
 		System.out.println("insertReview 최종 result"+result);
 		
 		String page = "";
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/selectReview?driname="+driname);
+			//response.sendRedirect(request.getContextPath()+"/totalGreade?");
+			response.sendRedirect(request.getContextPath() + "/selectReview?gno="+gno);
 		}else {
 			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

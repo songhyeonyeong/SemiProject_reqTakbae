@@ -47,9 +47,12 @@ import ="com.kh.jinkuk.border.review.model.vo.*"%>
 			<tr>
 				<th scope="row">별점</th>
 				<td>
-					<!--  <span><img src="../common/images/contents/starOn.png" alt="별on"></span>-->
-				<span><%=r.gethGrade() %></span>
-				</td>
+								<%for(int i=0; i<r.gethGrade(); i++){%>
+								<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
+							<%}for(int i=0; i<5-r.gethGrade(); i++){	%>
+							<span><img src="/reqtakbae/views/common/images/contents/starOff.png" alt="별off"></span>
+							<%}%>
+							</td>
 				<th scope="row">작성일</th>
 				<td><span><%=r.gethDate() %></span></td>
 			</tr>

@@ -84,14 +84,14 @@ public class ReviewDao {
 		System.out.println(query);
 		
 		try {
-			System.out.println(r.getDriname());//기사명이 넘어옴
+			
 			
 			pstmt=con.prepareStatement(query);
 			pstmt.setString(1, r.gethTitle());
 			pstmt.setString(2, r.gethContext());
 			pstmt.setInt(3, r.gethGrade());
-			pstmt.setInt(4, Integer.parseInt(r.getUname()));//로그인 한 유저번호 
-			pstmt.setInt(5, );//공고 번호 
+			pstmt.setInt(4,r.getUno());//로그인 한 유저번호 
+			pstmt.setInt(5, r.getGno());//공고 번호 
 			
 			
 		
@@ -111,7 +111,7 @@ public class ReviewDao {
 	}
 
 	//페이징 처리 후 게시판 조회용 메소드
-	public ArrayList<Review> selectList(Connection con, int currentPage, int limit,String driname) {
+	public ArrayList<Review> selectList(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Review> list = null;
@@ -142,8 +142,13 @@ public class ReviewDao {
 				r.setStatus(rset.getString("STATUS"));
 				r.setRnum(rset.getInt("RNUM"));
 				r.setUname(rset.getString("USER_ID"));
-				r.setDriname(driname);
+				r.setGno(rset.getInt("G_NO"));
+				r.setDriname(rset.getString("USER_NAME"));
+				
+				
 				list.add(r);
+				
+				
 			}
 			
 		} catch (SQLException e) {

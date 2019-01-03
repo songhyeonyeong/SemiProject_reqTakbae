@@ -45,11 +45,11 @@ public class ReviewService {
 
 
 	//페이징 처리 적용한 게시물 조회용 메소드
-	public ArrayList<Review> selectList(int currentPage, int limit,String driname) {
+	public ArrayList<Review> selectList(int currentPage, int limit) {
 		Connection con = getConnection();
 		
 		ArrayList<Review> list 
-			= new ReviewDao().selectList(con, currentPage, limit,driname);
+			= new ReviewDao().selectList(con, currentPage, limit);
 		System.out.println("reviewService 확인"+list);
 		
 		close(con);

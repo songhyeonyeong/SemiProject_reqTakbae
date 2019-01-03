@@ -123,7 +123,7 @@
 							var num = $(this).parent().parent().children("input").val();
 							var delId=$(this).parent().prev().prev().text();
 							
- 							location.href="/reqtakbae/views/board/reviewWrite.jsp?delId="+delId;
+ 							location.href="/reqtakbae/views/board/reviewWrite.jsp?delId="+delId+"&&gno="+num;
 							
 						});
 						$("#tbody td .sbtn.db").click(function(){

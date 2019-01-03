@@ -2,6 +2,7 @@
 import = "java.util.Calendar" %>
 
 <%
+
 Calendar cal = Calendar.getInstance();
 
 	int year= cal.get(Calendar.YEAR);
@@ -12,7 +13,7 @@ Calendar cal = Calendar.getInstance();
 	String tdate = String.valueOf(date);
 	String Todat =tyear+"-"+tmonth+"-"+tdate;
 	String delId =request.getParameter("delId");//기사 아아디 받기 
-	
+	String gno=request.getParameter("gno");
 %>
 <%@ include file="/views/include/common.jsp" %>
 
@@ -64,6 +65,7 @@ Calendar cal = Calendar.getInstance();
 				<td>
 					<input type="text" value="<%=loginUser.getUser_id()%>" name="writer" readonly>
 					<input type="hidden" value="<%=loginUser.getU_no() %>" name="uno">
+					<input type="hidden" value="<%=gno %>" name="gno" id="gno">
 				</td>
 			</tr>
 			<tr>
