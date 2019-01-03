@@ -174,6 +174,8 @@ public class MypageService {
 Connection con =  getConnection();
 		
 		ArrayList<Inquiry> list = new MypageDao().selectListIn(con, currentPage, limit,uno);
+		return list;
+	}
 
 	public ArrayList<MyCharge> ChargeList(int uno) {
 		Connection con = getConnection();

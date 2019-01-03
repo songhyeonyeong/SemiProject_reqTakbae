@@ -13,6 +13,7 @@ public class Review implements java.io.Serializable{
 	private String uname;			//회원이름
 	private int gno;					//공고 번호
 	private String driname;			//매칭된 기사 이름
+	private int Rnum;
 	
 	
 	
@@ -23,7 +24,7 @@ public class Review implements java.io.Serializable{
 
 
 	public Review(int hno, String hTitle, String hContext, int hGrade, Date hDate, String status, int uno, String uname,
-			int gno, String driname) {
+			int gno, String driname, int rnum) {
 		super();
 		this.hno = hno;
 		this.hTitle = hTitle;
@@ -35,6 +36,7 @@ public class Review implements java.io.Serializable{
 		this.uname = uname;
 		this.gno = gno;
 		this.driname = driname;
+		this.Rnum = rnum;
 	}
 
 
@@ -180,13 +182,28 @@ public class Review implements java.io.Serializable{
 
 
 
+	public int getRnum() {
+		return Rnum;
+	}
+
+
+
+
+	public void setRnum(int rnum) {
+		this.Rnum = rnum;
+	}
+
+
+
+
 	@Override
 	public String toString() {
 		return "Review [hno=" + hno + ", hTitle=" + hTitle + ", hContext=" + hContext + ", hGrade=" + hGrade
 				+ ", hDate=" + hDate + ", status=" + status + ", uno=" + uno + ", uname=" + uname + ", gno=" + gno
-				+ ", driname=" + driname + "]";
+				+ ", driname=" + driname + ", Rnum=" + Rnum + "]";
 	}
-
+	
+	
 
 
 	

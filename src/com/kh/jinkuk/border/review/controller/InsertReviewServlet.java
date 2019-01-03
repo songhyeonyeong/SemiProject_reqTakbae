@@ -62,7 +62,7 @@ public class InsertReviewServlet extends HttpServlet {
 		
 		String page = "";
 		if(result > 0) {
-			response.sendRedirect(request.getContextPath() + "/selectReview");
+			response.sendRedirect(request.getContextPath() + "/selectReview?driname="+driname);
 		}else {
 			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

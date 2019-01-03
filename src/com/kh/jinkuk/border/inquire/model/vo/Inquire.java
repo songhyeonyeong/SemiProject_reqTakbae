@@ -3,20 +3,22 @@ package com.kh.jinkuk.border.inquire.model.vo;
 import java.sql.Date;
 
 public class Inquire {
-	private int m_no;
-	private String m_title;
-	private String m_context;
-	private int ref_mno;
-	private int reply_level;
-	private String status;
-	private Date m_date;
-	private int u_no; 
-	private String user_id;
+	private int m_no;//문의 번호
+	private String m_title;//문의 제목
+	private String m_context;//문의 내용
+	private int ref_mno;//댓글 번호
+	private int reply_level;//댓글 레벨=1
+	private String status;//삭제 상태 여부
+	private Date m_date;//공고 작성 날짜
+	private int u_no; //작성자 번호
+	private String user_id;//작성자 아이디
+	private int refstatus; //댓글 상태
+	private int Rnum;//번호
 	
 	public Inquire() {}
 
 	public Inquire(int m_no, String m_title, String m_context, int ref_mno, int reply_level, String status, Date m_date,
-			int u_no, String user_id) {
+			int u_no, String user_id, int refstatus, int rnum) {
 		super();
 		this.m_no = m_no;
 		this.m_title = m_title;
@@ -27,6 +29,8 @@ public class Inquire {
 		this.m_date = m_date;
 		this.u_no = u_no;
 		this.user_id = user_id;
+		this.refstatus = refstatus;
+		Rnum = rnum;
 	}
 
 	public int getM_no() {
@@ -101,12 +105,33 @@ public class Inquire {
 		this.user_id = user_id;
 	}
 
+	public int getRefstatus() {
+		return refstatus;
+	}
+
+	public void setRefstatus(int refstatus) {
+		this.refstatus = refstatus;
+	}
+
+	public int getRnum() {
+		return Rnum;
+	}
+
+	public void setRnum(int rnum) {
+		Rnum = rnum;
+	}
+
 	@Override
 	public String toString() {
 		return "Inquire [m_no=" + m_no + ", m_title=" + m_title + ", m_context=" + m_context + ", ref_mno=" + ref_mno
 				+ ", reply_level=" + reply_level + ", status=" + status + ", m_date=" + m_date + ", u_no=" + u_no
-				+ ", user_id=" + user_id + "]";
+				+ ", user_id=" + user_id + ", refstatus=" + refstatus + ", Rnum=" + Rnum + "]";
 	}
+
+	
+	
+
+	
 
 	
 	

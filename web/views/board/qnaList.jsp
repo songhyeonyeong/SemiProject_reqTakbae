@@ -49,21 +49,22 @@ import="java.util.*,
 				<th scope="col">답변여부</th>
 			</tr>
 			<%
-				int num=1;
+				
 				for(Inquire i : list){
 					
 			%>
 			<tr>
 			<input type="hidden" value="<%=i.getM_no() %>">
-			<td><%=num %></td>
+			<td><%=i.getRnum() %></td>
 				<td><%=i.getM_title() %></td>
 				<td><%=i.getM_context()%></td>
 				<td><%=i.getUser_id() %></td>
 				<td><%=i.getM_date() %></td>
-				<td><%=i.getStatus() %></td>
+				<td><%=i.getRefstatus() %></td>
+				
 			</tr>
 				<%
-				num++;
+				
 				}%>
 		
 		</thead>

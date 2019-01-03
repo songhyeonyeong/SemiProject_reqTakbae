@@ -51,7 +51,7 @@
 
 					</span> <span> <label for="Keyword"></label><input id="Keyword"
 						name="Keyword" class="wth240" type="text"> <a class="sch"
-						href="#"><img src="../common/images/contents/icoSearch.png"
+						href="#"><img src="/reqtakbae/views/common/images/contents/icoSearch.png"
 							alt="검색" title="검색"></a>
 					</span>
 				</div>
@@ -88,7 +88,7 @@
 						%>
 						<tr>
 							<input type="hidden" value="<%=r.getHno()%>">
-							<td> <%=r.getHno()%></td>
+							<td> <%=r.getRnum()%></td>
 							<td><%=r.gethTitle()%></td>
 							<td><%=r.getDriname()%></td>
 							<td><%=r.getUname()%></td>
