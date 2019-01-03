@@ -15,10 +15,11 @@ public class ChangeService {
 		
 		int up = new ChangeDao().UpdateMoney(con, c);
 		
-		int cyberInsert = new ChangeDao().CyberInsert(con, c);
-		
-		if(result > 0 && up >0 && cyberInsert >0) {
+		if(result > 0 && up >0) {
 			commit(con);
+			int cyberInsert = new ChangeDao().CyberInsert(con, c);
+			if(cyberInsert >0) commit(con);
+			rollback(con);
 			
 		}else {
 			rollback(con);

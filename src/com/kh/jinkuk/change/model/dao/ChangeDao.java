@@ -83,9 +83,9 @@ public class ChangeDao {
 			pstmt.setString(1,"충전");
 			pstmt.setInt(2, c.getCh_cmoney());
 			pstmt.setInt(3, c.getU_no());
-			pstmt.setInt(4, c.getCh_no());
 			
-			pstmt.executeQuery();
+			
+			result = pstmt.executeUpdate();
 			
 			
 			
