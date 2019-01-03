@@ -43,8 +43,8 @@ public class SelectReviewListServlet extends HttpServlet {
 		int startPage;
 		int endPage;
 		
-		String driname=request.getParameter("driname");
-		System.out.println("기사명 넘어옴 확인"+driname);
+		String gno=request.getParameter("gno");
+		System.out.println("공고 번호 넘어옴 확인"+gno);
 		
 		currentPage=1;
 		
@@ -72,7 +72,7 @@ public class SelectReviewListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
-		ArrayList<Review> list = new ReviewService().selectList(currentPage, limit,driname);
+		ArrayList<Review> list = new ReviewService().selectList(currentPage, limit);
 		
 		
 		
