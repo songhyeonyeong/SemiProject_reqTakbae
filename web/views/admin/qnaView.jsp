@@ -75,7 +75,6 @@
 					<div id="replySelectArea">
 						<table>
 							<td scope="row" id="replySelectTable"></td>
-							<td><%=m.getM_date() %></td>
 						</table>
 					</div>
 					<%} %>

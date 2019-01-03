@@ -12,7 +12,7 @@
 			<li><a href="#INSERT" onClick="SelectAllMoney();">충전/포인트/환전 내역</a></li>
 			<li><a href="#INSERT" onClick="SelectAllInquiry();">문의 내역</a></li>
 			<li><a href="#INSERT" onClick="SelectAllReport();">신고 내역</a></li>
-			<li><a href="/reqtakbae/views/admin/reviewList.jsp">후기 게시물 관리</a></li>
+			<li><a href="#INSERT" onClick="SelectAllReview();">후기 게시물 관리</a></li>
 
 			<li><a href="/reqtakbae/views/admin/statistics.jsp">통계 관리</a></li>
 
@@ -38,6 +38,10 @@
 		
 		function SelectAllMoney(){
 			location.href="<%=request.getContextPath()%>/selectAll.mo";
+		}
+		
+		function SelectAllReview(){
+			location.href="<%=request.getContextPath()%>/selectAll.re";
 		}
 	
 	</script>

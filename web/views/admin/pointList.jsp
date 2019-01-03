@@ -54,7 +54,7 @@
 			<tr>
 				<td><%=m.getP_no() %></td>
 				<td><%=m.getUserId() %></td>
-				<td>충전</td>
+				<td>사용</td>
 				<td><%=m.getP_date() %></td>
 				<td><%=m.getP_usePoint() %></td>
 				<td><%=m.getUser_point() %></td>

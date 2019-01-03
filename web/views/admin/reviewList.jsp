@@ -1,6 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="1";
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");	
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -55,54 +63,58 @@
 					<th scope="col">작성일</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="listArea">
+			<% for(Review m : list){ %>
 				<tr>
-					<td>9</td>
-					<td class="tleft"><a href="reviewView.jsp">넘친절해용~~~~~~~~~~~~~~~ㅎㅎ</a></td>
+					<td><%=m.getHno() %></td>
+					<td class="tleft"><a href="reviewView.jsp"><%=m.gethTitle() %></a></td>
 					<td>현빈 기사님</td>
-					<td>박**</td>
+					<td><%=m.getUname() %></td>
 					<td>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/reqtakbae/views/common/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/reqtakbae/views//common/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/reqtakbae/views//common/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/reqtakbae/views//common/images/contents/starOn.png" alt="별on"></span>
+						<span><img src="/reqtakbae/views//common/images/contents/starOn.png" alt="별on"></span>
 					</td>
-					<td>2018-12-03</td>
+					<td><%=m.gethDate() %></td>
 				</tr>
-				<tr>
-					<td>8</td>
-					<td class="tleft"><a href="reviewView.jsp">눈이부셔서 평점1!!!!!</a></td>
-					<td>박보검 기사님</td>
-					<td>이**</td>
-					<td>
-						<span><img src="../common/images/contents/starOn.png" alt="별on"></span>
-						<span><img src="../common/images/contents/starOff.png" alt="별off"></span>
-						<span><img src="../common/images/contents/starOff.png" alt="별off"></span>
-						<span><img src="../common/images/contents/starOff.png" alt="별off"></span>
-						<span><img src="../common/images/contents/starOff.png" alt="별off"></span>
-					</td>
-					<td>2018-12-03</td>
-				</tr>
+			<% } %> 
 			</tbody>
 		</table>
 
 		
 		<p class="flo_right mt10"><a class="mbtn or" href="/reqtakbae/views/board/reviewWrite.jsp">후기작성하기</a></p>
 		
-		<div class="numbox pt40 pb50"> 
-			<span><a class="num" href="#">&lt;</a></span>
-			<span><a class="num on" href="#">1</a></span>
-			<span><a class="num" href="#">2</a></span>
-			<span><a class="num" href="#">3</a></span>
-			<span><a class="num" href="#">4</a></span>
-			<span><a class="num" href="#">5</a></span>
-			<span><a class="num" href="#">6</a></span>
-			<span><a class="num" href="#">7</a></span>
-			<span><a class="num" href="#">8</a></span>
-			<span><a class="num" href="#">9</a></span>
-			<span><a class="num" href="#">&gt;</a></span>
+		<div class="numbox pt40 pb50" align="center"> 
+			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.re?currentPage=1'"><<</a></span>
+			<% if(currentPage <=1){ %>
+				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.re?currentPage=<%=currentPage - 1 %>'"><</a></span> <!-- 하나 이전페이지로 이동 -->
+			<%} %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){%>
+				
+				<span><a class="num" href="#" disable><%= p %></a></span> <!-- 비활성화 -->
+			<%  }else{ %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.re?currentPage=<%= p %>'"><%= p %></a></span>
+			
+			
+			<%         } %>
+			<%} %>
+			
+			<%if(currentPage >= maxPage){ %>
+				<span><a class="num" href="#" disable>></a></span> <!-- 비활성화 -->
+			<%}else{%>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.re?currentPage=<%=currentPage + 1 %>'">></a></span> <!-- 하나 다음페이지로 이동 -->
+			<%} %>
+				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.re?currentPage=<%=maxPage%>'">>></a></span>
+			
+			
 		</div>
+	
 
 		</div><!--// contBox E-->
 
@@ -112,6 +124,30 @@
 
 
 </div><!--// Wrap E-->
+
+	<script>
+		$(function(){
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"darkgray","cursor":"pointer"});//td의 부모는 tr -> tr에 css적용
+
+			}).mouseout(function(){
+				$(this).parent().css({"background":"white"});
+			}).click(function(){
+				var num = $(this).parent().children().eq(0).text();
+				
+				console.log(num);
+				location.href="<%=request.getContextPath()%>/selectOne.in?num=" + num; 
+	
+				
+			});
+			
+		});
+		
+		
+		
+		
+		
+	</script>
 
 </body>
 </html>

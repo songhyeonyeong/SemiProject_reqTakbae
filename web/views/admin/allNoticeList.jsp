@@ -123,7 +123,7 @@
 						<td><%= m.getG_SIZE() %></td>
 						<td><%= m.getG_PRICE() %></td>
 						<td><%= m.getG_P_DIV() %></td>
-						<td><a class="sbtn gy" href="/views/admin/allNoticeView.jsp">상세보기</a></td>
+						<td><a class="sbtn gy" href="#">상세보기</a></td>
 					</tr>
 				<% } %> 
 					
@@ -184,7 +184,18 @@
 			});
 			
 		}
-		
+
+		$(function(){
+			$(".sbtn").click(function(){
+				var num = $(this).parent().parent().children().eq(1).text();
+				console.log(num);
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num; 
+
+	
+				
+			});
+			
+		});
 				
 			
 	
