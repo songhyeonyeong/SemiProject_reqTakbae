@@ -79,7 +79,7 @@
 				<th scope="row">주 교통수단</th>
 				<td>
 					<span>
-						<select name="mainWay">
+						<select name="mainWay" id="mainWay">
 							<option value="차">차</option>
 							<option value="오토바이">오토바이</option>
 							<option value="대중교통">대중교통</option>
@@ -88,6 +88,7 @@
 						</select>
 					</span>
 				</td>
+				<td><img id="mainWayCheckImg" class="checkTest" src=""></td>
 			</tr>
 			<tr>
 				<th scope="row">이메일</th>
@@ -134,12 +135,7 @@
 							<option value="011">농협</option>
 							<option value="020">우리은행</option>
 						</select>
-						<!-- 	<option value='045'>새마을금고
-							<option value='027'>한국씨티은행
-							<option value='007'>수협
-							<option value='048'>신협
-							<option value='071'>우체국
-							<option value='081'>하나은행 -->
+
 						<br>
 					계좌번호<input type="text" size="25" placeholder="'-'를 제외하고 입력" name="accnum" id="accnum"><br>
 					생년월일<input type="text" size="25" placeholder="'-'를 제외하고 6자리" name="birth" id="birth">&nbsp;
@@ -341,7 +337,6 @@
 					if(data=="YES"){
 						if(SId != "") {
 							$("#idCheckMsg").html("");
-							//$("#idCheckMsg").css("color","black");
 							$("#idCheckImg").attr("src",checkImgPath);
 						}
 					}else{
@@ -445,6 +440,11 @@
 	}); 
 	
 	
+	$("#mainWay").change(function(){
+		$("#mainWayCheckImg").attr("src",checkImgPath);
+	});
+	
+	
 	var randomCode = $("#randomCode").val();
 	//이메일 인증번호 발송
 	$("#sendEmail").click(function(){		
@@ -465,7 +465,6 @@
 					alert("인증코드 발송 실패");
 				}
 			}
-			
 		});
 	});
 	
@@ -501,7 +500,7 @@
 	 
 	 
 	 
-	//원본 
+	/* //원본 
 	//계좌 인증
 	var token;
 	 
@@ -583,7 +582,7 @@
 				
 			});
 	} 
-	
+	 */
 	
 	
 	$("#showImgArea1").click(function(){
@@ -658,7 +657,7 @@
 			alert("계좌번호를 입력 입력하세요");
 		}else{
 			$("#joinForm").submit();
-		} */
+		} 
 		
 		/* var SId = $("#SId").val();
 		$("#userNo").val(SId);
@@ -811,12 +810,11 @@
 							if (data.account_holder_name == depositor && data.account_holder_info == account_holder_info &&
 							data.account_num == account_num && data.bank_code_std == bank_code_std) {
 								alert("계좌 인증 성공");
+								$("#accountCheckImg").attr("src", checkImgPath);
 
 							} else {
 								alert('계좌 인증 실패');
-								$("#sbm-flag").attr("checked", false);
-								$("#sbm-ok").hide();
-								$("#sbm-no").show();
+								$("#accountCheckImg").attr("src", "");
 							}
 						}
 				
