@@ -18,7 +18,7 @@
 </script>
 </head>
 <body>
-<script>
+<%-- <script>
 	$(function(){
 		boolean t = false;
 		if(!t){
@@ -28,7 +28,7 @@
 			console.log(<%=request.getAttribute("count")%>);
 		}	
 	});
-</script>
+</script> --%>
 
 <div id="wrap"><!-- Wrap S -->
 

@@ -94,7 +94,7 @@ function fn_open() {
 					<th scope="col">배송날짜</th>
 					<td>
 						<label for=""></label>
-						<input id="" name="" title="" class="wth150" type="text">
+						<input id="" name="" title="" class="wth150" type="date">
 					</td>
 					<th scope="col">상태</th>
 					<td>
@@ -113,8 +113,11 @@ function fn_open() {
 			<span><a class="mbtn db wth60" href="#">검색</a></span>
 		</div>
 
-		<p class="flo_right mb10"><a class="mbtn or" href="/reqtakbae/views/board/allNoticeWrite.jsp">공고등록하기</a></p><!-- user에게만 보임 -->
-
+		<!-- user에게만 보임 -->
+		<% if(loginUser != null){ %>
+		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/reset?p=writer">공고등록하기</a></p>
+		<% } %>
+		
 		<table class="boardList mt20">
 			<caption>전체공고 리스트입니다.</caption>
 			<colgroup>
