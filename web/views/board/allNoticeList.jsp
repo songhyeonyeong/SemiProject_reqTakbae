@@ -54,8 +54,31 @@ function fn_open() {
 						<label for=""></label>
 						<select id="" name="" class="wth150">
 						<option value="" selected="selected">서울시 전체</option>
-						<option value="">강남구</option>
-						<option value="">동대문</option>
+						<option value="#">강남구</option>
+						<option value="#">강동구</option>
+						<option value="#">강북구</option>
+						<option value="#">강서구</option>
+						<option value="#">관악구</option>
+						<option value="#">광진구</option>
+						<option value="#">구로구</option>
+						<option value="#">금천</option>
+						<option value="#">노원구</option>
+						<option value="#">도봉구</option>
+						<option value="#">동대문구</option>
+						<option value="#">동작구</option>
+						<option value="#">마포구</option>
+						<option value="#">서대문구</option>
+						<option value="#">서초구</option>
+						<option value="#">성동구</option>
+						<option value="#">성북구</option>
+						<option value="#">송파구</option>
+						<option value="#">양천구</option>
+						<option value="#">영등포구</option>
+						<option value="#">용산구</option>
+						<option value="#">은평구</option>
+						<option value="#">종로구</option>
+						<option value="#">중구</option>
+						<option value="#">중랑구</option>
 					</td>
 					<th scope="col">크기</th>
 					<td>
