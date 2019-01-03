@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.kh.jinkuk.border.announcment.model.dao.AnnouncmentDao;
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
+import com.kh.jinkuk.border.announcment.model.vo.InsertAnnouncment;
 
 public class AnnouncmentService {
 
@@ -89,11 +90,11 @@ public class AnnouncmentService {
 		}*/
 	
 	//게시판 작성페이지
-	public int insertBoard(Announcment a) {
+	public int insertBoard(InsertAnnouncment i) {
 		
 		Connection con = getConnection();
 		
-		int result = new AnnouncmentDao().insertBoard(con, a);
+		int result = new AnnouncmentDao().insertBoard(con, i);
 		
 		if(result > 0) {
 			commit(con);
@@ -103,4 +104,7 @@ public class AnnouncmentService {
 		
 		return result;
 	}
+	
+	
+
 }
