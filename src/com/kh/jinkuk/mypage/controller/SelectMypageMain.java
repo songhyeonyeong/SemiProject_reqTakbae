@@ -35,23 +35,24 @@ public class SelectMypageMain extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		PrintWriter out =response.getWriter();
-		
-		
-		Member loginUser =(Member) request.getSession().getAttribute("loginUser");
-		if(loginUser ==null) {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		PrintWriter out = response.getWriter();
+
+		Member loginUser = (Member) request.getSession().getAttribute("loginUser");
+		if (loginUser == null) {
 			out.print("<script>");
 			out.print("alert('로그인을 먼저 해주세요!');");
 			out.print("history.go(-1);");
 			out.print("</script>");
 			out.flush();
-			
+
 		}
-		
+
 		else {
 		if(loginUser.getUser_div().equals("신청자")) {
 		int currentPage;	//현재 페이지를 표시할 변수
@@ -168,20 +169,8 @@ public class SelectMypageMain extends HttpServlet {
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
+		}
 
-		
-		}
-		
-		
-		
-		}
-		
-		
-		
-		
-	
-		
-	
 	}
 
 	/**

@@ -31,7 +31,7 @@ public class UpdateB_StatusServlet extends HttpServlet {
 		String value = request.getParameter("value");
 		int gno =Integer.parseInt(request.getParameter("gno"));
 		
-		int result =new MypageService().updateB_status(value,gno);
+		int result =new MypageService().updateBstatusGisa(value,gno);
 		
 		
 		response.getWriter().print(result);

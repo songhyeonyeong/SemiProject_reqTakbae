@@ -92,7 +92,7 @@
 								} else {
 							%>
 							<td><%=m.getD_STATUS()%></td>
-							<td><a class="sbtn db" href="deliView.jsp#">상세보기</a></td>
+							<td><a class="sbtn db">배송조회</a></td>
 							<%
 								}
 							%>
@@ -119,11 +119,24 @@
 						});
 						
 						$("#tbody td .sbtn.yl").click(function(){
-							alert("리뷰쓰기");
+							alert("리뷰쓰기페이지로 이동합니다.");
 							var num = $(this).parent().parent().children("input").val();
 							var delId=$(this).parent().prev().prev().text();
 							
  							location.href="/reqtakbae/views/board/reviewWrite.jsp?delId="+delId;
+							
+						});
+						$("#tbody td .sbtn.db").click(function(){
+							var num = $(this).parent().parent().children("input").eq(0).val();
+							var uno = $(this).parent().parent().children("input").eq(1).val();
+							/*웹소켓 사용 부분  */
+							
+							
+							
+							
+							
+							
+							
 							
 						});
 						
