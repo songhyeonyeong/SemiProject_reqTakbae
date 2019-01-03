@@ -74,8 +74,8 @@
 <script>
 	$(function(){
 		$.ajax({
-				url:"ExchangeAjaxServlet",
-			type:"get",
+			url:"ExchangeAjaxServlet",
+			type:"post",
 			success:function(data){
 				$(".aaa").text(data+"p");
 			},

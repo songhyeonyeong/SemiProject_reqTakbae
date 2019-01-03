@@ -95,7 +95,7 @@
 				<th scope="col">구분</th>
 				<th scope="col">날짜</th>
 				<th scope="col">이용 포인트</th>
-				<th scope="col">누적 포인트</th>
+				<!-- <th scope="col">누적 포인트</th> -->
 				<th scope="col">비고</th>
 			</tr>
 			</thead>
@@ -119,7 +119,7 @@
 				}
 			%>
 			
-			<%
+		<%-- 	<%
 				if(c.getCm_div().equals("포인트사용") || c.getCm_div().equals("포인트적립")){
 			%>
 			<td><%=c.getC_point() %></td>
@@ -129,7 +129,7 @@
 			<td><%=c.getC_money()%></td>
 			<% 
 			}
-			%>
+			%> --%>
 			<%
 				if(c.getCm_note()!=null){
 			%>
@@ -175,22 +175,19 @@
 			<span><a class="num" href="#">&gt;</a></span>
 		</div>
  -->		
-		<div class="numbox pt40 pb50"> 
+		<%-- <div class="numbox pt40 pb50"> 
 			<% if(currentPage <= 1){ %>
 			<span><a class="num" disabled>&lt;</a></span>
 			<% }else{ %>
 			<span><a class="num" href="<%=request.getContextPath()%>/Cybermoney_breakdownServlet?currentPage=<%=currentPage - 1%>">&lt;</a></span>
-<%-- 			<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage - 1%>'"><</button> --%>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){ 
 					if(p == currentPage){
 			%>
 						<span><a class="num on" disabled><%= p %></a></span>
-<%-- 					<button disabled><%= p %></button> --%>
 			<%      }else{ %>
 								<span><a class="num" href="<%=request.getContextPath()%>/Cybermoney_breakdownServlet?currentPage=<%= p %>"><%= p %></a></span>
-<%-- 					<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%= p %>'"><%= p %></button> --%>
 			<%      } %>
 	
 			<% } %>
@@ -198,12 +195,36 @@
 			
 			<% if(currentPage >= maxPage){ %>
 			<span><a class="num" disabled>></a></span>
-<!-- 			<button disabled>></button> -->
 			<% }else{ %>
 				<span><a class="num" href="<%=request.getContextPath()%>/Cybermoney_breakdownServlet?currentPage=<%=currentPage + 1%>">></a></span>
-<%-- 			<button onclick="location.href='<%=request.getContextPath()%>/selectMyNoticeList.mp?currentPage=<%=currentPage + 1%>'">></button> --%>
 			<% } %>
 			
+			 --%>
+			<div class="numbox pt40 pb50"> 
+			<% if(currentPage <= 1){ %>
+			<span><a class="num" disabled>&lt;</a></span>
+			<% }else{ %>
+			<span><a class="num" href="<%=request.getContextPath()%>/Cybermoney_breakdownServlet?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+			<% } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){ 
+					if(p == currentPage){
+			%>
+						<span><a class="num on" disabled><%= p %></a></span>
+			<%      }else{ %>
+								<span><a class="num" href="<%=request.getContextPath()%>/Cybermoney_breakdownServlet?currentPage=<%= p %>"><%= p %></a></span>
+			<%      } %>
+	
+			<% } %>
+			
+			<% if(currentPage >= maxPage){ %>
+			<span><a class="num" disabled>></a></span>
+			<% }else{ %>
+				<span><a class="num" href="<%=request.getContextPath()%>/Cybermoney_breakdownServlet?currentPage=<%=currentPage + 1%>">></a></span>
+			<% } %>
+			
+			
+		</div>
 			
 		</div>
 
