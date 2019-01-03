@@ -77,8 +77,10 @@ import ="com.kh.jinkuk.border.inquire.model.vo.*"%>
 
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn bk" href='<%=request.getContextPath()%>/selectInquireList'>목록</a></span>
+			<% if(loginUser != null && loginUser.getUser_id().equals(i.getUser_id())){ %>
 			<span><a class="mbtn gy" href='<%=request.getContextPath()%>/updateInquire?mno=<%=i.getM_no()%>'>수정</a></span>
 			<span><a class="mbtn rd" href='<%=request.getContextPath()%>/deleteInquire?mno=<%=i.getM_no()%>'>삭제</a></span>
+		<%} %>
 		</div><!--// btnbox E-->
 		
 

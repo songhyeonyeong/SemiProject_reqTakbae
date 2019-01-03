@@ -56,6 +56,19 @@ public class InquireService {
 		
 
 	}
+	
+	//댓글 상태 여부 가져오기
+	public ArrayList<Inquire> selectRefList() {
+Connection con = getConnection();
+		
+	ArrayList<Inquire> statuslist = new InquireDao().selectRefList(con);
+		
+		
+		close(con);
+		
+		return statuslist;
+	}
+
 
 	//신청자 문의 상세보기 부분 메소드
 	public Inquire selectOne(int num) {
@@ -144,6 +157,9 @@ public class InquireService {
 		
 		return result;
 	}
+
+
+
 
 
 

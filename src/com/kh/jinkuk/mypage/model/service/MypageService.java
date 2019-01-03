@@ -174,7 +174,9 @@ public class MypageService {
 
 		ArrayList<Inquiry> list = new MypageDao().selectListIn(con, currentPage, limit, uno);
 		
+
 		close(con);
+
 		return list;
 	}
 

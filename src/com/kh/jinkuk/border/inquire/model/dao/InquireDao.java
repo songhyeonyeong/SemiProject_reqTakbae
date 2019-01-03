@@ -41,7 +41,45 @@ public class InquireDao {
 		return null;
 	}
 	
-	
+	//댓글 상태 여부 메소드
+	public ArrayList<Inquire> selectRefList(Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Inquire> statuslist = null;
+		
+		String query = prop.getProperty("refStatus");
+		
+		
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			statuslist = new ArrayList<Inquire>();
+			
+			while(rset.next()) {
+				Inquire i = new Inquire();
+				
+				i.setRefstatus(rset.getInt("REF_MNO"));
+				
+				
+				
+				
+				statuslist.add(i);
+				
+			}
+			
+			System.out.println("댓글 확인 dao  "+statuslist);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		return statuslist;
+	}
 	
 	
 	//페이징 처리 문의 리스트 메소드
@@ -65,11 +103,12 @@ public class InquireDao {
 			
 			list = new ArrayList<Inquire>();
 			
+		
 			
 			while(rset.next()) {
 				Inquire i = new Inquire();
 				
-				i.setM_no(rset.getInt("RNUM"));
+				i.setM_no(rset.getInt("M_NO"));
 				i.setM_title(rset.getString("M_TITLE"));
 				i.setM_context(rset.getString("M_CONTEXT"));
 				i.setRef_mno(rset.getInt("REF_MNO"));
@@ -78,6 +117,10 @@ public class InquireDao {
 				i.setM_date(rset.getDate("M_DATE"));
 				i.setU_no(rset.getInt("U_NO"));
 				i.setUser_id(rset.getString("USER_ID"));
+				i.setRnum(rset.getInt("RNUM"));
+				
+				
+				
 				
 				list.add(i);
 				
@@ -137,6 +180,7 @@ public class InquireDao {
 			
 			pstmt.setInt(1, num);
 			
+			System.out.println("DAO"+num);
 			rset = pstmt.executeQuery();
 			
 			
@@ -299,6 +343,8 @@ public class InquireDao {
 		System.out.println("InquireDao확인본"+result);
 		return result;
 	}
+
+
 
 
 	

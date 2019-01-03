@@ -42,11 +42,11 @@ public class ReviewDao {
 	try {
 		stmt=con.createStatement();
 		rset = stmt.executeQuery(query);
-		System.out.println("rset"+rset);
+		System.out.println(query);
 		list=new ArrayList<Review>();
 		
 		while(rset.next()) {
-			Review r = new Review();
+			Review r=new Review();
 			
 			r.setHno(rset.getInt("H_NO"));
 			r.sethTitle(rset.getString("H_TITLE"));
@@ -54,10 +54,8 @@ public class ReviewDao {
 			r.sethGrade(rset.getInt("H_GRADE"));
 			r.sethDate(rset.getDate("H_DATE"));
 			r.setStatus(rset.getString("STATUS"));
-			r.setGno(rset.getInt("G_NO"));
-			r.setDriname(rset.getString("USER_NAME"));
 			r.setUname(rset.getString("USER_ID"));
-			r.setUno(rset.getInt("U_NO"));
+			r.setRnum(rset.getInt("RNUM"));
 			
 			list.add(r);
 			
@@ -71,6 +69,7 @@ public class ReviewDao {
 	}
 	
 	
+		System.out.println("Review Dao"+list);
 		return list;
 	}
 	
@@ -85,11 +84,14 @@ public class ReviewDao {
 		System.out.println(query);
 		
 		try {
+			System.out.println(r.getDriname());//기사명이 넘어옴
+			
 			pstmt=con.prepareStatement(query);
 			pstmt.setString(1, r.gethTitle());
 			pstmt.setString(2, r.gethContext());
 			pstmt.setInt(3, r.gethGrade());
 			pstmt.setInt(4, Integer.parseInt(r.getUname()));//로그인 한 유저번호 
+			pstmt.setInt(5, );//공고 번호 
 			
 			
 		
@@ -109,7 +111,7 @@ public class ReviewDao {
 	}
 
 	//페이징 처리 후 게시판 조회용 메소드
-	public ArrayList<Review> selectList(Connection con, int currentPage, int limit) {
+	public ArrayList<Review> selectList(Connection con, int currentPage, int limit,String driname) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Review> list = null;
@@ -138,10 +140,9 @@ public class ReviewDao {
 				r.sethGrade(rset.getInt("H_GRADE"));
 				r.sethDate(rset.getDate("H_DATE"));
 				r.setStatus(rset.getString("STATUS"));
-				r.setGno(rset.getInt("G_NO"));
+				r.setRnum(rset.getInt("RNUM"));
 				r.setUname(rset.getString("USER_ID"));
-				r.setDriname(rset.getString("USER_NAME"));
-				
+				r.setDriname(driname);
 				list.add(r);
 			}
 			
@@ -153,7 +154,7 @@ public class ReviewDao {
 		}
 		
 	
-		System.out.println("dao 확인");
+		System.out.println("dao 확인"+list);
 		return list;
 	}
 
