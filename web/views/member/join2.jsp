@@ -74,21 +74,6 @@
 				 </td>
 				<td><img id="phoneCheckImg" class="checkTest" src=""></td>
 			</tr>
-			
-			<!-- <tr>
-				<th scope="row">주 교통수단</th>
-				<td>
-					<span>
-						<select name="mainWay">
-							<option value="차">차</option>
-							<option value="오토바이">오토바이</option>
-							<option value="대중교통">대중교통</option>
-							<option value="자전거">자전거</option>
-							<option value="기타">기타</option>
-						</select>
-					</span>
-				</td>
-			</tr> -->
 			<tr>
 				<th scope="row">이메일</th>
 				<td>
@@ -134,12 +119,6 @@
 							<option value="011">농협</option>
 							<option value="020">우리은행</option>
 						</select>
-						<!-- 	<option value='045'>새마을금고
-							<option value='027'>한국씨티은행
-							<option value='007'>수협
-							<option value='048'>신협
-							<option value='071'>우체국
-							<option value='081'>하나은행 -->
 						<br>
 					계좌번호<input type="text" size="25" placeholder="'-'를 제외하고 입력" name="accnum" id="accnum"><br>
 					생년월일<input type="text" size="25" placeholder="'-'를 제외하고 6자리" name="birth" id="birth">&nbsp;
@@ -159,7 +138,7 @@
 			
 			<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">다음</a></span>
+			<span><a class="mbtn db" onclick="insertMember();">회원가입</a></span>
 		</div>
 		</form>
 		</div>
@@ -179,22 +158,7 @@
 						<input type="hidden" id="response_type" name="response_type" value="code" /> 
 						<input type="hidden" id="scope" name="scope" value="inquiry" /> 
 						<input type="hidden" id="redirect_uri" name="redirect_uri" value="http://localhost:8880/html/callback.html" />
-						<!-- <tr>
-							<th>
-							</th>
-							<td><span><input type="hidden" id="client_id" name="client_id" style="width: 200px"
-										 value="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed"></span></td>
-						</tr> -->
 					
-				</tr>
-				
-				<tr>
-					<th>
-						<span><input type="hidden" id="client_id" name="client_id" style="width: 200px"
-										 value="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed"></span>
-					</th>
-					<td><span><input type="hidden" id="client_secret" name="client_secret" style="width: 200px"
-								 value="2b229cffd50b45c08f0cde6158ab69c1"></span></td>
 				</tr>
 				<tr>
 					<th>
@@ -249,65 +213,6 @@
 
 	</div>
 	
-		<!-- <div class="btnbox mt20">btnbox S
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
-		</div>
-		
-		
-	<%-- 	<form id="insertGisaImg" action="<%=request.getContextPath() %>/GisaJoinImg" method="post" encType="multipart/form-data">
-			<table>
-				<tr>
-					<th scope="row">신분증</th>
-					<td>
-						<div id="showImgArea1">
-							<img id="showImg1" name="showImg1" width="350" height="200"> 
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">본인 얼굴사진</th>
-					<td>
-						<div id="showImgArea2">
-							<img id="showImg2" name="showImg2" width="350" height="200"> 
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="hidden" id="userNo" name="userId" value=""></td>
-					<td></td>
-				</tr>
-				<tr><td>
-					<div id="fileArea">
-					<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
-					<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
-					</div></td>
-				</tr>
-				
-				
-		</table>
-				<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
-		</div>
-		</form> --%>
-		
-		<!-- <div id="fileArea">
-			<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
-			<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
-		</div> -->
-
-		<!-- <div class="btnbox mt20">btnbox S
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
-		</div>// btnbox E -->
-		
-	<!--// boardWrite E-->
-		
-<!-- 
-	</div>// inner E
-</div>
- -->
 <%@ include file="/views/include/footer.jsp" %>
 
 
@@ -341,7 +246,6 @@
 					if(data=="YES"){
 						if(SId != "") {
 							$("#idCheckMsg").html("");
-							//$("#idCheckMsg").css("color","black");
 							$("#idCheckImg").attr("src",checkImgPath);
 						}
 					}else{
@@ -501,7 +405,7 @@
 	 
 	 
 	 
-	//원본 
+	/* //원본 
 	//계좌 인증
 	var token;
 	 
@@ -583,9 +487,9 @@
 				
 			});
 	} 
+	 */
 	
-	
-	
+	//이미지 미리보기
 	$("#showImgArea1").click(function(){
 		$("#IdCardImg").click();
 	});
@@ -724,20 +628,6 @@
 	 
 	
 	 $.support.cors = true;
-		var reqDate = new Date();
-		/* var year = reqDate.getFullYear() +"";
-		var month = (reqDate.getMonth() + 1) > 10?reqDate.getMonth() + 1 + "":"0" + (reqDate.getMonth() + 1);
-		var date = (reqDate.getDate() > 10?reqDate.getDate() + "":"0" + reqDate.getDate());
-		var hour = reqDate.getHours() > 9?reqDate.getHours() + "":"0" + reqDate.getHours();
-		var min = reqDate.getMinutes() > 10?reqDate.getMinutes() + "":"0" + reqDate.getMinutes();
-		var sec = reqDate.getSeconds() > 10?reqDate.getSeconds() + "":"0" + reqDate.getSeconds(); 
-		
-		var currentTime = year + month + date + hour + min + sec;*/
-		
-		/* var today = $("#today").val();
-		console.log(today); */
-		//$("#tran_dtime").val($("#today").val());
-		//console.log($("#tran_dtime"));
 		/* 사용자인증 Access Token 획득 */
 		function fnSearchAccessToken() {
 			$("#bank_code_std").val($("#bankcode").val());
@@ -752,7 +642,7 @@
 				//url: "/tpt/test/getOauthToken",
 				url : "https://testapi.open-platform.or.kr/oauth/2.0/token",
 				type : "POST",
-				contenttype:"application/x-www-form-urlencoded; charset=UTF-8",/*내가 넣음  */
+				contenttype:"application/x-www-form-urlencoded; charset=UTF-8",
 				//cache: false,
 				contenType : "application/json",
 				data : {
@@ -811,12 +701,10 @@
 							if (data.account_holder_name == depositor && data.account_holder_info == account_holder_info &&
 							data.account_num == account_num && data.bank_code_std == bank_code_std) {
 								alert("계좌 인증 성공");
-
+								$("#accountCheckImg").attr("src", checkImgPath);
 							} else {
-								alert('계좌 인증 실패');
-								$("#sbm-flag").attr("checked", false);
-								$("#sbm-ok").hide();
-								$("#sbm-no").show();
+								alert("계좌 인증 실패");
+								$("#accountCheckImg").attr("src", "");
 							}
 						}
 				
