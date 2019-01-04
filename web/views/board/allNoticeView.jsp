@@ -3,6 +3,7 @@
 
 <% 
 	Announcment a = (Announcment)request.getAttribute("a"); 
+	int num = (int)request.getAttribute("num");
 %>
 
 <%@ include file="/views/include/common.jsp" %>
@@ -68,8 +69,18 @@
 			전체 공고
 			<span>홈 &gt; 전체 공고</span>
 			<p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p><!-- user에게만 보임 -->
+		
+		<script>
+			function fn_open(){
+				location.href="<%=request.getContextPath()%>/views/board/reportPop.jsp?gno=<%=num%>&title=<%= a.getG_TITLE() %>&name=<%= loginUser.getUser_name() %>&uno=<%=loginUser.getU_no()%>";
+				<%-- ?no="+<%=a.getG_NO()%>+"&title="+<%= a.getG_TITLE() %>+"&name="+<%= loginUser.getUser_name() %>; --%>
 			
+					<%-- "<%=request.getContextPath()%>/ReportServlet --%>
+			}
+		</script>	
+		
 		</div>
+		
 		
 		<div class="rtv of mt30">
 

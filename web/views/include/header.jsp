@@ -74,20 +74,24 @@
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script> 
 <!-- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
 
+<%if (loginUser !=null){ %>
 <script>
 	$(function(){
-		$.ajax({
-			url:"ExchangeAjaxServlet",
-			type:"post",
-			success:function(data){
-				$(".aaa").text(data+"p");
-			},
-			error:function(data){
-				console.log("실패");
-			}
-		});								
+			var uno=<%=loginUser.getU_no()%>;
+			$.ajax({
+				url:"ExchangeAjaxServlet",
+				type:"get",
+				data: {uno:uno},
+				success:function(data){
+					$(".aaa").text(data+"p");
+				},
+				error:function(data){
+					console.log("실패");
+				}
+			});	
 	});
 </script>
+<%} %>
 
 <script type="text/javascript"> 
 //<![CDATA[
