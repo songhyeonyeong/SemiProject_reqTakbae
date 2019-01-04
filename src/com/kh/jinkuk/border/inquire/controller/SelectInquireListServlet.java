@@ -68,6 +68,7 @@ public class SelectInquireListServlet extends HttpServlet {
 		
 		ArrayList<Inquire> list = new InquireService().selectList(currentPage, limit);
 
+		
 		ArrayList<Inquire> statuslist = new InquireService().selectRefList();//댓글 상태 쭉 가져오기
 		System.out.println("댓글 상태 확인"+statuslist);
 		

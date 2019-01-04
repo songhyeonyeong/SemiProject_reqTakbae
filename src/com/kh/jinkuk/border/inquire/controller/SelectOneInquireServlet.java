@@ -39,17 +39,13 @@ public class SelectOneInquireServlet extends HttpServlet {
 		
 		Inquire i = new InquireService().selectOne(num);
 
-		System.out.println("i객체의 댓글상태 확인 :"+i.getReply_level());
-		
-		
 		Inquire ai=new InquireService().selectAdminOne(num);
 		
 		//관리자가 댓글을 달지 않았을 경우 
 		if(ai!=null) {
 		request.setAttribute("ai", ai);
 		}
-			System.out.println("문의 상세보기 댓글 ai"+ai);
-		
+			
 		
 			String page = "";
 		

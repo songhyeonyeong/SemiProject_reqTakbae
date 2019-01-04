@@ -59,9 +59,9 @@ public class InquireService {
 	
 	//댓글 상태 여부 가져오기
 	public ArrayList<Inquire> selectRefList() {
-Connection con = getConnection();
+		Connection con = getConnection();
 		
-	ArrayList<Inquire> statuslist = new InquireDao().selectRefList(con);
+		ArrayList<Inquire> statuslist = new InquireDao().selectRefList(con);
 		
 		
 		close(con);
