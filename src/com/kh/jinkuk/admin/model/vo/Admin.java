@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Admin implements java.io.Serializable{
 	private int uno;
 	private String b_name;
-	private int b_num;
+	private String b_num;
 	private String userId;
 	private String userPwd;
 	private String phone;
@@ -19,14 +19,16 @@ public class Admin implements java.io.Serializable{
 	private Date u_date;
 	private String status;
 	private String k_trans;
+	private String path;
+	private String i_name;
 	
 	
 	public Admin() {}
 
 
-	public Admin(int uno, String b_name, int b_num, String userId, String userPwd, String phone, String email,
+	public Admin(int uno, String b_name, String b_num, String userId, String userPwd, String phone, String email,
 			String blackList, String user_div, int c_money, int c_point, String login_div, String userName, Date u_date,
-			String status, String k_trans) {
+			String status, String k_trans, String path, String i_name) {
 		super();
 		this.uno = uno;
 		this.b_name = b_name;
@@ -44,6 +46,8 @@ public class Admin implements java.io.Serializable{
 		this.u_date = u_date;
 		this.status = status;
 		this.k_trans = k_trans;
+		this.path = path;
+		this.i_name = i_name;
 	}
 
 
@@ -67,12 +71,12 @@ public class Admin implements java.io.Serializable{
 	}
 
 
-	public int getB_num() {
+	public String getB_num() {
 		return b_num;
 	}
 
 
-	public void setB_num(int b_num) {
+	public void setB_num(String b_num) {
 		this.b_num = b_num;
 	}
 
@@ -207,13 +211,42 @@ public class Admin implements java.io.Serializable{
 	}
 
 
+	public String getPath() {
+		return path;
+	}
+
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+
+	public String getI_name() {
+		return i_name;
+	}
+
+
+	public void setI_name(String i_name) {
+		this.i_name = i_name;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Admin [uno=" + uno + ", b_name=" + b_name + ", b_num=" + b_num + ", userId=" + userId + ", userPwd="
 				+ userPwd + ", phone=" + phone + ", email=" + email + ", blackList=" + blackList + ", user_div="
 				+ user_div + ", c_money=" + c_money + ", c_point=" + c_point + ", login_div=" + login_div
-				+ ", userName=" + userName + ", u_date=" + u_date + ", status=" + status + ", k_trans=" + k_trans + "]";
+				+ ", userName=" + userName + ", u_date=" + u_date + ", status=" + status + ", k_trans=" + k_trans
+				+ ", path=" + path + ", i_name=" + i_name + "]";
 	}
+	
+	
+
+
+
+
+
+
 	
 	
 
