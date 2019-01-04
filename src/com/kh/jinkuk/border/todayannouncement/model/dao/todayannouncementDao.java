@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 import static com.kh.jinkuk.common.JDBCTemplate.*;
 import com.kh.jinkuk.border.announcment.model.dao.AnnouncmentDao;
@@ -31,6 +33,13 @@ public class todayannouncementDao {
 	
 	//페이징 처리 후 당일 게시판 조회용 메소드
 	public ArrayList<Announcment> selectTodayList(Connection con, int currentPage, int limit) {
+		
+
+		Date d = new Date ();
+		String s = d.toString();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+		System.out.println(sdf.format(d));
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Announcment> list = null;
