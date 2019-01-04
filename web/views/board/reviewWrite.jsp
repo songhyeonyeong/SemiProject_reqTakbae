@@ -98,7 +98,7 @@ Calendar cal = Calendar.getInstance();
 
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn gy" href="reviewList.jsp">목록</a></span>
-			<button type="submit">등록하기</button>
+			<button class="mbtn gy" type="submit">등록하기</button>
 		</div><!--// btnbox E-->
 		
 		</form>

@@ -220,17 +220,19 @@ public class InquireDao {
 		Inquire ai = null;
 		
 		String query = prop.getProperty("selectAdminOne");
-		
+		System.out.println(query);
 		try {
 			pstmt=con.prepareStatement(query);
 			 pstmt.setInt(1, num);
+			 System.out.println("num"+num);
 			 rset=pstmt.executeQuery();
+			
 			 
 			 if(rset.next()) {
-				 ai=new Inquire();
 				 
-				 ai.setM_context(rset.getString("M_CONTEXT"));
-				 ai.setM_date(rset.getDate("M_DATE"));
+				 ai=new Inquire();
+				ai.setM_context(rset.getString("M_CONTEXT"));
+				ai.setM_date(rset.getDate("M_DATE"));
 			 }
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -239,6 +241,7 @@ public class InquireDao {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println("관리자 댓글 확인"+ai);
 		
 		return ai;
 	}

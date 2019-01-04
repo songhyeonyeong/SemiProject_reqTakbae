@@ -214,8 +214,7 @@ public class ReviewDao {
 				r.sethGrade(rset.getInt("H_GRADE"));
 				r.sethDate(rset.getDate("H_DATE"));
 				r.setStatus(rset.getString("STATUS"));
-				r.setGno(rset.getInt("G_NO"));
-				r.setUname("USER_ID");
+				r.setUname(rset.getString("USER_ID"));
 				r.setDriname(rset.getString("USER_NAME"));
 			}
 			
@@ -227,7 +226,9 @@ public class ReviewDao {
 			close(rset);
 			close(pstmt);
 		}
+		System.out.println(r);
 		return r;
+		
 	
 	}
 

@@ -69,7 +69,7 @@ import="java.util.*,
 		
 		</thead>
 		</table>
-		<p class="flo_right mb10"><button class="mbtn or" onclick="location.href='views/board/qnaWrite.jsp'">후기 작성</button></p>
+		<p class="flo_right mb10"><button class="mbtn or" onclick="location.href='views/board/qnaWrite.jsp'">문의 작성</button></p>
 
 	
 

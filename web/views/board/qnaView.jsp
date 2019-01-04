@@ -16,7 +16,7 @@ import ="com.kh.jinkuk.border.inquire.model.vo.*"%>
 
 <%@ include file="/views/include/header.jsp" %>
 
-<div id="subvisual">내 문의내역</div>
+<div id="subvisual">문의내역</div>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
