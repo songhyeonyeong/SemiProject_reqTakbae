@@ -42,9 +42,11 @@ public class SelectoneBoardServlet extends HttpServlet {
 		System.out.println(a);
 		String page = "";
 		
+		
 		if(a != null) {
 			page = "views/board/allNoticeView.jsp";
 			request.setAttribute("a", a);
+			request.setAttribute("num", num);
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 상세조회 실패!");
