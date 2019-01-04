@@ -44,7 +44,7 @@ public class DeleteInquiryServlet extends HttpServlet {
 		int result = new AdminService().deleteInquiry(m);
 		
 		if(result > 0) {
-			response.sendRedirect("/selectAll.in"); //재요청
+			response.sendRedirect("/reqtakbae/selectAll.in"); //재요청
 			
 		}
 		}catch(NumberFormatException e) {

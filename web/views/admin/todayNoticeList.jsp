@@ -104,7 +104,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% for(Announcment m : list){ %>
+					<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.to">
+				<% for(Announcment m : list){ %>
 					<tr>
 						<td>
 							<label for=""> 체크</label>
@@ -121,6 +122,7 @@
 						<td><a class="sbtn gy" href="#">상세보기</a></td>
 					</tr>
 				<% } %> 
+				</form>
 				</tbody>
 			</table>
 		<!-- 패이징 처리 부분 -->	
@@ -173,7 +175,7 @@
 
 				console.log(test);
 				
-				location.href="<%=request.getContextPath()%>/delete.to?name=" + test; 
+				$("#add").submit();
 
 			});
 			

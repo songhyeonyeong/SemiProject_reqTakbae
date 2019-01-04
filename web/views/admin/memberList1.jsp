@@ -9,6 +9,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+
 %>
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -51,8 +52,8 @@
 			
 			<div class="flo_left mt30 mb30">
 				<span><a class="mbtn wh" href="#">전체선택</a></span>
-				<span><a class="mbtn bk" href="#">블랙리스트로 이동</a></span>
-				<span><a class="mbtn rd" href="#">회원삭제</a></span>
+				<span><a class="mbtn bk" href="#" value="1">블랙리스트로 이동</a></span>
+				<span><a class="mbtn rd" href="#" value="2">회원삭제</a></span>
 			</div>
 
 
@@ -83,6 +84,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.me">
 					<% for(Admin m : list){ %>
 					<tr>
 						<td>
@@ -106,6 +108,8 @@
 						
 					</tr>
 				<% } %> 
+				</form>
+
 				</tbody>
 			</table>
 
@@ -164,6 +168,7 @@
 			 
 				$("input[name=memCheck]:checked").each(function() {
 
+					a=1;
 					
 					var test =$(this).val();
 
@@ -181,13 +186,13 @@
 			 
 				$("input[name=memCheck]:checked").each(function() {
 
+					a=2;
 					
 					var test =$(this).val();
 
 					console.log(test);
 					
-					location.href="<%=request.getContextPath()%>/delete.me?name=" + test; 
-
+					$("#add").submit();
 				});
 				
 			

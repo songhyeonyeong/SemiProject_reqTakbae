@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.jinkuk.admin.model.service.AdminService;
+import com.kh.jinkuk.admin.model.vo.Admin;
 import com.kh.jinkuk.admin.model.vo.Announcment;
 
 /**
@@ -34,20 +35,26 @@ public class DeleteNoticeServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		
-		int gno = Integer.parseInt(request.getParameter("name"));
-		System.out.println("delete Gno : " + gno);
-		
+		int result=0;
+		String[] noticeNo = request.getParameterValues("memCheck");
+		for(int i=0; i<noticeNo.length; i++) {
+		System.out.println("delete noticeNo : " + noticeNo[i]);
 		Announcment m = new Announcment();
-		m.setG_NO(gno);
+		m.setG_NO(Integer.parseInt(noticeNo[i]));
 		
-		int result = new AdminService().deleteNotice(m);
+		
+		result = new AdminService().deleteNotice(m);;
+		
+		
+		}
+
 		
 		if(result > 0) {
-			RequestDispatcher view = request.getRequestDispatcher("/selectAll.an");
-			view.forward(request, response);
+			response.sendRedirect("/reqtakbae/selectAll.an");
 			
+
 		}
+		
 
 	}
 

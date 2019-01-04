@@ -1598,7 +1598,7 @@ public class AdminDao {
 			
 			while(rset.next()) {
 				Review m = new Review();
-				m.setHno(rset.getInt("RNUM"));
+				m.setHno(rset.getInt("H_NO"));
 				m.setDriname(rset.getString("USER_NAME"));
 				m.sethTitle(rset.getString("H_TITLE"));
 				m.setUname(rset.getString("USER_ID"));
@@ -1635,7 +1635,7 @@ public class AdminDao {
 			
 
 			rset = pstmt.executeQuery();
-			
+			System.out.println(rset);
 			if(rset.next()) {
 				n = new Review();
 				
@@ -1646,8 +1646,7 @@ public class AdminDao {
 				n.sethContext(rset.getString("H_CONTEXT"));
 				n.sethGrade(rset.getInt("H_GRADE"));
 				n.sethDate(rset.getDate("H_DATE"));
-				
-				result = pstmt.executeUpdate();
+
 				
 			}
 		
@@ -1665,9 +1664,6 @@ public class AdminDao {
 		return n;
 	}
 
-
-
-	
 
 
 }

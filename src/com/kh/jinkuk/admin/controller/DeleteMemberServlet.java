@@ -34,19 +34,23 @@ public class DeleteMemberServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		
-		String userId = request.getParameter("name");
-		System.out.println("delete UserId : " + userId);
-		
+		int result=0;
+		String[] userId = request.getParameterValues("memCheck");
+		for(int i=0; i<userId.length; i++) {
+		System.out.println("delete UserId : " + userId[i]);
 		Admin m = new Admin();
-		m.setUserId(userId);
+		m.setUserId(userId[i]);
 		
-		int result = new AdminService().deleteMember(m);
+		result = new AdminService().deleteMember(m);
+		
+		
+		}
+
 		
 		if(result > 0) {
-			RequestDispatcher view = request.getRequestDispatcher("/admin.no");
-			view.forward(request, response);
+			response.sendRedirect("/reqtakbae/admin.no");
 			
+
 		}
 
 		

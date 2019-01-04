@@ -44,6 +44,9 @@ public class SelectReviewViewServlet extends HttpServlet {
 		if(re != null ) {
 			page="/views/admin/reviewView.jsp";
 			request.setAttribute("re", re);
+		}else {
+			page="/views/admin/reviewView.jsp";
+			request.setAttribute("re", re);
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
