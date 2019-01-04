@@ -455,6 +455,31 @@ public class AdminDao {
 	}
 
 	
+	public int getListCount4(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("joinConfirmCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	
 	
 	public ArrayList<Admin> selectList(Connection con, int currentPage, int limit) {
 		PreparedStatement pstmt = null;
@@ -1663,6 +1688,135 @@ public class AdminDao {
 		
 		return n;
 	}
+
+	public ArrayList<Review> searchDeliId(Connection con, String writer) {
+		ArrayList<Review> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("searchIdReview");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, writer);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Review>();
+			
+			while(rset.next()) {
+				Review m = new Review();
+				
+				m.setHno(rset.getInt("H_NO"));
+				m.setDriname(rset.getString("USER_NAME"));
+				m.sethTitle(rset.getString("H_TITLE"));
+				m.setUname(rset.getString("USER_ID"));
+				m.sethGrade(rset.getInt("H_GRADE"));
+				m.sethDate(rset.getDate("H_DATE"));
+				
+				
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+	
+		return list;
+	}
+
+	public ArrayList<Review> searchDeliName(Connection con, String deliver) {
+		ArrayList<Review> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("searchNameReview");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, deliver);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Review>();
+			
+			while(rset.next()) {
+				Review m = new Review();
+				
+				m.setHno(rset.getInt("H_NO"));
+				m.setDriname(rset.getString("USER_NAME"));
+				m.sethTitle(rset.getString("H_TITLE"));
+				m.setUname(rset.getString("USER_ID"));
+				m.sethGrade(rset.getInt("H_GRADE"));
+				m.sethDate(rset.getDate("H_DATE"));
+
+				list.add(m);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+	
+		return list;
+	}
+
+	public ArrayList<Admin> selectListJo(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Admin> list = null;
+		
+		String query = prop.getProperty("selectListJo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow); 
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Admin>();
+			
+			while(rset.next()) {
+				Admin m = new Admin();
+				
+				m.setUno(rset.getInt("RNUM"));
+				m.setUserId(rset.getString("USER_ID"));
+				m.setUserName(rset.getString("USER_NAME"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setU_date(rset.getDate("U_DATE"));
+				m.setB_num(rset.getString("BANK_NUM"));
+				m.setB_name(rset.getString("BANK_NAME"));
+				
+				
+			
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
+
 
 
 

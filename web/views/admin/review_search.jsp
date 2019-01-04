@@ -2,13 +2,14 @@
 	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
 	String tabon="1";
-	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");	
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Review> list = (ArrayList<Review>)request.getAttribute("list");
+	String optVal = (String)request.getAttribute("optVal");
+/* 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+	int endPage = pi.getEndPage(); */
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -89,7 +90,7 @@
 		
 		<p class="flo_right mt10"><a class="mbtn or" href="/reqtakbae/views/board/reviewWrite.jsp">dvfd</a></p> -->
 		
-		<div class="numbox pt40 pb50" align="center"> 
+	<%-- 	<div class="numbox pt40 pb50" align="center"> 
 			<span><a class="num" href="#" onclick="location.href='<%=request.getContextPath()%>/selectAll.re?currentPage=1'"><<</a></span>
 			<% if(currentPage <=1){ %>
 				<span><a class="num" href="#" disable><</a></span> <!-- 비활성화 -->
@@ -116,7 +117,7 @@
 				<span><a class="num" href="#" onclick ="location.href='<%=request.getContextPath()%>/selectAll.re?currentPage=<%=maxPage%>'">>></a></span>
 			
 			
-		</div>
+		</div> --%>
 	
 
 		</div><!--// contBox E-->
