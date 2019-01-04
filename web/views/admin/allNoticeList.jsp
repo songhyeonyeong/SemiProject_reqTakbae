@@ -109,6 +109,7 @@
 					</tr>
 				</thead>
 				<tbody>
+				<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.no">
 				<% for(Announcment m : list){ %>
 					<tr>
 						<td>
@@ -126,7 +127,7 @@
 						<td><a class="sbtn gy" href="#">상세보기</a></td>
 					</tr>
 				<% } %> 
-					
+				</form>
 				</tbody>
 			</table>
 			
@@ -178,8 +179,7 @@
 				var test =$(this).val();
 
 				console.log(test);
-				
-				location.href="<%=request.getContextPath()%>/delete.no?name=" + test; 
+				$("#add").submit();
 
 			});
 			
