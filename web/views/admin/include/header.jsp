@@ -7,11 +7,11 @@
 	<div class="inner"><!-- inner S -->
 		<ul class="gnbMenu">
 			<li><a href="#INSERT" onClick="submitForm();">회원 관리</a></li>
-			<li><a href="/reqtakbae/views/admin/joinConfirmList.jsp">배송기사 승인</a></li>
+			<li><a href="#INSERT" onClick="SelectAllJoinConfirm();">배송기사 승인</a></li>
 			<li><a href="#INSERT" onClick="SelectAllAnnoucement();">공고 게시물 관리</a></li>
 			<li><a href="#INSERT" onClick="SelectAllMoney();">충전/포인트/환전 내역</a></li>
 			<li><a href="#INSERT" onClick="SelectAllInquiry();">문의 내역</a></li>
-			<li><a href="#INSERT" onClick="SelectAllReport();">신고 내역</a></li>
+			<li><a href="/reqtakbae/views/admin/joinConfirmList.jsp">신고 내역</a></li>
 			<li><a href="#INSERT" onClick="SelectAllReview();">후기 게시물 관리</a></li>
 
 			<li><a href="/reqtakbae/views/admin/statistics.jsp">통계 관리</a></li>
@@ -43,6 +43,12 @@
 		function SelectAllReview(){
 			location.href="<%=request.getContextPath()%>/selectAll.re";
 		}
+		
+		function SelectAllJoinConfirm(){
+			location.href="<%=request.getContextPath()%>/select.jo";
+		}
+		
+		
 	
 	</script>
 	

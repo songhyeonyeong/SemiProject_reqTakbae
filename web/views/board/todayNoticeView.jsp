@@ -85,6 +85,9 @@
 						<col style="width:20%;">
 						<col style="width:%;">
 					</colgroup>
+						<% if(loginUser != null){ %>
+						<p class="flo_right mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>
+						<% } %>
 					<tbody>
 					<tr>
 						<th scope="row">제목</th>
@@ -132,6 +135,7 @@
 
 		<div class="clear btnbox mt30 mb30">
 			<span><a class="mbtn gy wth60" href='<%=request.getContextPath()%>/selectTodayList.bo'>목록</a></span>
+			
 			<%if(loginUser.getUser_div().equals("신청자")){ %>
 				<%if(loginUser.getUser_id().equals(a.getUSER_ID())) {%>
 			<span><a class="mbtn gy wth60" href="#">수정</a></span>
@@ -141,9 +145,7 @@
 			<span><a class="mbtn db wth60" href="#">신청하기</a></span>
 			<%} %>
 		</div>
-
-
-
+		
 	</div><!--// inner E-->
 </div>
 

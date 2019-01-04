@@ -39,6 +39,7 @@ public class ReviewService {
 		}else {
 			rollback(con);
 		}
+		close(con);
 		
 		return result;
 	}
@@ -77,6 +78,38 @@ public class ReviewService {
 		close(con);
 		return r;
 	}
+
+	//후기 작성시 포인트 업데이트 메소드
+public int updatePoint(Review r) {
+		Connection con = getConnection();
+		
+		int resultPoint = new ReviewDao().updatePoint(con,r);
+		
+		if(resultPoint > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return resultPoint;
+	}
+
+	//해당 기사의 평점 모두 불러오기
+public ArrayList<Review> selectGradeList(Review r) {
+	
+	Connection con = getConnection();
+	
+	ArrayList<Review> list 
+		= new ReviewDao().selectGradeList(con,r);
+	
+	
+	close(con);
+	
+	return list;
+	
+}
 
 	
 

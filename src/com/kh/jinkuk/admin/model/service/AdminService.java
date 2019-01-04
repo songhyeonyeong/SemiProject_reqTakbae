@@ -162,6 +162,14 @@ public class AdminService {
 		return listCount;
 	}
 	
+	public int getListCount4() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCount4(con);
+		close(con);
+		return listCount;
+	}
+
+	
 	public int getListCountAn() {
 		Connection con = getConnection();
 		int listCount = new AdminDao().getListCountAn(con);
@@ -250,6 +258,16 @@ public class AdminService {
 		return list;
 	}
 
+	
+	public ArrayList<Admin> selectJoinList(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Admin> list = new AdminDao().selectListJo(con, currentPage, limit);
+		
+		close(con);
+		
+		return list;
+	}
 	
 
 	public int cancleBlack(Admin m) {
@@ -443,6 +461,25 @@ public class AdminService {
 		
 		return list;
 	}
+
+	public ArrayList<Review> searchDeliId(String writer) {
+		Connection con = getConnection();
+		ArrayList<Review> list = new AdminDao().searchDeliId(con, writer);
+		
+		close(con);
+		return list;
+	}
+
+	public ArrayList<Review> searchDeliName(String deliver) {
+		Connection con = getConnection();
+		ArrayList<Review> list = new AdminDao().searchDeliName(con, deliver);
+		
+		close(con);
+		return list;
+	}
+
+
+
 
 
 
