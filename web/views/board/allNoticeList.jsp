@@ -202,7 +202,7 @@ function fn_open() {
 
 	<script>
 		$(function(){
-			$(".sbtn").click(function(){
+			$(".sbtn.gy").click(function(){
 				
 				var num = $(this).parent().parent().children("td").eq(0).text();
 				console.log(num);

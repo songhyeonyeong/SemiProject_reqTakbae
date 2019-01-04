@@ -72,7 +72,6 @@ public class SelectBoardListServlet extends HttpServlet {
 		
 		ArrayList<Announcment> list = new AnnouncmentService().selectList(currentPage, limit);
 		
-		System.out.println(list);
 		
 		
 		String page = "";

@@ -34,7 +34,7 @@ public class ExchangeAjaxServlet extends HttpServlet {
 		int uNo = Integer.parseInt(request.getParameter("uno"));
 		int money = new ExchangeService().SearchMoney(uNo);
 		
-		response.getWriter().print(money);*/
+		response.getWriter().print(money);
 	}
 
 	/**
