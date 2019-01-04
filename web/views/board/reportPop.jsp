@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ include file="/views/include/common.jsp" %>
+<% 
+	int gno = Integer.parseInt(request.getParameter("gno"));
+	String title = request.getParameter("title");
+	String name = request.getParameter("name");
+	int uno = Integer.parseInt(request.getParameter("uno"));
+%>
+<%@ include file="/views/include/common.jsp" 
+%>
 
 <title>신고하기</title>
 
@@ -14,6 +20,7 @@
 
 	<div class="popCont">
 		
+		<form action="<%=request.getContextPath()%>/ReportServlet">
 		<table class="boardWrite"><!-- boardWrite S-->
 			<caption>신고하기 리스트입니다.</caption>
 			<colgroup>
@@ -23,15 +30,15 @@
 			<tbody>
 			<tr>
 				<th scope="row">공고번호</th>
-				<td>20181217</td>
+				<td><%= gno %></td>
 			</tr>
 			<tr>
 				<th scope="row">제목</th>
-				<td>배송구합니다.</td>
+				<td><%= title %></td>
 			</tr>
 			<tr>
 				<th scope="row">작성자</th>
-				<td>홍길동</td>
+				<td><%= name %></td>
 			</tr>
 			<tr>
 				<th scope="row">사유선택</th>
@@ -39,17 +46,17 @@
 					<p>해당하는 사유를 선택해주세요.</p>
 					<ul>
 						<li>
-							<label for=""></label><input id="" name="" class="" type="radio" value="" > 부적절한 홍보 게시글
+							<label for=""></label><input id="" name="report" class="" type="radio" value="부적절한 홍보 게시글" > 부적절한 홍보 게시글
 						</li>
 						<li>
-							<label for=""></label><input id="" name="" class="" type="radio" value="" > 음란성 또는 청소년에게 부적합한 내용
+							<label for=""></label><input id="" name="report" class="" type="radio" value="음란성 또는 청소년에게 부적합한 내용" > 음란성 또는 청소년에게 부적합한 내용
 						</li>
 						<li>
-							<label for=""></label><input id="" name="" class="" type="radio" value="" > 명예훼손/사생활 침해 및 저작권 침해 등
+							<label for=""></label><input id="" name="report" class="" type="radio" value="명예훼손/사생활 침해 및 저작권 침해 등" > 명예훼손/사생활 침해 및 저작권 침해 등
 						</li>
 						<li>
-							<p><label for=""></label><input id="" name="" class="" type="radio" value="" > 기타</p>
-							<p><textarea class="inp_info tf_info" cols="24" id="" name=""></textarea></p>
+							<p><label for=""></label><input id="" name="report" class="" type="radio" value="기타" > 기타</p>
+							<p><textarea id="tarea" class="inp_info tf_info" cols="24"name="area"></textarea></p>
 						</li>
 					</ul>
 				</td>
@@ -58,14 +65,21 @@
 		</table><!--// boardWrite E-->
 
 		<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn rd" href="#">신고하기</a></span>
+			<span><a class="mbtn rd" onclick="input();">신고하기</a></span>
 			<span><a class="mbtn gy" href="#">취소</a></span>
+		</form>
 		</div><!--// btnbox E-->
-
+		
 	</div>
 
 </div><!--// Wrap E-->
-
+<script>
+	function input(){
+		var report = $('input[name="report"]:checked').val();
+		var area = $('#tarea').val();
+		location.href="<%=request.getContextPath()%>/ReportServlet?gno=<%= gno %>&title=<%= title %>&name=<%= name %>&report="+report+"&area="+area+"&uno=<%=uno%>";
+	}
+</script>
 
 </body>
 </html>

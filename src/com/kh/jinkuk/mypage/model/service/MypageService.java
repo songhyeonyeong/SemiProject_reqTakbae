@@ -215,5 +215,20 @@ public class MypageService {
 		return list;
 	}
 
+	public int updateMember(String uno, String userPwd, String phone, String email, String bankName, String accnum) {
+		Connection con = getConnection();
+		
+		int result = new MypageDao().updateMember(con, uno,userPwd,phone,email,bankName);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
 
 }
