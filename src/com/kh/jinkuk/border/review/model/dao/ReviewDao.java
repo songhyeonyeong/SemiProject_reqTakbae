@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.jinkuk.border.inquire.model.vo.Inquire;
 import com.kh.jinkuk.border.review.model.vo.Review;
 
 
@@ -230,6 +231,68 @@ public class ReviewDao {
 		return r;
 		
 	
+	}
+
+	//후기 작성시 포인트 업데이트 메소드
+	public int updatePoint(Connection con,Review r) {
+		
+		PreparedStatement pstmt = null;
+		int resultPoint = 0;
+		
+		String query = prop.getProperty("updatePoint");
+		
+		System.out.println(r.getUno());
+		
+		//r.set(uno);//회원 번호 들어가 있음
+		
+		try {
+			
+			pstmt=con.prepareStatement(query);
+			
+			System.out.println("Dao  "+query);
+			
+			pstmt.setInt(1,r.getUno());
+			pstmt.setInt(2, r.getUno());
+			
+			resultPoint=pstmt.executeUpdate();
+			
+			System.out.println(resultPoint);
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		System.out.println("포인트 업데이트 dao"+resultPoint);
+		
+		return resultPoint;
+	}
+	
+	////내가 넣은것까지 모두 grade출력하기
+	public ArrayList<Review> selectGradeList(Connection con,Review r) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Review> list = null;
+		
+		String query = prop.getProperty("totalGrade");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			
+			
+			
+			rset = pstmt.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 
 
