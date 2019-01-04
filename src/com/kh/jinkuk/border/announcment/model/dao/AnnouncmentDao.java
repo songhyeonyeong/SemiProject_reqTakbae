@@ -276,10 +276,100 @@ public class AnnouncmentDao {
 			
 			try {
 				pstmt = con.prepareStatement(query);
-				pstmt.
+				pstmt.setString(1, i.getGtitle());
+				pstmt.setString(2,i.getGcontext());
+				pstmt.setString(3,"일반");
+				pstmt.setDate(4,i.getGday());
+				pstmt.setString(5, i.getGsarea());
+				pstmt.setString(6, i.getGearea());
+				pstmt.setString(7,i.getGtype());
+				pstmt.setInt(8,i.getGsum());
+				pstmt.setInt(9,i.getGprice());
+				pstmt.setString(10,i.getGsize());
+				pstmt.setDate(11,i.getGday());
+				pstmt.setInt(12,i.getUno());
 				
 				result = pstmt.executeUpdate();
-				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+		public int insertANNOUNCEPAY(Connection con, InsertAnnouncment i) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("insertANNOUNCEPAY");
+			System.out.println(query);
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, "매칭중");
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+		public int insertPointbd(Connection con, InsertAnnouncment i) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("insertPointbd");
+			System.out.println(query);
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, "공고요금사용");
+				pstmt.setInt(2, i.getPoint());
+				pstmt.setString(3,i.getGtitle());
+				pstmt.setInt(4,i.getUno());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+		public int insertcmoneybd(Connection con, InsertAnnouncment i) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("insertcmoneybd");
+			System.out.println(query);
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, "공고요금사용");
+				pstmt.setInt(2, i.getGsum());
+				pstmt.setString(3,i.getGtitle());
+				pstmt.setInt(4,i.getUno());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result;
+		}
+
+		public int updatemembermoney(Connection con, InsertAnnouncment i) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("updatemembermoney");
+			System.out.println(query);
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1,-(i.getGsum()));
+				pstmt.setInt(2,-(i.getPoint()));
+				pstmt.setInt(3,i.getUno());
+				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

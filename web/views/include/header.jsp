@@ -76,6 +76,7 @@
 
 <script>
 	$(function(){
+		
 		$.ajax({
 			url:"ExchangeAjaxServlet",
 			type:"post",
