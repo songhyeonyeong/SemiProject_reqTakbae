@@ -151,11 +151,11 @@ public class MypageService {
 		int result3 = 0;
 		int result4 = 0;
 		int result = 0;
-
 		result1 = new MypageDao().upReq(uno, gno, con);
 		result2 = new MypageDao().InserMAT(uno, gno, con);
 		result3 = new MypageDao().InserShipping(uno, gno, con);
 		result4 = new MypageDao().up_AP(uno, gno, con);
+		
 		if (result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0) {
 			commit(con);
 			result = 1;

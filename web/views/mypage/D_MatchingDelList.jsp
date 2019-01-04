@@ -118,10 +118,10 @@ int endPage = pi.getEndPage();
 								select.val("선택").prop("selected", true);
 							}  
 						});
-						/*웹소켓 사용  */
+					/* 웹소켓사용
 						$("#listArea .sbtn .gy").click(function(){
 							console.log("배송하기");
-						}
+						} */
 						
 			
 					});
