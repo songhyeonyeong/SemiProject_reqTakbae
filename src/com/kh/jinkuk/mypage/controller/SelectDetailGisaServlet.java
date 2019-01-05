@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.mypage.model.service.MypageService;
 import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
 
@@ -32,7 +33,6 @@ public class SelectDetailGisaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int num =Integer.parseInt(request.getParameter("num"));
 		SelectReqGisa srg= new MypageService().SelectDetailGisa(num);
-		
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		new Gson().toJson(srg, response.getWriter());
