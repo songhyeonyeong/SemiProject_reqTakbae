@@ -160,7 +160,10 @@ public class ReviewDao {
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(query);
-
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
