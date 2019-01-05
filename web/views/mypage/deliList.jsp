@@ -60,7 +60,6 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th scope="col">No</th>
 							<th scope="col">구분</th>
 							<th scope="col">공고번호</th>
 							<th scope="col">공고내용</th>
@@ -77,13 +76,11 @@
 						%>
 						<tr>
 							<input type="hidden" value="<%=m.getG_NO()%>">
-							<td><label for=""> 체크</label> <input id="" name=""
-								class="check" type="checkbox"></td>
 							<td><%=m.getG_DIV()%></td>
 							<td><%=m.getG_NO()%></td>
 							<td><%=m.getG_CONTEXT()%></td>
 							<td><%=m.getG_DAY()%></td>
-							<td><a class="sbtn gy" href="deliView.jsp#">상세보기</a></td>
+							<td><a class="sbtn gy">상세보기</a></td>
 							<%
 								if (m.getUSER_ID() == null) {
 							%>
@@ -92,7 +89,7 @@
 							<%
 								} else {
 							%>
-							<td><a class="sbtn gy">선택완료</a></td>
+							<td><a class="sbtn bk">선택완료</a></td>
 							<td><%=m.getUSER_ID()%></td>
 							<%
 								}
@@ -113,6 +110,13 @@
 							console.log(num);
 						/* 	location.href="/reqtakbae/views/mypage/deliDetail.jsp"; */
 							location.href="/reqtakbae/selectreqGisa.mp?gno="+num; 
+						});
+						$("#tbody td .sbtn.gy").click(function(){
+							console.log("클릭하셨습니다");
+							var num = $(this).parent().parent().children("input").val();
+							var gongdiv=$(this).parent().parent().children("input").next().text();
+							location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num+"&&gongdiv="+gongdiv;
+							
 						});
 					});
 					

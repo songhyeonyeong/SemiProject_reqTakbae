@@ -1,8 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 		import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
 
 <% 
-	Announcment a = (Announcment)request.getAttribute("a"); 
+	Announcment a = (Announcment)request.getAttribute("a");
+	int num = (int)request.getAttribute("num");
+	Images img =(Images)request.getAttribute("img");
 %>
 
 <%@ include file="/views/include/common.jsp" %>
@@ -72,7 +74,7 @@
 		<div class="rtv of mt30">
 
 			<div class="flo_left wth300"><!-- flo_left S-->
-				<p><img src="http://via.placeholder.com/300x250" alt="상품이미지"></p>
+				<p><img src="<%=request.getContextPath()%>/upload/<%=img.getI_c_name()%>" alt="상품이미지"  width="300" height="250"></p>
 				<p class="font30 tcen">신청자 인원 <em class="font30 orange"><%= a.getCount() %></em>명</p>
 			</div><!--// flo_left E-->
 
@@ -85,9 +87,6 @@
 						<col style="width:20%;">
 						<col style="width:%;">
 					</colgroup>
-						<% if(loginUser != null){ %>
-						<p class="flo_right mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>
-						<% } %>
 					<tbody>
 					<tr>
 						<th scope="row">제목</th>
@@ -134,7 +133,7 @@
 		</div>
 
 		<div class="clear btnbox mt30 mb30">
-			<span><a class="mbtn gy wth60" href='<%=request.getContextPath()%>/selectTodayList.bo'>목록</a></span>
+			<span><a class="mbtn gy wth60" href='<%=request.getContextPath()%>/selectList.bo?gongdiv=당일'>목록</a></span>
 			
 			<%if(loginUser.getUser_div().equals("신청자")){ %>
 				<%if(loginUser.getUser_id().equals(a.getUSER_ID())) {%>
@@ -158,4 +157,4 @@
 <%@ include file="../include/myNav.jsp" %>
 
 </body>
-</html>
+</html> --%>

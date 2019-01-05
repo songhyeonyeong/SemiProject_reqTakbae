@@ -35,13 +35,13 @@ public class SelectInquiryOneServlet extends HttpServlet {
 		try {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
-		System.out.println(num);
+//		System.out.println(num);
 		
 		
 		Inquiry n = new AdminService().selectOne(num);
 		Inquiry m = new AdminService().selectOneReply(num);
-		System.out.println(n);
-		System.out.println(m);
+//		System.out.println(n);
+//		System.out.println(m);
 		String page = "";
 		
 		if(n != null && m != null) {
