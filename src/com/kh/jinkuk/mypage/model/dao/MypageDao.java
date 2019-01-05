@@ -519,7 +519,8 @@ public class MypageDao {
 		}finally {
 			close(pstmt);
 //		}	System.out.println("멤버싸머업뎃:"+result);
-		return result;
+		}
+			return result;
 	}
 
 	public ArrayList<Inquiry> selectListIn(Connection con, int currentPage, int limit, int uno) {
@@ -725,6 +726,7 @@ public class MypageDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				c_name=rset.getString("I_C_NAME");
+			}
 			}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
