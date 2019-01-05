@@ -139,7 +139,9 @@ public class MypageService {
 
 	public SelectReqGisa SelectDetailGisa(int num) {
 		Connection con = getConnection();
+		String cname= new MypageDao().selectgisaimg(con,num);
 		SelectReqGisa srg = new MypageDao().SelectDetailGisa(con, num);
+		srg.setImgname(cname);
 		close(con);
 		return srg;
 	}

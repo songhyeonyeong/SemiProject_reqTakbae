@@ -23,8 +23,12 @@
 		 <div class="multBoxL2">
 			<ul>
 				<li>
+					<%if(loginUser.getUser_div().equals("신청자")){ %>
 					<span><a class="orange bold" href="/reqtakbae/selectMyNoticeList.mp"><%=loginUser.getUser_name() %></a>님이 접속하셨습니다.</span>
+					<%}else{ %>
+					<span><a class="orange bold" href="/reqtakbae/reqList.mp"><%=loginUser.getUser_name() %></a>님이 접속하셨습니다.</span>
 					
+					<%} %>
 				</li>
 				<li class="mt5">
 					<span class="aaa"></span>
@@ -50,8 +54,8 @@
 		  <div class="overlay-content">
 			<p class="clear"><a href="<%=request.getContextPath()%>/reset?p=comInfo">회사 소개</a></p>
 			<p><a href="<%=request.getContextPath()%>/reset?p=info">이용 안내</a></p>
-			<p><a href="<%=request.getContextPath() %>/selectList.bo">전체 공고</a></p>
-			<p><a href="<%=request.getContextPath() %>/selectTodayList.bo">오늘의 공고</a></p>
+			<p><a href="<%=request.getContextPath() %>/selectList.bo?gongdiv=일반">전체 공고</a></p>
+			<p><a href="<%=request.getContextPath() %>/selectList.bo?gongdiv=당일">오늘의 공고</a></p>
 			<p><a href="<%= request.getContextPath() %>/selectReview">후기게시판</a></p>
 			<p><a href="<%=request.getContextPath() %>/selectInquireList">문의하기</a></p>
 			<p class="smMenu mt20">
@@ -60,7 +64,6 @@
 					<span><a href="/reqtakbae/views/member/joinSort.jsp">회원가입</a></span>
 					<span> / </span>
 					<span><a href="javascript:openpop();">로그인</a></span>
-					<span> / </span>
 				<% } %>
 
 			</p>
@@ -72,7 +75,6 @@
 
 <!--  -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script> 
-<!-- <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script> -->
 
 <%if (loginUser !=null){ %>
 <script>
@@ -85,9 +87,9 @@
 				success:function(data){
 					$(".aaa").text(data+"p");
 				},
-				error:function(data){
-					console.log("실패");
-				}
+				error:function(request,status,error){
+			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			       },
 			});	
 	});
 </script>
@@ -158,16 +160,19 @@ function openpop()
 			function logout(){
 					location.href="<%=request.getContextPath()%>/logout.me";
 			}
+			
 			function chargeMoney(){
 					location.href="<%=request.getContextPath()%>/reset?p=charge";
 			}
 			
 			function myPage(){
+				<%if(loginUser!=null){%>
+				<%if(loginUser.getUser_div().equals("신청자")){ %>
 				location.href="<%=request.getContextPath()%>/selectMyNoticeList.mp";
+				<%}else{ %>
+				location.href="<%=request.getContextPath()%>/reqList.mp";
+				<%} }%>
 			}
-			
-			
-			
 			
 		</script>
 		

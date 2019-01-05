@@ -10,13 +10,14 @@ public class SelectReqGisa implements java.io.Serializable{
 	private String h_context;
 	private int h_grade;
 	private int u_no;
+	private String imgname;
 	
 	public SelectReqGisa() {
 		super();
 	}
 
 	public SelectReqGisa(String user_id, String user_name, int grade, String phone, int basongnujuk, String h_context,
-			int h_grade, int u_no) {
+			int h_grade, int u_no, String imgname) {
 		super();
 		this.user_id = user_id;
 		this.user_name = user_name;
@@ -26,6 +27,7 @@ public class SelectReqGisa implements java.io.Serializable{
 		this.h_context = h_context;
 		this.h_grade = h_grade;
 		this.u_no = u_no;
+		this.imgname = imgname;
 	}
 
 	public String getUser_id() {
@@ -92,13 +94,20 @@ public class SelectReqGisa implements java.io.Serializable{
 		this.u_no = u_no;
 	}
 
+	public String getImgname() {
+		return imgname;
+	}
+
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
+
 	@Override
 	public String toString() {
 		return "SelectReqGisa [user_id=" + user_id + ", user_name=" + user_name + ", grade=" + grade + ", phone="
 				+ phone + ", basongnujuk=" + basongnujuk + ", h_context=" + h_context + ", h_grade=" + h_grade
-				+ ", u_no=" + u_no + "]";
+				+ ", u_no=" + u_no + ", imgname=" + imgname + "]";
 	}
-	
 
 	
 }

@@ -2,6 +2,7 @@ package com.kh.jinkuk.border.announcment.cotroller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -18,6 +19,7 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.kh.jinkuk.border.announcment.model.service.AnnouncmentService;
 import com.kh.jinkuk.border.announcment.model.vo.InsertAnnouncment;
 import com.kh.jinkuk.common.MyFileRenamePolicy;
+import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.member.model.vo.Member;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -44,39 +46,42 @@ public class InsertBoardServlet extends HttpServlet {
 			
 			//전송 파일 용량 제한 :  10MB로 제한
 			int maxSize =  1024 * 1024 * 10;
+			String root = request.getSession().getServletContext().getRealPath("/upload/");
+			/*String filePath = root + "GisaJoinImg/";*/
+			System.out.println("root : "+root);
 			
-			String root = request.getSession().getServletContext().getRealPath("/");
-			
-			System.out.println(root);
-			
-			String filePath = root + "thumbnail_uploadFiles/";
-			
-			//사용자가 올린 파일명을 그대로 저장하지 않는 것이 일반적이다.
-			//1.같은 파일명이 있는 경우 이전 파일을 덮어 쓸 수 있다.
-			//2.한글로된 파일명, 특수기호, 띄어쓰기는 서버에 따라 문제가 생길 수 도 있다.
-			
-			//DefaultFileRenamePolicy는 cos.jar 제공하는 클래스
-			//같은 파일명이 존재하는지를 검사하고 있을 경우에는 뒤에 숫자를 붙여준다.
-			//ex : aaa.zip, aaa1.zip, aaa2.zip
-			
-			/*MultipartRequest multiRequest
-			 = new MultipartRequest(request, filePath, maxSize, 
-					 "UTF-8", new DefaultFileRenamePolicy());*/
 			MultipartRequest multiRequest
-			 = new MultipartRequest(request, filePath, maxSize,
+			 = new MultipartRequest(request, root, maxSize,
 					 "UTF-8", new MyFileRenamePolicy());
+			String gongdiv=multiRequest.getParameter("gongdiv");
+			System.out.println(gongdiv);
+			String saveFiles="";
+			String originFiles="";
+			String name="upload01";
+			saveFiles=multiRequest.getFilesystemName(name);
+			originFiles=multiRequest.getOriginalFileName(name);
+//			System.out.println("fileSystem name : " +saveFiles);
+//			System.out.println("originFile name : " +originFiles);
+		
+			
+			Images image =new Images();
+			image.setI_path(root);
+			image.setI_o_name(originFiles);
+			image.setI_c_name(saveFiles);
+			image.setI_div("공고사진");
+			
 			String title = multiRequest.getParameter("title");
-			System.out.println("title:"+title);
+//			System.out.println("title:"+title);
 			String product = multiRequest.getParameter("product");
-			System.out.println("product:"+product);
+//			System.out.println("product:"+product);
 			String size=multiRequest.getParameter("size");
-			System.out.println("size:"+size);
+//			System.out.println("size:"+size);
 			int value = Integer.parseInt(multiRequest.getParameter("value"));
-			System.out.println("value"+value);
+//			System.out.println("value"+value);
 			String start = multiRequest.getParameter("start");
-			System.out.println("start"+value);
+//			System.out.println("start"+value);
 			String end = multiRequest.getParameter("end");
-			System.out.println("end"+end);
+//			System.out.println("end"+end);
 			String yearmd = multiRequest.getParameter("d");
 			int year =Integer.parseInt(yearmd.split("-")[0]);
 			int month=Integer.parseInt(yearmd.split("-")[1]);
@@ -86,7 +91,7 @@ public class InsertBoardServlet extends HttpServlet {
 			GregorianCalendar g =new GregorianCalendar(year, month-1, day, h, m);
 			long date =g.getTimeInMillis();
 			String area = multiRequest.getParameter("area");
-			System.out.println("area"+area);
+//			System.out.println("area"+area);
 			int total=Integer.parseInt(multiRequest.getParameter("total"));
 			int point=Integer.parseInt(multiRequest.getParameter("point")); 
 			Member loginUser =(Member)request.getSession().getAttribute("loginUser");
@@ -104,12 +109,12 @@ public class InsertBoardServlet extends HttpServlet {
 			i.setGtype(product);
 			i.setUno(uno);
 			i.setPoint(point);
-			System.out.println(i);
-//			int result = new AnnouncmentService().insertBoard(i);
-			/*if(result>0) {
-			response.sendRedirect("/reqtakbae/selectList.bo");
+			int result = new AnnouncmentService().insertBoard(i,image,gongdiv);
+			if(result>0) {
+			String encoded = URLEncoder.encode(gongdiv,"UTF-8");
+			response.sendRedirect("/reqtakbae/selectList.bo?gongdiv="+encoded);
 			
-			}*/
+			}
 			
 		}
 		
