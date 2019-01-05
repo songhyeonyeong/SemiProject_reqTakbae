@@ -19,6 +19,7 @@ import com.kh.jinkuk.admin.model.vo.Change;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.admin.model.vo.Point;
+import com.kh.jinkuk.admin.model.vo.Report;
 import com.kh.jinkuk.admin.model.vo.Review;
 
 
@@ -1800,6 +1801,104 @@ public class AdminDao {
 				
 				
 			
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
+
+	public int updateJoin(Connection con, Admin m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("joinConfirm");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, m.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int getListCountRp(Connection con) {
+		Statement stmt =null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String query =prop.getProperty("ReportCount");
+			
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
+
+	public ArrayList<Report> selectListRp(Connection con, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Report> list = null;
+		
+		String query = prop.getProperty("selectReport");
+		System.out.println(query);
+		try {
+			pstmt = con.prepareStatement(query);
+		
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+			
+
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Report>();
+			
+			while(rset.next()) {
+				Report m = new Report();
+				
+				m.setS_no(rset.getInt("RNUM"));
+				m.setU_no1(rset.getString("USER_ID"));
+				m.setU_no2(rset.getString("USER_NAME"));
+				m.setS_title(rset.getString("S_TITLE"));
+				m.setS_s_reason(rset.getString("S_S_REASON"));
+				m.setS_reason(rset.getString("S_REASON"));
+				m.setG_no(rset.getInt("G_NO"));
 				
 				list.add(m);
 			}
