@@ -35,17 +35,17 @@ public class todayannouncementDao {
 	public ArrayList<Announcment> selectTodayList(Connection con, int currentPage, int limit) {
 		
 
-		Date d = new Date ();
-		String s = d.toString();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-		System.out.println(sdf.format(d));
-		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Announcment> list = null;
+		Date d = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yy/mm/dd");
+		String today = sdf.format(d);
+		
+		System.out.println(d);
 		
 		String query = prop.getProperty("selectTodayList");
-		
+			
 		try {
 			pstmt = con.prepareStatement(query);
 			
@@ -59,7 +59,7 @@ public class todayannouncementDao {
 			list = new ArrayList<Announcment>();
 			
 			rset = pstmt.executeQuery();
-			
+			System.out.println(query);
 			while(rset.next()) {
 				Announcment a = new Announcment();
 				a.setRnum(rset.getInt("RNUM"));
@@ -83,7 +83,6 @@ public class todayannouncementDao {
 		}
 		return list;
 	}
-
 
 	public int getListCountToday(Connection con) {
 		PreparedStatement pstmt =null;

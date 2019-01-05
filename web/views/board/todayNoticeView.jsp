@@ -69,13 +69,15 @@
 			<span>홈 &gt; 오늘의 공고</span>
 		</div>
 
+		<p class="flo_right mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>
+		
 		<div class="rtv of mt30">
 
 			<div class="flo_left wth300"><!-- flo_left S-->
 				<p><img src="http://via.placeholder.com/300x250" alt="상품이미지"></p>
 				<p class="font30 tcen">신청자 인원 <em class="font30 orange"><%= a.getCount() %></em>명</p>
 			</div><!--// flo_left E-->
-
+			
 			<div class="flo_right wth850"><!-- flo_right S-->
 				<table class="noticeWrite"><!-- boardWrite S-->
 					<caption>공고 리스트입니다.</caption>
@@ -85,9 +87,6 @@
 						<col style="width:20%;">
 						<col style="width:%;">
 					</colgroup>
-						<% if(loginUser != null){ %>
-						<p class="flo_right mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>
-						<% } %>
 					<tbody>
 					<tr>
 						<th scope="row">제목</th>

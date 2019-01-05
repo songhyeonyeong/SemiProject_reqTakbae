@@ -18,6 +18,7 @@
 function fn_open() {
    window.open('reportPop.jsp','reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=600,height=600');
 }
+
 </script>
 
 </head>
@@ -39,7 +40,7 @@ function fn_open() {
 		</div>
 
 		
-		<h2 class="tcen cal mt20">당일 날짜 : <em class="font20 darkred">2019.01.01</em></h2>
+		<h2 class="tcen cal mt20">당일 날짜 : <em class="font20 darkred"></em></h2>
 
 		<table class="searchTbl mt20 mb30"><!-- searchTbl S -->
 			<caption>공고 검색입니다.</caption>
@@ -122,7 +123,7 @@ function fn_open() {
 					<% for(Announcment a : list){ %>
 				<tr>
 					<input type="hidden" value="<%= a.getG_NO() %>">
-					<td><%= a.getG_NO() %></td>
+					<td><%= a.getRnum() %></td>
 					<td><%= a.getG_S_DATE() %></td>
 					<td><%= a.getG_S_AREA() %></td>
 					<td><%= a.getG_E_AREA() %></td>
@@ -175,7 +176,7 @@ function fn_open() {
 
 
 </div><!--// Wrap E-->
-
+	<!-- 상세보기 클릭시 -->
 	<script>
 		$(function(){
 			$(".sbtn").click(function(){
@@ -186,6 +187,7 @@ function fn_open() {
 			});
 		});
 	</script>
+	
 
 <%@ include file="/views/include/myNav.jsp" %>
 
