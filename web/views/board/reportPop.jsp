@@ -20,7 +20,6 @@
 
 	<div class="popCont">
 		
-		<form action="<%=request.getContextPath()%>/ReportServlet">
 		<table class="boardWrite"><!-- boardWrite S-->
 			<caption>신고하기 리스트입니다.</caption>
 			<colgroup>
@@ -65,20 +64,28 @@
 		</table><!--// boardWrite E-->
 
 		<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn rd" onclick="input();">신고하기</a></span>
-			<span><a class="mbtn gy" href="#">취소</a></span>
-		</form>
+			<span><a id="a1" class="mbtn rd">신고하기</a></span>
+			<span><a id="a2" class="mbtn gy">취소</a></span>
+		
 		</div><!--// btnbox E-->
 		
 	</div>
 
 </div><!--// Wrap E-->
 <script>
-	function input(){
+	$("#a1").click(function(){
 		var report = $('input[name="report"]:checked').val();
 		var area = $('#tarea').val();
-		location.href="<%=request.getContextPath()%>/ReportServlet?gno=<%= gno %>&title=<%= title %>&name=<%= name %>&report="+report+"&area="+area+"&uno=<%=uno%>";
-	}
+		if(report!=null){
+			location.href="<%=request.getContextPath()%>/ReportServlet?gno=<%= gno %>&title=<%= title %>&name=<%= name %>&report="+report+"&area="+area+"&uno=<%=uno%>";
+		}else{
+			alert("해당 사유를 선택해주세요!");
+		}	
+	});
+	
+	$("#a2").click(function(){
+		window.close();
+	});
 </script>
 
 </body>

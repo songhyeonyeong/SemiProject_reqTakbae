@@ -1,12 +1,14 @@
 package com.kh.jinkuk.border.report.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import com.kh.jinkuk.border.report.model.service.ReportService;
 import com.kh.jinkuk.border.report.model.vo.Report;
@@ -44,10 +46,20 @@ public class ReportServlet extends HttpServlet {
 		r.setName(name);
 		r.setReport(report);
 		r.setArea(area);
-		
 		int result = new ReportService().insertReport(r);
 		
+		PrintWriter out = response.getWriter();
+		if(result > 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script> alert('신고 작성 완료')</script>");
+			out.println("<script> window.close();</script>");
+		/*	out.close();*/
+		}else {
+			out.println("<script> alert('신고 작성 실패');</script>");
+			
+		}
 		
+		/* location.href='"+request.getContextPath()+"/selectList.bo';*/
 		
 		
 		

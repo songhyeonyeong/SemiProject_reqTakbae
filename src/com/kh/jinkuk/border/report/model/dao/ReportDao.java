@@ -45,8 +45,6 @@ public class ReportDao {
 			pstmt.setInt(6, r.getGno());
 			
 			result = pstmt.executeUpdate();
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -57,13 +55,23 @@ public class ReportDao {
 	}
 
 	public int upMember(Connection con, Report r) {
-		PreparedStatement pstmt;
+		PreparedStatement pstmt = null;
 		int result = 0;
 		
+		String query = prop.getProperty("upmember");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, r.getUno());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
-		
-		
-		return 0;
+		System.out.println(result);
+		return result;
 	}
 
 }

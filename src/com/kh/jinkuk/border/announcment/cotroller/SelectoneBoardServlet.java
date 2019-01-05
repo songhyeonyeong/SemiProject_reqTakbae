@@ -35,11 +35,9 @@ public class SelectoneBoardServlet extends HttpServlet {
 		try {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
-		System.out.println(num);
 		
 		Announcment a = new AnnouncmentService().selectOne(num);
 		
-		System.out.println(a);
 		String page = "";
 		
 		

@@ -68,15 +68,19 @@
 		<div class="titNavi">
 			전체 공고
 			<span>홈 &gt; 전체 공고</span>
-			<p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p><!-- user에게만 보임 -->
+			<!-- <p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>user에게만 보임 -->
 		
 		<script>
-			function fn_open(){
-				location.href="<%=request.getContextPath()%>/views/board/reportPop.jsp?gno=<%=num%>&title=<%= a.getG_TITLE() %>&name=<%= loginUser.getUser_name() %>&uno=<%=loginUser.getU_no()%>";
-				<%-- ?no="+<%=a.getG_NO()%>+"&title="+<%= a.getG_TITLE() %>+"&name="+<%= loginUser.getUser_name() %>; --%>
-			
-					<%-- "<%=request.getContextPath()%>/ReportServlet --%>
+		function fn_open() {
+			   window.open('<%=request.getContextPath()%>/views/board/reportPop.jsp?gno=<%=num%>&title=<%= a.getG_TITLE() %>&name=<%= loginUser.getUser_name() %>&uno=<%=loginUser.getU_no()%>','reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=500,width=600,height=600');
 			}
+		
+			<%-- function fn_open(){
+				location.href="<%=request.getContextPath()%>/views/board/reportPop.jsp?gno=<%=num%>&title=<%= a.getG_TITLE() %>&name=<%= loginUser.getUser_name() %>&uno=<%=loginUser.getU_no()%>";
+				?no="+<%=a.getG_NO()%>+"&title="+<%= a.getG_TITLE() %>+"&name="+<%= loginUser.getUser_name() %>;
+			
+					"<%=request.getContextPath()%>/ReportServlet
+			} --%>
 		</script>	
 		
 		</div>
@@ -98,6 +102,9 @@
 						<col style="width:20%;">
 						<col style="width:%;">
 					</colgroup>
+					<% if(loginUser != null){ %>
+						<p class="flo_right mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>
+						<% } %>
 					<tbody>
 					<tr>
 						<th scope="row">제목</th>
