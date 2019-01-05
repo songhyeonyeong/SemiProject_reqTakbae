@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
+	import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*, java.text.*"%>
 <%
 	ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
@@ -8,6 +8,11 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	
+	Calendar calendar = Calendar.getInstance();
+    java.util.Date date = calendar.getTime();
+    String today = (new SimpleDateFormat("yyyy-MM-dd").format(date));
+
 %>	
 
 <%@ include file="/views/include/common.jsp" %>
@@ -39,7 +44,7 @@ function fn_open() {
 		</div>
 
 		
-		<h2 class="tcen cal mt20">당일 날짜 : <em class="font20 darkred">2019.01.01</em></h2>
+		<h2 class="tcen cal mt20">당일 날짜 : <em class="font20 darkred"><%=today %></em></h2>
 
 		<table class="searchTbl mt20 mb30"><!-- searchTbl S -->
 			<caption>공고 검색입니다.</caption>
@@ -86,10 +91,9 @@ function fn_open() {
 			<span><a class="mbtn db wth60" href="#">검색</a></span>
 		</div>
 
-		
 		<!-- user에게만 보임 -->
 		<% if(loginUser != null){ %>
-		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/reset?p=writer">공고등록하기</a></p>
+		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=당일">공고등록하기</a></p>
 		<% } %>
 
 		<table class="boardList mt20">
@@ -143,7 +147,7 @@ function fn_open() {
 			<% if(currentPage <= 1){ %>
 			<span><a class="num" disabled>&lt;</a></span>
 			<% }else{ %>
-			<span><a class="num" href="<%=request.getContextPath()%>/selectTodayList.bo?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+			<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage - 1%>&&gongdiv=당일">&lt;</a></span>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){ 
@@ -151,7 +155,7 @@ function fn_open() {
 			%>
 						<span><a class="num on" disabled><%= p %></a></span>
 			<%      }else{ %>
-								<span><a class="num" href="<%=request.getContextPath()%>/selectTodayList.bo?currentPage=<%= p %>"><%= p %></a></span>
+								<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%= p %>&&gongdiv=당일"><%= p %></a></span>
 			<%      } %>
 	
 			<% } %>
@@ -160,7 +164,7 @@ function fn_open() {
 			<% if(currentPage >= maxPage){ %>
 			<span><a class="num" disabled>></a></span>
 			<% }else{ %>
-				<span><a class="num" href="<%=request.getContextPath()%>/selectTodayList.bo?currentPage=<%=currentPage + 1%>">></a></span>
+				<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage + 1%>&&gongdiv=당일">></a></span>
 			<% } %>
 			
 			
@@ -182,7 +186,7 @@ function fn_open() {
 				
 				var num = $(this).parent().parent().children("td").eq(0).text();
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/selectoneTodayList.bo?num=" + num;
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num="+num+"&&gongdiv=당일";
 			});
 		});
 	</script>

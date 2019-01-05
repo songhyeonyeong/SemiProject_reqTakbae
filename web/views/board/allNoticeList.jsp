@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" 
 	import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
 <%
+
 	ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");
+
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
@@ -115,7 +117,7 @@ function fn_open() {
 
 		<!-- user에게만 보임 -->
 		<% if(loginUser != null){ %>
-		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/reset?p=writer">공고등록하기</a></p>
+		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반">공고등록하기</a></p>
 		<% } %>
 		
 		<table class="boardList mt20">
@@ -168,7 +170,7 @@ function fn_open() {
 			<% if(currentPage <= 1){ %>
 			<span><a class="num" disabled>&lt;</a></span>
 			<% }else{ %>
-			<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage - 1%>">&lt;</a></span>
+			<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage - 1%>&&gongdiv=일반">&lt;</a></span>
 			<% } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){ 
@@ -176,7 +178,7 @@ function fn_open() {
 			%>
 						<span><a class="num on" disabled><%= p %></a></span>
 			<%      }else{ %>
-								<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%= p %>"><%= p %></a></span>
+								<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%= p %>&&gongdiv=일반"><%= p %></a></span>
 			<%      } %>
 	
 			<% } %>
@@ -185,7 +187,7 @@ function fn_open() {
 			<% if(currentPage >= maxPage){ %>
 			<span><a class="num" disabled>></a></span>
 			<% }else{ %>
-				<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage + 1%>">></a></span>
+				<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage + 1%>&&gongdiv=일반">></a></span>
 			<% } %>
 			
 			
@@ -206,7 +208,7 @@ function fn_open() {
 				
 				var num = $(this).parent().parent().children("td").eq(0).text();
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num;
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num+"&&gongdiv=일반";
 			});
 		});
 	</script>

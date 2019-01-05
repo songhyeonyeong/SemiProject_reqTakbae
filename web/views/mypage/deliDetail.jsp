@@ -15,9 +15,9 @@ $(document).ready(function(){
 	  window.resizeTo(620, 690);
 	 });
 
-function fn_open(id,name,phone,count,grade) {
+function fn_open(id,name,phone,count,grade,img) {
 	console.log(id+" "+name+" "+phone+" "+count+" "+grade);
-   window.open('/reqtakbae/views/mypage/deliDetailPop.jsp?id='+id+"&&name="+name+"&&phone="+phone+"&&count="+count+"&&grade="+grade,'deliDetailPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=700,height=600');
+   window.open('/reqtakbae/views/mypage/deliDetailPop.jsp?id='+id+"&&name="+name+"&&phone="+phone+"&&count="+count+"&&grade="+grade+"&&img="+img,'deliDetailPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=700,height=600');
 }
 	
 
@@ -131,7 +131,7 @@ function fn_open(id,name,phone,count,grade) {
 								data:{num:num},
 								type:"get",
 								success:function(data){
-											fn_open(data.user_id,data.user_name,data.phone,data.basongnujuk,data.grade);
+											fn_open(data.user_id,data.user_name,data.phone,data.basongnujuk,data.grade,data.imgname);
 									
 								},
 								error:function(request,status,error){

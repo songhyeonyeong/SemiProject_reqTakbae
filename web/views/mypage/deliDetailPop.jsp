@@ -7,6 +7,7 @@
 		String phone =(String)request.getParameter("phone");
 		int count=Integer.parseInt(request.getParameter("count"));
 		int grade=Integer.parseInt(request.getParameter("grade"));
+		String img =(String)request.getParameter("img");
 	%>
 <%@ include file="/views/include/common.jsp" %>
 
@@ -33,7 +34,11 @@
 		<div class="rtv of mt30">
 
 			<div class="flo_left wth250"><!-- flo_left S-->
+				<%if(img!=null){ %>
+				<img src="<%=request.getContextPath()%>/upload/<%=img%>" width="250" height="250" alt="기사사진">
+				<%}else{ %>
 				<img src="http://via.placeholder.com/250x250" alt="기사사진">
+				<%} %>
 			</div><!--// flo_left E-->
 
 			<div class="flo_right wth380"><!-- flo_right S-->
