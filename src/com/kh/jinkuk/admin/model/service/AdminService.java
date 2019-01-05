@@ -15,6 +15,7 @@ import com.kh.jinkuk.admin.model.vo.Change;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.admin.model.vo.Point;
+import com.kh.jinkuk.admin.model.vo.Report;
 import com.kh.jinkuk.admin.model.vo.Review;
 
 
@@ -475,6 +476,34 @@ public class AdminService {
 		ArrayList<Review> list = new AdminDao().searchDeliName(con, deliver);
 		
 		close(con);
+		return list;
+	}
+
+	public int updateJoin(Admin m) {
+		Connection con = getConnection();
+		int result = new AdminDao().updateJoin(con,m);
+	
+		if(result > 0)commit(con);
+		else rollback(con);
+		close(con);
+		
+		return result;
+	}
+
+	public int getListCountRp() {
+		Connection con = getConnection();
+		int listCount = new AdminDao().getListCountRp(con);
+		close(con);
+		return listCount;
+	}
+
+	public ArrayList<Report> selectListRp(int currentPage, int limit) {
+		Connection con =  getConnection();
+		
+		ArrayList<Report> list = new AdminDao().selectListRp(con,currentPage,limit);
+		
+		close(con);
+		
 		return list;
 	}
 

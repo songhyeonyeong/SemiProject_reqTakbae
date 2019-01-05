@@ -65,7 +65,7 @@
 				<tr>
 					<td>
 						<label for=""> 체크</label>
-						<input id="" name="" class="check" type="checkbox">
+						<input id="memCheck" name="memCheck" class="check" type="checkbox">
 					</td>
 					<td><%=m.getUno() %></td>
 					<td><%=m.getUserName() %></td>
@@ -146,6 +146,64 @@
 	  return false;
 	 }
 	}
+	
+	
+	 $('span').eq(0).click(function() {
+
+			$("input[name=memCheck]:checkbox").each(function() {
+
+				$(this).attr("checked", true);
+
+			});
+
+		});
+	 
+	 
+
+	 $('span').eq(4).click(function() {
+		 
+			$("input[name=memCheck]:checked").each(function() {
+
+				a=2;
+				
+				var test =$(this).val();
+
+				console.log(test);
+				
+				$("#add").submit();
+			});
+			
+		
+
+		});
+	 
+	 
+	 var selected = new Array();
+
+	 
+	 
+	 $(function(){
+			$("span").eq(1).click(function(){
+				 $("input:checkbox[name=memCheck]:checked").each(function() {
+				        selected.push($(this).parent().parent().children().eq(3).text());
+				   });
+				console.log(selected);
+				$.ajax({
+					url:"/reqtakbae/joinConfirm", //댓글삽입 서블릿으로 전송
+					data:{selected:selected},
+					type:"post",
+					success:function(data){
+						console.log(data);
+						location.reload();
+					},
+					error:function(){
+						console.log("실패");
+					}
+				});
+			});
+		});
+		
+	 
 	</script>
 
 

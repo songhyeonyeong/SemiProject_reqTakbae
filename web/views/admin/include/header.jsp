@@ -11,9 +11,8 @@
 			<li><a href="#INSERT" onClick="SelectAllAnnoucement();">공고 게시물 관리</a></li>
 			<li><a href="#INSERT" onClick="SelectAllMoney();">충전/포인트/환전 내역</a></li>
 			<li><a href="#INSERT" onClick="SelectAllInquiry();">문의 내역</a></li>
-			<li><a href="/reqtakbae/views/admin/joinConfirmList.jsp">신고 내역</a></li>
+			<li><a href="#INSERT" onClick="SelectAllReport();">신고 내역</a></li>
 			<li><a href="#INSERT" onClick="SelectAllReview();">후기 게시물 관리</a></li>
-
 			<li><a href="/reqtakbae/views/admin/statistics.jsp">통계 관리</a></li>
 
 		</ul>
@@ -32,9 +31,6 @@
 			location.href="<%=request.getContextPath()%>/selectAll.in";
 		}
 		
-		function SelectAllReport(){
-			location.href="<%=request.getContextPath()%>/selectAll.in";
-		}
 		
 		function SelectAllMoney(){
 			location.href="<%=request.getContextPath()%>/selectAll.mo";
@@ -46,6 +42,10 @@
 		
 		function SelectAllJoinConfirm(){
 			location.href="<%=request.getContextPath()%>/select.jo";
+		}
+		
+		function SelectAllReport(){
+			location.href="<%=request.getContextPath()%>/select.rp";
 		}
 		
 		
