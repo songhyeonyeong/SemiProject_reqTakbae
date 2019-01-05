@@ -73,7 +73,6 @@ public class ExchangeServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		
 		ArrayList<Exchange> list = new ExchangeService().selectList(currentPage, limit, uNo);
-		System.out.println(list);
 		String page ="";
 		if(list != null) {
 			page = "views/mypage/payBackList.jsp";

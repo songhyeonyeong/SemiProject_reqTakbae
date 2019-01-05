@@ -46,14 +46,37 @@
 	 
 		<%@ include file="/views/include/tabMypage.jsp" %>
 		
-		<p class="flo_right mb10"><a class="mbtn or" href="#">환전하기</a></p>
+		<p class="flo_right mb10"><a class="mbtn or" href="#" onclick="fn_open();">환전하기</a></p>
 		
 	<script>
-		$(function(){
+
+		function fn_open() {
+				var uno = <%=loginUser.getU_no()%>;
+				$.ajax({
+					url:"/reqtakbae/ExchangeAjaxServlet",
+					type:"get",
+					data:{uno:uno},
+					success:function(data){
+						window.open('/reqtakbae/views/mypage/payBackPop.jsp?num='+uno+"&money="+data,'reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=500,width=300,height=250');
+					},
+					error:function(data){
+						console.log("실패");	
+					}
+				});
+			}
+	  		
+
+		
+
+
+		<%-- $(function(){
+			
 			$(".mbtn").click(function(){
+				var uno = <%=loginUser.getU_no()%>;
 				$.ajax({
 					url:"ExchangeAjaxServlet",
 					type:"get",
+					data:{uno:uno},
 					success:function(data){
 						$("#p1").text(data);
 						var exmoney = prompt('환전 가능 금액 : ' + data + '원 ','환전은 10000원 이상부터 가능합니다.');
@@ -75,7 +98,7 @@
 					}
 				});
 			});
-		});
+		}); --%>
 	</script>
 
 		<table class="boardList mt20">

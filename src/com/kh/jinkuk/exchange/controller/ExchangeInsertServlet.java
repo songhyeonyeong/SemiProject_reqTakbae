@@ -31,11 +31,9 @@ public class ExchangeInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int money = Integer.parseInt(request.getParameter("exmoney"));
-		Member loginUser = (Member)request.getSession().getAttribute("loginUser");
-		int uNo = loginUser.getU_no();
+		int money = Integer.parseInt(request.getParameter("radio"));
+		int uNo = Integer.parseInt(request.getParameter("uno"));
 		int rmoney = money - (int)(money*0.2);
-		
 		int result = new ExchangeService().InsertExchange(uNo, money, rmoney);
 		
 		if(result > 0) {
@@ -44,7 +42,6 @@ public class ExchangeInsertServlet extends HttpServlet {
 			out.println("<script> alert('환전 신청 완료'); location.href='"+request.getContextPath()+"/ExchangeServlet';</script>");
 			out.close();
 		}else {
-			request.setAttribute("msg", "환전 신청 실패");
 			
 		}
 		

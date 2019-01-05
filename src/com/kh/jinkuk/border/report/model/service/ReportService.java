@@ -14,14 +14,20 @@ public class ReportService {
 		int result = new ReportDao().insertReport(con, r);
 		int up = new ReportDao().upMember(con, r);
 		
+		if(result > 0 && up > 0) {
+			commit(con);
+			close(con);
+			return 1;
+		}else {
+			rollback(con);
+			close(con);
+			return 0;
+		}
 		
-		if(result > 0 && up > 0) commit(con);
-		rollback(con);
-		
-		close(con);
 		
 		
-		return result;
+		
+		
 	}
 
 }

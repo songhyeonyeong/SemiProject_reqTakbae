@@ -30,7 +30,6 @@ public class ExchangeAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		int uNo = Integer.parseInt(request.getParameter("uno"));
 		int money = new ExchangeService().SearchMoney(uNo);
 		
