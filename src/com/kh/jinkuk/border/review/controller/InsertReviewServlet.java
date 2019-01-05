@@ -1,6 +1,8 @@
 package com.kh.jinkuk.border.review.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,6 +34,10 @@ public class InsertReviewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		response.setContentType("text/html;charset=UTF-8");
+		
+		
 		// 제목 별점 내용 기사명 작성자아이디
 		String title = request.getParameter("title");
 		String starScore = request.getParameter("starScore");
@@ -68,11 +74,13 @@ public class InsertReviewServlet extends HttpServlet {
 		System.out.println("후기 인서트 완료" );
 		
 		
+		
+		
 		String page = "";
 		if(result > 0) {
 			//response.sendRedirect(request.getContextPath()+"/totalGreade?");
 			
-			response.sendRedirect(request.getContextPath()+"/updatePoint?uno="+uno+"&&gno="+gno+"&&score="+score+"&&driname="+driname);
+			response.sendRedirect(request.getContextPath()+"/updatePoint?uno="+uno+"&&gno="+gno+"&&driname="+driname);
 			//score , driname , gno , uno
 		}else {
 			

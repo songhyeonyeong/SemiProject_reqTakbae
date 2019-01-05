@@ -1,6 +1,8 @@
 package com.kh.jinkuk.border.review.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,13 +35,12 @@ public class UpdatePointServlet extends HttpServlet {
 		int uno=Integer.parseInt(request.getParameter("uno"));
 		int gno = Integer.parseInt(request.getParameter("gno"));
 		String driname = request.getParameter("driname");
-		int score = Integer.parseInt(request.getParameter("score"));
 		
 		System.out.println("---UpdatePointServlet---");
 		System.out.println(uno);
 		System.out.println(gno);
 		System.out.println(driname);
-		System.out.println(score);
+		
 		
 		
 		Review r = new Review();
@@ -52,14 +53,25 @@ public class UpdatePointServlet extends HttpServlet {
 		
 		
 		
-		
-		
 		String page = "";
 		
 		if(resultPoint > 0) {
-			response.sendRedirect(request.getContextPath()+"/totalGrade?uno="+uno+"&&gno="+gno+"&&score="+score+"&&driname="+driname);
-			//response.sendRedirect(request.getContextPath() + "/selectReview?gno="+gno);
 			
+			PrintWriter out = response.getWriter();
+			
+			response.setCharacterEncoding("UTF-8");
+			response.setContentType("text/html; charset=UTF-8");
+			
+			out.println("<script language='javascript'>");
+			
+			out.println("alert('포인트 100P가 지급되었습니다.'); location.href='/reqtakbae/totalGrade?gno="+gno+"&&driname="+driname+"' ;"); 
+			
+			out.println("</script>");
+			
+			out.close();
+			
+			
+			//response.sendRedirect(request.getContextPath() + "/selectReview?gno="+gno);
 		}else {
 			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

@@ -2,6 +2,7 @@ package com.kh.jinkuk.border.review.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,16 +32,13 @@ public class UpdateGradeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int uno=Integer.parseInt(request.getParameter("uno"));
 		int gno = Integer.parseInt(request.getParameter("gno"));
-		String driname = request.getParameter("driname");
-		int score = Integer.parseInt(request.getParameter("score"));
+		String driname = request.getParameter("driname");//후기 기사아이디
+	
 		
 		System.out.println("---UpdateGradeServlet---");
-		System.out.println(uno);
 		System.out.println(gno);
 		System.out.println(driname);
-		System.out.println(score); //방금 인서트한 후기 정보들
 		
 		Review r = new Review();
 		r.setDriname(driname);
@@ -48,17 +46,22 @@ public class UpdateGradeServlet extends HttpServlet {
 		
 		//평점 업데이트 
 		
-		ArrayList<Review> list = new ReviewService().selectGradeList(r);
 		
-	
+		int result= new ReviewService().totalGrade(r);//점수값 받아오기
+		int countResult=new ReviewService().totalCount(r);//갯수
 		
-	
-	
-	
-	
-	
-	
-	
+		System.out.println("-----UpdateGradeServlet-----");
+		System.out.println("통계 점수값"+result);
+		System.out.println("통계 카운트 값"+countResult);
+		
+		int grade=result/countResult;
+		
+		int updateResult = new ReviewService().updateGrade(r,grade);
+		
+		System.out.println("updateResult"+updateResult);
+		
+		
+		
 	
 	response.sendRedirect(request.getContextPath() + "/selectReview?gno="+gno);
 	
