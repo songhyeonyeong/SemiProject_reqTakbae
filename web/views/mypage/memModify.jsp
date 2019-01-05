@@ -3,9 +3,7 @@
 <% 
 	String bigtabon="7";
 %>
-<%
-	String msg = (String)request.getAttribute("msg");
-%>
+
 <%@ include file="/views/include/common.jsp" %>
 
 <title>회원정보수정</title>
@@ -36,8 +34,8 @@
 
 			<div class="flo_right wth850">flo_right S -->
 			
-		<form id="updateForm" action="<%=request.getContextPath()%>/modifyMember.me" method="get">
-			<table class="boardWrite wth750 mr_auto mt30"><!-- boardWrite S-->
+		<form id="updateForm" action="<%=request.getContextPath()%>/modifyMember.me" method="post">
+			<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원정보수정 리스트입니다.</caption>
 			<colgroup>
 				<col style="width:30%;">
@@ -83,6 +81,7 @@
 				<th scope="row">이메일</th>
 				<td>
 					<span><input id="email" name="email" class="wth200 emailArea" type="text" value="<%=loginUser.getEmail() %>" readonly></span>
+					
 					<span class="changeArea" style="display: none;">
 						<input id="email1" class="wth100" type="text">@<input id="email2" class="wth100" type="text">
 						<select id="emailSelect">
@@ -97,11 +96,11 @@
 					<%!
 						public int getRandom(){
 							int randomCode=0;
-							randomCode = (int)Math.floor((Math.random()*99999-10000+1))+10000;
+							randomCode = (int)Math.floor((Math.random()*99999-9999))+10000;
 							return randomCode;
 						}
 					%>
-					<input type="hidden" value="<%=getRandom()%>" id="randomCode" name="">
+					<input type="hidden" value="<%=getRandom()%>" id="randomCode" name="randomCode">
 					
 					<a id="changeEmailBtn" class="sbtn db emailArea" onclick="emailChange()">변경하기</a>
 					<a class="sbtn db changeArea" onclick="sendCode()" style="display: none">인증번호 발송</a><br>
@@ -111,17 +110,20 @@
 						<input id="authCode" type="text" placeholder="인증번호를 입력하세요">
 						<a class="sbtn db" onclick="auth();">인증하기</a>
 					</span>
-					<a class="sbtn gy changeArea wth60" onclick="emailChangeCancle()" style="display: none">취소하기</a>
+					
+					<a class="sbtn gy wth60 changeArea" onclick="emailChangeCancle()" style="display: none">취소하기</a>
+					<input type="hidden" id="emailAuthArea" value="이메일 인증 실패">
 				</td>
 				
 				<script>
 					
-				
+					//이메일 변경하기 버튼
 					function emailChange(){
 						$(".changeArea").show();
 						$(".emailArea").hide();
 					}
 					
+					//이메일 취소하기 버튼
 					function emailChangeCancle(){
 						$(".changeArea").hide();
 						$(".emailArea").show();
@@ -129,9 +131,8 @@
 					}
 					
 					
-					//인증번호 발송
+					//인증번호 발송 버튼
 					var randomCode = $("#randomCode").val();
-					
 					function sendCode(){
 						$("#sendEmailClick").show();
 						
@@ -140,19 +141,24 @@
 						var email2 = $("#email2").val();
 						var fullEmail = email1 + "@" +email2;
 					
-						$.ajax({
-							url:"/reqtakbae/sendEmail",
-							type:"post",
-							data:{fullEmail:fullEmail,randomCode:randomCode},
-							success:function(data){
-								if(data == "YES"){
-									alert("인증코드 발송");
-								}else{
-									alert("인증코드 발송 실패");
+						if(email1 == "" || email2 == ""){
+							alert("이메일을 입력하세요");
+						}else{
+							$.ajax({
+								url:"/reqtakbae/sendEmail",
+								type:"post",
+								data:{fullEmail:fullEmail,randomCode:randomCode},
+								success:function(data){
+									if(data == "YES"){
+										alert("인증코드 발송");
+									}else{
+										alert("인증코드 발송 실패");
+									}
 								}
-							}
-							
-						});
+								
+							});
+						}
+						
 					}
 					
 					//이메일 인증코드 확인
@@ -162,12 +168,13 @@
 							
 							var email1 = $("#email1").val();
 							var email2 = $("#email2").val();
+							var fullEmail = email1+"@"+email2;
 							
-							$("#email").val(email1+"@"+email2);
+							$("#email").val(fullEmail);
+							$("#emailAuthArea").val("이메일 인증 성공");
 							
 						}else{
 							alert("이메일 인증 실패");
-
 						}
 						
 					}
@@ -206,6 +213,7 @@
 						생년월일<input type="text" size="25" placeholder="'-'를 제외하고 6자리" id="birth" >&nbsp;
 						<a class="sbtn db" id="confirmacc" onclick="fnSearchAccessToken()">계좌인증</a>
 						<a class="sbtn gy wth60" onclick="bankChangeCancle()">취소하기</a>
+						<input type="hidden" id="AccountlAuthArea" value="계좌 인증 실패">
 					</span>
 				</td>
 				<td><input type="hidden" name="changeDiv" id="changeDiv"></td>
@@ -216,15 +224,18 @@
 					$(".bankArea").hide();
 				}); */
 				
+				//계좌 변경하기 버튼
 				function changeBank(){
 					$(".bankArea").show();
 					$(".memberBank").hide();
 				}
 				
+				//계좌 취소하기 버튼
 				function bankChangeCancle(){
 					$(".bankArea").hide();
 					$(".memberBank").show();
 				}
+				
 				
 				
 			</script>
@@ -236,10 +247,10 @@
 		<!-- </div>// flo_right E
 		</div> -->
 
+		</form>
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn gy" href="#">취소</a></span>
 			<span><a class="mbtn db" onclick="infoChange()">수정하기</a></span>
-		</form>
 		</div><!--// btnbox E-->
 	</div><!--// inner E-->
 	
@@ -390,6 +401,8 @@
 								$("memberBankName").val(bankName);
 								$("#memberAccountNum").val(accNum);
 								
+								$("#AccountlAuthArea").val("계좌 인증 성공");
+								
 							} else {
 								alert("계좌 인증 실패");
 					
@@ -402,49 +415,28 @@
 		
 		
 		
-		function auth(){
-			if($("#authCode").val() == randomCode){
-				alert("이메일 인증 성공");
-				
-				var email1 = $("#email1").val();
-				var email2 = $("#email2").val();
-				
-				$("#email").val(email1+"@"+email2);
-				
-			}else{
-				alert("이메일 인증 실패");
-
-			}
-			
-		}
+	
 		
 		
 	
 	
 	
 		function infoChange(){
-			var uno = $("#uno").val();
-			var userPwd = $("#userPwd").val();
-			var phone = $("#phone").val();
-			var email = $("#email").val();
-			var bankName = $("#bankName").val();
-			var accnum = $("#accnum").val();
+			if($("#pwd1").val() == ""){
+				alert("새 비밀번호를 입력하세요");
+			}else if($("#pwd1").val() != $("#pwd2").val()){
+				alert("새 비밀번호를 확인을 올바르게 입력하세요");
+			}else if($("#phone").val() == ""){
+				alert("핸드폰 번호를 입력하세요");
+			}else if($(".changeArea").css("display") != "none" && $("#emailAuthArea").val() != "이메일 인증 성공"){
+				alert("이메일을 인증하세요");
+			}else if($(".bankArea").css("display") != "none" && $("#AccountlAuthArea").val() != "계좌 인증 성공"){
+				alert("계좌를 인증하세요");
+			}else{
+				$("#updateForm").submit();
+			}
 			
-			$.ajax({
-				url:"/reqtakbae/modifyMember.me",
-				type:"post",
-				data:{uno:uno,userPwd:userPwd,phone:phone,email:email,bankName:bankName,accnum:accnum},
-				success:function(data){
-					if(data=="YES"){
-						alert("회원 수정 성공");
-						
-					}else{
-						alert("회원 수정 실패");
-					}
-					
-				}
-				
-			});
+			
 			
 			
 		}
