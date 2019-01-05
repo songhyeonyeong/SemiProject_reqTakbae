@@ -1,12 +1,15 @@
 package com.kh.jinkuk.mypage.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.jinkuk.member.model.vo.Member;
 import com.kh.jinkuk.mypage.model.service.MypageService;
 
 /**
@@ -28,6 +31,8 @@ public class ModifyMember extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Member m = (Member) request.getSession().getAttribute("loginUser");
+		
 		String uno = request.getParameter("uno");
 		String userPwd = request.getParameter("userPwd");
 		String phone = request.getParameter("phone");
@@ -44,13 +49,23 @@ public class ModifyMember extends HttpServlet {
 		
 		int result = new MypageService().updateMember(uno,userPwd,phone,email,bankName,accnum);
 		
+		PrintWriter out = response.getWriter();
+		//response.sendRedirect("/reqtakbae/views/mypage/memModify.jsp");
+		//request.getRequestDispatcher("/views/mypage/memModify.jsp").forward(request, response);
 		if(result>0) {
-			response.getWriter().print("YES");
+			/*response.getWriter().print("YES");*/
+			out.println("<script>");
+			out.println("alert('회원정보 수정 성공');");
+			
+			request.getSession().setAttribute("loginUser", new Member(m.getU_no(), bankName, accnum, m.getUser_id(), m.getUser_pwd(), 
+					phone, email, m.getBacklist(), m.getUser_div(), m.getC_money(), m.getC_point(), m.getLogin_div(), m.getUser_name(), m.getU_date(), m.getStatus(), m.getK_trans()));
+
 		}else {
-			response.getWriter().print("NO");
+			out.println("alert('회원정보 수정 실패');");
 		}
 		
-		
+		out.println("location.href='/reqtakbae/views/mypage/memModify.jsp'");
+		out.println("</script>");
 	}
 
 	/**

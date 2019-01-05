@@ -232,5 +232,30 @@ public class MypageService {
 		return result;
 	}
 
+	public int leaveMember(String uno) {
+		Connection con = getConnection();
+		
+		int result = new MypageDao().leaveMember(con, uno);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<String> findGisaImgAddr(String uno) {
+		Connection con = getConnection();
+		
+		ArrayList<String> imgList = new MypageDao().findGisaImgAddr(con,uno);
+		
+		close(con);
+		
+		return imgList;
+	}
+
 
 }

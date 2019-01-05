@@ -19,6 +19,7 @@ import com.kh.jinkuk.mypage.model.vo.MyExchange;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
 import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class MypageDao {
 
@@ -670,7 +671,50 @@ public class MypageDao {
 		return result;
 	}
 
-	public String selectgisaimg(Connection con, int num) {
+	public int leaveMember(Connection con, String uno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("leaveMember");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, uno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+    
+	public ArrayList<String> findGisaImgAddr(Connection con, String uno) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<String> imgList = new ArrayList<String>();
+		String query = prop.getProperty("findGisaImgAddr");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, uno);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {
+				//String first = rset.getString("I_PATH");
+				String fileName = rset.getString("I_C_NAME");
+				System.out.println(fileName);
+				imgList.add(fileName);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		return imgList;
+  }
+    
+    
+  	public String selectgisaimg(Connection con, int num) {
 		PreparedStatement pstmt = null;
 		ResultSet rset =null;
 		String c_name=null;
@@ -681,11 +725,9 @@ public class MypageDao {
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				c_name=rset.getString("I_C_NAME");
-			}
-			
-		} catch (SQLException e) {
+			}catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			close(pstmt);
 			close(rset);
 		}
