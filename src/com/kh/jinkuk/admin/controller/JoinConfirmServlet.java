@@ -1,28 +1,28 @@
-package com.kh.jinkuk.mypage.controller;
+package com.kh.jinkuk.admin.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.kh.jinkuk.member.model.vo.Images;
-import com.kh.jinkuk.mypage.model.service.MypageService;
-import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
+import com.kh.jinkuk.admin.model.service.AdminService;
+import com.kh.jinkuk.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class SelectDetailGisaServlet
+ * Servlet implementation class JoinConfirmServlet
  */
-@WebServlet("/selectdetailgisa.mp")
-public class SelectDetailGisaServlet extends HttpServlet {
+@WebServlet("/joinConfirm")
+public class JoinConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectDetailGisaServlet() {
+    public JoinConfirmServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,27 +31,30 @@ public class SelectDetailGisaServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num =Integer.parseInt(request.getParameter("num"));
-		SelectReqGisa srg= new MypageService().SelectDetailGisa(num);
-		response.setContentType("application/json");
-		response.setCharacterEncoding("UTF-8");
-		new Gson().toJson(srg, response.getWriter());
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		String[] userId = request.getParameterValues("selected[]"); 
+		int result = 0;
+		for(int i = 0; i<userId.length; i++) {
+			System.out.println(userId[i]);
+
+			Admin m = new Admin();
+			m.setUserId(userId[i]);;
+
+			result = new AdminService().updateJoin(m);
+			System.out.println(result);
+
+			}
 		
-	/*	if(srg!=null) {
-			request.setAttribute("detailGisa",srg);
-			request.getRequestDispatcher("/views/mypage/deliDetailPop.jsp").forward(request, response);
+		
+		if(result > 0) {
+			response.sendRedirect("/reqtakbae/select.jo");
 			
-			
-		}*/
+
+		}
+		}
 		
-		
-		
-		
-		
-		
-		
-	
-	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

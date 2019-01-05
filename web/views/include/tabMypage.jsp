@@ -16,6 +16,11 @@
 			<li <%if(bigtabon.equals("5")){%>class="on"<%}%>><a href="/reqtakbae/ExchangeServlet">환전내역</a></li>
 			<li <%if(bigtabon.equals("6")){%>class="on"<%}%>><a href="/reqtakbae//SelectMyInquiry.mp">나의 문의내역</a></li>
 			<li <%if(bigtabon.equals("7")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memModify.jsp">회원정보수정</a></li>
-			<li <%if(bigtabon.equals("8")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memLeave.jsp">탈퇴하기</a></li>
+			
+			<%if(loginUser.getUser_div().equals("기사")){ %>
+			<li <%if(bigtabon.equals("8")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memModifyImg.jsp">회원사진수정</a></li>
+			<%} %>
+			
+			<li <%if(bigtabon.equals("9")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memLeave.jsp">탈퇴하기</a></li>
 		</ul>
 	</div>  

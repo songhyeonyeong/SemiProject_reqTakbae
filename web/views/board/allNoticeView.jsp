@@ -4,6 +4,9 @@
 <% 
 	Announcment a = (Announcment)request.getAttribute("a"); 
 	int num = (int)request.getAttribute("num");
+	Images img =(Images)request.getAttribute("img");
+	String gongdiv=(String)request.getAttribute("gongdiv");
+	
 %>
 
 <%@ include file="/views/include/common.jsp" %>
@@ -13,7 +16,6 @@
 <script type="text/javascript">
 
 (function($){
-  
   var $fileBox = null;
   
   $(function() {
@@ -60,27 +62,20 @@
 
 <%@ include file="/views/include/header.jsp" %>
 
-<div id="subvisual">전체 공고</div>
+<div id="subvisual">공고 -상세보기</div>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<div class="titNavi">
 			전체 공고
-			<span>홈 &gt; 전체 공고</span>
+			<span>홈 &gt; 공고&gt; 상세보기</span>
 			<!-- <p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>user에게만 보임 -->
-		
 		<script>
 		function fn_open() {
 			   window.open('<%=request.getContextPath()%>/views/board/reportPop.jsp?gno=<%=num%>&title=<%= a.getG_TITLE() %>&name=<%= loginUser.getUser_name() %>&uno=<%=loginUser.getU_no()%>','reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=500,width=600,height=600');
 			}
 		
-			<%-- function fn_open(){
-				location.href="<%=request.getContextPath()%>/views/board/reportPop.jsp?gno=<%=num%>&title=<%= a.getG_TITLE() %>&name=<%= loginUser.getUser_name() %>&uno=<%=loginUser.getU_no()%>";
-				?no="+<%=a.getG_NO()%>+"&title="+<%= a.getG_TITLE() %>+"&name="+<%= loginUser.getUser_name() %>;
-			
-					"<%=request.getContextPath()%>/ReportServlet
-			} --%>
 		</script>	
 		
 		</div>
@@ -89,8 +84,13 @@
 		<div class="rtv of mt30">
 
 			<div class="flo_left wth300"><!-- flo_left S-->
-				<p><img src="http://via.placeholder.com/300x250" alt="상품이미지"></p>
-				<p class="font30 tcen">신청자 인원 <em class="font30 orange">3</em>명</p>
+				<%if(img!=null){ %>
+				
+				<p><img src="<%=request.getContextPath()%>/upload/<%=img.getI_c_name()%>" alt="상품이미지"  width="300" height="250"></p>
+				<%}else{%>
+					<img src="http://via.placeholder.com/250x250" alt="기사사진">
+				<%} %>
+				<p class="font30 tcen">신청자 인원 <em class="font30 orange"><%= a.getCount() %></em>명</p>
 			</div><!--// flo_left E-->
 
 			<div class="flo_right wth850"><!-- flo_right S-->
@@ -151,10 +151,20 @@
 		</div>
 
 		<div class="clear btnbox mt30 mb30">
-			<span><a class="mbtn gy wth60" href='<%=request.getContextPath()%>/selectList.bo'>목록</a></span>
+		<%-- 	<span><a class="mbtn gy wth60" href='<%=request.getContextPath()%>/selectList.bo?gongdiv=<%=gongdiv%>'>공고목록</a></span> --%>
+
+			
+			<%if(loginUser!=null){
+						if(loginUser.getUser_div().equals("신청자")){ %>
+				<%if(loginUser.getUser_id().equals(a.getUSER_ID())) {%>
 			<span><a class="mbtn gy wth60" href="#">수정</a></span>
 			<span><a class="mbtn rd wth60" href="#">삭제</a></span>
-			<span><a class="mbtn db wth60" href="#">신청하기</a></span>
+				<%}%>
+			<%}else{ %>
+			<span><a class="mbtn db wth60" href="<%=request.getContextPath()%>/ReqAnnouncement.bo?gongdiv=<%=gongdiv%>&&gno=<%=num%>">신청하기</a></span>
+			<%} 
+			}%>
+			<span><a class="mbtn bk wth60" onclick="history.go(-1);">돌아가기</a></span>
 		</div>
 
 

@@ -139,7 +139,9 @@ public class MypageService {
 
 	public SelectReqGisa SelectDetailGisa(int num) {
 		Connection con = getConnection();
+		String cname= new MypageDao().selectgisaimg(con,num);
 		SelectReqGisa srg = new MypageDao().SelectDetailGisa(con, num);
+		srg.setImgname(cname);
 		close(con);
 		return srg;
 	}
@@ -228,6 +230,31 @@ public class MypageService {
 		close(con);
 		
 		return result;
+	}
+
+	public int leaveMember(String uno) {
+		Connection con = getConnection();
+		
+		int result = new MypageDao().leaveMember(con, uno);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<String> findGisaImgAddr(String uno) {
+		Connection con = getConnection();
+		
+		ArrayList<String> imgList = new MypageDao().findGisaImgAddr(con,uno);
+		
+		close(con);
+		
+		return imgList;
 	}
 
 

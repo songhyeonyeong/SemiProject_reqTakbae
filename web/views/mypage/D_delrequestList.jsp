@@ -51,7 +51,6 @@ int endPage = pi.getEndPage();
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">No</th>
 					<th scope="col">구분</th>
 					<th scope="col">공고번호</th>
 					<th scope="col">공고내용</th>
@@ -62,22 +61,19 @@ int endPage = pi.getEndPage();
 					
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tbody">
 			<!--  내공고 목록 출력 tr -->
 						<%
 							for (MyR_M_article m : list) {
 						%>
 						<tr>
 							<input type="hidden" value="<%=m.getG_no()%>">
-							<tr>
-							<td><label for=""> 체크</label> <input id="" name=""
-								class="check" type="checkbox"></td>
 							<td><%=m.getG_div()%></td>
 							<td><%=m.getG_no()%></td>
 							<td><%=m.getG_context()%></td>
 							<td><%=m.getG_day()%></td>
 							<td><%=m.getUser_id()%></td>
-							<td><a class="sbtn gy" href="#">상세보기</a></td>
+							<td><a class="sbtn gy">상세보기</a></td>
 							<td><%=m.getG_p_div()%></td>
 						</tr>
 						<%
@@ -111,7 +107,19 @@ int endPage = pi.getEndPage();
 			
 			
 		</div>
-
+	<script type="text/javascript">
+	$(function(){
+	$("#tbody td .sbtn.gy").click(function(){
+		console.log("클릭하셨습니다");
+		var num = $(this).parent().parent().children("input").val();
+		var gongdiv=$(this).parent().parent().children("input").next().text();
+		location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num+"&&gongdiv="+gongdiv;
+		
+	});
+		
+	});
+	
+	</script>
 
 	</div><!--// inner E-->
 </div>

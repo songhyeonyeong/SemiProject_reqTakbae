@@ -14,6 +14,8 @@
 
 
 <title>택배를 부탁해 관리자페이지</title>
+
+
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -42,9 +44,32 @@
 						<td>
 							<label for=""></label>
 							<select id="" name="" class="wth150">
-							<option value="" selected="selected">서울시 전체</option>
+							<option value="" selected="selected" selected disabled hidden>도착지 선택</option>
 							<option value="">강남구</option>
-							<option value="">---</option>
+							<option value="">강동구</option>
+							<option value="">강북구</option>
+							<option value="">강서구</option>
+							<option value="">관악구</option>
+							<option value="">광진구</option>
+							<option value="">구로구</option>
+							<option value="">금천구</option>
+							<option value="">노원구</option>
+							<option value="">도봉구</option>
+							<option value="">동대문구</option>
+							<option value="">동작구</option>
+							<option value="">마포구</option>
+							<option value="">서대문구</option>
+							<option value="">서초구</option>
+							<option value="">성동구</option>
+							<option value="">성북구</option>
+							<option value="">송파구</option>
+							<option value="">양천구</option>
+							<option value="">영등포구</option>
+							<option value="">용산구</option>
+							<option value="">은평구</option>
+							<option value="">종로구</option>
+							<option value="">중구</option>
+							<option value="">중랑구</option>
 						</td>
 						<th scope="col">크기</th>
 						<td>
@@ -60,7 +85,7 @@
 						<th scope="col">배송날짜</th>
 						<td>
 							<label for=""></label>
-							<input id="" name="" title="" class="wth150" type="text">
+							<input id="datePicker" name="datePicker" class="wth150" type="text">
 						</td>
 						<th scope="col">상태</th>
 						<td>
@@ -172,6 +197,8 @@
 </div><!--// Wrap E-->
 
 	<script>
+
+	
 		function deleteNotice(){
 			$("input[name=memCheck]:checked").each(function() {
 				

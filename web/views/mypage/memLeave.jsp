@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% 
-	String bigtabon="8";
+	String bigtabon="9";
 %>
 <%@ include file="/views/include/common.jsp" %>
 
@@ -31,21 +31,20 @@
 			<tr>
 				<th scope="row">탈퇴사유</th>
 				<td>
-					<label for=""></label>
-					<select id="" name="" class="input wth200">
+					<input type="hidden" id="uno" name="uno" value="<%=loginUser.getU_no()%>">
+					<select id="leaveSelect" name="leaveSelect" class="input wth200">
 						<option selected="selected">선택하세요</option>
-						<option value="#">----</option>
-						<option value="#">----</option>
-						<option value="#">----</option>
-					</select> 
-
+						<option value="#">타 사이트의 유사서비스 이용</option>
+						<option value="#">속도가 느림</option>
+						<option value="#">찾고자 하는 정보가 없음</option>
+						<option value="#">기타</option>
+					</select>
 				</td>
 			</tr>
 			<tr>
 				<th scope="row">상세내용</th>
 				<td>
-					<label for=""></label>
-					<textarea class="wth90p" cols="24" id="" name=""></textarea>
+					<textarea class="wth90p" cols="24" id="leaveText" name="leaveText"></textarea>
 				</td>
 			</tr>
 			</tbody>
@@ -53,11 +52,25 @@
 
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn gy" href="#">취소</a></span>
-			<span><a class="mbtn rd" href="#">탈퇴하기</a></span>
+			<span><a class="mbtn rd" onclick="leave();">탈퇴하기</a></span>
 		</div><!--// btnbox E-->
 
 	</div><!--// inner E-->
 </div>
+
+<script>
+	var uno = $("#uno").val();
+
+	function leave(){
+		if($("#leaveSelect option:selected").text()==("선택하세요") && $("#leaveText").val()==""){
+			alert("사유를 선택하거나 작성해주세요")
+		}else{
+			location.href="/reqtakbae/leaveMember?uno="+uno;			
+		}
+		
+		
+	}
+</script>
 
 <%@ include file="/views/include/footer.jsp" %>
 
