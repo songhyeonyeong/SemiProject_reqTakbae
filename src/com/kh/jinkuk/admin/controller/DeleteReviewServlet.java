@@ -2,7 +2,6 @@ package com.kh.jinkuk.admin.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.jinkuk.admin.model.service.AdminService;
-import com.kh.jinkuk.admin.model.vo.Admin;
+import com.kh.jinkuk.admin.model.vo.Review;
 
 /**
- * Servlet implementation class DeleteDeliverServlet
+ * Servlet implementation class DeleteReviewServlet
  */
-@WebServlet("/delete.de")
-public class DeleteDeliverServlet extends HttpServlet {
+@WebServlet("/delete.re")
+public class DeleteReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteDeliverServlet() {
+    public DeleteReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +33,23 @@ public class DeleteDeliverServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		int result = 0;
-		String[] userId = request.getParameterValues("memCheck");
-		for(int i=0; i<userId.length; i++) {
-			System.out.println("delete UserId : " + userId[i]);
-			Admin m = new Admin();
-			m.setUserId(userId[i]);
-			
-			result = new AdminService().deleteDeliver(m);
-		}
-
-
+		try {
+		int num = Integer.parseInt(request.getParameter("name"));
+		System.out.println("delete num : " + num);
+		
+		Review m = new Review();
+		m.setHno(num);
+		
+		int result = new AdminService().deleteReview(m);
+		
 		if(result > 0) {
-			response.sendRedirect("/reqtakbae/selectAll.me");
+			response.sendRedirect("/reqtakbae/selectAll.re"); //재요청
 			
 		}
-
+		}catch(NumberFormatException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/**

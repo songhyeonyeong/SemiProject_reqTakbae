@@ -15,6 +15,18 @@
 
 
 <title>택배를 부탁해 관리자페이지</title>
+<script type="text/javascript">
+$(document).ready(function(){
+	  window.resizeTo(400, 300);
+	 });
+
+function fn_open(img) {
+	console.log(img);
+   window.open("/reqtakbae/views/admin/DeliverImg.jsp?img="+img,'DeliverImg','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=400,height=300');
+}
+	
+
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
@@ -74,7 +86,7 @@
 					<td><%=m.getB_name() %></td>
 					<td><%=m.getB_num()%></td>
 					<td><%=m.getPhone() %></td>
-					<td><a class="sbtn gy" href="#">확인</a></td>
+					<td><a class="sbtn gy" href="#" id="confirm">확인</a></td>
 					<div id="spot" style="position:absolute; left:520px; top:500px; visibility:hidden;">
 <%-- 					<img src="<%=m.getPath() %> + <%=m.getI_name() %>" alt="신분증 사진" /> --%>
 					</div>
@@ -123,18 +135,6 @@
 
 
 	<script>
-	$(function(){
-		$('a').eq(3).click(function(){
-			var num = $(this).parent().parent().children().eq(3).text();
-			
-			console.log(num);
-	<%-- 		location.href="<%=request.getContextPath()%>/selectOne.in?num=" + num;  --%>
-			
-		});
-		
-	});
-
-	
 	
 	function showmap() { 
 	 if(document.all.spot.style.visibility=="hidden") {
@@ -189,7 +189,7 @@
 				   });
 				console.log(selected);
 				$.ajax({
-					url:"/reqtakbae/joinConfirm", //댓글삽입 서블릿으로 전송
+					url:"/reqtakbae/joinConfirm", 
 					data:{selected:selected},
 					type:"post",
 					success:function(data){
@@ -204,6 +204,29 @@
 		});
 		
 	 
+	 
+	 
+	 $(function(){
+			$("#confirm").click(function(){
+				var num = $(this).parent().parent().children().eq(3).text();
+				console.log(num);
+		/* 		location.href="/reqtakbae/selectdetailgisa.mp?num="+num; */
+		
+			$.ajax({
+						url:"/reqtakbae/img",
+							data:{num:num},
+							type:"get",
+							success:function(data){
+										fn_open(data.imgname);
+								
+							},
+							error:function(request,status,error){
+						        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						       },
+				});
+				
+			});
+	 });
 	</script>
 
 

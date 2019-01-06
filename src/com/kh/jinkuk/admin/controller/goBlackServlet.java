@@ -35,15 +35,16 @@ public class goBlackServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		//request객체에서 parameter꺼내기
-		String userId = request.getParameter("name");
+		String[] userId = request.getParameterValues("selected[]");
 		
-		System.out.println(userId);
-		Admin m = new Admin();
-		m.setUserId(userId);
-		
-
-		int result = new AdminService().goBlack(m);
-		System.out.println(result);
+		int result = 0;
+		for(int i = 0; i<userId.length; i++) {
+			System.out.println(userId[i]);
+			Admin m = new Admin();
+			m.setUserId(userId[i]);
+			result = new AdminService().goBlack(m);
+			System.out.println(result);
+		}
 		
 		String page="";
 		if(result > 0) {

@@ -1,6 +1,7 @@
 package com.kh.jinkuk.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.jinkuk.admin.model.service.AdminService;
-import com.kh.jinkuk.admin.model.vo.Admin;
+import com.kh.jinkuk.admin.model.vo.Announcment;
 
 /**
- * Servlet implementation class DeleteDeliverServlet
+ * Servlet implementation class FilterSearchServlet
  */
-@WebServlet("/delete.de")
-public class DeleteDeliverServlet extends HttpServlet {
+@WebServlet("/search.fi")
+public class FilterSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteDeliverServlet() {
+    public FilterSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +35,40 @@ public class DeleteDeliverServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		int result = 0;
-		String[] userId = request.getParameterValues("memCheck");
-		for(int i=0; i<userId.length; i++) {
-			System.out.println("delete UserId : " + userId[i]);
-			Admin m = new Admin();
-			m.setUserId(userId[i]);
+		String destination = request.getParameter("destination");
+		String size = request.getParameter("size");
+		String datePicker = request.getParameter("datePicker");
+		String status = request.getParameter("status");
+		
+		System.out.println("도착지 : " + destination + " 크기 : " + size + " 날짜 : " + datePicker
+				+ " 상태 : " + status);
+		
+
+		Announcment a = new Announcment();
+		a.setG_E_AREA(destination);
+		a.setG_SIZE(size);
+		a.setA_status(status);
+
+		
+		ArrayList<Announcment> list = new AdminService().selectFilter(a);
+		System.out.println(list);
+		
+		
+		String page = "";
+		if(list != null) {
+			request.setAttribute("list", list);
 			
-			result = new AdminService().deleteDeliver(m);
-		}
-
-
-		if(result > 0) {
-			response.sendRedirect("/reqtakbae/selectAll.me");
+			page = "/views/admin/allNoticeList_search.jsp";
+		}else {
+			request.setAttribute("msg", "검색 실패!");
 			
+			page = "/views/common/errorPage.jsp";
 		}
-
+		
+		RequestDispatcher view  = request.getRequestDispatcher(page);
+		view.forward(request, response);
+		
+		
 	}
 
 	/**

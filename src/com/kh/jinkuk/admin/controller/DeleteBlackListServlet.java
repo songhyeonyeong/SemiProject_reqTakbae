@@ -34,14 +34,17 @@ public class DeleteBlackListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
-		
-		String userId = request.getParameter("name");
-		System.out.println("cancle UserId : " + userId);
-		
-		Admin m = new Admin();
-		m.setUserId(userId);
-		
-		int result = new AdminService().deleteBlack(m);
+		int result = 0;
+		String[] userId = request.getParameterValues("memCheck");
+		for(int i = 0; i< userId.length; i++) {
+			System.out.println("cancle UserId : " + userId[i]);
+			
+			Admin m = new Admin();
+			m.setUserId(userId[i]);
+			
+			result = new AdminService().deleteBlack(m);
+			
+		}
 		
 		if(result > 0) {
 			RequestDispatcher view = request.getRequestDispatcher("/selectAll.bl");

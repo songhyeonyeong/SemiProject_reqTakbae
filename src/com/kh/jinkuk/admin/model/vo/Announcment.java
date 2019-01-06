@@ -20,12 +20,13 @@ public class Announcment implements java.io.Serializable{
 	private int U_NO;
 	private String G_P_DIV;
 	private String USER_ID;
+	private String a_status;
 	
 	public Announcment() {}
 
 	public Announcment(int g_NO, String g_TITLE, String g_CONTEXT, Date g_S_DATE, Date g_E_DATE, String g_S_AREA,
 			String g_E_AREA, String g_TYPE, int g_SUM, int g_PRICE, String g_SIZE, Date g_DAY, String sTATUS, int u_NO,
-			String g_P_DIV, String uSER_ID) {
+			String g_P_DIV, String uSER_ID, String a_status) {
 		super();
 		G_NO = g_NO;
 		G_TITLE = g_TITLE;
@@ -43,6 +44,7 @@ public class Announcment implements java.io.Serializable{
 		U_NO = u_NO;
 		G_P_DIV = g_P_DIV;
 		USER_ID = uSER_ID;
+		this.a_status = a_status;
 	}
 
 	public int getG_NO() {
@@ -173,13 +175,21 @@ public class Announcment implements java.io.Serializable{
 		USER_ID = uSER_ID;
 	}
 
+	public String getA_status() {
+		return a_status;
+	}
+
+	public void setA_status(String a_status) {
+		this.a_status = a_status;
+	}
+
 	@Override
 	public String toString() {
 		return "Announcment [G_NO=" + G_NO + ", G_TITLE=" + G_TITLE + ", G_CONTEXT=" + G_CONTEXT + ", G_S_DATE="
 				+ G_S_DATE + ", G_E_DATE=" + G_E_DATE + ", G_S_AREA=" + G_S_AREA + ", G_E_AREA=" + G_E_AREA
 				+ ", G_TYPE=" + G_TYPE + ", G_SUM=" + G_SUM + ", G_PRICE=" + G_PRICE + ", G_SIZE=" + G_SIZE + ", G_DAY="
 				+ G_DAY + ", STATUS=" + STATUS + ", U_NO=" + U_NO + ", G_P_DIV=" + G_P_DIV + ", USER_ID=" + USER_ID
-				+ "]";
+				+ ", a_status=" + a_status + "]";
 	}
 
 	

@@ -84,6 +84,7 @@
 					</tr>
 				</thead>
 				<tbody>
+				<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.bl">
 					<% for(Admin m : list){ %>
 					<tr>
 						<td>
@@ -107,6 +108,7 @@
 						
 					</tr>
 				<% } %> 
+				</form>
 				</tbody>
 			</table>
 
@@ -160,43 +162,44 @@
 		 
 
 			
-
+	 var selected = new Array();
 		 
-		 $('span').eq(3).click(function() {
-			 
-				$("input[name=memCheck]:checked").each(function() {
-
-					
-					var test =$(this).val();
-
-					console.log(test);
-					
-					location.href="<%=request.getContextPath()%>/cancle.bl?name=" + test; 
-
+	 $(function(){
+			$("span").eq(3).click(function(){
+				 $("input:checkbox[name=memCheck]:checked").each(function() {
+				        selected.push($(this).parent().parent().children().eq(1).text());
+				   });
+				console.log(selected);
+				$.ajax({
+					url:"/reqtakbae/cancle.bl", 
+					data:{selected:selected},
+					type:"post",
+					success:function(data){
+						console.log(data);
+						location.reload();
+					},
+					error:function(){
+						console.log("실패");
+					}
 				});
-				
-			
-
 			});
+		});
 		 
+	 $('span').eq(4).click(function() {
 		 
-		 $('span').eq(4).click(function() {
-			 
-				$("input[name=memCheck]:checked").each(function() {
+			$("input[name=memCheck]:checked").each(function() {
 
-					
-					var test =$(this).val();
-
-					console.log(test);
-					
-					location.href="<%=request.getContextPath()%>/delete.bl?name=" + test; 
-
-				});
 				
-			
+				var test =$(this).val();
 
+				console.log(test);
+				
+				$("#add").submit();
 			});
+			
+		
 
+		});
 		 
 
 		 

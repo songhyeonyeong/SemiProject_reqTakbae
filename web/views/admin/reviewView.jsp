@@ -30,6 +30,10 @@
 			</colgroup>
 			<tbody>
 			<tr>
+				<th scope="row">후기번호</th>
+				<td colspan="3"><%=re.getHno()%></td>
+			</tr>
+			<tr>
 				<th scope="row">제목</th>
 				<td colspan="3"><%=re.gethTitle() %></td>
 			</tr>
@@ -55,13 +59,14 @@
 				<td colspan="4" class=""><%=re.gethContext() %></td>
 			</tr>
 			</tbody>
+
 		</table><!--// boardWrite E-->
 		
-
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn bk" href="/reqtakbae/selectAll.re">목록</a></span>
-			<span><a class="mbtn rd" href="#">삭제</a></span>
+			<span id="delete"><a class="mbtn rd" href="#">삭제</a></span>
 		</div><!--// btnbox E-->
+
 
 		</div><!--// contBox E-->
 
@@ -71,6 +76,19 @@
 
 
 </div><!--// Wrap E-->
+
+	<script>
+	 $("#delete").click(function() {
+
+			var test =$("td").eq(0).text();
+
+			console.log(test);
+
+			location.href="<%=request.getContextPath()%>/delete.re?name=" + test; 
+
+		});
+		
+	</script>
 
 </body>
 </html>
