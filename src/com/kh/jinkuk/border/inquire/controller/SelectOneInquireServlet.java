@@ -45,18 +45,14 @@ public class SelectOneInquireServlet extends HttpServlet {
 		if(ai!=null) {
 		request.setAttribute("ai", ai);
 		}
-			
 		
 			String page = "";
-		
-		
 		
 			page="views/board/qnaView.jsp";
 			request.setAttribute("i", i);
 		
 			System.out.println("문의 상세보기  i"+i);
 			
-		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
 		

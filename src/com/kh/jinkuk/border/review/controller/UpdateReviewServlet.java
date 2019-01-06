@@ -13,16 +13,16 @@ import com.kh.jinkuk.border.review.model.service.ReviewService;
 import com.kh.jinkuk.border.review.model.vo.Review;
 
 /**
- * Servlet implementation class SelectOneReviewServlet
+ * Servlet implementation class UpdateReviewServlet
  */
-@WebServlet("/selectOneRe")
-public class SelectOneReviewServlet extends HttpServlet {
+@WebServlet("/updateReview")
+public class UpdateReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectOneReviewServlet() {
+    public UpdateReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,31 +31,31 @@ public class SelectOneReviewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int num = Integer.parseInt(request.getParameter("num"));
+		
+		int num = Integer.parseInt(request.getParameter("hno"));//수정 하기 게시글 번호
 		String driId=request.getParameter("driId");
-		System.out.println("selectoneRe - 서블릿num  "+num);//후기 번호 
-		System.out.println("selectoneRe - 서블릿driId  "+driId);//기사아이디
+		System.out.println("UpdateReviewServlet 후기 글 번호"+num);
+		System.out.println("UpdateReviewServlet driId"+driId);
+		
+		String page="";
 		
 		Review r = new ReviewService().selectOne(num);
-		
-		
 		r.setDriId(driId);
-		System.out.println("selectoneRe  "+r);
 		
 		
 		
-		String page ="";
-		
-		if(r != null) {
-			page = "views/board/reviewView.jsp";
+		if(r!= null) {
+			page = "views/board/reviewUpdate.jsp";
 			request.setAttribute("r", r);
-			
 		}else {
-			page="views/common/errorPage";
+			page="views/common/errorPage.jsp";
+			
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
+		
+		
 		
 	}
 

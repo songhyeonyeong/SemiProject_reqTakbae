@@ -54,6 +54,7 @@ public class ReviewDao {
 				r.setStatus(rset.getString("STATUS"));
 				r.setUname(rset.getString("USER_ID"));
 				r.setRnum(rset.getInt("RNUM"));
+				r.setDriname(rset.getString("U_ID"));
 
 				list.add(r);
 
@@ -134,6 +135,8 @@ public class ReviewDao {
 				r.setUname(rset.getString("USER_ID"));
 				r.setGno(rset.getInt("G_NO"));
 				r.setDriname(rset.getString("USER_NAME"));
+				r.setDriId(rset.getString("U_ID"));
+				
 
 				list.add(r);
 
@@ -187,6 +190,8 @@ public class ReviewDao {
 			pstmt = con.prepareStatement(query);
 
 			pstmt.setInt(1, num);
+			
+			System.out.println(num+"확인 완료");
 
 			rset = pstmt.executeQuery();
 
@@ -199,6 +204,8 @@ public class ReviewDao {
 				r.sethGrade(rset.getInt("H_GRADE"));
 				r.sethDate(rset.getDate("H_DATE"));
 				r.setStatus(rset.getString("STATUS"));
+				r.setUno(rset.getInt("U_NO"));
+				r.setGno(rset.getInt("G_NO"));
 				r.setUname(rset.getString("USER_ID"));
 				r.setDriname(rset.getString("USER_NAME"));
 			}
@@ -210,7 +217,7 @@ public class ReviewDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(r);
+		System.out.println("selectOne-ReviewDao "+r);
 		return r;
 
 	}
@@ -349,5 +356,31 @@ public class ReviewDao {
 		
 		
 		return updateResult;
+	}
+
+
+	public int updateReview(Connection con, Review r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateReview");
+		
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1, r.gethTitle());
+			pstmt.setString(2,r.gethContext());
+			pstmt.setInt(3, r.gethGrade());
+			pstmt.setDate(4,r.gethDate());
+			pstmt.setInt(5,r.getHno());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }
