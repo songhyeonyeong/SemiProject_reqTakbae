@@ -5,15 +5,11 @@ import static com.kh.jinkuk.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import org.apache.tomcat.dbcp.dbcp2.PStmtKey;
 
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.border.announcment.model.vo.InsertAnnouncment;
@@ -139,19 +135,6 @@ public class AnnouncmentDao {
 					a.setG_DAY(rset.getDate("G_DAY"));
 					a.setG_CONTEXT(rset.getString("G_CONTEXT"));
 					a.setG_P_DIV(rset.getString("G_P_DIV"));
-//					a = new Announcment();
-//					a.setUSER_ID(rset.getString("USER_ID"));
-//					a.setG_TITLE(rset.getString("G_TITLE"));
-//					a.setG_S_DATE(rset.getDate("G_S_DATE"));
-//					a.setG_E_DATE(rset.getDate("G_E_DATE"));
-//					a.setG_TYPE(rset.getString("G_TYPE"));
-//					a.setG_S_AREA(rset.getString("G_S_AREA"));
-//					a.setG_E_AREA(rset.getString("G_E_AREA"));
-//					a.setG_PRICE(rset.getInt("G_PRICE"));
-//					a.setG_SIZE(rset.getString("G_SIZE"));
-//					a.setG_DAY(rset.getDate("G_DAY"));
-//					a.setG_CONTEXT(rset.getString("G_CONTEXT"));
-//					a.setG_P_DIV(rset.getString("G_P_DIV"));
 					
 				}
 			
@@ -408,6 +391,26 @@ public class AnnouncmentDao {
 			}finally {
 				close(pstmt);
 				close(rset);
+			}
+			return result;
+		}
+
+		public int deleteBoard(Connection con, int gno) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = prop.getProperty("deleteBoard");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, gno);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
 			}
 			return result;
 		}
