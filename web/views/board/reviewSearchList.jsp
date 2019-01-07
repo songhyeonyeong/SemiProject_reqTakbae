@@ -4,12 +4,8 @@
 
 <%
 	ArrayList<Review> list = (ArrayList<Review>) request.getAttribute("list");
-	PageInfo pi = (PageInfo) request.getAttribute("pi");
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+	String select=(String)request.getAttribute("select");
+	
 %>
 
 <%@ include file="/views/include/common.jsp"%>
@@ -35,9 +31,8 @@
 				<div class="titNavi">
 					후기게시판 <span>홈 &gt; 후기게시판</span>
 				</div>
-
-
-				<div class="topsearch mt30 mb30">
+			
+			<div class="topsearch mt30 mb30">
 					<!-- topsearch S -->
 			<form action="<%=request.getContextPath()%>/searchRe.re" method="post">
 					<span> <label for="col01"></label> 
@@ -57,8 +52,9 @@
 					</form>
 					
 				</div>
-				
 
+			<!-- 전체 목록 확인하기 기능 만들기  -->
+			
 				<table class="boardList mt20" >
 					<caption>후기게시판 리스트입니다.</caption>
 					<colgroup>
@@ -110,10 +106,7 @@
 					</thead>
 				</table>
 
-
-				
-
-				<!-- paging -->
+				<%-- <!-- paging -->
 				<div class="numbox pt40 pb50" align="center">
 					<span><a class="num" href="#" 
 					onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=1'"><<</a></span>
@@ -147,7 +140,7 @@
 					<span><a class="num" href="#" 
 						onclick="location.href='<%=request.getContextPath()%>/selectReview?currentPage=<%=maxPage%>'">>></a></span>
 				</div>
-			<!-- //paging -->
+			<!-- //paging --> --%>
 
 
 			</div>

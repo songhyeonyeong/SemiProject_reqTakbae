@@ -348,6 +348,104 @@ public class InquireDao {
 	}
 
 
+	public ArrayList<Inquire> searchT(Connection con,String titleS) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Inquire> list = null;
+		
+		String query = prop.getProperty("searchTitle");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1,titleS);
+		
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Inquire>();
+			
+			while(rset.next()) {
+				Inquire i = new Inquire();
+				
+				i.setM_no(rset.getInt("M_NO"));
+				i.setM_title(rset.getString("M_TITLE"));
+				i.setM_context(rset.getString("M_CONTEXT"));
+				i.setRef_mno(rset.getInt("REF_MNO"));
+				i.setReply_level(rset.getInt("REPLY_LEVEL"));
+				i.setStatus(rset.getString("STATUS"));
+				i.setM_date(rset.getDate("M_DATE"));
+				i.setU_no(rset.getInt("U_NO"));
+				i.setUser_id(rset.getString("USER_ID"));
+				i.setRnum(rset.getInt("RNUM"));
+				
+				
+				
+				
+				list.add(i);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		System.out.println("inquire Dao 확인"+list);
+		return list;
+	}
+
+
+	public ArrayList<Inquire> searchText(Connection con,String textS) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Inquire> list = null;
+		
+		String query = prop.getProperty("searchText");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1,textS);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Inquire>();
+			
+		
+			
+			while(rset.next()) {
+				Inquire i = new Inquire();
+				
+				i.setM_no(rset.getInt("M_NO"));
+				i.setM_title(rset.getString("M_TITLE"));
+				i.setM_context(rset.getString("M_CONTEXT"));
+				i.setRef_mno(rset.getInt("REF_MNO"));
+				i.setReply_level(rset.getInt("REPLY_LEVEL"));
+				i.setStatus(rset.getString("STATUS"));
+				i.setM_date(rset.getDate("M_DATE"));
+				i.setU_no(rset.getInt("U_NO"));
+				i.setUser_id(rset.getString("USER_ID"));
+				i.setRnum(rset.getInt("RNUM"));
+				
+				
+				
+				
+				list.add(i);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		System.out.println("inquire Dao 확인"+list);
+		return list;
+	}
+
+
 
 
 	
