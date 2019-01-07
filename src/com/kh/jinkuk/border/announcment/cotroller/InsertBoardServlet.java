@@ -1,11 +1,8 @@
 package com.kh.jinkuk.border.announcment.cotroller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;

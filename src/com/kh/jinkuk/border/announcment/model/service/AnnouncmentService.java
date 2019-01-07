@@ -130,4 +130,20 @@ public class AnnouncmentService {
 		return result;
 	}
 
+	public int deleteBoard(int gno) {
+		Connection con = getConnection();
+		
+		int result = new AnnouncmentDao().deleteBoard(con, gno);
+		
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
 }
