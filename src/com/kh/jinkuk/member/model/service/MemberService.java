@@ -114,6 +114,22 @@ public class MemberService {
 		return result;
 	}
 
+	public int insertKakaoMember(Member mem) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().insertKakaoMember(con,mem);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
 }
 
 

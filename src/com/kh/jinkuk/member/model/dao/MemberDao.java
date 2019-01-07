@@ -264,7 +264,7 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				result = rset.getInt("U_NO");
+				result = rset.getInt(1);
 			}
 			
 		} catch (SQLException e) {
@@ -275,6 +275,15 @@ public class MemberDao {
 		}
 		
 		return result;
+	}
+
+	public int insertKakaoMember(Connection con, Member mem) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("insertKakao");
+		
+		return 0;
 	}
 	
 	

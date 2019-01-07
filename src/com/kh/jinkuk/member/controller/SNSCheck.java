@@ -1,6 +1,8 @@
 package com.kh.jinkuk.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +41,17 @@ public class SNSCheck extends HttpServlet {
 		
 		System.out.println("result : "+result);
 		
-		
+		PrintWriter out = response.getWriter();
+		String page="";
+		if(result==0) {
+			page="<script>";
+			page+="opener.window.location.href='/reqtakbae/views/member/joinKakao.jsp?kakaoId='+kakaoId;";
+			page+="window.close();";
+			page+="</script>";
+			out.print(page);
+		}else {
+			
+		}
 		
 		
 	}

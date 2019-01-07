@@ -28,7 +28,7 @@
 	<br><br>
 	
 	<div class="mr_auto wth250" align="center" >
-		<input type="radio" name="userDiv" value="신청자" checked>신청자 &nbsp; &nbsp;
+		<input type="radio" name="userDiv" value="신청자">신청자 &nbsp; &nbsp;
 		<input type="radio" name="userDiv" value="기사">기사
 		
 		<br><br>
@@ -38,26 +38,17 @@
 	</div>
 
 
-<script>
-	var userDiv=$("input[name=radio]:checked").val();
-		//var userDiv = $("input[name='userDiv']:checked").val();
-		
-			//userDiv = $("input[name='userDiv']:checked").val();
-	$("input[name=userDiv]").click(function(){
-		userDiv = $("input[name=userDiv]:checked").attr("value");
-		console.log("userDiv : "+userDiv);
-	});
-	
-		
-	
-	
-
-</script>
 
 
 </body>
+<script>
+	var userDiv;
+	$("input[type=radio]").click(function(){
+		userDiv = $("input[type=radio]:checked").val();
+	});
+</script>
 
- <script type='text/javascript'>
+ <script>
 	//var userDiv = $("input[name='userDiv']:checked").val();
 	//console.log("userDiv : "+ userDiv);
 	
@@ -84,9 +75,10 @@
   	         	 //res.properties.nickname으로도 접근 가능 )
   	             //console.log(authObj.access_token);<---- 콘솔 로그에 토큰값 출력
   	    
-  	             location.href="<%=request.getContextPath()%>/snsCheck?kakaoId="+res.id+"&userDiv=기사";
-  	             
-  	           }
+  	             location.href="<%=request.getContextPath()%>/snsCheck?kakaoId="+res.id+"&userDiv="+userDiv;
+  	             <%-- window.opener.top.location.href="<%=request.getContextPath()%>/views/member/joinKakao.jsp";
+  	          	 window.close(); --%>
+  	       		}
 
   	         })
   	       },

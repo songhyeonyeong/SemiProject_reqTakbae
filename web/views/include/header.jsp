@@ -139,11 +139,11 @@ function openpop()
 						<!-- <li class="mt10 white">카카오로그인자리</li> -->
 						
 						
-					<!-- 	
+						
 						<a id="kakao-login-btn"></a>
  						<a href="http://developers.kakao.com/logout"></a> 
  						<li><a href="javascript:popupOpen();" class="mt30 white">카카오로그인</a></li>
-						 -->
+						
 						
 						<!--  -->
 						<!-- <div id="naverIdLogin"></div>  -->
