@@ -105,7 +105,7 @@ public class InsertMemberGisaServlet extends HttpServlet {
 				int result = new MemberService().insertImg(fileList);
 				String page="";
 				if(result > 0) {
-					page="/reqtakbae/index.jsp";
+					page="/reqtakbae/views/member/joinComplete.jsp";
 					response.sendRedirect(page);
 					return;
 				}else {
@@ -118,7 +118,7 @@ public class InsertMemberGisaServlet extends HttpServlet {
 						//true false를 리턴함
 						failedFile.delete();
 					}
-					request.setAttribute("msg", "사진게시판 등록 실패!");
+					request.setAttribute("msg", "기사 회원가입 실패!");
 					request.getRequestDispatcher(page).forward(request, response);
 					
 				}
