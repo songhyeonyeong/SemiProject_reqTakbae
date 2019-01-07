@@ -147,66 +147,22 @@ jQuery UI 라이브러리 js파일
 											class="wth190" type="text" placeholder="숫자만 입력하세요"></td>
 									</tr>
 									<tr>
-										<th scope="row">출발지</th>
-										<td><label for="start"></label> <select id="start" name="start"
-											class="input wth200">
-												<option selected="selected">선택하세요</option>
-												<option value="강남구">강남구</option>
-												<option value="강동구">강동구</option>
-												<option value="강북구">강북구</option>
-												<option value="강서구">강서구</option>
-												<option value="관악구">관악구</option>
-												<option value="광진구">광진구</option>
-												<option value="구로구">구로구</option>
-												<option value="금천구">금천구</option>
-												<option value="노원구">노원구</option>
-												<option value="도봉구">도봉구</option>
-												<option value="동대문구">동대문구</option>
-												<option value="동작구">동작구</option>
-												<option value="마포구">마포구</option>
-												<option value="서대문구">서대문구</option>
-												<option value="서초구">서초구</option>
-												<option value="성동구">성동구</option>
-												<option value="성북구">성북구</option>
-												<option value="송파구">송파구</option>
-												<option value="양천구">양천구</option>
-												<option value="영등포구">영등포구</option>
-												<option value="용산구">용산구</option>
-												<option value="은평구">은평구</option>
-												<option value="종로구">종로구</option>
-												<option value="중구">중구</option>
-												<option value="중랑구">중랑구</option>
-										</select></td>
-										<th scope="row">도착지</th>
-										<td><label for="end"></label> <select id="end" name="end"
-											class="input wth200">
-												<option selected="selected">선택하세요</option>
-												<option value="강남구">강남구</option>
-												<option value="강동구">강동구</option>
-												<option value="강북구">강북구</option>
-												<option value="강서구">강서구</option>
-												<option value="관악구">관악구</option>
-												<option value="광진구">광진구</option>
-												<option value="구로구">구로구</option>
-												<option value="금천">금천</option>
-												<option value="노원구">노원구</option>
-												<option value="도봉구">도봉구</option>
-												<option value="동대문구">동대문구</option>
-												<option value="동작구">동작구</option>
-												<option value="마포구">마포구</option>
-												<option value="서대문구">서대문구</option>
-												<option value="서초구">서초구</option>
-												<option value="성동구">성동구</option>
-												<option value="성북구">성북구</option>
-												<option value="송파구">송파구</option>
-												<option value="양천구">양천구</option>
-												<option value="영등포구">영등포구</option>
-												<option value="용산구">용산구</option>
-												<option value="은평구">은평구</option>
-												<option value="종로구">종로구</option>
-												<option value="중구">중구</option>
-												<option value="중랑구">중랑구</option>
-										</select></td>
+										<th scope="row">출발주소</th>
+										<td><input type="hidden" id="startAdrr" name="startAdrr" value="">
+										<span>
+										<span id="startAdrrS"></span>
+										<label for="start"></label><a class="mbtn db" id="start" href="#selectAddr" onclick="selectAddr('start')">선택</a>
+										</span>
+										</td>
+										<th scope="row">도착추소</th>
+										<td>
+										<input type="hidden" id="endAdrr"  name="endAdrr" value="">
+										<span>
+										<span id="endAdrrS"></span>
+										<label for="end"></label>
+										<a class="mbtn db" id="start" href="#selectAddr" onclick="selectAddr('end')">선택</a>
+										</span>
+										</td>
 									</tr>
 									<tr>
 										<th scope="row">배송날짜</th>
@@ -280,6 +236,7 @@ jQuery UI 라이브러리 js파일
 							<!--// boardWrite E-->
 						</div>
 						<!--// flo_right E-->
+						<br>
 						<div class="clear btnbox mt30 mb30">
 							<!-- 	<span><button type="submit" class="mbtn or wth60">등록</button></span>
 					<span><button type="reset" class="mbtn or wth60">취소</button></span> -->
@@ -348,6 +305,10 @@ jQuery UI 라이브러리 js파일
 				reader.readAsDataURL(value.files[0]);
 			}
 		}
+		
+		function selectAddr(val) {
+			   window.open('views/board/selectDetailaddr.jsp?To='+val,'selectDetailaddr','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=500,height=150');
+	}
 	</script>
 
 </body>

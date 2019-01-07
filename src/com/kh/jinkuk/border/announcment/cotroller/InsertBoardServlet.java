@@ -78,10 +78,10 @@ public class InsertBoardServlet extends HttpServlet {
 //			System.out.println("size:"+size);
 			int value = Integer.parseInt(multiRequest.getParameter("value"));
 //			System.out.println("value"+value);
-			String start = multiRequest.getParameter("start");
-//			System.out.println("start"+value);
-			String end = multiRequest.getParameter("end");
-//			System.out.println("end"+end);
+			String start = multiRequest.getParameter("startAdrr");
+			System.out.println("start"+start);
+			String end = multiRequest.getParameter("endAdrr");
+			System.out.println("end"+end);
 			String yearmd = multiRequest.getParameter("d");
 			int year =Integer.parseInt(yearmd.split("-")[0]);
 			int month=Integer.parseInt(yearmd.split("-")[1]);

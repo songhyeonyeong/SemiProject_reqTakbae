@@ -78,13 +78,13 @@ public class AnnouncmentService {
 		result4 = new AnnouncmentDao().insertcmoneybd(con, i);
 		result5 = new AnnouncmentDao().updatemembermoney(con, i);
 		result6 = new AnnouncmentDao().insertimage(con, image);
-		//
-		// System.out.println("공고테이블 삽입 결과 :" + result1);
-		// System.out.println("공고상세 테이블 삽입 결과 :" + result2);
-		// System.out.println("포인트내역 삽입 결과 :" + result3);
-		// System.out.println("싸이버머니내역테이블 삽입 결과 :" + result4);
-		// System.out.println("회원정보 업데이트 결과 :" + result5);
-		// System.out.println("이미지 삽입 결과:"+result6);
+		
+		 System.out.println("공고테이블 삽입 결과 :" + result1);
+		 System.out.println("공고상세 테이블 삽입 결과 :" + result2);
+		 System.out.println("포인트내역 삽입 결과 :" + result3);
+		 System.out.println("싸이버머니내역테이블 삽입 결과 :" + result4);
+		 System.out.println("회원정보 업데이트 결과 :" + result5);
+		 System.out.println("이미지 삽입 결과:"+result6);
 
 		if (result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0 && result6 > 0) {
 			commit(con);
