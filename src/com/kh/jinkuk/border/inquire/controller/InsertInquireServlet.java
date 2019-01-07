@@ -31,6 +31,8 @@ public class InsertInquireServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		response.setContentType("text/html;charset=UTF-8");
+		
 		String title=request.getParameter("title");
 		String context=request.getParameter("context");
 		String writer = String.valueOf(((Member)(request.getSession().getAttribute("loginUser"))).getUser_id());
@@ -52,6 +54,7 @@ public class InsertInquireServlet extends HttpServlet {
 		i.setUser_id(writer);
 		
 		int result = new InquireService().insertInquire(i);
+		
 		
 		String page = "";
 		if(result>0) {

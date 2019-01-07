@@ -45,6 +45,8 @@ public class SelectReviewListServlet extends HttpServlet {
 		
 		String gno=request.getParameter("gno");
 		System.out.println("공고 번호 넘어옴 확인"+gno);
+		String driname=request.getParameter("driname");
+		System.out.println("기사 아아디 넘어옴 확인"+driname);
 		
 		currentPage=1;
 		
