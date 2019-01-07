@@ -151,8 +151,9 @@ function fn_open() {
 				<tr>
 					<td><%= a.getG_NO() %></td>
 					<td><%= a.getG_S_DATE() %></td>
-					<td><%= a.getG_S_AREA() %></td>
-					<td><%= a.getG_E_AREA() %></td>
+					<!--이거 1로 바꿔야함  -->
+					<td><%= a.getG_S_AREA().split("/")[0] %></td>
+					<td><%= a.getG_E_AREA().split("/")[0] %></td>
 					<td><%= a.getG_TITLE() %></td>
 					<td><%= a.getG_DAY() %></td>
 					<td><%= a.getG_SIZE() %></td>

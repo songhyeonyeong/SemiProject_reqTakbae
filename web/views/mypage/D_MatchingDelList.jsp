@@ -67,7 +67,7 @@ int endPage = pi.getEndPage();
 							<td><%=m.getG_no()%></td>
 							<td><%=m.getG_context()%></td>
 							<td><%=m.getUser_id()%></td>
-							<td><a class="sbtn gy">배송지도</a></td>
+							<td><a class="sbtn gy">배송시작</a></td>
 							<td>
 							<select id="selectDel" name="selectDel">
 							<option value="선택">선택</option>
@@ -118,10 +118,38 @@ int endPage = pi.getEndPage();
 								select.val("선택").prop("selected", true);
 							}  
 						});
-					/* 웹소켓사용
-						$("#listArea .sbtn .gy").click(function(){
-							console.log("배송하기");
-						} */
+					// 웹소켓사용
+						$("#listArea .sbtn.gy").click(function(){
+									var la;
+									var lo;
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+									
+								  if (navigator.geolocation) { // GPS를 지원하면
+								    navigator.geolocation.getCurrentPosition(function(position) {
+								    	la=position.coords.latitude;
+								    	lo=position.coords.longitude;
+								    	location.href="/reqtakbae/views/mypage/basonglocation.jsp";
+								    }, function(error) {
+								      console.error(error);
+								    }, {
+								      enableHighAccuracy: false,
+								      maximumAge: 0,
+								      timeout: Infinity
+								    });
+								  } else {
+								    alert('GPS를 지원하지 않습니다');
+								  }
+							
+						});
 						
 			
 					});

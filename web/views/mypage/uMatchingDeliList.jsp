@@ -55,12 +55,12 @@
 					</colgroup>
 					<thead>
 						<tr>
-							<th scope="col">No</th>
 							<th scope="col">구분</th>
 							<th scope="col">공고번호</th>
 							<th scope="col">공고내용</th>
 							<th scope="col">배송날짜</th>
 							<th scope="col">선택기사</th>
+						<!-- 	<th scope="col">상세주소선택</th> -->
 							<th scope="col">상태</th>
 							<th scope="col">상세</th>
 						</tr>
@@ -73,13 +73,12 @@
 						<tr>
 							<input type="hidden" value="<%=m.getG_NO()%>">
 							<input type="hidden" value="<%=m.getU_no()%>">
-							<td><label for=""> 체크</label> <input id="" name=""
-								class="check" type="checkbox"></td>
 							<td><%=m.getG_DIV()%></td>
 							<td><%=m.getG_NO()%></td>
 							<td><%=m.getG_CONTEXT()%></td>
 							<td><%=m.getG_DAY()%></td>
 							<td><%=m.getUSER_ID()%></td>
+							<!-- <td><a class="sbtn sk">주소선택</a></td> -->
 							<%
 								if (m.getD_STATUS().equals("배송완료")) {
 							%>
@@ -126,18 +125,16 @@
  							location.href="/reqtakbae/views/board/reviewWrite.jsp?delId="+delId+"&&gno="+num;
 							
 						});
+						$("#tbody td .sbtn.sk").click(function(){
+							//상세주소 선택부분
+							location.href="/reqtakbae/views/mypage/selectDetailADDR.jsp";
+						});
+
+						
 						$("#tbody td .sbtn.db").click(function(){
 							var num = $(this).parent().parent().children("input").eq(0).val();
 							var uno = $(this).parent().parent().children("input").eq(1).val();
-							/*웹소켓 사용 부분  */
-							
-							
-							
-							
-							
-							
-							
-							
+							location.href="/reqtakbae/views/mypage/selectDetailADDR.jsp";
 						});
 						
 						
