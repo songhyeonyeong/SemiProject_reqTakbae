@@ -72,7 +72,7 @@ import ="com.kh.jinkuk.border.review.model.vo.*"%>
 			<span><a class="mbtn bk" href='<%=request.getContextPath()%>/selectReview'>목록</a></span>
 			<% if(loginUser != null && loginUser.getUser_id().equals(r.getUname())){ %>
 			<span><a class="mbtn gy" href='<%=request.getContextPath()%>/updateReview?hno=<%=r.getHno()%>&driId=<%=r.getDriId()%>'>수정</a></span>
-			<span><a class="mbtn rd" href='<%=request.getContextPath()%>/deleteReview'>삭제</a></span>
+			<span><a class="mbtn rd" href='<%=request.getContextPath()%>/deleteReview?hno=<%=r.getHno()%>'>삭제</a></span>
 			<%}%>  
 		</div><!--// btnbox E-->
 

@@ -62,7 +62,7 @@
 			<p class="smMenu mt20">
 			
 				<% if(loginUser == null){ %>
-					<span><a href="/reqtakbae/views/member/joinSort.jsp">회원가입</a></span>
+					<span><a href="/reqtakbae/views/member/join1.jsp">회원가입</a></span>
 					<span> / </span>
 					<span><a href="javascript:openpop();">로그인</a></span>
 				<% } %>
@@ -138,7 +138,7 @@ function openpop()
 						
 						<li class="mt10"><a class="bbtn db wth240" onclick="login()">로그인</a></li>
 						<li class="mt10">
-							<span><a class="white" href="/reqtakbae/views/member/joinSort.jsp">회원가입</a></span>
+							<span><a class="white" href="/reqtakbae/views/member/join1.jsp">회원가입</a></span>
 							<span class="ml30"><a class="white" href="/reqtakbae/views/member/idpwList.jsp">아이디/비밀번호찾기</a></span>
 						</li>
 						<!-- <li class="mt30 white">네이버로그인자리</li> -->
@@ -146,7 +146,7 @@ function openpop()
 						
 						
 						
-						<a id="kakao-login-btn"></a>
+						 <a id="kakao-login-btn"></a>
  						<a href="http://developers.kakao.com/logout"></a> 
  						<li><a href="javascript:popupOpen();" class="mt30 white">카카오로그인</a></li>
 						

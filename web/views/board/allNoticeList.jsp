@@ -140,7 +140,7 @@ function fn_open() {
 					<th scope="col">공고등록일자</th>
 					<th scope="col">출발지</th>
 					<th scope="col">도착지</th>
-					<th scope="col">공고내용</th>
+					<th scope="col">공고제목</th>
 					<th scope="col">배송날짜</th>
 					<th scope="col">크기</th>
 					<th scope="col">금액</th>

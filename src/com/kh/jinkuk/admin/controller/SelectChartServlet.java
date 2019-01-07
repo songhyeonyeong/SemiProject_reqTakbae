@@ -1,25 +1,28 @@
-package com.kh.jinkuk.mypage.controller;
+package com.kh.jinkuk.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.jinkuk.mypage.model.service.MypageService;
+import com.kh.jinkuk.admin.model.service.AdminService;
+import com.kh.jinkuk.admin.model.vo.Chart;
 
 /**
- * Servlet implementation class getSElocation
+ * Servlet implementation class SelectChartServlet
  */
-@WebServlet("/getselocation.mp")
-public class getSElocation extends HttpServlet {
+@WebServlet("/SelectChartServlet")
+public class SelectChartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getSElocation() {
+    public SelectChartServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,18 +31,17 @@ public class getSElocation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int gno =Integer.parseInt(request.getParameter("gno"));
-		String []stEd =new String[2];
-		stEd  =new MypageService().selectSE(gno);
-		System.out.println(stEd[0]);
-		System.out.println(stEd[1]);
-		String page="";
-		if(stEd!=null) {
-			page="views/mypage/basonglocation.jsp";
-			request.setAttribute("start", stEd[0]);
-			request.setAttribute("end", stEd[1]);
+		
+		ArrayList<Chart> c = new AdminService().selectChart();
+		
+		System.out.println(c);
+		String page = "";
+		if(c != null) {
+			request.setAttribute("c", c);
+			page = "/views/admin/statisticsarea.jsp";
 			request.getRequestDispatcher(page).forward(request, response);
 		}
+		
 		
 	}
 

@@ -1,11 +1,8 @@
 package com.kh.jinkuk.border.announcment.cotroller;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
@@ -110,6 +107,9 @@ public class InsertBoardServlet extends HttpServlet {
 			i.setUno(uno);
 			i.setPoint(point);
 			int result = new AnnouncmentService().insertBoard(i,image,gongdiv);
+			
+			/*int areaCount = new AnnouncmentService().areaCount(start);*/
+			
 			if(result>0) {
 			String encoded = URLEncoder.encode(gongdiv,"UTF-8");
 			response.sendRedirect("/reqtakbae/selectList.bo?gongdiv="+encoded);

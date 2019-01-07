@@ -45,10 +45,9 @@ int endPage = pi.getEndPage();
 			</colgroup>
 			<thead>
 				<tr>
-					<th scope="col">No</th>
 					<th scope="col">구분</th>
 					<th scope="col">공고번호</th>
-					<th scope="col">공고내용</th>
+					<th scope="col">공고제목</th>
 					<th scope="col">신청자ID</th>
 					<th scope="col">상세</th>
 					<th scope="col" colspan="2">배송상태</th>
@@ -61,11 +60,9 @@ int endPage = pi.getEndPage();
 						%>
 						<tr>
 							<input type="hidden" value="<%=m.getG_no()%>">
-							<td><label for=""> 체크</label> <input id="" name=""
-								class="check" type="checkbox"></td>
 							<td><%=m.getG_div()%></td>
 							<td><%=m.getG_no()%></td>
-							<td><%=m.getG_context()%></td>
+							<td><%=m.getG_title()%></td>
 							<td><%=m.getUser_id()%></td>
 							<td><a class="sbtn gy">배송시작</a></td>
 							<td>
@@ -120,34 +117,9 @@ int endPage = pi.getEndPage();
 						});
 					// 웹소켓사용
 						$("#listArea .sbtn.gy").click(function(){
-									var la;
-									var lo;
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-									
-								  if (navigator.geolocation) { // GPS를 지원하면
-								    navigator.geolocation.getCurrentPosition(function(position) {
-								    	la=position.coords.latitude;
-								    	lo=position.coords.longitude;
-								    	location.href="/reqtakbae/views/mypage/basonglocation.jsp";
-								    }, function(error) {
-								      console.error(error);
-								    }, {
-								      enableHighAccuracy: false,
-								      maximumAge: 0,
-								      timeout: Infinity
-								    });
-								  } else {
-								    alert('GPS를 지원하지 않습니다');
-								  }
+										var num = $(this).parent().parent().children("input").val();
+										console.log(num);
+								    	location.href="/reqtakbae/getselocation.mp?gno="+num;
 							
 						});
 						
