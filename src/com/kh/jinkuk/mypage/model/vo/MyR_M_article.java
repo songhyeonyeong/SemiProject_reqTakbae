@@ -3,6 +3,7 @@ package com.kh.jinkuk.mypage.model.vo;
 import java.sql.Date;
 
 public class MyR_M_article {
+	private String g_title;
 	private String g_div;
 	private int g_no;
 	private String g_context;
@@ -13,9 +14,10 @@ public class MyR_M_article {
 	public MyR_M_article() {
 		super();
 	}
-	public MyR_M_article(String g_div, int g_no, String g_context, Date g_day, String user_id, String g_p_div,
-			String b_status) {
+	public MyR_M_article(String g_title, String g_div, int g_no, String g_context, Date g_day, String user_id,
+			String g_p_div, String b_status) {
 		super();
+		this.g_title = g_title;
 		this.g_div = g_div;
 		this.g_no = g_no;
 		this.g_context = g_context;
@@ -23,6 +25,12 @@ public class MyR_M_article {
 		this.user_id = user_id;
 		this.g_p_div = g_p_div;
 		this.b_status = b_status;
+	}
+	public String getG_title() {
+		return g_title;
+	}
+	public void setG_title(String g_title) {
+		this.g_title = g_title;
 	}
 	public String getG_div() {
 		return g_div;
@@ -68,11 +76,9 @@ public class MyR_M_article {
 	}
 	@Override
 	public String toString() {
-		return "MyR_M_article [g_div=" + g_div + ", g_no=" + g_no + ", g_context=" + g_context + ", g_day=" + g_day
-				+ ", user_id=" + user_id + ", g_p_div=" + g_p_div + ", b_status=" + b_status + "]";
+		return "MyR_M_article [g_title=" + g_title + ", g_div=" + g_div + ", g_no=" + g_no + ", g_context=" + g_context
+				+ ", g_day=" + g_day + ", user_id=" + user_id + ", g_p_div=" + g_p_div + ", b_status=" + b_status + "]";
 	}
-	
-	
 	
 	
 }

@@ -82,6 +82,7 @@ public class MypageDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				m = new Mynotice();
+				m.setG_TITLE(rset.getString("G_TITLE"));
 				m.setG_NO(rset.getInt("G_NO"));
 				m.setG_DIV(rset.getString("G_DIV"));
 				m.setG_CONTEXT(rset.getString("G_CONTEXT"));
@@ -145,6 +146,7 @@ public class MypageDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				m = new MyDeliverNotice();
+				m.setG_TITLE(rset.getString("G_TITLE"));
 				m.setG_NO(rset.getInt("G_NO"));
 				m.setG_DIV(rset.getString("G_DIV"));
 				m.setG_CONTEXT(rset.getString("G_CONTEXT"));
@@ -211,6 +213,7 @@ public class MypageDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				m = new MyR_M_article();
+				m.setG_title(rset.getString("G_TITLE"));
 				m.setG_div(rset.getString("G_DIV"));
 				m.setG_no(rset.getInt("G_NO"));
 				m.setG_context(rset.getString("G_CONTEXT"));
@@ -274,6 +277,7 @@ public class MypageDao {
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
 				m = new MyR_M_article();
+				m.setG_title(rset.getString("G_TITLE"));
 				m.setG_div(rset.getString("G_DIV"));
 				m.setG_no(rset.getInt("G_NO"));
 				m.setG_context(rset.getString("G_CONTEXT"));
@@ -765,6 +769,32 @@ public class MypageDao {
 		}
 		
 		return result;
+	}
+
+	public String[] selectSE(int gno, Connection con) {
+		PreparedStatement pstmt = null;
+		ResultSet rset =null;
+		String[] sted=null;
+		String query = prop.getProperty("selectSE");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1,gno);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				sted=new String[2];
+				sted[0]=rset.getString("G_S_AREA");
+				sted[1]=rset.getString("G_E_AREA");
+			}
+			}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+	
+		return sted;
+		
+		
 	}
 
 }
