@@ -22,7 +22,7 @@
 			<span>홈 &gt; 회원가입</span>
 		</div>
 		
-		<form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="get">
+		<form id="joinForm" method="post">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원가입 리스트입니다.</caption>
 			<colgroup>
@@ -33,7 +33,7 @@
 			<tr>
 				<th scope="row">아이디</th>
 				<td>
-					<input name="userDiv" value="기사" type="hidden">
+					<input id="userDiv" name="userDiv" value="기사" type="hidden">
 					<input id="SId" name="userId" type="text">
 					<span>
 						<a id="idCheckBtn" class="sbtn db" >중복확인</a>
@@ -146,20 +146,8 @@
 			</tr>
 			</tbody>
 			</table>
-			
-		
-			<div id="fileArea">
-				<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
-				<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
-			</div>
-			
-			<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">다음</a></span>
-		</div>
 		</form>
-		</div>
-		</div>
+		
 		
 
 
@@ -243,67 +231,61 @@
 			
 		</table>
 
-	</div>
 	
-		<!-- <div class="btnbox mt20">btnbox S
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
-		</div>
-		
-		
-	<%-- 	<form id="insertGisaImg" action="<%=request.getContextPath() %>/GisaJoinImg" method="post" encType="multipart/form-data">
-			<table>
-				<tr>
-					<th scope="row">신분증</th>
-					<td>
-						<div id="showImgArea1">
-							<img id="showImg1" name="showImg1" width="350" height="200"> 
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th scope="row">본인 얼굴사진</th>
-					<td>
-						<div id="showImgArea2">
-							<img id="showImg2" name="showImg2" width="350" height="200"> 
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="hidden" id="userNo" name="userId" value=""></td>
-					<td></td>
-				</tr>
-				<tr><td>
-					<div id="fileArea">
-					<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
-					<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
-					</div></td>
-				</tr>
-				
-				
-		</table>
-				<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
-		</div>
-		</form> --%>
-		
-		<!-- <div id="fileArea">
-			<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
-			<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
-		</div> -->
+	
+	
+	
 
-		<!-- <div class="btnbox mt20">btnbox S
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">회원가입하기</a></span>
-		</div>// btnbox E -->
+	
+	
+	
+	<%-- <form id="imgForm" action="<%=request.getContextPath()%>/GisaJoinImg" method="post" encType="multipart/form-data"> --%>
+	<form id="imgForm"  action="<%=request.getContextPath()%>/GisaJoinImg" method="post" encType="multipart/form-data">
+		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
+			<caption>회원가입 리스트입니다.</caption>
+			<colgroup>
+				<col style="width:30%;">
+				<col style="width:%;">
+			</colgroup>
+			<tbody>
+			
+			<tr>
+				<th scope="row">신분증</th>
+				<td>
+					<div id="showImgArea1">
+						<img id="showImg1" name="showImg1" width="450" height="200"> 
+						<input id="GisaId" name="id" type="text" hidden>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th scope="row">본인 얼굴사진</th>
+				<td>
+					<div id="showImgArea2">
+						<img id="showImg2" name="showImg2" width="450" height="200"> 
+					</div>
+				</td>
+			</tr>
+			 
+			</tbody>
+			</table>
+			
 		
-	<!--// boardWrite E-->
+			<div id="fileArea">
+				<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
+				<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
+			</div>
+			
+			<div class="btnbox mt20"><!-- btnbox S-->
+			<!-- <button type="submit" class="mbtn db">회원가입</button> -->
+			<a class="mbtn db" onclick="joinjoin()">회원가입</a>
+			
+			</div>
+		</form>
+		</div>
+		</div>
+	</div>
 		
-<!-- 
-	</div>// inner E
-</div>
- -->
 <%@ include file="/views/include/footer.jsp" %>
 
 
@@ -483,108 +465,6 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	 
-	 
-	 
-	/* //원본 
-	//계좌 인증
-	var token;
-	 
-	function testtest(){
-		var cId="l7xx4d589e5dd8fb46d6afcf7e22fd7039ed";
-		var cSecret="2b229cffd50b45c08f0cde6158ab69c1";
-		
-		$.ajax({
-			url:"https://testapi.open-platform.or.kr/oauth/2.0/token",
-			type:"POST",
-			contenttype:"application/x-www-form-urlencoded; charset=UTF-8",
-			data:{client_id:cId, client_secret:cSecret, scope:"oob", grant_type:"client_credentials"},
-			success:function(data){
-				console.log(data);
-				
-				token=data.access_token;
-				console.log(token);
-				
-				bankbank();
-			}
-		});
-	}
-	
-	function bankbank(){
-			var accountNum = $("#accountNum").val();
-			var depositor = $("#SName").val();
-			var birth = $("#birth").val();
-			var today = $("#today").val();
-			var bankName = $("#bankName option:selected").val();
-			
-			var bankNum="0";
-			if(bankName=="nongHyup"){
-				bankNum="011";
-			}else if(bankName=="shinHan"){
-				bankNum="088";
-			}else if(bankName=="ibk"){
-				bankNum="003";
-			}else if(bankName=="kb"){
-				bankNum="004";
-			}else if(bankName=="woori"){
-				bankNum="020";
-			}
-			
-			console.log("bankName: "+bankName);
-			console.log("bankNum: "+bankNum);
-			console.log("accountNum: "+accountNum);
-			console.log("depositor: "+depositor);
-			console.log("birth: "+birth);
-			console.log("today: "+today); 
-			console.log("token: "+token); 
-			
-			var data={
-					"bank_code_std": bankNum,"account_num": accountNum, "account_holder_info": birth, "tran_dtime": today		
-			}
-			
-			
-			
-		
-			$.ajax({
-				url:"https://testapi.open-platform.or.kr/inquiry/real_name",
-				type:"POST",
-				ContentType:"application/json; charset=UTF-8",
-				//redirect_uri:"http://localhost:8880/html/callback.html",
-			    headers: {'Authorization': ('Bearer ' + token)},
-				data:JSON.stringify(data),
-				success:function(data){
-					console.log(data);
-					if(bankNum==data.bank_code_std && accountNum==data.account_num && depositor==data.account_holder_name && birth == data.account_holder_info){
-						alert("계좌 인증 성공");
-						$("#accountCheckImg").attr("src", checkImgPath);
-					}else{
-						alert("계좌 인증 실패");
-						$("#accountCheckImg").attr("src","");
-					}
-				},
-				error:function(data){
-					alert("오류");
-				}
-				
-			});
-	} 
-	 */
-	
-	
 	$("#showImgArea1").click(function(){
 		$("#IdCardImg").click();
 	});
@@ -611,109 +491,12 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-/* 	
-	//회원가입 버튼 클릭시 && 널값
-	function insertMember(){
-		if($("#SId").val() == ""){
-			alert("아이디를 입력하세요");
-		}else if($("#idCheckImg").attr("src") == ""){
-			alert("아이디 중복을 확인하세요");
-		}else if($("#SPwd").val() == ""){
-			alert("비밀번호를 입력하세요");
-		}else if($("#SPwd2").val() == ""){
-			alert("비밀번호확인을 입력하세요");
-		}else if($("#SPwd").val() != $("#SPwd2").val()){
-			alert("비밀번호가 일치하지 않습니다");
-			$("#SPwd").val("");
-			$("#SPwd2").val("");
-			$("#pwdCheckImg").attr("src","");
-			$("#pwdCheckImg2").attr("src","");
-		}else if($("#SName").val() == ""){
-			alert("이름 입력하세요");
-		}else if($("#Sphone").val() == ""){
-			alert("휴대폰 번호를 입력하세요");
-		}else if($("#Semail1").val() == ""){
-			alert("이메일을 입력하세요");
-		}else if($("#Semail2").val() == ""){
-			alert("이메일을 입력하세요");
-		}else if($("#emailCheckImg").attr("src") == ""){
-			alert("이메일을 인증하세요");
-		}else if($("#accountNum").val() == ""){
-			alert("계좌번호를 입력하세요");
-		}else if($("#birth").val() == ""){
-			alert("생년월일을 입력하세요");
-		}else if($("#accountCheckImg").attr("src") == ""){
-			alert("계좌번호를 입력 입력하세요");
-		}else{
-			$("#joinForm").submit();
-		} 
 		
-		/* var SId = $("#SId").val();
-		$("#userNo").val(SId);
-		
-		 function insertMember(){
-			$("#joinForm").submit();
-			//$("#insertGisaImg").submit();
-		} */
-		 
-		
-		/* var userDiv = $("#userDiv").val();
-		var SId = $("#SId").val();
-		var SPwd = $("#SPwd").val();
-		var SName = $("#SName").val();
-		var Sphone = $("#Sphone").val();
-		var mainWay = $("#mainWay").val();
-		
-		var Semail1 = $("#Semail1").val();
-		var Semail2 = $("#Semail2").val();
-		var email = Semail1+Semail2;
-		
-		var bankName = $("#bankName").val();
-		var accountNum = $("#accountNum").val();
-		
-		var data={
-				"userDiv": userDiv,"SId": SId, "SPwd": SPwd, "SName": SName,"Sphone": Sphone,"mainWay": mainWay, "email": email, "bankName": bankName,"accountNum":accountNum	
-		} */
-		
-
-		
-
-
-		
-		function insertMember(){
-			/* var form = $("#insertGisaImg")[0];
-			var formData = new FormData(form);
-			console.log("form : " + form);
-			console.log("formData : " + formData);
-
-			$.ajax({
-					url : "/reqtakbae/GisaJoinImg",
-					type : "POST",
-					processData: false,
-                    contentType: false,
-               		data: formData,
-					success : function(data) {
-						alert("업로드 성공!!");
-
-					},
-					error : function(data) {
-					}
-				});  */
+		/* function insertMember(){
 				
 				$("#joinForm").submit();
 			
-		}
+		} */
 	
 
 	</script>
@@ -724,19 +507,7 @@
 	
 	 $.support.cors = true;
 		var reqDate = new Date();
-		/* var year = reqDate.getFullYear() +"";
-		var month = (reqDate.getMonth() + 1) > 10?reqDate.getMonth() + 1 + "":"0" + (reqDate.getMonth() + 1);
-		var date = (reqDate.getDate() > 10?reqDate.getDate() + "":"0" + reqDate.getDate());
-		var hour = reqDate.getHours() > 9?reqDate.getHours() + "":"0" + reqDate.getHours();
-		var min = reqDate.getMinutes() > 10?reqDate.getMinutes() + "":"0" + reqDate.getMinutes();
-		var sec = reqDate.getSeconds() > 10?reqDate.getSeconds() + "":"0" + reqDate.getSeconds(); 
 		
-		var currentTime = year + month + date + hour + min + sec;*/
-		
-		/* var today = $("#today").val();
-		console.log(today); */
-		//$("#tran_dtime").val($("#today").val());
-		//console.log($("#tran_dtime"));
 		/* 사용자인증 Access Token 획득 */
 		function fnSearchAccessToken() {
 			$("#bank_code_std").val($("#bankcode").val());
@@ -822,6 +593,56 @@
 		}
 	
 	
+		
+		function joinjoin(){
+			
+			var userDiv = $("#userDiv").val();
+			var userId = $("#SId").val();
+			var userPwd = $("#SPwd").val();
+			var userName = $("#SName").val();
+			var phone = $("#Sphone").val();
+			var mainWay = $("#mainWay").val();
+			var email1 = $("#Semail1").val();
+			var email2 = $("#Semail2").val();
+			
+			//var bankName = $("#bankName").val();
+			var bankcode = $("#bankcode").val();
+			
+			var accnum = $("#accnum").val();
+			
+			//사진삽입용 uno
+			$("#GisaId").val(userId);
+			
+			console.log("userDiv : "+userDiv);
+			console.log("userId : "+userId);
+			console.log("userPwd : "+userPwd);
+			console.log("userName : "+userName);
+			console.log("phone : "+phone);
+			console.log("mainWay : "+mainWay);
+			console.log("email1 : "+email1);
+			console.log("email2 : "+email2);
+			console.log("bankcode : "+bankcode);
+			console.log("accnum : "+accnum);
+			
+			
+			$.ajax({
+				url : "/reqtakbae/insertGisa.me",
+				type : "POST",
+				data:{userDiv:userDiv, userId:userId, userPwd:userPwd, userName:userName, phone:phone, mainWay:mainWay, email1:email1, email2:email2, bankcode:bankcode, accnum:accnum},
+				success : function(data) {
+					if(data=="회원정보인서트성공"){
+						$("#imgForm").submit();
+					}else{
+						alert("회원가입 실패")
+					}
+					
+				}
+				
+			})
+		}
+		
+		
+		
 	
 	</script>
 
