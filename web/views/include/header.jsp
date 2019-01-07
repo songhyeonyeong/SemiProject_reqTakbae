@@ -8,7 +8,7 @@
  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <header>
 	<div class="inner"><!-- inner S -->
-		<h1><a href="/reqtakbae/index.jsp"><img src="/reqtakbae/views/common/images/gnb/logo.png" alt="택배를 부탁해 로고"></a></h1>
+		<h1><a href="/reqtakbae/AA"><img src="/reqtakbae/views/common/images/gnb/logo.png" alt="택배를 부탁해 로고"></a></h1>
 		<!-- 로그인 전 -->
 		
 

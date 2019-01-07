@@ -538,6 +538,15 @@ public class AdminService {
 		return result;
 	}
 
+	public ArrayList<Announcment> selectListMainAn() {
+		Connection con =  getConnection();
+		
+		ArrayList<Announcment> list = new AdminDao().selectMainAn(con);
+		
+		close(con);
+		
+		return list;
+}
 	public ArrayList<Chart> selectChart() {
 		Connection con = getConnection();
 		

@@ -1,7 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <%-- <% int count = (int)request.getAttribute("count"); %>  --%>
 <%@ include file="/views/include/common.jsp" %>
 
+<%
+	ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");	
+%>
 <title>택배를 부탁해 홈</title>
 
 <script type="text/javascript">
@@ -16,10 +20,20 @@
 	});
 
 </script>
-
 <style>
-
+	#today{
+		color:yellow;
+		
+	}
+	#slideContainer > div{
+		color:white;
+	}
+	#slideContainer > div > a{
+		color:white;
+	}
 </style>
+
+
 </head>
 <body>
 <%-- <script>
@@ -68,15 +82,34 @@
 			<li class="tit bold mr20">공지사항</li>
 			<li><a href="#">택배를 부탁해 홈페이지가 오픈되었습니다.</a></li>
 		</ul>
+		
+	 <a class="tit bold" id="today">오늘의 공고</a>	    
+ 	<div id="slideContainer">
+ 	<%if(list != null){ %>
+	<%for(Announcment m : list){ %>
 
-		<ul class="today">
-			<li class="tit bold">오늘의 공고</li>
+			<div><%=m.getUSER_ID() %> <%=m.getG_S_AREA() %> ~ <%=m.getG_E_AREA() %> <%=m.getG_P_DIV() %></div>
+
+		<%} }else{%>
+			<div></div>
+		<%} %>
+
+	</div>  
+
+
+
+<!-- <div id="page">
+
+		<ul class="ticker" id="ticker_01">
+				<a class="tit bold" id="today">오늘의 공고</a>
 			<li>
 				<span class="ml20 mr20">김**</span>
 				<a href="#">서울 중랑구 ~ 서울 강남구</a>
 				<span class="ml20 mr20">모집중</span>
 			</li>
+
 		</ul>
+</div> -->
 
 	</div><!--// inner E-->
 </div><!--// noticeLine E-->
@@ -89,8 +122,66 @@
 
 
 <%@ include file="/views/include/myNav.jsp" %>
+<script type="text/javascript">
 
-<script>
+
+
+
+ 
+			
+$(function(){
+
+		$.ajax({
+			url:"/reqtakbae/AA", //댓글삽입 서블릿으로 전송
+			type:"post",
+			success:function(data){
+				console.log(data);
+			
+					
+				}
+				
+			},
+			error:function(){
+				console.log("실패");
+			}
+		});
+	});
+
+
+
+
+
+
+
+/* 
+	function tick(){
+		$('#ticker_01 li:first').slideUp( function(){ $(this).appendTo($('#ticker_01')).slideDown(); });
+		}setInterval(function(){tick()}, 5000);
+	 */
+	 
+	 $(function() {
+
+			
+		    $("#slideContainer").css({
+		        "height" :$("#slideContainer div:first").css("height"),
+		        "overflow" : "hidden"
+		    });
+		    
+		    function slide() {
+		        $("#slideContainer div:first").slideUp(1500, function() {
+		            var $this = $(this);
+		            $this.parent().append(this);
+		            $this.show();
+		            slide();
+		        });
+		    }
+		    slide();  
+		});
+	 
+	 
+	 
+	
+
 	$(".car").animate({
 		left:0
 	},function(){
@@ -101,6 +192,9 @@
 		},300);
 		
 	});
+	
+	
+	
 </script>
 
 

@@ -2026,6 +2026,50 @@ public class AdminDao {
 		return result;
 	}
 
+	public ArrayList<Announcment> selectMainAn(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Announcment> list = null;
+		
+		String query = "SELECT RNUM,G_NO,USER_ID, G_S_AREA, G_E_AREA, G_P_DIV" + 
+				"		FROM (SELECT ROWNUM RNUM,G_NO,USER_ID, G_S_AREA, G_E_AREA, G_P_DIV" + 
+				"    		  FROM (SELECT A.G_NO,M.USER_ID, A.G_S_AREA, A.G_E_AREA, AP.G_P_DIV" + 
+				"					FROM ANNOUNCEMENT A" + 
+				"					JOIN ANNOUNCEMENT_PAYMENT AP ON(A.G_NO = AP.G_NO)" + 
+				"           		JOIN MEMBER M ON(A.U_NO = M.U_NO)" + 
+				"					WHERE A.STATUS='Y'" + 
+				"          		 	AND AP.G_P_DIV = '매칭중'" + 
+				"					AND A.G_DIV='일반'" + 
+				"					ORDER BY G_NO DESC))" + 
+				"		WHERE RNUM BETWEEN 1 AND 5";
+		System.out.println(query);
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(query);
+			
+			list = new ArrayList<Announcment>();
+			
+			while(rset.next()) {
+				Announcment m = new Announcment();
+				
+				m.setG_NO(rset.getInt("RNUM"));
+				m.setG_S_AREA(rset.getString("G_S_AREA"));
+				m.setG_E_AREA(rset.getString("G_E_AREA"));
+				m.setUSER_ID(rset.getString("USER_ID"));
+				m.setG_P_DIV(rset.getString("G_P_DIV"));
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rset);
+		}
+		return list;
+}
 	public ArrayList<Chart> selectChart(Connection con) {
 		Statement stmt = null;
 		ResultSet rset = null;
