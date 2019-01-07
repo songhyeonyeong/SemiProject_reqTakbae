@@ -16,13 +16,13 @@ import com.kh.jinkuk.mypage.model.service.MypageService;
  * Servlet implementation class GisaImgServlet
  */
 @WebServlet("/GisaImg")
-public class GisaImgServlet extends HttpServlet {
+public class GisaImgShowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GisaImgServlet() {
+    public GisaImgShowServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,8 +41,8 @@ public class GisaImgServlet extends HttpServlet {
 			String fir=imgList.get(0);
 			String sec=imgList.get(1);
 			
-			System.out.println(fir);
-			System.out.println(sec);
+			System.out.println("fir : "+fir);
+			System.out.println("sec : "+sec);
 			
 			response.getWriter().println(fir+"&"+sec);
 			

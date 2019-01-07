@@ -1,6 +1,8 @@
 package com.kh.jinkuk.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,11 +31,27 @@ public class SNSCheck extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String kakaoId = request.getParameter("kakaoId");
+		String userDiv = request.getParameter("userDiv");
+		
+		System.out.println("snsCheck 서블릿 kakaoId : " + kakaoId);
+		System.out.println("snsCheck 서블릿 userDiv : " + userDiv);
 		
 		//kakaoId가 Member에 있는지 : 있으면 회원가입, 없으면 로그인
-		int result = new MemberService().snsJoinCheck(kakaoId);
+		int result = new MemberService().snsJoinCheck(kakaoId,userDiv);
 		
+		System.out.println("result : "+result);
 		
+		PrintWriter out = response.getWriter();
+		String page="";
+		if(result==0) {
+			page="<script>";
+			page+="opener.window.location.href='/reqtakbae/views/member/joinKakao.jsp?kakaoId='+kakaoId;";
+			page+="window.close();";
+			page+="</script>";
+			out.print(page);
+		}else {
+			
+		}
 		
 		
 	}

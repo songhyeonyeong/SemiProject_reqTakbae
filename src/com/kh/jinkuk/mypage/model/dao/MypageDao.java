@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
+import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
 import com.kh.jinkuk.mypage.model.vo.MyExchange;
@@ -702,7 +703,7 @@ public class MypageDao {
 			while(rset.next()) {
 				//String first = rset.getString("I_PATH");
 				String fileName = rset.getString("I_C_NAME");
-				System.out.println(fileName);
+				//System.out.println("회원수정화면 "+fileName);
 				imgList.add(fileName);
 			}
 		} catch (SQLException e) {
@@ -735,6 +736,35 @@ public class MypageDao {
 		}
 	
 		return c_name;
+	}
+
+	public int updateImg(Connection con, ArrayList<Images> fileList) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateimg");
+		try {
+			for(int i = 0; i < fileList.size(); i++) {
+				pstmt = con.prepareStatement(query);
+				
+				System.out.println("dao old: "+fileList.get(i).getI_o_name());
+				System.out.println("dao new: "+fileList.get(i).getI_c_name());
+				
+				pstmt.setString(1, fileList.get(i).getI_o_name());
+				pstmt.setString(2, fileList.get(i).getI_c_name());
+				pstmt.setInt(3, fileList.get(i).getU_no());
+				pstmt.setString(4, fileList.get(i).getI_div());
+	
+				result += pstmt.executeUpdate();
+	
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }

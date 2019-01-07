@@ -102,10 +102,28 @@ public class MemberService {
 		return uno;
 	}
 
-	public int snsJoinCheck(String kakaoId) {
+
+
+	public int snsJoinCheck(String kakaoId, String userDiv) {
 		Connection con = getConnection();
 		
-		int result = new MemberDao().snsJoinCheck(con, kakaoId);
+		int result = new MemberDao().snsJoinCheck(con, kakaoId,userDiv);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int insertKakaoMember(Member mem) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().insertKakaoMember(con,mem);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
 		
 		close(con);
 		

@@ -4,14 +4,6 @@
 	String bigtabon="8";
 %>
 
-<%
-	/* ArrayList<String> imgList = (ArrayList<String>)request.getAttribute("imgList");
-
-	String fir=imgList.get(0);
-	String sec=imgList.get(1); */
-	
-%>
-
 <%@ include file="/views/include/common.jsp" %>
 
 <title>탈퇴하기</title>
@@ -32,7 +24,7 @@
 		<%@ include file="/views/include/tabMypage.jsp" %>
 
 
-		<form id="imgForm" action="<%=request.getContextPath()%>/GisaJoinImg" method="post" encType="multipart/form-data">
+		<form id="imgForm" action="<%=request.getContextPath()%>/GisaModifyImg" method="post" encType="multipart/form-data">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원사진 수정 리스트입니다.</caption>
 			<colgroup>
@@ -46,7 +38,7 @@
 				<td>
 					<div id="showImgArea1">
 						<img id="showImg1" name="showImg1" width="350" height="200" > 
-						<input id="id" name="id" type="text"  hidden>
+						<input type="hidden" id="uno" name="uno" value="<%=loginUser.getU_no()%>">
 					</div>
 				</td>
 			</tr>
@@ -55,21 +47,24 @@
 				<td>
 					<div id="showImgArea2">
 						<img id="showImg2" name="showImg2" width="350" height="200" > 
+						<input type="hidden" id="preImg1" name="preImg1">
+						<input type="hidden" id="preImg2" name="preImg2">
 					</div>
 				</td>
 			</tr>
 			 
 			</tbody>
 			</table>
-		</form>
-		
 		<div id="fileArea">
 			<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
 			<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
 		</div>
+		</form>
+		
 			
 		<div class="btnbox mt20"><!-- btnbox S-->
-		<button type="submit" class="mbtn db">사진 수정</button>
+		<!-- <button type="submit" class="mbtn db">사진 수정</button> -->
+		<span class="mbtn db" onclick="imgModify()">사진 수정</span>
 		</div>
 		
 
@@ -92,12 +87,20 @@
 			type:"post",
 			data:{uno:uno},
 			success:function(data){
-				addr = data.split("&");
+				console.log(data);
+				var addr = data.split("&");
 				console.log(addr[0]);
 				console.log(addr[1]);
 				
 				$("#showImg1").attr("src","<%=request.getContextPath()%>/upload/"+addr[1]);
 				$("#showImg2").attr("src","<%=request.getContextPath()%>/upload/"+addr[0]);
+				
+				$("#preImg1").val(addr[1]);
+				$("#preImg2").val(addr[0]);
+				
+				
+				
+
 			}
 		});
 		
@@ -130,7 +133,11 @@
 		}
 	}
 	
+	
+	function imgModify(){
+		$("#imgForm").submit();
 
+	}
 	
 	
 	

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.kh.jinkuk.admin.model.dao.AdminDao;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
+import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.mypage.model.dao.MypageDao;
 import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
@@ -255,6 +256,22 @@ public class MypageService {
 		close(con);
 		
 		return imgList;
+	}
+
+	public int updateImg(ArrayList<Images> fileList) {
+		Connection con = getConnection();
+		
+		int result = new MypageDao().updateImg(con,fileList);
+		
+		if(result>0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
 	}
 
 
