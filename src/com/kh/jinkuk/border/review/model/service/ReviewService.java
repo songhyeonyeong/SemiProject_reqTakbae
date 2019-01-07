@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.jinkuk.border.inquire.model.dao.InquireDao;
 import com.kh.jinkuk.border.review.model.dao.ReviewDao;
 import com.kh.jinkuk.border.review.model.vo.Review;
 
@@ -123,5 +124,18 @@ public class ReviewService {
 		close(con);
 
 		return updateResult;
+	}
+
+	public int updateReview(Review r) {
+		Connection con = getConnection();
+		
+		int result = new ReviewDao().updateReview(con, r);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
 	}
 }

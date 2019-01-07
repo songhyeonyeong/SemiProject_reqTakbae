@@ -68,6 +68,7 @@ public class UpdatePointServlet extends HttpServlet {
 			
 			out.println("</script>");
 			
+			out.flush();
 			out.close();
 			
 			

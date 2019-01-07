@@ -35,8 +35,11 @@ import ="com.kh.jinkuk.border.review.model.vo.*"%>
 			</colgroup>
 			<tbody>
 			<tr>
+				<th scope="row">글 번호 </th>
+				<td><span><%=r.getHno() %></span></td>
 				<th scope="row">제목</th>
-				<td colspan="3"><span><%=r.gethTitle() %></span></td>
+				<td><span><%=r.gethTitle() %></span></td>
+				
 			</tr>
 			<tr>
 				<th scope="row">기사명</th>
@@ -67,8 +70,10 @@ import ="com.kh.jinkuk.border.review.model.vo.*"%>
 
 		<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn bk" href='<%=request.getContextPath()%>/selectReview'>목록</a></span>
-			<span><a class="mbtn gy" href='<%=request.getContextPath()%>/'>수정</a></span>
-			<span><a class="mbtn rd" href="#">삭제</a></span>
+			<% if(loginUser != null && loginUser.getUser_id().equals(r.getUname())){ %>
+			<span><a class="mbtn gy" href='<%=request.getContextPath()%>/updateReview?hno=<%=r.getHno()%>&driId=<%=r.getDriId()%>'>수정</a></span>
+			<span><a class="mbtn rd" href='<%=request.getContextPath()%>/deleteReview'>삭제</a></span>
+			<%}%>  
 		</div><!--// btnbox E-->
 
 

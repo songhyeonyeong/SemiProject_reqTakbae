@@ -84,13 +84,6 @@ public class SelectInquireListServlet extends HttpServlet {
 		}
 		
 		
-
-
-			
-			
-			
-		
-
 		System.out.println("서블릿 종료 후 list" + list);
 
 		String page = "";

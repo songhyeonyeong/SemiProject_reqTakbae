@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.jinkuk.exchange.model.vo.Exchange;
+import com.kh.jinkuk.exchange.model.vo.ExchangeAjax;
 
 public class ExchangeDao {
 	private Properties prop = new Properties();
@@ -158,12 +159,12 @@ public class ExchangeDao {
 
 	public int SearchMoney(Connection con, int uNo) {
 		PreparedStatement pstmt = null;
-		int money = 0;
 		ResultSet rset = null;
-		
+		int money=0;
 		String query = prop.getProperty("searchmoney");
 		
 		try {
+			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, uNo);
 			
@@ -183,5 +184,40 @@ public class ExchangeDao {
 		
 		return money;
 	}
+
+
+	public ExchangeAjax SearchMoneye(Connection con, int uNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ExchangeAjax money=null;
+		String query = prop.getProperty("searchmoney");
+		
+		try {
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, uNo);
+			
+			rset = pstmt.executeQuery();
+			
+			money = new ExchangeAjax();
+			while(rset.next()) {
+				money.setMoney(rset.getInt("C_MONEY"));
+				money.setPoint(rset.getInt("C_POINT"));
+				
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return money;
+	}
+
+
+
 
 }

@@ -16,10 +16,12 @@ public class ReportService {
 		
 		if(result > 0 && up > 0) {
 			commit(con);
+			
 			close(con);
 			return 1;
 		}else {
 			rollback(con);
+			
 			close(con);
 			return 0;
 		}

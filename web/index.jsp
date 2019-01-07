@@ -16,6 +16,10 @@
 	});
 
 </script>
+
+<style>
+
+</style>
 </head>
 <body>
 <%-- <script>
@@ -39,8 +43,15 @@
 		<li class="banner01 tcen">
 			<div class="text">
 				<p class="font60">택배보다 <span class="font60 darkbluee">빠르고</span><br>퀵보다 <span class="font60 darkbluee">싸다!!</span></p>
-				<p class="font30">택배업계 최초 일반인 택배서비스</p>
+				<p class="font30" id="msg">&nbsp;</p>
 			</div>
+			
+			
+			<div style="position: absolute;bottom:-15px;right:0px;" class="car">
+				<img src="/reqtakbae/views/common/images/contents/222.png" width="150" height="80" style="">
+			</div>
+			
+			
 		</li>
 		<li class="banner02">
 			<div class="text">
@@ -79,6 +90,18 @@
 
 <%@ include file="/views/include/myNav.jsp" %>
 
+<script>
+	$(".car").animate({
+		left:0
+	},function(){
+		$(".car").fadeOut(1500);
+		
+		setTimeout(function(){
+			$("#msg").append("택배업계 최초 일반인 택배서비스");		
+		},300);
+		
+	});
+</script>
 
 
 </body>

@@ -34,6 +34,7 @@ public class UpdateGradeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int gno = Integer.parseInt(request.getParameter("gno"));
 		String driname = request.getParameter("driname");//후기 기사아이디
+		
 	
 		
 		System.out.println("---UpdateGradeServlet---");
@@ -63,7 +64,7 @@ public class UpdateGradeServlet extends HttpServlet {
 		
 		
 	
-	response.sendRedirect(request.getContextPath() + "/selectReview?gno="+gno);
+	response.sendRedirect(request.getContextPath() + "/selectReview?gno="+gno+"&&driname="+driname);
 	
 	}
 

@@ -91,6 +91,7 @@
 							<td> <%=r.getRnum()%></td>
 							<td><%=r.gethTitle()%></td>
 							<td><%=r.getDriname()%></td>
+							<input type="hidden" name="driId" value="<%=r.getDriId()%>">
 							<td><%=r.getUname()%></td>
 							<td>
 								<%for(int i=0; i<r.gethGrade(); i++){%>
@@ -158,9 +159,11 @@
 				$(this).parent().css({"background":"white"});
 			}).click(function(){
 				var num = $(this).parent().children("input").val();
+				var driId=$(this).parent().children("input").eq(1).val();
 				
 				
-				location.href="<%=request.getContextPath()%>/selectOneRe?num=" + num;
+				location.href="<%=request.getContextPath()%>/selectOneRe?num=" + num+"&driId="+driId;
+				
 			});
 		});
 		</script>

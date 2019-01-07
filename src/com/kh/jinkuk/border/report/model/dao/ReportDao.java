@@ -61,7 +61,7 @@ public class ReportDao {
 		String query = prop.getProperty("upmember");
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, r.getUno());
+			pstmt.setInt(1, r.getGno());
 			result = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {

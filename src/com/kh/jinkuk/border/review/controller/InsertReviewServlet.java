@@ -73,15 +73,11 @@ public class InsertReviewServlet extends HttpServlet {
 		int result = new ReviewService().insertReview(r);//후기 인서트
 		System.out.println("후기 인서트 완료" );
 		
-		
-		
-		
 		String page = "";
 		if(result > 0) {
 			//response.sendRedirect(request.getContextPath()+"/totalGreade?");
 			
 			response.sendRedirect(request.getContextPath()+"/updatePoint?uno="+uno+"&&gno="+gno+"&&driname="+driname);
-			//score , driname , gno , uno
 		}else {
 			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);

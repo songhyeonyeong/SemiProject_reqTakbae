@@ -6,11 +6,7 @@
 
 
 <title>택배를 부탁해 관리자페이지</title>
-<style>
-	#aaa{
-		margin:auto;
-	}
-</style>
+
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -24,13 +20,14 @@
 		<div class="contBox mt30"><!-- contBox S -->	
 			
 			<%@ include file="include/tab_statistics.jsp" %>
-			<div id="aaa">
-				<%-- <%@ include file="chart.jsp" %> --%>
-			</div>
+			
 		</div><!--// contBox E-->
 
 	</div><!--// container E-->
-
+	<div>
+		<%@ include file="chart.jsp" %>
+	</div>
+	
 	<%@ include file="include/footer.jsp" %>
 
 

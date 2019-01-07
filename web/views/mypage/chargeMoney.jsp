@@ -25,24 +25,24 @@
 		
 		<div class="chargeBox">
 			<dl>
-				<dt class="font20 bold">사이버머니 5,000P</dt>
+				<dt class="font20 bold">사이버머니 5,000원</dt>
 				<dd class="font18">5,000원(부가세별도)</dd>
 				<dd class="mt5"><a class="bbtn db" href="javascript:void(0);" onclick="a(5000);">충전하기</a></dd>
 			</dl>
 
 			<dl>
-				<dt class="font20 bold">사이버머니 10,000P</dt>
+				<dt class="font20 bold">사이버머니 10,000원</dt>
 				<dd class="font18">10,000원(부가세별도)</dd>
 				<dd class="mt5"><a class="bbtn db" href="javascript:void(0);" onclick="a(10000);">충전하기</a></dd>
 			</dl>
 
 			<dl>
-				<dt class="font20 bold">사이버머니 20,000P</dt>
+				<dt class="font20 bold">사이버머니 20,000원</dt>
 				<dd class="font18">20,000원(부가세별도)</dd>
 				<dd class="mt5"><a class="bbtn db" href="javascript:void(0);" onclick="a(20000);">충전하기</a></dd>
 			</dl>
 			<dl>
-				<dt class="font20 bold">사이버머니 50,000P</dt>
+				<dt class="font20 bold">사이버머니 50,000원</dt>
 				<dd class="font18">50,000원(부가세별도)</dd>
 				<dd class="mt5"><a class="bbtn db" href="javascript:void(0);" onclick="a(50000);">충전하기</a></dd>
 			</dl>
