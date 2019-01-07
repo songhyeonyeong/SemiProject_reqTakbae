@@ -49,13 +49,6 @@ public class ChangeServlet extends HttpServlet {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		int userNo = loginUser.getU_no();
 		
-		System.out.println(msg);
-		System.out.println(userNo);
-		System.out.println(rMoney);
-		System.out.println(cMoney);
-		System.out.println(chOk);
-		System.out.println(chDiv);
-		
 		Change c = new Change();
 		c.setCh_cmoney(cMoney);
 		c.setCh_rmoney(rMoney);

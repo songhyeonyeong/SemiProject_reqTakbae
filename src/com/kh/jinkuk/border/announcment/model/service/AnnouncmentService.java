@@ -130,4 +130,12 @@ public class AnnouncmentService {
 		return result;
 	}
 
+	public int areaCount(String start) {
+		Connection con = getConnection();
+		
+		int areaCount = new AnnouncmentDao().areaCount(con, start);
+		
+		return areaCount;
+	}
+
 }

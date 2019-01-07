@@ -411,4 +411,15 @@ public class AnnouncmentDao {
 			}
 			return result;
 		}
+
+		public int areaCount(Connection con, String start) {
+			PreparedStatement pstmt = null;
+			int areaCount = 0;
+			
+			String qeury = prop.getProperty("areaCount");
+			
+			
+			
+			return areaCount;
+		}
 }

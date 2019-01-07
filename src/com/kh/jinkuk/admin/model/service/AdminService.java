@@ -12,6 +12,7 @@ import com.kh.jinkuk.admin.model.dao.AdminDao;
 import com.kh.jinkuk.admin.model.vo.Admin;
 import com.kh.jinkuk.admin.model.vo.Announcment;
 import com.kh.jinkuk.admin.model.vo.Change;
+import com.kh.jinkuk.admin.model.vo.Chart;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.admin.model.vo.LoadImg;
@@ -535,6 +536,16 @@ public class AdminService {
 		close(con);
 		
 		return result;
+	}
+
+	public ArrayList<Chart> selectChart() {
+		Connection con = getConnection();
+		
+		ArrayList<Chart> c = new AdminDao().selectChart(con);
+		
+		close(con);
+		
+		return c;
 	}
 
 

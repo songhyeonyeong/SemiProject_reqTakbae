@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>	
+
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -51,9 +53,9 @@
 		        
 				]);
 			var options = {
-					title : 'Monthly Coffee Production by Country',
+					title : '지역별 신청 통계',
 				/* 	vAxis: {title: 'Cups'}, */
-					hAxis: {title: 'Month'}, 
+				/* 	hAxis: {title: 'Month'},  */
 					seriesType: 'bars',
 					legend : 'none',
 					/* series: {5: {type: 'line'}} */
