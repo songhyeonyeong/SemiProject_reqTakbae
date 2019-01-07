@@ -57,7 +57,7 @@
 					type:"get",
 					data:{uno:uno},
 					success:function(data){
-						window.open('/reqtakbae/views/mypage/payBackPop.jsp?num='+uno+"&money="+data,'reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=500,width=300,height=250');
+						window.open('/reqtakbae/views/mypage/payBackPop.jsp?num='+uno+"&money="+data["ex"].money,'reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=500,width=300,height=250');
 					},
 					error:function(data){
 						console.log("실패");	
