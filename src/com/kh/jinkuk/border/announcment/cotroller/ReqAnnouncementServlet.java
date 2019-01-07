@@ -41,10 +41,11 @@ public class ReqAnnouncementServlet extends HttpServlet {
 		int result =new AnnouncmentService().insertReqATC(uno,gno);
 		if(result>0) {
 			String encoded = URLEncoder.encode(gongdiv,"UTF-8");
-			response.sendRedirect("/reqtakbae/selectList.bo?gongdiv="+encoded);
+			/*response.sendRedirect("/reqtakbae/selectList.bo?gongdiv="+encoded);*/
+			response.sendRedirect("/reqtakbae/reqList.mp");
 		}else {
 			out.print("<script>");
-			out.print("alert('이미 등록한 공고입니다!');");
+			out.print("alert('이미 신청한 공고입니다!');");
 			out.print("history.go(-1);");
 			out.print("</script>");
 			out.flush();

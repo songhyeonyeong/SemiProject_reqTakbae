@@ -274,5 +274,15 @@ public class MypageService {
 		return result;
 	}
 
+	public String[] selectSE(int gno) {
+		Connection con =getConnection();
+		
+		String [] sted =new MypageDao().selectSE(gno,con);
+		
+		close(con);
+		
+		return sted;
+	}
+
 
 }
