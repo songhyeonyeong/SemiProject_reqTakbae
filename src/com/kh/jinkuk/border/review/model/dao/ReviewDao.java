@@ -259,6 +259,7 @@ public class ReviewDao {
 		return resultPoint;
 	}
 
+	
 	//total 평점 합계 출력하기
 	public int totalGrade(Connection con, Review r) {
 		PreparedStatement  pstmt = null;
@@ -294,6 +295,7 @@ public class ReviewDao {
 		return result;
 	}
 
+	//후기 전체 목록 개수 메소드
 	public int totalCount(Connection con, Review r) {
 		PreparedStatement  pstmt = null;
 		ResultSet rset = null;
@@ -358,7 +360,7 @@ public class ReviewDao {
 		return updateResult;
 	}
 
-
+	//리뷰 수정하기 메소드
 	public int updateReview(Connection con, Review r) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -382,5 +384,171 @@ public class ReviewDao {
 		}
 		
 		return result;
+	}
+
+	//리뷰 삭제 하기 메소드
+	public int deleteReview(Connection con, int hno) {
+	
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteReview");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setInt(1, hno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Review> searchT(Connection con, String titleS) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Review> list = null;
+
+		String query = prop.getProperty("searchT");
+		System.out.println(query);
+		
+		System.out.println(titleS);
+
+		try {
+			pstmt = con.prepareStatement(query);
+			
+			pstmt.setString(1, titleS);
+
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Review>();
+
+			while (rset.next()) {
+				Review r = new Review();
+
+				r.setRnum(rset.getInt("RNUM"));
+				r.setHno(rset.getInt("H_NO"));
+				r.sethTitle(rset.getString("H_TITLE"));
+				r.sethContext(rset.getString("H_CONTEXT"));
+				r.sethGrade(rset.getInt("H_GRADE"));
+				r.sethDate(rset.getDate("H_DATE"));
+				r.setStatus(rset.getString("STATUS"));
+				r.setUname(rset.getString("USER_ID"));
+				r.setGno(rset.getInt("G_NO"));
+				r.setDriname(rset.getString("USER_NAME"));
+				r.setDriId(rset.getString("U_ID"));
+
+				list.add(r);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return list;
+		
+	
+	}
+
+	public ArrayList<Review> searchW(Connection con, String writerS) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Review> list = null;
+
+		String query = prop.getProperty("searchW");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1, writerS);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<Review>();
+
+			while (rset.next()) {
+				Review r = new Review();
+
+				r.setRnum(rset.getInt("RNUM"));
+				r.setHno(rset.getInt("H_NO"));
+				r.sethTitle(rset.getString("H_TITLE"));
+				r.sethContext(rset.getString("H_CONTEXT"));
+				r.sethGrade(rset.getInt("H_GRADE"));
+				r.sethDate(rset.getDate("H_DATE"));
+				r.setStatus(rset.getString("STATUS"));
+				r.setUname(rset.getString("USER_ID"));
+				r.setGno(rset.getInt("G_NO"));
+				r.setDriname(rset.getString("USER_NAME"));
+				r.setDriId(rset.getString("U_ID"));
+
+				list.add(r);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return list;
+		
+	}
+
+	public ArrayList<Review> searchD(Connection con, String driS) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Review> list = null;
+
+		String query = prop.getProperty("searchD");
+
+		try {
+			pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1, driS);
+
+			rset = pstmt.executeQuery();
+
+			list = new ArrayList<Review>();
+
+			while (rset.next()) {
+				Review r = new Review();
+
+				r.setRnum(rset.getInt("RNUM"));
+				r.setHno(rset.getInt("H_NO"));
+				r.sethTitle(rset.getString("H_TITLE"));
+				r.sethContext(rset.getString("H_CONTEXT"));
+				r.sethGrade(rset.getInt("H_GRADE"));
+				r.sethDate(rset.getDate("H_DATE"));
+				r.setStatus(rset.getString("STATUS"));
+				r.setUname(rset.getString("USER_ID"));
+				r.setGno(rset.getInt("G_NO"));
+				r.setDriname(rset.getString("USER_NAME"));
+				r.setDriId(rset.getString("U_ID"));
+
+				list.add(r);
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+
+		return list;
 	}
 }

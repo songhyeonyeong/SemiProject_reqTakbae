@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import com.kh.jinkuk.border.inquire.model.dao.InquireDao;
 import com.kh.jinkuk.border.inquire.model.vo.Inquire;
+import com.kh.jinkuk.border.review.model.vo.Review;
 
 
 
@@ -157,6 +158,31 @@ public class InquireService {
 		
 		return result;
 	}
+
+
+
+
+	public ArrayList<Inquire> searchTitle(String titleS) {
+		Connection con =getConnection();
+		ArrayList<Inquire> list = new InquireDao().searchT(con,titleS);
+		close(con);
+		
+		return list;
+	}
+
+
+
+
+	public ArrayList<Inquire> searchText(String textS) {
+		Connection con =getConnection();
+		ArrayList<Inquire> list = new InquireDao().searchText(con,textS);
+		close(con);
+		
+		return list;
+	}
+
+
+
 
 
 
