@@ -247,15 +247,34 @@ public class MemberDao {
 		return result;
 	}
 
-	public int snsJoinCheck(Connection con, String kakaoId) {
+	
+
+	public int snsJoinCheck(Connection con, String kakaoId, String userDiv) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		int result =0;
 		
 		String query = prop.getProperty("snsCheck");
 		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, kakaoId);
+			pstmt.setString(2, userDiv);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt("U_NO");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
 		
-		
-		return 0;
+		return result;
 	}
 	
 	

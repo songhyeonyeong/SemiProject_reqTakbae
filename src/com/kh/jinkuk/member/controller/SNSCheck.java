@@ -29,9 +29,15 @@ public class SNSCheck extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String kakaoId = request.getParameter("kakaoId");
+		String userDiv = request.getParameter("userDiv");
+		
+		System.out.println("snsCheck 서블릿 kakaoId : " + kakaoId);
+		System.out.println("snsCheck 서블릿 userDiv : " + userDiv);
 		
 		//kakaoId가 Member에 있는지 : 있으면 회원가입, 없으면 로그인
-		int result = new MemberService().snsJoinCheck(kakaoId);
+		int result = new MemberService().snsJoinCheck(kakaoId,userDiv);
+		
+		System.out.println("result : "+result);
 		
 		
 		

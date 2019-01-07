@@ -102,10 +102,12 @@ public class MemberService {
 		return uno;
 	}
 
-	public int snsJoinCheck(String kakaoId) {
+
+
+	public int snsJoinCheck(String kakaoId, String userDiv) {
 		Connection con = getConnection();
 		
-		int result = new MemberDao().snsJoinCheck(con, kakaoId);
+		int result = new MemberDao().snsJoinCheck(con, kakaoId,userDiv);
 		
 		close(con);
 		

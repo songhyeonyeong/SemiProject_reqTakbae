@@ -116,6 +116,8 @@ function openpop()
 </script>
 
 
+
+
 <div class="layerWrap"><!-- layerWrap S-->
 		<div class="layerContainer">
 			<div class="xy">
@@ -133,18 +135,19 @@ function openpop()
 							<span><a class="white" href="/reqtakbae/views/member/joinSort.jsp">회원가입</a></span>
 							<span class="ml30"><a class="white" href="/reqtakbae/views/member/idpwList.jsp">아이디/비밀번호찾기</a></span>
 						</li>
-						<li class="mt30 white">네이버로그인자리</li>
-						<!-- <li class="mt10 white">구글로그인자리</li> -->
+						<!-- <li class="mt30 white">네이버로그인자리</li> -->
+						<!-- <li class="mt10 white">카카오로그인자리</li> -->
 						
 						
-						
-						 <a id="kakao-login-btn"></a>
- 						<a href="http://developers.kakao.com/logout"></a>
-						
+					<!-- 	
+						<a id="kakao-login-btn"></a>
+ 						<a href="http://developers.kakao.com/logout"></a> 
+ 						<li><a href="javascript:popupOpen();" class="mt30 white">카카오로그인</a></li>
+						 -->
 						
 						<!--  -->
 						<!-- <div id="naverIdLogin"></div>  -->
-						<div id="naver_id_login"></div>
+						<!-- <div id="naver_id_login"></div> -->
 						
 					</ul>
 				</form>	
@@ -154,6 +157,14 @@ function openpop()
 			<div class="dimBg"></div>
 		</div> 
 		<script>
+			//팝업창
+			 function popupOpen(){
+				var popUrl="/reqtakbae/views/include/pop.jsp";
+				var popOption="width=370, height=360, resizable=no, scrollbars=no, status=no;";
+				window.open(popUrl,"",popOption);
+			}
+		
+		
 			function login(){
 					$("#loginForm").submit();
 			}
@@ -176,8 +187,11 @@ function openpop()
 			
 		</script>
 		
+		<script>
 		
-		 <script type='text/javascript'>
+		</script>
+		
+		<%--  <script type='text/javascript'>
       //<![CDATA[
         // 사용할 앱의 JavaScript 키를 설정해 주세요.
         Kakao.init('7911dc804e017095fb23eed7313ade99');
@@ -193,12 +207,12 @@ function openpop()
         	       success: function(res) {
         	             //alert(JSON.stringify(res)); //<---- kakao.api.request 에서 불러온 결과값 json형태로 출력
         	             //alert(JSON.stringify(authObj)); //<----Kakao.Auth.createLoginButton에서 불러온 결과값 json형태로 출력
-        	             //console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+        	             console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
         	             //console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 (어딨는지 알겠죠?)
         	             //console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
         	         	 //res.properties.nickname으로도 접근 가능 )
         	             //console.log(authObj.access_token);<---- 콘솔 로그에 토큰값 출력
-        	             location.href="<%=request.getContextPath()%>/snsCheck?kakaoId="+res.id;
+        	             //location.href="<%=request.getContextPath()%>/snsCheck?kakaoId="+res.id;
         	           }
         	         })
         	       },
@@ -209,7 +223,7 @@ function openpop()
         });
       //]]>
      
-    </script>
+    </script> --%>
 		
 	</div><!--// layerWrap E-->	
 	
