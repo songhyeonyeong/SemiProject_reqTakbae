@@ -31,7 +31,8 @@
 					<%} %>
 				</li>
 				<li class="mt5">
-					<span class="aaa"></span>
+					<span class="aaa" style=color:blue></span>&nbsp
+					<span class="bbb" style=color:orange></span>
 					<span class="sbtn db" onclick="chargeMoney()">충전</span>
 					<span class="sbtn rd" onclick="logout()">로그아웃</span>
 					<span class="sbtn wh" onclick="myPage()">마이페이지</span>
@@ -80,16 +81,21 @@
 <script>
 	$(function(){
 			var uno=<%=loginUser.getU_no()%>;
+			var div="<%=loginUser.getUser_div()%>";
 			$.ajax({
 				url:"ExchangeAjaxServlet",
 				type:"get",
 				data: {uno:uno},
 				success:function(data){
-					$(".aaa").text(data+"p");
+					$(".aaa").text(data["ex"].money+"원");
+					
+					if(div=="신청자"){
+						$(".bbb").text(data["ex"].point+"p");
+					} 
 				},
 				error:function(request,status,error){
-			        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-			       },
+			       console.log("실패");
+			      },
 			});	
 	});
 </script>

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import com.kh.jinkuk.exchange.model.dao.ExchangeDao;
 import com.kh.jinkuk.exchange.model.vo.Exchange;
+import com.kh.jinkuk.exchange.model.vo.ExchangeAjax;
 
 public class ExchangeService {
 
@@ -51,6 +52,20 @@ public class ExchangeService {
 		Connection con = getConnection();
 		
 		int money = new ExchangeDao().SearchMoney(con, uNo);
+		/*int money = new ExchangeDao().SearchMoney(con, uNo);*/
+		
+		
+		close(con);
+		
+		return money;
+	}
+
+	public ExchangeAjax SearchMoneye(int uNo) {
+		Connection con = getConnection();
+		
+		ExchangeAjax money = new ExchangeDao().SearchMoneye(con, uNo);
+		/*int money = new ExchangeDao().SearchMoney(con, uNo);*/
+		
 		
 		close(con);
 		
