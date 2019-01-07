@@ -16,6 +16,7 @@ import java.util.Properties;
 import com.kh.jinkuk.admin.model.vo.Admin;
 import com.kh.jinkuk.admin.model.vo.Announcment;
 import com.kh.jinkuk.admin.model.vo.Change;
+import com.kh.jinkuk.admin.model.vo.Chart;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.admin.model.vo.LoadImg;
@@ -2023,6 +2024,41 @@ public class AdminDao {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Chart> selectChart(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Chart> c = null;
+		
+		String query = prop.getProperty("selectchart");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			c = new ArrayList<Chart>();
+			
+			while(rset.next()) {
+				
+				Chart ch = new Chart();
+				
+				ch.setArea(rset.getString("AREA"));
+				ch.setCount(rset.getInt("A_COUNT"));
+				c.add(ch);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		
+		
+		return c;
 	}
 
 }

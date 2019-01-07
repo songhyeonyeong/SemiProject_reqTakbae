@@ -107,6 +107,9 @@ public class InsertBoardServlet extends HttpServlet {
 			i.setUno(uno);
 			i.setPoint(point);
 			int result = new AnnouncmentService().insertBoard(i,image,gongdiv);
+			
+			/*int areaCount = new AnnouncmentService().areaCount(start);*/
+			
 			if(result>0) {
 			String encoded = URLEncoder.encode(gongdiv,"UTF-8");
 			response.sendRedirect("/reqtakbae/selectList.bo?gongdiv="+encoded);

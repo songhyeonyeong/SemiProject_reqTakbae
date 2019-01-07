@@ -144,6 +144,5 @@ public class AnnouncmentService {
 		close(con);
 		
 		return result;
-	}
 
 }

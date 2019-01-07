@@ -395,6 +395,7 @@ public class AnnouncmentDao {
 			return result;
 		}
 
+
 		public int deleteBoard(Connection con, int gno) {
 			PreparedStatement pstmt = null;
 			int result = 0;
