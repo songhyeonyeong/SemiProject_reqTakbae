@@ -135,6 +135,12 @@
 
 	<script>
 	$(function(){
+		$(".mbtn").css("cursor","pointer");
+	});
+	
+	
+	
+	$(function(){
 		$("#addReply").click(function(){ //댓글등록클릭시
 			var content = $("#replyContent").val(); //유저가 작성한 댓글내용
 			var inquiryNo = $("#inquiryNo").text();

@@ -115,7 +115,7 @@
 						<th scope="col">배송날짜</th>
 						<td>
 							<label for=""></label>
-							<input id="datePicker" name="datePicker" class="wth150" type="text">
+							<input id="" name="date" class="wth150" type="date">
 						</td>
 						<th scope="col">상태</th>
 						<td>
@@ -230,20 +230,6 @@
 
 	<script>
 
-	
-	$(function() { 
-		 
-	    $("#datePicker").datepicker({dateFormat: 'yy-mm-dd'});
-	 
-	    }); 
-	 
-	    function show_dp(){ 
-	 
-	     $("#datePicker").datepicker('show'); //Show on click of button 
-	 
-	    } 
-	 
-	
 		function deleteNotice(){
 			$("input[name=memCheck]:checked").each(function() {
 				
@@ -268,26 +254,6 @@
 				
 			
 
-/*  		function check() {
-
-			if(fr.destination.value==null) {
-				fr.destination.value = "0";
-				System.out.println(fr.destination.value);
-				return true;
-				
-			}else if(fr.size.value==null) {
-				fr.size.value = "0";
-				System.out.println(fr.size.value);
-				return true;
-				
-			}else if(fr.status.value==null) {
-				fr.status.value = "0";
-				System.out.println(fr.status.value);
-				return true;
-			}
-
-		}
-	  */
 			
 	</script>
 

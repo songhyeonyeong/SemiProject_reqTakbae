@@ -488,9 +488,9 @@ public class AdminDao {
 		ResultSet rset = null;
 		ArrayList<Admin> list = null;
 		
-		String query = "SELECT RNUM,U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
-				+ "		FROM (SELECT ROWNUM RNUM,U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
-				+ "			  FROM (SELECT U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
+		String query = "SELECT RNUM,U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT,U_REPORT "
+				+ "		FROM (SELECT ROWNUM RNUM,U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT,U_REPORT "
+				+ "			  FROM (SELECT U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT,U_REPORT "
 				+ "					FROM MEMBER "
 				+ "					WHERE STATUS='Y' "
 				+ "					AND USER_DIV='신청자'"
@@ -520,6 +520,7 @@ public class AdminDao {
 				m.setEmail(rset.getString("EMAIL"));
 				m.setU_date(rset.getDate("U_DATE"));
 				m.setBlackList(rset.getString("BLACKLIST"));
+				m.setReportCount(rset.getInt("U_REPORT"));
 				m.setC_money(rset.getInt("C_MONEY"));
 				m.setC_point(rset.getInt("C_POINT"));
 	
@@ -546,9 +547,9 @@ public class AdminDao {
 		ResultSet rset = null;
 		ArrayList<Admin> list = null;
 		
-		String query = "SELECT RNUM,U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
-				+ "		FROM (SELECT ROWNUM RNUM,U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
-				+ "			  FROM (SELECT U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT "
+		String query = "SELECT RNUM,U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT,U_REPORT"
+				+ "		FROM (SELECT ROWNUM RNUM,U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT,U_REPORT "
+				+ "			  FROM (SELECT U_NO, USER_ID, USER_NAME, PHONE, EMAIL, U_DATE, BLACKLIST, C_MONEY, C_POINT,U_REPORT "
 				+ "					FROM MEMBER "
 				+ "					WHERE STATUS='Y' "
 				+ "					AND USER_DIV='기사'"
@@ -578,6 +579,7 @@ public class AdminDao {
 				m.setEmail(rset.getString("EMAIL"));
 				m.setU_date(rset.getDate("U_DATE"));
 				m.setBlackList(rset.getString("BLACKLIST"));
+				m.setReportCount(rset.getInt("U_REPORT"));
 				m.setC_money(rset.getInt("C_MONEY"));
 				m.setC_point(rset.getInt("C_POINT"));
 	
