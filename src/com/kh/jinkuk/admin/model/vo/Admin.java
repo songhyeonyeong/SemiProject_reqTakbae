@@ -21,6 +21,7 @@ public class Admin implements java.io.Serializable{
 	private String k_trans;
 	private String path;
 	private String i_name;
+	private int reportCount;
 	
 	
 	public Admin() {}
@@ -28,7 +29,7 @@ public class Admin implements java.io.Serializable{
 
 	public Admin(int uno, String b_name, String b_num, String userId, String userPwd, String phone, String email,
 			String blackList, String user_div, int c_money, int c_point, String login_div, String userName, Date u_date,
-			String status, String k_trans, String path, String i_name) {
+			String status, String k_trans, String path, String i_name, int reportCount) {
 		super();
 		this.uno = uno;
 		this.b_name = b_name;
@@ -48,6 +49,7 @@ public class Admin implements java.io.Serializable{
 		this.k_trans = k_trans;
 		this.path = path;
 		this.i_name = i_name;
+		this.reportCount = reportCount;
 	}
 
 
@@ -231,16 +233,25 @@ public class Admin implements java.io.Serializable{
 	}
 
 
+	public int getReportCount() {
+		return reportCount;
+	}
+
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Admin [uno=" + uno + ", b_name=" + b_name + ", b_num=" + b_num + ", userId=" + userId + ", userPwd="
 				+ userPwd + ", phone=" + phone + ", email=" + email + ", blackList=" + blackList + ", user_div="
 				+ user_div + ", c_money=" + c_money + ", c_point=" + c_point + ", login_div=" + login_div
 				+ ", userName=" + userName + ", u_date=" + u_date + ", status=" + status + ", k_trans=" + k_trans
-				+ ", path=" + path + ", i_name=" + i_name + "]";
+				+ ", path=" + path + ", i_name=" + i_name + ", reportCount=" + reportCount + "]";
 	}
-	
-	
+
 
 
 

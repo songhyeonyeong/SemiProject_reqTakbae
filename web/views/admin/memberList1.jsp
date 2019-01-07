@@ -78,6 +78,7 @@
 						<th scope="col">휴대폰번호</th>
 						<th scope="col">이메일 주소</th>
 						<th scope="col">가입일</th>
+						<th scope="col">신고횟수</th>
 						<th scope="col">블랙리스트 유무</th>
 						<th scope="col">사이버머니</th>
 						<th scope="col">보유포인트</th>
@@ -99,6 +100,7 @@
 							<td><%= m.getPhone()%></td>
 							<td><%= m.getEmail()%></td>
 							<td><%= m.getU_date() %></td>
+							<td><%= m.getReportCount() %></td>
 							<td><%= m.getBlackList() %></td>
 							<td><%= m.getC_money() %></td>
 							<td><%= m.getC_point() %></td>
