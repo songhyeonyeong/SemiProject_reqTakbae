@@ -30,6 +30,7 @@
 	<div class="mr_auto wth250" align="center" >
 		<input type="radio" name="userDiv" value="신청자">신청자 &nbsp; &nbsp;
 		<input type="radio" name="userDiv" value="기사">기사
+		<input type="hidden" name="kakaoId" id="kakaoId" >
 		
 		<br><br>
 		<a id="kakao-login-btn"></a>
@@ -78,6 +79,10 @@
   	             location.href="<%=request.getContextPath()%>/snsCheck?kakaoId="+res.id+"&userDiv="+userDiv;
   	             <%-- window.opener.top.location.href="<%=request.getContextPath()%>/views/member/joinKakao.jsp";
   	          	 window.close(); --%>
+  	          	 
+
+  	          	 
+  	          	 
   	       		}
 
   	         })

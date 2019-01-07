@@ -138,4 +138,50 @@ public class ReviewService {
 		
 		return result;
 	}
+
+	public int deleteReview(int hno) {
+		
+	Connection con = getConnection();
+		
+		int result = new ReviewDao().deleteReview(con, hno);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+	
+	//타이틀 찾기 메소드
+	public ArrayList<Review> searchT(String titleS) {
+		Connection con = getConnection();
+
+		ArrayList<Review> list = new ReviewDao().searchT(con,titleS);
+
+		close(con);
+
+		return list;
+		
+	}
+
+	public ArrayList<Review> searchW(String writerS) {
+		Connection con = getConnection();
+
+		ArrayList<Review> list = new ReviewDao().searchW(con,writerS);
+
+		close(con);
+
+		return list;
+	}
+
+	public ArrayList<Review> searchD(String driS) {
+		Connection con = getConnection();
+
+		ArrayList<Review> list = new ReviewDao().searchD(con,driS);
+
+		close(con);
+
+		return list;
+	}
 }

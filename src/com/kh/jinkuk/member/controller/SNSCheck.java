@@ -40,15 +40,25 @@ public class SNSCheck extends HttpServlet {
 		int result = new MemberService().snsJoinCheck(kakaoId,userDiv);
 		
 		System.out.println("result : "+result);
-		
+		//String page="/reqtakbae/views/member/joinKakao.jsp";
+		String page="/reqtakbae/views/member/joinKakao.jsp?kakaoId="+kakaoId;
+		System.out.println("page : "+page);
 		PrintWriter out = response.getWriter();
-		String page="";
 		if(result==0) {
-			page="<script>";
-			page+="opener.window.location.href='/reqtakbae/views/member/joinKakao.jsp?kakaoId='+kakaoId;";
-			page+="window.close();";
-			page+="</script>";
-			out.print(page);
+//			page="<script>";
+//			page+="opener.window.location.href='/reqtakbae/views/member/joinKakao.jsp?kakaoId='"+kakaoId;
+//			/*page+="opener.window.location.href='/reqtakbae/views/member/joinKakao.jsp';";*/
+//			page+="self.close();";
+//			page+="</script>";
+//			out.print(page);
+			out.println("<script>");
+			out.println("window.close();");
+			//out.println(page);
+			out.print("opener.window.location.href="+page);
+			out.println("</script>");
+			//response.sendRedirect("/reqtakbae/views/member/joinKakao.jsp?kakaoId="+kakaoId);
+			//request.setAttribute("kakaoId", kakaoId);
+			//request.getRequestDispatcher("/views/member/joinKakao.jsp").forward(request, response);
 		}else {
 			
 		}

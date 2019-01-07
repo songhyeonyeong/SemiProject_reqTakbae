@@ -28,7 +28,25 @@ import="java.util.*,
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
+	<div class="topsearch mt30 mb30">
+					<!-- topsearch S -->
+			<form action="<%=request.getContextPath()%>/searchIn.in" method="post">
+					<span> <label for="col01"></label> 
+					<select id="col01" name="select" class="wth140">
+						<option selected disabled hidden>선택</option>
+							<option value="title">제목</option>
+							<option value="text">내용</option>
+					</select>
 
+					<span>
+					<label for="Keyword"></label><input type="text" id="Keyword" name="searchText" class="wth240" >
+					<input type="submit" value="검색">
+					<!-- <a class="sch" href="#"> -->
+					<!-- <img src="/reqtakbae/views/common/images/contents/icoSearch.png" alt="검색" title="검색" ></a> -->
+			</span>
+					</form>
+					
+				</div>
 
 		<table class="boardList mt30">
 			<caption>문의내역 리스트입니다.</caption>

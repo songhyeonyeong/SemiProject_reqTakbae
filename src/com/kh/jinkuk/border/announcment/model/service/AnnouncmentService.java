@@ -130,12 +130,19 @@ public class AnnouncmentService {
 		return result;
 	}
 
-	public int areaCount(String start) {
+	public int deleteBoard(int gno) {
 		Connection con = getConnection();
 		
-		int areaCount = new AnnouncmentDao().areaCount(con, start);
+		int result = new AnnouncmentDao().deleteBoard(con, gno);
 		
-		return areaCount;
-	}
+		if(result > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
 
 }

@@ -1,4 +1,4 @@
-package com.kh.jinkuk.mypage.controller;
+package com.kh.jinkuk.border.review.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.jinkuk.mypage.model.service.MypageService;
+import com.kh.jinkuk.border.review.model.service.ReviewService;
 
 /**
- * Servlet implementation class getSElocation
+ * Servlet implementation class DeleteReviewOneServlet
  */
-@WebServlet("/getselocation.mp")
-public class getSElocation extends HttpServlet {
+@WebServlet("/deleteReview")
+public class DeleteReviewOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public getSElocation() {
+    public DeleteReviewOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,20 +28,24 @@ public class getSElocation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int gno =Integer.parseInt(request.getParameter("gno"));
-		String []stEd =new String[2];
-		stEd  =new MypageService().selectSE(gno);
-		System.out.println(stEd[0]);
-		System.out.println(stEd[1]);
-		String page="";
-		if(stEd!=null) {
-			page="views/mypage/basonglocation.jsp";
-			request.setAttribute("start", stEd[0]);
-			request.setAttribute("end", stEd[1]);
-			request.getRequestDispatcher(page).forward(request, response);
-		}
+		int hno = Integer.parseInt(request.getParameter("hno"));
 		
+		System.out.println("DeleteReview hno : "+hno);
+		
+		int result = new ReviewService().deleteReview(hno);
+		
+		System.out.println("완료된 DeleteReview : "+result);
+		
+		if(result > 0) {
+			response.sendRedirect(request.getContextPath() + "/selectReview");
+		}else {
+			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
 	}
+		
+		
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

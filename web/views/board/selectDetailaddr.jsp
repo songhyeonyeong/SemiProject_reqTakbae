@@ -4,11 +4,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>상세주소검색</title>
-<style>
 <%
 String div=request.getParameter("To");
-
 %>
+<style>
  input[type='text']{
  		width:250px;
 		height:30px;

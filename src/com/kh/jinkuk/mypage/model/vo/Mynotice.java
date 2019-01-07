@@ -3,7 +3,7 @@ package com.kh.jinkuk.mypage.model.vo;
 import java.sql.Date;
 
 public class Mynotice implements java.io.Serializable{
-	
+	private String G_TITLE;
 	private int G_NO;
 	private String G_DIV;
 	private String G_CONTEXT;
@@ -12,13 +12,16 @@ public class Mynotice implements java.io.Serializable{
 	public Mynotice() {
 		super();
 	}
-	public Mynotice(int g_NO, String g_DIV, String g_CONTEXT, Date g_DAY, String uSER_ID) {
-		super();
-		G_NO = g_NO;
-		G_DIV = g_DIV;
-		G_CONTEXT = g_CONTEXT;
-		G_DAY = g_DAY;
-		USER_ID = uSER_ID;
+	@Override
+	public String toString() {
+		return "Mynotice [G_TITLE=" + G_TITLE + ", G_NO=" + G_NO + ", G_DIV=" + G_DIV + ", G_CONTEXT=" + G_CONTEXT
+				+ ", G_DAY=" + G_DAY + ", USER_ID=" + USER_ID + "]";
+	}
+	public String getG_TITLE() {
+		return G_TITLE;
+	}
+	public void setG_TITLE(String g_TITLE) {
+		G_TITLE = g_TITLE;
 	}
 	public int getG_NO() {
 		return G_NO;
@@ -50,10 +53,14 @@ public class Mynotice implements java.io.Serializable{
 	public void setUSER_ID(String uSER_ID) {
 		USER_ID = uSER_ID;
 	}
-	@Override
-	public String toString() {
-		return "Mynotice [G_NO=" + G_NO + ", G_DIV=" + G_DIV + ", G_CONTEXT=" + G_CONTEXT + ", G_DAY=" + G_DAY
-				+ ", USER_ID=" + USER_ID + "]";
+	public Mynotice(String g_TITLE, int g_NO, String g_DIV, String g_CONTEXT, Date g_DAY, String uSER_ID) {
+		super();
+		G_TITLE = g_TITLE;
+		G_NO = g_NO;
+		G_DIV = g_DIV;
+		G_CONTEXT = g_CONTEXT;
+		G_DAY = g_DAY;
+		USER_ID = uSER_ID;
 	}
 
 }

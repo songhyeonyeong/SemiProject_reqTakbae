@@ -53,7 +53,7 @@ int endPage = pi.getEndPage();
 				<tr>
 					<th scope="col">구분</th>
 					<th scope="col">공고번호</th>
-					<th scope="col">공고내용</th>
+					<th scope="col">공고제목</th>
 					<th scope="col">배송날짜</th>
 					<th scope="col">신청자 ID</th>
 					<th scope="col">상세보기</th>
@@ -70,7 +70,7 @@ int endPage = pi.getEndPage();
 							<input type="hidden" value="<%=m.getG_no()%>">
 							<td><%=m.getG_div()%></td>
 							<td><%=m.getG_no()%></td>
-							<td><%=m.getG_context()%></td>
+							<td><%=m.getG_title()%></td>
 							<td><%=m.getG_day()%></td>
 							<td><%=m.getUser_id()%></td>
 							<td><a class="sbtn gy">상세보기</a></td>

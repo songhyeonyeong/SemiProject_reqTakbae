@@ -57,7 +57,7 @@
 						<tr>
 							<th scope="col">구분</th>
 							<th scope="col">공고번호</th>
-							<th scope="col">공고내용</th>
+							<th scope="col">공고제목</th>
 							<th scope="col">배송날짜</th>
 							<th scope="col">선택기사</th>
 						<!-- 	<th scope="col">상세주소선택</th> -->
@@ -75,7 +75,7 @@
 							<input type="hidden" value="<%=m.getU_no()%>">
 							<td><%=m.getG_DIV()%></td>
 							<td><%=m.getG_NO()%></td>
-							<td><%=m.getG_CONTEXT()%></td>
+							<td><%=m.getG_TITLE()%></td>
 							<td><%=m.getG_DAY()%></td>
 							<td><%=m.getUSER_ID()%></td>
 							<!-- <td><a class="sbtn sk">주소선택</a></td> -->
