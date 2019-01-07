@@ -14,6 +14,7 @@ import com.kh.jinkuk.admin.model.vo.Announcment;
 import com.kh.jinkuk.admin.model.vo.Change;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
+import com.kh.jinkuk.admin.model.vo.LoadImg;
 import com.kh.jinkuk.admin.model.vo.Point;
 import com.kh.jinkuk.admin.model.vo.Report;
 import com.kh.jinkuk.admin.model.vo.Review;
@@ -505,6 +506,35 @@ public class AdminService {
 		close(con);
 		
 		return list;
+	}
+
+	public ArrayList<Announcment> selectFilter(Announcment a) {
+		Connection con =  getConnection();
+		
+		ArrayList<Announcment> list = new AdminDao().selectFilter(con,a);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public LoadImg SelectImg(String num) {
+		Connection con = getConnection();
+		LoadImg cname= new AdminDao().selectImg(con,num);
+		close(con);
+		return cname;
+	}
+
+	public int deleteReview(Review m) {
+		Connection con = getConnection();
+		System.out.println(con);
+		int result = new AdminDao().deleteReview(con,m);
+	
+		if(result > 0)commit(con);
+		else rollback(con);
+		close(con);
+		
+		return result;
 	}
 
 

@@ -83,6 +83,7 @@
 					</tr>
 				</thead>
 				<tbody>
+				<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.de">
 					<% for(Admin m : list){ %>
 					<tr>
 						<td>
@@ -101,12 +102,12 @@
 							<td><%= m.getC_money() %></td>
 							<td><%= m.getC_point() %></td>
 
-							
-						
 						
 					</tr>
 				<% } %> 
+				</form>
 				</tbody>
+				
 			</table>
 
 			
@@ -160,22 +161,31 @@
 
 		});
 		 
-		 $('span').eq(3).click(function() {
-			 
-				$("input[name=memCheck]:checked").each(function() {
-
-					
-					var test =$(this).val();
-
-					console.log(test);
-					
-					location.href="<%=request.getContextPath()%>/goBlack.de?name=" + test; 
-
+ 		var selected = new Array();
+		 
+		 $(function(){
+				$("span").eq(3).click(function(){
+					 $("input:checkbox[name=memCheck]:checked").each(function() {
+					        selected.push($(this).parent().parent().children().eq(1).text());
+					   });
+					console.log(selected);
+					$.ajax({
+						url:"/reqtakbae/goBlack.de", 
+						data:{selected:selected},
+						type:"post",
+						success:function(data){
+							console.log(data);
+							location.reload();
+						},
+						error:function(){
+							console.log("실패");
+						}
+					});
 				});
-				
-			
-
 			});
+		 
+
+		 
 		 
 		 $('span').eq(4).click(function() {
 			 
@@ -186,8 +196,7 @@
 
 					console.log(test);
 					
-					location.href="<%=request.getContextPath()%>/delete.de?name=" + test; 
-
+					$("#add").submit();
 				});
 				
 			

@@ -33,16 +33,17 @@ public class goBlackDeliverServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+		int result = 0;
 		//request객체에서 parameter꺼내기
-		String userId = request.getParameter("name");
-		System.out.println(userId);
+		String[] userId = request.getParameterValues("selected[]");
+		for(int i = 0 ; i < userId.length; i++) {
+			System.out.println(userId[i]);
+			Admin m = new Admin();
+			m.setUserId(userId[i]);
+			result = new AdminService().goBlackDeliver(m);
+			System.out.println(result);
+		}
 		
-		Admin m = new Admin();
-		m.setUserId(userId);
-		
-		int result = new AdminService().goBlackDeliver(m);
-		System.out.println(result);
 		
 		String page="";
 		if(result > 0) {

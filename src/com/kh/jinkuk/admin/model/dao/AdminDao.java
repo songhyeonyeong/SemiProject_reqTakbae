@@ -18,6 +18,7 @@ import com.kh.jinkuk.admin.model.vo.Announcment;
 import com.kh.jinkuk.admin.model.vo.Change;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
+import com.kh.jinkuk.admin.model.vo.LoadImg;
 import com.kh.jinkuk.admin.model.vo.Point;
 import com.kh.jinkuk.admin.model.vo.Report;
 import com.kh.jinkuk.admin.model.vo.Review;
@@ -1916,8 +1917,111 @@ public class AdminDao {
 		return list;
 	}
 
+	public ArrayList<Announcment> selectFilter(Connection con, Announcment a) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Announcment> list = null;
+		
+		String query = "SELECT RNUM,G_NO, G_S_AREA, G_E_AREA,G_TITLE, G_DAY, G_SIZE, G_PRICE, G_P_DIV" + 
+				"		FROM (SELECT ROWNUM RNUM,G_NO, G_S_AREA, G_E_AREA, G_TITLE, G_DAY, G_SIZE, G_PRICE, G_P_DIV" + 
+				"      		  FROM (SELECT A.G_NO, A.G_S_AREA, A.G_E_AREA, A.G_TITLE, A.G_DAY, A.G_SIZE, A.G_PRICE, AP.G_P_DIV" + 
+				"            		FROM ANNOUNCEMENT A" + 
+				"					JOIN ANNOUNCEMENT_PAYMENT AP ON(A.G_NO = AP.G_NO)" + 
+				"					WHERE A.STATUS='Y'" + 
+				"            		AND A.G_DIV='일반'" + 
+				"            		AND A.G_E_AREA = ?" + 
+				"            		OR A.G_SIZE = ?" + 
+				"            		OR AP.G_P_DIV=?" + 
+				"					ORDER BY G_NO DESC))";
+		System.out.println(query);
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, a.getG_E_AREA());
+			pstmt.setString(2, a.getG_SIZE());
+			pstmt.setString(3, a.getA_status());
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Announcment>();
+			
+			while(rset.next()) {
+				Announcment m = new Announcment();
+				
+				m.setG_NO(rset.getInt("RNUM"));
+				m.setG_S_AREA(rset.getString("G_S_AREA"));
+				m.setG_E_AREA(rset.getString("G_E_AREA"));
+				m.setG_TITLE(rset.getString("G_TITLE"));
+				m.setG_DAY(rset.getDate("G_DAY"));
+				m.setG_SIZE(rset.getString("G_SIZE"));
+				m.setG_PRICE(rset.getInt("G_PRICE"));
+				m.setG_P_DIV(rset.getString("G_P_DIV"));
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
 
+	public LoadImg selectImg(Connection con, String num) {
+		PreparedStatement pstmt = null;
+		ResultSet rset =null;
+		LoadImg img=null;
+		String query ="SELECT I.I_C_NAME FROM IMAGES I JOIN MEMBER M ON(I.U_NO = M.U_NO) WHERE M.USER_ID = ? AND I.STATUS='Y' AND I.I_DIV='신분증'";
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, num);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			if(rset.next()) {
+				img = new LoadImg();
+				
+				img.setImgname(rset.getString("I_C_NAME"));
+				
+			}
+			}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+	
+		return img;
+	}
 
+	public int deleteReview(Connection con, Review m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteReview");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, m.getHno());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 }
 
