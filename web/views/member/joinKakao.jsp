@@ -4,7 +4,7 @@
 <%@ include file="/views/include/common.jsp" %>
 
 <%
-	String kakaoId = (String)request.getParameter("kakaoId");
+	String kakaoId = (String)request.getAttribute("kakaoId");
 %>
 
 <title>회원가입</title>
@@ -38,13 +38,12 @@
 				<th scope="row">아이디</th>
 				<td>
 					<input name="userDiv" value="신청자" type="hidden">
-					<input id="SId" name="userId" type="text">
+					<input id="Id" name="userId" type="text">
 					<input id="kakaoId" name="kakaoId" type="hidden" value="<%=kakaoId%>">
 					<span>
 						<a id="idCheckBtn" class="sbtn db" >중복확인</a>
 						<span id="idCheckMsg"></span>
-						<input type="hidden" id="userPwd" name="userPwd" value="1">
-						<input type="hidden" id="email" name="email" value=kakaoId>
+						<input type="hidden" id="userPass" name="userPwd" value="1">
 					</span>
 				</td>
 				<td><img id="idCheckImg" class="checkTest" src=""></td>
@@ -241,7 +240,7 @@
 	
 	//아이디 정규표현식 && 중복체크
 	$("#idCheckBtn").click(function(){
-		var SId = $("#SId").val();
+		var SId = $("#Id").val();
 		var regExp = /\w{3,}/;
 		
 		if(regExp.test(SId)){
