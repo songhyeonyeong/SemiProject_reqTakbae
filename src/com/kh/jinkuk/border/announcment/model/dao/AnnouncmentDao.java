@@ -1,7 +1,6 @@
 package com.kh.jinkuk.border.announcment.model.dao;
 
 import static com.kh.jinkuk.common.JDBCTemplate.close;
-import static com.kh.jsp.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -364,7 +363,6 @@ public class AnnouncmentDao {
 				pstmt.setInt(2,gno);
 				result =pstmt.executeUpdate();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				close(pstmt);
@@ -392,6 +390,44 @@ public class AnnouncmentDao {
 				close(pstmt);
 				close(rset);
 			}
+			return result;
+		}
+
+		public int updatedelmembermoney(Connection con, InsertAnnouncment i) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("updatemembermoney");
+			System.out.println(query);
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1,(i.getGsum()));
+				pstmt.setInt(2,(i.getPoint()));
+				pstmt.setInt(3, i.getUno());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			System.out.println(result);
+			return result;
+		}
+
+		public int deleteBoard(Connection con, Announcment a) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			String query = prop.getProperty("deleteBoard");
+			System.out.println(query);
+			try {
+				pstmt=con.prepareStatement(query);
+				pstmt.setInt(1, a.getG_NO());
+				result = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+			close(pstmt);
+			}
+			System.out.println(result);
 			return result;
 		}
 

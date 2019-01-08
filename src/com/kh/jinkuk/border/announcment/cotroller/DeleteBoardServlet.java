@@ -31,25 +31,23 @@ public class DeleteBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int total=Integer.parseInt(request.getParameter("total"));
-		int point=Integer.parseInt(request.getParameter("point")); 
-		int gno = Integer.parseInt(request.getParameter("gno"));
 		Member loginUser =(Member)request.getSession().getAttribute("loginUser");
 		int uno=loginUser.getU_no();
-		
+		int gno=Integer.parseInt(request.getParameter("gno"));
+		int point=Integer.parseInt(request.getParameter("point"));
+		int gsum=Integer.parseInt(request.getParameter("gsum"));
+		System.out.println(point);
+		System.out.println(gsum);
 		Announcment a = new Announcment();
-		InsertAnnouncment d = new InsertAnnouncment();
-		d.setUno(uno);
-		d.setPoint(point);
-		d.setGsum(total);
-		a.setG_NO(gno);
-		
-		int result = new AnnouncmentService().DeleteMoneyBoard(d, gno);
-		
-		String page = "";
+		a.setU_NO(gno);
+		InsertAnnouncment i = new InsertAnnouncment();
+		i.setUno(uno);
+		i.setPoint(point);
+		i.setGsum(gsum);
+		int result = new AnnouncmentService().deleteBoard(i, a);
 		
 		if(result > 0) {
-			response.sendRedirect("views/board/selectList.bo?gongdiv=일반");
+			response.sendRedirect("/reqtakbae/selectList.bo?gongdiv=일반");
 		}else {
 			request.setAttribute("msg", "게시글 삭제 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
