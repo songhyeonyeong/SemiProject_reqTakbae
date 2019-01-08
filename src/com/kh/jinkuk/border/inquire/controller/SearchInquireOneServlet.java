@@ -48,7 +48,7 @@ public class SearchInquireOneServlet extends HttpServlet {
 			String titleS = request.getParameter("searchText");
 			System.out.println("SearchReview 조건: " + titleS);// 입력한 값
 			list=new InquireService().searchTitle(titleS);
-
+			
 
 		} else if (select.equals("text")) {
 			String textS = request.getParameter("searchText");
@@ -57,13 +57,29 @@ public class SearchInquireOneServlet extends HttpServlet {
 		
 		}
 		
+		
+		
+		ArrayList<Inquire> statusList = new InquireService().selectRefList();
+		
+		System.out.println("댓글 상태 확인"+statusList);
+		
+		for(int i=0;i<list.size();i++) {
+			for(int  j =0; j<statusList.size();j++) {
+				if(list.get(i).getM_no()==statusList.get(j).getRefstatus()) {
+					list.get(i).setRefstatus(1);	
+					System.out.println(list.get(i)	);
+					}
+			}
+		}
+		
+	
 		String page = "";
 		if(list != null) {
 			
 			request.setAttribute("list", list);
 			request.setAttribute("select", select);
 			
-			page = "/views/board/inquireSearchList.jsp";
+			page = "/views/board/qnaSearchList.jsp";
 			
 		}else {
 			request.setAttribute("msg", "검색 실패!");
