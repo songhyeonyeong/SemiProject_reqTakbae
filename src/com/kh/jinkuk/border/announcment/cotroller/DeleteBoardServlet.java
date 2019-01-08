@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.jinkuk.border.announcment.model.service.AnnouncmentService;
+import com.kh.jinkuk.border.announcment.model.vo.Announcment;
+import com.kh.jinkuk.border.announcment.model.vo.InsertAnnouncment;
+import com.kh.jinkuk.member.model.vo.Member;
 
 /**
  * Servlet implementation class DeleteBoardServlet
@@ -28,10 +31,21 @@ public class DeleteBoardServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int total=Integer.parseInt(request.getParameter("total"));
+		int point=Integer.parseInt(request.getParameter("point")); 
 		int gno = Integer.parseInt(request.getParameter("gno"));
-		System.out.println(gno);
-		int result = new AnnouncmentService().deleteBoard(gno);
-		System.out.println(result);
+		Member loginUser =(Member)request.getSession().getAttribute("loginUser");
+		int uno=loginUser.getU_no();
+		
+		Announcment a = new Announcment();
+		InsertAnnouncment d = new InsertAnnouncment();
+		d.setUno(uno);
+		d.setPoint(point);
+		d.setGsum(total);
+		a.setG_NO(gno);
+		
+		int result = new AnnouncmentService().DeleteMoneyBoard(d, gno);
+		
 		String page = "";
 		
 		if(result > 0) {
