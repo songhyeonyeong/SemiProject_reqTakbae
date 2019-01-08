@@ -3,6 +3,7 @@
 
 <% 
 	Announcment a = (Announcment)request.getAttribute("a"); 
+	InsertAnnouncment i = (InsertAnnouncment)request.getAttribute("i");
 	int num = (int)request.getAttribute("num");
 	Images img =(Images)request.getAttribute("img");
 	String gongdiv=(String)request.getAttribute("gongdiv");
@@ -158,7 +159,7 @@
 				<%if(loginUser.getUser_id().equals(a.getUSER_ID())) {%>
 			<span><a class="mbtn gy wth60" href="<%=request.getContextPath()%>/updateBO?gongdiv=<%=gongdiv%>&&gno=<%=num%>">수정하기</a></span>
 			
-			<span><a class="mbtn rd wth60" href="<%=request.getContextPath()%>/deleteBoard.bo?gno">삭제</a></span>
+			<span><a class="mbtn rd wth60" href="<%=request.getContextPath()%>/deleteBoard.bo?gongdiv=<%=gongdiv%>&&gno=<%=num%>">삭제</a></span>
 				<%}%>
 			<%}else{ %>
 			<span><a class="mbtn db wth60" href="<%=request.getContextPath()%>/ReqAnnouncement.bo?gongdiv=<%=gongdiv%>&&gno=<%=num%>">신청하기</a></span>

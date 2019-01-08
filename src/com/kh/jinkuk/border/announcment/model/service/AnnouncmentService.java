@@ -162,8 +162,24 @@ public class AnnouncmentService {
 		return result;
 	}
 
-
-
+	public int deleteBoard(InsertAnnouncment i, Announcment a) {
+		Connection con = getConnection();
+		
+		int result1 = 0, result2 = 0;
+		int result = 0;
+		
+		result1 = new AnnouncmentDao().updatedelmembermoney(con, i);
+		result2 = new AnnouncmentDao().deleteBoard(con, a);
+		if (result1 > 0 && result2 > 0 ) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+			result = 0;
+		}
+		System.out.println(result);
+		return result;
+	}
 }
 
 
