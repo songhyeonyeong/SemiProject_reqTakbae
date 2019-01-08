@@ -8,7 +8,7 @@
  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <header>
 	<div class="inner"><!-- inner S -->
-		<h1><a href="/reqtakbae/AA"><img src="/reqtakbae/views/common/images/gnb/logo.png" alt="택배를 부탁해 로고"></a></h1>
+		<h1><a href="/reqtakbae/index.jsp"><img src="/reqtakbae/views/common/images/gnb/logo.png" alt="택배를 부탁해 로고"></a></h1>
 		<!-- 로그인 전 -->
 		
 
@@ -146,10 +146,11 @@ function openpop()
 						
 						
 						
-						 <a id="kakao-login-btn"></a>
- 						<a href="http://developers.kakao.com/logout"></a> 
- 						<li><a href="javascript:popupOpen();" class="mt30 white">카카오로그인</a></li>
-						
+						<!--  <a id="kakao-login-btn"></a>
+ 						<a href="http://developers.kakao.com/logout"></a>  -->
+ 						<!-- <li><a href="javascript:popupOpen();" class="mt30 white">카카오로그인</a></li> -->
+ 						<br>
+						<li><a href="/reqtakbae/views/include/snsChoiceForm.jsp" class="mt30 white">SNS로그인</a></li>
 						
 						<!--  -->
 						<!-- <div id="naverIdLogin"></div>  -->
@@ -164,11 +165,11 @@ function openpop()
 		</div> 
 		<script>
 			//팝업창
-			 function popupOpen(){
+			 /* function popupOpen(){
 				var popUrl="/reqtakbae/views/include/pop.jsp";
 				var popOption="width=370, height=360, resizable=no, scrollbars=no, status=no;";
 				window.open(popUrl,"",popOption);
-			}
+			} */
 		
 		
 			function login(){

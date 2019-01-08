@@ -9,6 +9,7 @@ import com.kh.jinkuk.admin.model.dao.AdminDao;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.member.model.vo.Images;
+import com.kh.jinkuk.member.model.vo.Member;
 import com.kh.jinkuk.mypage.model.dao.MypageDao;
 import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
@@ -282,6 +283,19 @@ public class MypageService {
 		close(con);
 		
 		return sted;
+	}
+	
+	public Member selectMemberById(String id) {
+		Connection con =getConnection();
+		
+		Member m =new MypageDao().selectMemberById(con,id);
+		
+		close(con);
+		
+		return m;
+		
+		
+		
 	}
 
 

@@ -12,15 +12,14 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.jinkuk.admin.model.vo.Inquiry;
-import com.kh.jinkuk.border.announcment.model.vo.Announcment;
 import com.kh.jinkuk.member.model.vo.Images;
+import com.kh.jinkuk.member.model.vo.Member;
 import com.kh.jinkuk.mypage.model.vo.MyCharge;
 import com.kh.jinkuk.mypage.model.vo.MyDeliverNotice;
 import com.kh.jinkuk.mypage.model.vo.MyExchange;
 import com.kh.jinkuk.mypage.model.vo.MyR_M_article;
 import com.kh.jinkuk.mypage.model.vo.Mynotice;
 import com.kh.jinkuk.mypage.model.vo.SelectReqGisa;
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class MypageDao {
 
@@ -795,6 +794,52 @@ public class MypageDao {
 		return sted;
 		
 		
+	}
+
+	public Member selectMemberById(Connection con, String id) {
+		PreparedStatement pstmt =null;
+		ResultSet rset= null;
+		Member m =null;
+		
+		String query =prop.getProperty("selectMemberById");
+		try {
+			pstmt=con.prepareStatement(query);
+			pstmt.setString(1,id);
+			rset=pstmt.executeQuery();
+			if(rset.next()) {
+				m=new Member();
+				m.setU_no(rset.getInt("U_NO"));
+				m.setBank_name(rset.getString("BANK_NAME"));
+				m.setBank_num(rset.getString("BANK_NUM"));
+				m.setUser_id(rset.getString("USER_ID"));
+				m.setUser_pwd(rset.getString("USER_PWD"));
+				m.setPhone(rset.getString("PHONE"));
+				m.setEmail(rset.getString("EMAIL"));
+				m.setBacklist(rset.getString("BLACKLIST"));
+				m.setUser_div(rset.getString("USER_DIV"));
+				m.setC_money(rset.getInt("C_MONEY"));
+				m.setC_point(rset.getInt("C_POINT"));
+				m.setLogin_div(rset.getString("LOGIN_DIV"));
+				m.setUser_name(rset.getString("USER_NAME"));
+				m.setU_date(rset.getDate("U_DATE"));
+				m.setStatus(rset.getString("STATUS"));
+				m.setK_trans(rset.getString("K_TRANS"));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		
+		
+		
+		
+		return m;
 	}
 
 }

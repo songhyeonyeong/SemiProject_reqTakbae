@@ -145,9 +145,84 @@
 
 	<script>
 		function printExchange(){
-			window.print();
+
+				var strFeature = "";
+	 			strFeature += "width=1000, height=800, all=no"; 
+
+				var objWin = window.open('', 'print',strFeature);
+				objWin.document.write("충전 적립 리스트 입니다.");
+				objWin.document.write("<table width='1000' border='1'>");
+				objWin.document.write("<tr align='center'>");
+				objWin.document.write("<td>");
+				objWin.document.write("no");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("구분");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("아이디");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("이름");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("환전금액");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("실금액");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("계좌번호");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("은행이름");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("날짜");
+				objWin.document.write("</td>");
+				objWin.document.write("</tr>");
+				<%for(Exchange m : list){%>
+				objWin.document.write("<tr align='center'>");
+				objWin.document.write("<td>");
+				objWin.document.write(<%=m.getC_no() %>);
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write($('tr').eq(1).children().eq(1).text());
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("<%=m.getUser_id() %>");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("<%=m.getUser_name() %>");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("<%=m.getcMoney() %>");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("<%=m.getrMoney() %>");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("<%=m.getBankNum() %>");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("<%=m.getBankName() %>");
+				objWin.document.write("</td>");
+				objWin.document.write("<td>");
+				objWin.document.write("<%=m.getcDate() %>");
+				objWin.document.write("</td>");
+				objWin.document.write("</tr>");
+				<%}%>
+				objWin.document.write("</table>");
+				objWin.document.close();
+
+
+				objWin.print();
+				objWin.close();
+
+
+			}
 			
-		}
+		
 		
 
 		

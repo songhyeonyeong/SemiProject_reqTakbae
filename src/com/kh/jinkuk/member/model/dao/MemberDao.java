@@ -249,13 +249,15 @@ public class MemberDao {
 
 	
 
-	public int snsJoinCheck(Connection con, String kakaoId, String userDiv) {
+	public Member snsJoinCheck(Connection con, String kakaoId, String userDiv) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		int result =0;
+		Member member = null;
+				
 		
 		String query = prop.getProperty("snsCheck");
 		
+
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, kakaoId);
@@ -264,7 +266,44 @@ public class MemberDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				result = rset.getInt(1);
+				member = new Member();
+				
+				member.setU_no(rset.getInt("U_NO"));
+				member.setBank_name(rset.getString("BANK_NAME"));
+				member.setBank_num(rset.getString("BANK_NUM"));
+				member.setUser_id(rset.getString("USER_ID"));
+				member.setUser_pwd(rset.getString("USER_PWD"));
+				member.setPhone(rset.getString("PHONE"));
+				member.setEmail(rset.getString("EMAIL"));
+				member.setBacklist(rset.getString("BLACKLIST"));
+				member.setUser_div(rset.getString("USER_DIV"));
+				member.setC_money(rset.getInt("C_MONEY"));
+				member.setC_point(rset.getInt("C_POINT"));
+				member.setLogin_div(rset.getString("LOGIN_DIV"));
+				member.setUser_name(rset.getString("USER_NAME"));
+				member.setU_date(rset.getDate("U_DATE"));
+				member.setStatus(rset.getString("STATUS"));
+				member.setK_trans(rset.getString("K_TRANS"));
+			
+			
+			
+				System.out.println("member.getuno : "+member.getU_no());
+				System.out.println("member.getBank_name : "+member.getBank_name());
+				System.out.println("member.getBank_num : "+member.getBank_num());
+				System.out.println("member.getUser_id : "+member.getUser_id());
+				System.out.println("member.getUser_pwd : "+member.getUser_pwd());
+				System.out.println("member.getPhone : "+member.getPhone());
+				System.out.println("member.getEmail : "+member.getEmail());
+				System.out.println("member.getBacklist : "+member.getBacklist());
+				System.out.println("member.getUser_div : "+member.getUser_div());
+				System.out.println("member.getC_money : "+member.getC_money());
+				System.out.println("member.getLogin_div : "+member.getLogin_div());
+				System.out.println("member.getUser_name : "+member.getUser_name());
+				System.out.println("member.getU_date : "+member.getU_date());
+				System.out.println("member.getStatus : "+member.getStatus());
+				System.out.println("member.getK_trans : "+member.getK_trans());
+				
+			
 			}
 			
 		} catch (SQLException e) {
@@ -274,16 +313,63 @@ public class MemberDao {
 			close(rset);
 		}
 		
-		return result;
+		return member;
 	}
 
 	public int insertKakaoMember(Connection con, Member mem) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = prop.getProperty("insertKakao");
+		String query="";
+		if(mem.getUser_div().equals("신청자")) {
+			query = prop.getProperty("insertKakao");
+		}else {
+			query = prop.getProperty("insertKakaoGisa");
+		}
 		
-		return 0;
+		try {
+			
+			System.out.println();
+			System.out.println("mem.getBank_name() : "+mem.getBank_name());
+			System.out.println("mem.getBank_num() : "+mem.getBank_num());
+			System.out.println("mem.getUser_id() : "+mem.getUser_id());
+			System.out.println("mem.getUser_pwd() : "+mem.getUser_pwd());
+			System.out.println("mem.getPhone() : "+mem.getPhone());
+			System.out.println("mem.getEmail() : "+mem.getEmail());
+			
+			System.out.println("mem.getUser_div() : "+mem.getUser_div());
+			System.out.println("mem.getLogin_div()) : "+mem.getLogin_div());
+			System.out.println("mem.getUser_name() : "+mem.getUser_name());
+			System.out.println("mem.getgetK_trans() : "+mem.getK_trans());
+			System.out.println();
+			
+			
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, mem.getBank_name());
+			pstmt.setString(2, mem.getBank_num());
+			pstmt.setString(3, mem.getUser_id());
+			pstmt.setString(4, mem.getUser_pwd());
+			pstmt.setString(5, mem.getPhone());
+			pstmt.setString(6, mem.getEmail());
+			
+			pstmt.setString(7, mem.getUser_div());
+			pstmt.setString(8, mem.getLogin_div());
+			pstmt.setString(9, mem.getUser_name());
+			
+			if(mem.getUser_div().equals("기사")) {
+				pstmt.setString(10, mem.getK_trans());
+			}
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+
+		return result;
 	}
 	
 	
