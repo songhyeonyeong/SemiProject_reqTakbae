@@ -50,7 +50,7 @@ int endPage = pi.getEndPage();
 					<th scope="col">공고제목</th>
 					<th scope="col">신청자ID</th>
 					<th scope="col">상세</th>
-					<th scope="col" colspan="2">배송상태</th>
+					<th scope="col">배송상태</th>
 				</tr>
 			</thead>
 			<tbody id="listArea">
@@ -64,8 +64,13 @@ int endPage = pi.getEndPage();
 							<td><%=m.getG_no()%></td>
 							<td><%=m.getG_title()%></td>
 							<td><%=m.getUser_id()%></td>
+							<td style="color:blue"><%=m.getB_status()%></td>
+							<%if(m.getB_status().equals("배송완료")||m.getB_status().equals("배송확정")){ %>
+							<td><a class="sbtn bl" disabled>배송완료</a></td>
+							<%}else{ %>
 							<td><a class="sbtn gy">배송시작</a></td>
-							<td>
+							<%} %>
+							<!-- <td>
 							<select id="selectDel" name="selectDel">
 							<option value="선택">선택</option>
 							<option value="인수중">인수중</option>
@@ -73,8 +78,7 @@ int endPage = pi.getEndPage();
 							<option value="배송완료">배송완료</option>
 							</select>
 							&nbsp;&nbsp;<button>적용</button>
-							</td>
-							<td style="color:blue"><%=m.getB_status()%></td>
+							</td> -->
 						</tr>
 						<%
 							}
@@ -83,7 +87,7 @@ int endPage = pi.getEndPage();
 		</table>
 			<script type="text/javascript">
 					 $(function(){
-						$("#listArea td button").click(function(){
+					/* 	$("#listArea td button").click(function(){
 							var value = $(this).prev().val();
 							var select=$(this).prev();
 							 var t=$(this).parent().next();
@@ -114,12 +118,14 @@ int endPage = pi.getEndPage();
 							}); 
 								select.val("선택").prop("selected", true);
 							}  
-						});
+						}); */
 					// 웹소켓사용
 						$("#listArea .sbtn.gy").click(function(){
 										var num = $(this).parent().parent().children("input").val();
-										console.log(num);
-								    	location.href="/reqtakbae/getselocation.mp?gno="+num;
+										var id =$(this).parent().prev().prev().text();
+										var bst=$(this).parent().prev().text();
+										console.log(bst);
+								    	location.href="/reqtakbae/getselocation.mp?gno="+num+"&&id="+id+"&&stat="+bst;
 							
 						});
 						
