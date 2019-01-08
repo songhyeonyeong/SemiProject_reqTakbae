@@ -34,16 +34,10 @@ public class DeleteBoardServlet extends HttpServlet {
 		Member loginUser =(Member)request.getSession().getAttribute("loginUser");
 		int uno=loginUser.getU_no();
 		int gno=Integer.parseInt(request.getParameter("gno"));
-		int point=Integer.parseInt(request.getParameter("point"));
-		int gsum=Integer.parseInt(request.getParameter("gsum"));
-		System.out.println(point);
-		System.out.println(gsum);
 		Announcment a = new Announcment();
 		a.setU_NO(gno);
 		InsertAnnouncment i = new InsertAnnouncment();
 		i.setUno(uno);
-		i.setPoint(point);
-		i.setGsum(gsum);
 		int result = new AnnouncmentService().deleteBoard(i, a);
 		
 		if(result > 0) {
