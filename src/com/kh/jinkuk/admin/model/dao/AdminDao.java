@@ -1924,24 +1924,56 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Announcment> list = null;
-		
-		String query = "SELECT RNUM,G_NO, G_S_AREA, G_E_AREA,G_TITLE, G_DAY, G_SIZE, G_PRICE, G_P_DIV" + 
-				"		FROM (SELECT ROWNUM RNUM,G_NO, G_S_AREA, G_E_AREA, G_TITLE, G_DAY, G_SIZE, G_PRICE, G_P_DIV" + 
-				"      		  FROM (SELECT A.G_NO, A.G_S_AREA, A.G_E_AREA, A.G_TITLE, A.G_DAY, A.G_SIZE, A.G_PRICE, AP.G_P_DIV" + 
-				"            		FROM ANNOUNCEMENT A" + 
-				"					JOIN ANNOUNCEMENT_PAYMENT AP ON(A.G_NO = AP.G_NO)" + 
-				"					WHERE A.STATUS='Y'" + 
-				"            		AND A.G_DIV='일반'" + 
-				"            		AND A.G_E_AREA = ?" + 
-				"            		OR A.G_SIZE = ?" + 
-				"            		OR AP.G_P_DIV=?" + 
-				"					ORDER BY G_NO DESC))";
+		String query = "";
+
 		System.out.println(query);
 		try {
+			
+		if((a.getG_E_AREA())==null && (a.getG_SIZE())!=null && (a.getA_status())!=null) {
+			query = prop.getProperty("selectDao1");
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, a.getG_E_AREA());
+			pstmt.setString(1, "일반");
 			pstmt.setString(2, a.getG_SIZE());
 			pstmt.setString(3, a.getA_status());
+
+			
+		}else if((a.getG_E_AREA())!=null && (a.getG_SIZE())==null && (a.getA_status())!=null) {
+			query = prop.getProperty("selectDao2");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "일반");
+			pstmt.setString(2, a.getG_E_AREA());
+			pstmt.setString(3, a.getA_status());
+			
+			
+		}else if((a.getG_E_AREA())!=null && (a.getG_SIZE())!=null && (a.getA_status())==null) {
+			query = prop.getProperty("selectDao3");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "일반");
+			pstmt.setString(2, a.getG_E_AREA());
+			pstmt.setString(3, a.getG_SIZE());
+			
+			
+		}else if((a.getG_E_AREA())==null && (a.getG_SIZE())==null && (a.getA_status())!=null) {
+			query = prop.getProperty("selectDao4");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "일반");
+			pstmt.setString(2, a.getA_status());
+			
+		}else if((a.getG_E_AREA())!=null && (a.getG_SIZE())==null && (a.getA_status())==null) {
+			query = prop.getProperty("selectDao5");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "일반");
+			pstmt.setString(2, a.getG_E_AREA());
+			
+		}else if((a.getG_E_AREA())==null && (a.getG_SIZE())!=null && (a.getA_status())==null) {
+			query = prop.getProperty("selectDao6");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "일반");
+			pstmt.setString(2, a.getG_SIZE());
+			
+		}
+
+
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<Announcment>();

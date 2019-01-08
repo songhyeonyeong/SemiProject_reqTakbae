@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.kh.jinkuk.admin.model.service.AdminService;
 import com.kh.jinkuk.admin.model.vo.Announcment;
 
@@ -34,22 +35,13 @@ public class SelectMainAnServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("sd");
 		
-		ArrayList<Announcment> list = new AdminService().selectListMainAn();
 
-		System.out.println(list);
-		String page="";
-		if(list != null) {
-			page="index.jsp";
-			request.setAttribute("list", list);
-
-		}else {
-			request.setAttribute("msg", "회원정보 조회 실패!");
-			page="/views/common/errorPage.jsp";
-
-		}
 		
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
+		ArrayList<Announcment> list = new AdminService().selectListMainAn();
+		System.out.println(list);
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		new Gson().toJson(list, response.getWriter());
 
 	}
 
