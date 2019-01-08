@@ -30,12 +30,15 @@ public class InsertKakaoMemberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userDiv = request.getParameter("userDiv");
-		String userName = request.getParameter("userName");
-		String email = request.getParameter("email");
+		String kakaoId = request.getParameter("kakaoId");
+
+		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
+		String userName = request.getParameter("userName");
 		String phone = request.getParameter("phone");
 		String bankCode = request.getParameter("bankcode");
 		String accnum = request.getParameter("accnum");
+		String mainWay = request.getParameter("mainWay");
 		String bankName="";
 		
 		if(bankCode.equals("004")) {
@@ -50,7 +53,8 @@ public class InsertKakaoMemberServlet extends HttpServlet {
 			bankName="우리은행";
 		}
 		
-		System.out.println("email : "+email);
+		System.out.println();
+		System.out.println("kakaoId : "+kakaoId);
 		System.out.println("userPwd : "+userPwd);
 		System.out.println("userDiv : "+userDiv);
 		System.out.println("userName : "+userName);
@@ -58,16 +62,36 @@ public class InsertKakaoMemberServlet extends HttpServlet {
 		System.out.println("bankCode : "+bankCode);
 		System.out.println("bankName : "+bankName);
 		System.out.println("accnum : "+accnum);
+		System.out.println("mainWay : "+mainWay);
+		System.out.println();
 		
 		Member mem = new Member();
 		mem.setUser_div(userDiv);
+		mem.setUser_id(userId);
 		mem.setUser_pwd(userPwd);
 		mem.setUser_name(userName);
+		mem.setEmail(kakaoId);//카카오아이디로 이메일
 		mem.setPhone(phone);
 		mem.setBank_name(bankName);
 		mem.setBank_num(accnum);
+		mem.setLogin_div("카카오");
 		
-		//int result = new MemberService().insertKakaoMember(mem);
+		if(userDiv.equals("기사")) {
+			mem.setK_trans(mainWay);
+		}
+		
+		int result = new MemberService().insertKakaoMember(mem);
+		
+		if(result>0) {
+			if(mem.getUser_div().equals("신청자")) {
+				response.sendRedirect("/reqtakbae/views/member/joinComplete.jsp");				
+			}else if(mem.getUser_div().equals("기사")) {
+				response.getWriter().print("회원정보인서트성공");
+			}
+		}else {
+			System.out.println("카카오 회원가입 실패");
+			response.getWriter().print("회원정보인서트실패");
+		}
 		
 	}
 

@@ -1,6 +1,7 @@
 package com.kh.jinkuk.border.announcment.model.dao;
 
 import static com.kh.jinkuk.common.JDBCTemplate.close;
+import static com.kh.jsp.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -379,7 +380,6 @@ public class AnnouncmentDao {
 					i.setI_upload(rset.getDate("I_UPLOAD"));
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				close(pstmt);
@@ -451,6 +451,4 @@ public class AnnouncmentDao {
 			}
 			return result;
 		}
-
 		
-}

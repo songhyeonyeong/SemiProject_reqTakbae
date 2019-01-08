@@ -24,13 +24,13 @@ import com.oreilly.servlet.MultipartRequest;
  * Servlet implementation class InsertMemberGisaServlet
  */
 @WebServlet("/GisaJoinImg")
-public class InsertMemberGisaServlet extends HttpServlet {
+public class InsertGisaImgServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertMemberGisaServlet() {
+    public InsertGisaImgServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
