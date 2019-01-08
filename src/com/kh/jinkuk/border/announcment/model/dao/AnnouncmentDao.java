@@ -192,6 +192,42 @@ public class AnnouncmentDao {
 			return a;
 		}*/
 		
+		public int updateBoard(Connection con, InsertAnnouncment i, String gongdiv,int gno) {
+			PreparedStatement pstmt = null;
+			int result1 = 0;
+			
+			String query = prop.getProperty("updateBoard");
+			
+			System.out.println(query);
+			
+			try {
+				
+				pstmt = con.prepareStatement(query);
+				
+				pstmt.setString(1, i.getGtitle());
+				pstmt.setString(2,i.getGcontext());
+				pstmt.setString(3,gongdiv);
+				pstmt.setDate(4,i.getGday());
+				pstmt.setString(5, i.getGsarea());
+				pstmt.setString(6, i.getGearea());
+				pstmt.setString(7,i.getGtype());
+				pstmt.setInt(8,i.getGsum());
+				pstmt.setInt(9,i.getGprice());
+				pstmt.setString(10,i.getGsize());
+				pstmt.setDate(11,i.getGday());
+				pstmt.setInt(12,i.getUno());
+				pstmt.setInt(13, gno);
+				
+				result1 = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result1;
+		}
+		
 		//게시판 작성 
 		public int insertBoard(Connection con, InsertAnnouncment i, String gongdiv) {
 			PreparedStatement pstmt = null;
@@ -415,4 +451,6 @@ public class AnnouncmentDao {
 			}
 			return result;
 		}
+
+		
 }

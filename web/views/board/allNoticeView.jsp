@@ -156,7 +156,7 @@
 			<%if(loginUser!=null){
 						if(loginUser.getUser_div().equals("신청자")){ %>
 				<%if(loginUser.getUser_id().equals(a.getUSER_ID())) {%>
-			<span><a class="mbtn gy wth60" href="#">수정</a></span>
+			<span><a class="mbtn gy wth60" href="<%=request.getContextPath()%>/updateBO?gongdiv=<%=gongdiv%>&&gno=<%=num%>">수정하기</a></span>
 			
 			<span><a class="mbtn rd wth60" href="<%=request.getContextPath()%>/deleteBoard.bo?gongdiv=<%=gongdiv%>">삭제</a></span>
 				<%}%>

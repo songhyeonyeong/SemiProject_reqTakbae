@@ -161,10 +161,10 @@ public class InquireService {
 
 
 
-
+	//제목으로 찾기 
 	public ArrayList<Inquire> searchTitle(String titleS) {
 		Connection con =getConnection();
-		ArrayList<Inquire> list = new InquireDao().searchT(con,titleS);
+		ArrayList<Inquire> list = new InquireDao().searchTitle(con,titleS);
 		close(con);
 		
 		return list;
@@ -172,7 +172,7 @@ public class InquireService {
 
 
 
-
+	//내용으로 찾기
 	public ArrayList<Inquire> searchText(String textS) {
 		Connection con =getConnection();
 		ArrayList<Inquire> list = new InquireDao().searchText(con,textS);

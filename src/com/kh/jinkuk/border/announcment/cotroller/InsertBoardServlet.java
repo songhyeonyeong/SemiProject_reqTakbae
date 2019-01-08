@@ -88,7 +88,7 @@ public class InsertBoardServlet extends HttpServlet {
 			GregorianCalendar g =new GregorianCalendar(year, month-1, day, h, m);
 			long date =g.getTimeInMillis();
 			String area = multiRequest.getParameter("area");
-//			System.out.println("area"+area);
+			System.out.println("area"+area);
 			int total=Integer.parseInt(multiRequest.getParameter("total"));
 			int point=Integer.parseInt(multiRequest.getParameter("point")); 
 			Member loginUser =(Member)request.getSession().getAttribute("loginUser");

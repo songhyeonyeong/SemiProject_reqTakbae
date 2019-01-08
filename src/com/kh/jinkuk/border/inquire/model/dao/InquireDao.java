@@ -348,10 +348,12 @@ public class InquireDao {
 	}
 
 
-	public ArrayList<Inquire> searchT(Connection con,String titleS) {
+	public ArrayList<Inquire> searchTitle(Connection con,String titleS) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Inquire> list = null;
+		
+		System.out.println("타이틀확인 :"+titleS);
 		
 		String query = prop.getProperty("searchTitle");
 		
@@ -378,9 +380,7 @@ public class InquireDao {
 				i.setUser_id(rset.getString("USER_ID"));
 				i.setRnum(rset.getInt("RNUM"));
 				
-				
-				
-				
+			
 				list.add(i);
 				
 			}
@@ -391,7 +391,7 @@ public class InquireDao {
 			close(pstmt);
 			close(rset);
 		}
-		System.out.println("inquire Dao 확인"+list);
+		
 		return list;
 	}
 
@@ -401,7 +401,7 @@ public class InquireDao {
 		ResultSet rset = null;
 		ArrayList<Inquire> list = null;
 		
-		String query = prop.getProperty("searchText");
+		String query = prop.getProperty("gg/");
 		
 		try {
 			pstmt = con.prepareStatement(query);
@@ -441,7 +441,7 @@ public class InquireDao {
 			close(pstmt);
 			close(rset);
 		}
-		System.out.println("inquire Dao 확인"+list);
+		
 		return list;
 	}
 
