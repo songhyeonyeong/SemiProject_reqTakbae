@@ -1,4 +1,4 @@
-package com.kh.jinkuk.admin.controller;
+package com.kh.jinkuk.border.announcment.cotroller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import com.kh.jinkuk.admin.model.vo.Announcment;
 /**
  * Servlet implementation class FilterSearchServlet
  */
-@WebServlet("/search.fi")
+@WebServlet("/searchMain.fi")
 public class FilterSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -56,7 +56,7 @@ public class FilterSearchServlet extends HttpServlet {
 		if(list != null) {
 			request.setAttribute("list", list);
 			
-			page = "/views/admin/allNoticeList_search.jsp";
+			page = "/views/board/allNoticeList_search.jsp";
 		}else {
 			request.setAttribute("msg", "검색 실패!");
 			

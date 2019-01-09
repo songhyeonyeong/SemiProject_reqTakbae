@@ -117,12 +117,13 @@
 							<td><%=m.getC_money()%></td>
 							<td><%= m.getC_point() %></td>
 						<script>	
-			
-		 					var t=$('#money').children().eq(<%=i%>).children().eq(8).text();
-		 					$('#money').children().eq(<%=i%>).children().eq(8).text(Number(t).format());
+
 		 					
 							var t=$('#money').children().eq(<%=i%>).children().eq(9).text();	
 		 					$('#money').children().eq(<%=i%>).children().eq(9).text(Number(t).format());
+		 					
+							var t=$('#money').children().eq(<%=i%>).children().eq(10).text();	
+		 					$('#money').children().eq(<%=i%>).children().eq(10).text(Number(t).format());
 		 					
 		 					
 

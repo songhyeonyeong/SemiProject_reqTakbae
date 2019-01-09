@@ -52,12 +52,6 @@
 				<td class="minh100 clfix"><%=n.getM_context() %></td>
 			</tr>
 			<tr>
-				<th scope="row">파일 첨부</th>
-				<td>
-					<p><a href="#">12351251255.jpg</a></p>
-				</td>
-			</tr>
-			<tr>
 				<th scope="row">답변</th>
 				<td>
 				<%if(m != null){ %>

@@ -14,16 +14,16 @@ import com.kh.jinkuk.admin.model.service.AdminService;
 import com.kh.jinkuk.admin.model.vo.Announcment;
 
 /**
- * Servlet implementation class FilterSearchServlet
+ * Servlet implementation class FilterSearchDeliverServlet
  */
-@WebServlet("/search.fi")
-public class FilterSearchServlet extends HttpServlet {
+@WebServlet("/searchDeli.fi")
+public class FilterSearchDeliverServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FilterSearchServlet() {
+    public FilterSearchDeliverServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,7 +48,7 @@ public class FilterSearchServlet extends HttpServlet {
 		a.setA_status(status);
 
 		
-		ArrayList<Announcment> list = new AdminService().selectFilter(a);
+		ArrayList<Announcment> list = new AdminService().selectFilterDel(a);
 		System.out.println(list);
 		
 		
@@ -56,7 +56,7 @@ public class FilterSearchServlet extends HttpServlet {
 		if(list != null) {
 			request.setAttribute("list", list);
 			
-			page = "/views/admin/allNoticeList_search.jsp";
+			page = "/views/admin/todayNoticeList_search.jsp";
 		}else {
 			request.setAttribute("msg", "검색 실패!");
 			
@@ -65,8 +65,6 @@ public class FilterSearchServlet extends HttpServlet {
 		
 		RequestDispatcher view  = request.getRequestDispatcher(page);
 		view.forward(request, response);
-		
-		
 	}
 
 	/**

@@ -14,6 +14,7 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage(); 
+	int i = 0;
 
 %>
 <%-- <%! public boolean isNumber(String s){
@@ -30,7 +31,20 @@
 
 
 <title>환전내역</title>
+<script>
 
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 </head>
 <body>
 
@@ -128,19 +142,30 @@
 				<th scope="col">상태</th>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody id="money">
 			
 			<%
 				for(Exchange e : list){
 			%>
 			<tr>
-			<td><%=e.getrNum() %></td>
-			<td><%=e.getcMoney() %></td>
-			<td><%=e.getrMoney() %></td>
-			<td><%=e.getBankNum() %></td>
-			<td><%=e.getBankName() %></td>
-			<td><%=e.getcDate() %></td>
-			<td><%=e.geteStatus() %></td>
+			
+				<td><%=e.getrNum() %></td>
+				<td><%=e.getcMoney() %></td>
+				<td><%=e.getrMoney() %></td>
+				<td><%=e.getBankNum() %></td>
+				<td><%=e.getBankName() %></td>
+				<td><%=e.getcDate() %></td>
+				<td><%=e.geteStatus() %></td>
+			<script>	
+				var t=$('#money').children().eq(<%=i%>).children().eq(1).text();
+				console.log(t);
+		  		$('#money').children().eq(<%=i%>).children().eq(1).text(Number(t).format());
+		 		
+				var t=$('#money').children().eq(<%=i%>).children().eq(2).text();	
+		 		$('#money').children().eq(<%=i%>).children().eq(2).text(Number(t).format()); 
+		 		
+			</script>
+				<input type="hidden" value="<%=i++%>">
 			
 			</tr>
 			<%

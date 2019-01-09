@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
-	String tabon="1";
+	String tabon="2";
 	ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");	
-	int i = 0;
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -40,20 +39,6 @@
 		border-radius:3px;
 	}
 </style>
-<script>
-
- 	Number.prototype.format = function(){
-	    if(this==0) return 0;
-	 
-	    var reg = /(^[+-]?\d+)(\d{3})/;
-	    var n = (this + '');
-	 
-	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
-	 
-	    return n;
-	};
-
-</script>
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -79,7 +64,7 @@
 					<col style="width:%;">
 				</colgroup>
 				<tbody>
-				<form action="<%=request.getContextPath() %>/search.fi" method="POST" name="fr">
+			<form action="<%=request.getContextPath() %>/searchDeli.fi" method="POST" name="fr">
 					<tr>
 						<th scope="col">도착</th>
 						<td>
@@ -177,7 +162,6 @@
 							<label for=""> 체크</label>
 							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getG_NO()%>">
 						</td>
-						<input type="hidden" value="<%=i++%>">
 						<td><%= m.getG_NO() %></td>
 						<td><%= m.getG_S_AREA() %></td>
 						<td><%= m.getG_E_AREA()%></td>
@@ -187,14 +171,6 @@
 						<td><%= m.getG_PRICE() %></td>
 						<td><%= m.getG_P_DIV() %></td>
 						<td><a class="sbtn gy" href="#">상세보기</a></td>
-						
-						<script>	
-
-							var t=$('#money').children().eq(<%=i%>).children().eq(8).text();	
-		 					$('#money').children().eq(<%=i%>).children().eq(8).text(Number(t).format());
-
-
-						</script>
 					</tr>
 				<% } %> 
 				</form>
@@ -214,20 +190,7 @@
 
 	<script>
 
-	
-	$(function() { 
-		 
-	    $("#datePicker").datepicker({dateFormat: 'yy-mm-dd'});
-	 
-	    }); 
-	 
-	    function show_dp(){ 
-	 
-	     $("#datePicker").datepicker('show'); //Show on click of button 
-	 
-	    } 
-	 
-	
+
 		function deleteNotice(){
 			$("input[name=memCheck]:checked").each(function() {
 				
@@ -247,33 +210,14 @@
 				console.log(num);
 				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num; 
 			});
-			
 		});
-				
-			
 
-/*  		function check() {
 
-			if(fr.destination.value==null) {
-				fr.destination.value = "0";
-				System.out.println(fr.destination.value);
-				return true;
-				
-			}else if(fr.size.value==null) {
-				fr.size.value = "0";
-				System.out.println(fr.size.value);
-				return true;
-				
-			}else if(fr.status.value==null) {
-				fr.status.value = "0";
-				System.out.println(fr.status.value);
-				return true;
-			}
-
-		}
-	  */
-			
 	</script>
 
 </body>
 </html>
+
+
+
+

@@ -10,12 +10,26 @@
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage(); 
+	int endPage = pi.getEndPage();
+	int i = 0;
 %>
 <%@ include file="/views/include/common.jsp" %>
 
 <title>충전/적립 내역</title>
+<script>
 
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 </head>
 <body>
 
@@ -99,25 +113,31 @@
 				<th scope="col">비고</th>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody id="money">
 			<%
 				for(Cybermoney_breakdown c : list){
 			%>
 			<tr>
+			<input type="hidden" value="<%=i++%>">
 			<td><%=c.getR_num() %></td>
 			<td><%=c.getCm_div() %></td>
 			<td><%=c.getCm_date() %></td>
+			
 			<%
 				if(c.getCm_div().equals("포인트사용") || c.getCm_div().equals("공고등록")){
 			%>
 				<td style="color:red">-<%=c.getCm_use() %></td>
+						
 			<% 
 				}else{ 
 			%>
 				<td style="color:blue">+<%=c.getCm_use() %></td>
+
+						
 			<%
 				}
 			%>
+
 			
 		<%-- 	<%
 				if(c.getCm_div().equals("포인트사용") || c.getCm_div().equals("포인트적립")){
