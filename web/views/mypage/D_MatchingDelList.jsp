@@ -119,7 +119,8 @@ int endPage = pi.getEndPage();
 								select.val("선택").prop("selected", true);
 							}  
 						}); */
-					// 웹소켓사용
+						
+						// 웹소켓사용
 						$("#listArea .sbtn.gy").click(function(){
 										var num = $(this).parent().parent().children("input").val();
 										var id =$(this).parent().prev().prev().text();

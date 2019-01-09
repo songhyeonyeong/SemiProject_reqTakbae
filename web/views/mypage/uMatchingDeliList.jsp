@@ -134,7 +134,10 @@
 						$("#tbody td .sbtn.db").click(function(){
 							var num = $(this).parent().parent().children("input").eq(0).val();
 							var uno = $(this).parent().parent().children("input").eq(1).val();
-							location.href="/reqtakbae/views/mypage/selectDetailADDR.jsp";
+							var id =$(this).parent().prev().prev().text();
+							var stat =$(this).parent().prev().text();
+							location.href="/reqtakbae/views/mypage/selectDetailADDR.jsp"; 
+							 location.href="/reqtakbae/getUser_selocation.mp?gno="+num+"&&id="+id+"&&stat="+stat;
 						});
 						
 						

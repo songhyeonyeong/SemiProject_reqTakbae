@@ -58,31 +58,33 @@
 <%@ include file="/views/include/common.jsp" %>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="map_wrap">
-    <div id="map" style="width:70%;height:70%;position:relative;overflow:hidden;"></div>
+    <div id="map" style="width:150%;height:150%;position:relative;overflow:hidden;"></div>
     <div id="menu_wrap" class="bg_white">
         <div class="option" align="center">
             <div style="font-size:150%; font-weight:bold;">
-            <div style="font-size:130%"><%=gno%>번 공고 배송 현황</div>
-             <div style="font-size:70%">신청자 이름 :<%=user.getUser_name() %></div>
-             <div style="font-size:70%">신청자 번호 :<%=user.getPhone() %></div>
+            <div style="font-size:120%">내 <%=gno%>번 공고 배송 현황</div>
             <br>
-             <div onclick="panTo('start')" align="center" style="margin:auto; font-size:100%; border:1px solid black;"> <span id="startarea" ><bold>발송지 :</bold><%=fullstartlocation %></div></span><br>
+             <div style="font-size:70%">기사 이름 :<%=user.getUser_name() %></div>
+             <div style="font-size:70%">기사 번호 :<%=user.getPhone() %></div>
+            <br>
+           <%--   <div onclick="panTo('start')" align="center" style="margin:auto; font-size:100%; border:1px solid black;"> <span id="startarea" ><bold>발송지 :</bold><%=fullstartlocation %></div></span><br>
         	 <div onclick="panTo('end')" align="center" style="margin:auto; font-size:100%; border:1px solid black;"> <span id="endarea"><bold>도착지 :</bold><%=fullendlocation %></div> </span><br>
-        	 <div onclick="panTo('my')" align="center" style="margin:auto; font-size:100%; border:1px solid black;"> <span id="endarea1" ><bold>내위치로 이동</bold></div></span><br>
+        	 <div onclick="panTo('my')" align="center" style="margin:auto; font-size:100%; border:1px solid black;"> <span id="endarea1" ><bold>내위치로 이동</bold></div></span><br> --%>
         	
         	 <div align="left">
-        	 <button onclick="NOWtoS()">발송지 까지 길찾기</button>
+        	<!--  <button onclick="NOWtoS()">발송지 까지 길찾기</button> -->
         	 <br><br>
-        	 <button onclick="StoE()">도착지 까지 길찾기</button>
+        	<!--  <button onclick="StoE()">도착지 까지 길찾기</button> -->
         	 </div>
         	 <br>
         	 <div align="left">
-        	 <div>배송상태변경</div>
+        <!-- 	 <div>배송상태변경</div>
         	 <select id="selectDel" name="selectDel">
         	 <option value="선택">선택</option>
         	 <option value="인수중">인수중</option>
@@ -90,11 +92,11 @@
         	 <option value="배송완료">배송완료</option>
         	 </select>
         	 <button id="changeSTAT">적용</button>
-        	 <br><br>
+        	 <br><br> -->
         	 <div>
         	 현재상태:<span id="status" style="color:blue"><%=stat %></span>  <button id="sendSMS" >문자보내기</button>
-        	 <br><br>
-        	 <button onclick="location.href='matchingdellist.mp'">뒤로가기</button>
+        	 
+        	 
         	 </div>
 			</div>
 			
@@ -105,7 +107,7 @@
 
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85185db0fc452125ec8070a4279f67bb&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=df9b4b2c505f7b6860e9e73d0c22e278&libraries=services"></script>
 <script>
 
 $(function(){
@@ -150,9 +152,6 @@ $(function(){
 		if(value==="선택"){
 			alert("선택하세요!");
 		}else{ 
-			var Ok=confirm("적용하시겠습니까?");
-			if(Ok==true){
-				
 	$.ajax({
 			url:"/reqtakbae/updatebstatus.mp",
 			data:{value:value,gno:num},
@@ -173,8 +172,7 @@ $(function(){
 			
 		}); 
 	 		$("#selectDel").val("선택").prop("selected", true);
-			}  
-		}
+		}  
 	});
 	
 	
