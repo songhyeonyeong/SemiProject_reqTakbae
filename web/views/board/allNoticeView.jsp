@@ -155,7 +155,7 @@
 						<td colspan="3"><%= a.getG_DAY() %></td>
 					</tr>
 					<tr>
-						<th scope="row">상세내용</th>s
+						<th scope="row">상세내용</th>
 						<td colspan="3">
 						<%= a.getG_CONTEXT() %>
 						</td>

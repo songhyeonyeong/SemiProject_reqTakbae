@@ -60,9 +60,30 @@ public class DeleteBoardServlet extends HttpServlet {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 삭제 실패!");
 		}*/
-		if(result>0) {
-		response.sendRedirect(request.getContextPath() + "/selectList.bo?gongdiv="+gongdiv);
+		
+		
+	/*	if(list != null) {
+			page = "views/mypage/pointList.jsp";
+			request.setAttribute("list", list);
+			request.setAttribute("pi", pi);
+		}else {
+			page="views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 조회 실패!");
 		}
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
+	}*/
+		
+		if(result > 0 ) {
+			page = "/selectList.bo?gongdiv="+gongdiv;
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
+		
+		/*if(result>0) {
+		response.sendRedirect(request.getContextPath() + "/selectList.bo?gongdiv="+gongdiv);
+		}*/
 	}
 
 	/**

@@ -181,6 +181,26 @@ public class MemberService {
 	}
 
 
+	public int deleteCMember(String uno) {
+		Connection con = getConnection();
+		
+		int result1 = new MemberDao().deleteCMemberImage(con,uno);;
+		int result2 = 0;
+		
+		if(result1>0) {
+			result2 = new MemberDao().deleteCMember(con,uno);
+		}else {
+			System.out.println("C회원 이미지 삭제 실패");
+		}
+		
+		if(result2>0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result2;
+	}
+
 }
 
 

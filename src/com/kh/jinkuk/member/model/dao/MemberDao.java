@@ -490,6 +490,50 @@ public class MemberDao {
 		return result;
 	}
 	
+	public int deleteCMemberImage(Connection con, String uno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteCImg");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, uno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+
+	public int deleteCMember(Connection con, String uno) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteC");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, uno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
 	
 	
 	

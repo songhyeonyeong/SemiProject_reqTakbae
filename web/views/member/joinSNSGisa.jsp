@@ -240,7 +240,7 @@
 			
 			<div class="btnbox mt20"><!-- btnbox S-->
 			<!-- <button type="submit" class="mbtn db">회원가입</button> -->
-			<a class="mbtn db" onclick="joinjoin()">회원가입</a>
+			<a class="mbtn db" id="joinBtn" onclick="joinjoin()">회원가입</a>
 			
 			</div>
 		</form>
@@ -526,6 +526,7 @@
 				success : function(data) {
 					if(data=="회원정보인서트성공"){
 						$("#imgForm").submit();
+						$("#joinBtn").prop("disabled",true);
 					}else{
 						alert("회원가입 실패")
 					}

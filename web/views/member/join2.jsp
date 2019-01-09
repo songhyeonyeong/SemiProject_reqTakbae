@@ -138,7 +138,7 @@
 			
 			<div class="btnbox mt20"><!-- btnbox S-->
 			<span><a class="mbtn gy" onclick="resetBtn();">새로입력</a></span>
-			<span><a class="mbtn db" onclick="insertMember();">회원가입</a></span>
+			<span><a class="mbtn db" id="joinBtn" onclick="insertMember();">회원가입</a></span>
 		</div>
 		</form>
 		</div>
@@ -561,9 +561,10 @@
 			alert("생년월일을 입력하세요");
 		}else if($("#accountCheckImg").attr("src") == ""){
 			alert("계좌를 인증하세요");
-		}else{
+		}  else{
 			$("#joinForm").submit();
-		} 
+			$("#joinBtn").prop("disabled",true);
+		 } 
 	 }
 		/* var SId = $("#SId").val();
 		$("#userNo").val(SId);
