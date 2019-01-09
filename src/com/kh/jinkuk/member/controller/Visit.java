@@ -30,14 +30,23 @@ public class Visit extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		boolean flag = false;
 		
 		boolean check = new MemberService().visitcheck(id);
+		boolean check2 = new MemberService().visitcheck2();
+		
 		System.out.println(check);
 		if(!check && !id.equals("admin")) {
 			int visit = new MemberService().visitup(id);
 		}
-	
+		
+		if(!check2 && !id.equals("admin")) {
+			int sdatein = new MemberService().sdatein();
+		}
+		
+		if(!check && check2 && !id.equals("admin")) {
+			int sdateup = new MemberService().sdateup();
+		}
+		
 	}
 
 	/**

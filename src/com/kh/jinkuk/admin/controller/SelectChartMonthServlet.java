@@ -37,6 +37,7 @@ public class SelectChartMonthServlet extends HttpServlet {
 		int today = new AdminService().selectCharttoday();
 		int yesterday = new AdminService().selectChartyesterday();
 		
+		
 		String page = "";
 		if(c != null) {
 			request.setAttribute("c", c);

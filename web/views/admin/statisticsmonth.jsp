@@ -44,8 +44,7 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 		
 			var data = google.visualization.arrayToDataTable([
 				
-				['Element', '신청수', { role: 'style' }],
-					
+				['Element', '방문수', { role: 'style' }],
 		        ['1월', <%= c.getA1()%>, 'ffd700 '],        
 		        ['2월', <%= c.getA2()%>, 'ffd700 '],            // English color name
 		      	['3월', <%= c.getA3()%>, 'ffd700 '],

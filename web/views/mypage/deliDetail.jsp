@@ -140,20 +140,23 @@ function fn_open(id,name,phone,count,grade,img) {
 					});
 					
 				});
+				
+				
 				$("#selectgisa").click(function(){
 
 				
 					var ra=$("#tbody td input[type='radio']:checked").val();
 					var ok=confirm("선택하시겠습니까?");
+					location.href="/reqtakbae/updateinsertGisa.mp?uno="+ra+"&&gno="+<%=gno%>;
+					<%-- 
 					if(ok==true && ra!=null){
 						
-						<%-- location.href="/reqtakbae/updateinsertGisa.mp?uno="+ra+"&&gno="+<%=gno%>; --%>
 						 location.href=
 					}else{
 						
 						alert("기사를 먼저 선택해주세요!");
 						
-					}
+					} --%>
 					
 					
 					
