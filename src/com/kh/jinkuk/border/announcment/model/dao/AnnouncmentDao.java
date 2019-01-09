@@ -192,9 +192,14 @@ public class AnnouncmentDao {
 			return a;
 		}*/
 		
+		//공고 수정하기
 		public int updateBoard(Connection con, InsertAnnouncment i, String gongdiv,int gno) {
 			PreparedStatement pstmt = null;
 			int result1 = 0;
+			
+			System.out.println(i.getGtitle());
+			System.out.println(i.getGcontext());
+			System.out.println(i.getGday());
 			
 			String query = prop.getProperty("updateBoard");
 			
@@ -204,29 +209,138 @@ public class AnnouncmentDao {
 				
 				pstmt = con.prepareStatement(query);
 				
+				
 				pstmt.setString(1, i.getGtitle());
-				pstmt.setString(2,i.getGcontext());
-				pstmt.setString(3,gongdiv);
-				pstmt.setDate(4,i.getGday());
+				pstmt.setString(2, i.getGcontext());
+				pstmt.setString(3, gongdiv);
+				pstmt.setDate(4, i.getGday());
 				pstmt.setString(5, i.getGsarea());
 				pstmt.setString(6, i.getGearea());
-				pstmt.setString(7,i.getGtype());
-				pstmt.setInt(8,i.getGsum());
-				pstmt.setInt(9,i.getGprice());
-				pstmt.setString(10,i.getGsize());
-				pstmt.setDate(11,i.getGday());
-				pstmt.setInt(12,i.getUno());
+				pstmt.setString(7, i.getGtype());
+				pstmt.setInt(8, i.getGsum());
+				pstmt.setInt(9, i.getGprice());
+				pstmt.setString(10, i.getGsize());
+				pstmt.setDate(11, i.getGday());
+				pstmt.setInt(12, i.getUno());
 				pstmt.setInt(13, gno);
 				
+				
 				result1 = pstmt.executeUpdate();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {
 				close(pstmt);
 			}
 			
+			System.out.println(result1);
 			return result1;
 		}
+		
+		//공고 수정 - 포인트 사용 내역 업데이트
+		public int updatePointRbd(Connection con, InsertAnnouncment i, int gno, String gongdiv) {
+			PreparedStatement pstmt = null;
+			int result3 = 0;
+			String query = prop.getProperty("updatePointRbd");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, "포인트 사용");
+				pstmt.setInt(2, i.getPoint());
+				pstmt.setString(3,i.getGtitle());
+				pstmt.setInt(4,i.getUno());
+				pstmt.setInt(5, gno);
+				result3 = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result3;
+			
+			
+			
+			
+		}
+		//공고 수정 - 포인트 사용 내역 없을 시 삽입
+		public int insertPointbd(Connection con, InsertAnnouncment i, int gno, String gongdiv) {
+			PreparedStatement pstmt = null;
+			int result3 = 0;
+			String query = prop.getProperty("insertPoint");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, "포인트 사용");
+				pstmt.setInt(2, i.getPoint());
+				pstmt.setString(3,i.getGtitle());
+				pstmt.setInt(4,i.getUno());
+				pstmt.setInt(5, gno);
+				result3 = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			return result3;
+		}
+		
+		//사이버 머니 사용 내역 업데이트
+		public int updatecmoneybd(Connection con, InsertAnnouncment i, int gno, String gongdiv) {
+			PreparedStatement pstmt = null;
+			int result4 = 0;
+			
+			String query = prop.getProperty("updatecmoneybd");
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				
+				pstmt.setString(1, "공고요금사용");
+				pstmt.setInt(2, i.getGsum());
+				pstmt.setString(3,i.getGtitle());
+				pstmt.setInt(4,i.getUno());
+				pstmt.setInt(5, gno);
+				
+				result4 = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			System.out.println(result4);
+			return result4;
+		}
+		
+		//사용한 포인트와 사이버 머니 회원상태에서 업데이트
+		public int updateUserCmoney(Connection con, InsertAnnouncment i, int gno) {
+			PreparedStatement pstmt = null;
+			int result5 = 0;
+			
+			System.out.println("유저 아이디 확인"+i.getUno());
+			System.out.println(i.getGsum());
+			System.out.println(i.getPoint());
+			
+			String query = prop.getProperty("updateUserCmoney");
+			System.out.println(query);
+			try {
+				
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, i.getGsum());
+				pstmt.setInt(2, i.getPoint());
+				pstmt.setInt(3, i.getUno());
+				
+				result5 = pstmt.executeUpdate();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			System.out.println(result5);
+			return result5;
+		}
+
 		
 		//게시판 작성 
 		public int insertBoard(Connection con, InsertAnnouncment i, String gongdiv) {
@@ -450,14 +564,14 @@ public class AnnouncmentDao {
 			return result;
 		}
 
-		public int deleteBoard(Connection con, Announcment a) {
+		public int deleteBoard(Connection con, int gno) {
 			PreparedStatement pstmt = null;
 			int result = 0;
 			String query = prop.getProperty("deleteBoard");
 			System.out.println(query);
 			try {
 				pstmt=con.prepareStatement(query);
-				pstmt.setInt(1, a.getG_NO());
+				pstmt.setInt(1, gno);
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -468,4 +582,9 @@ public class AnnouncmentDao {
 			return result;
 		}
 
+		
+
+	
+
+	
 }

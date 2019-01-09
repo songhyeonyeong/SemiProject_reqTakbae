@@ -249,7 +249,7 @@ public class MemberDao {
 
 	
 
-	public Member snsJoinCheck(Connection con, String kakaoId, String userDiv) {
+	public Member snsJoinCheck(Connection con, String SNSId, String userDiv) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		Member member = null;
@@ -260,7 +260,7 @@ public class MemberDao {
 
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, kakaoId);
+			pstmt.setString(1, SNSId);
 			pstmt.setString(2, userDiv);
 			
 			rset = pstmt.executeQuery();
