@@ -120,6 +120,7 @@
 					}else{ 
 						var Ok=confirm("적용하시겠습니까?");
 						if(Ok==true){
+							webSocket.send("2/"+value);
 							
 				$.ajax({
 						url:"/reqtakbae/updatebstatus.mp",
@@ -255,9 +256,7 @@
 			    	
 			     
 			     if (navigator.geolocation) {
-			    	            var webSocket = new WebSocket('ws://localhost:8001/reqtakbae/broadcasting?<%=gno%>');
-			    	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-			    	   /*  var id= navigator.geolocation.watchPosition(function(position) { */
+					 var webSocket = new WebSocket('ws://localhost:8001/reqtakbae/broadcasting?<%=gno%>');
 			    		   navigator.geolocation.watchPosition(function(position) {
 			    	        var lat = position.coords.latitude, // 위도
 			    	            lon = position.coords.longitude; // 경도
@@ -282,7 +281,7 @@
 			    	              function onError(event) {
 			    	                alert(event.data);
 			    	              }
-			    	              webSocket.send(lat+","+lon);
+			    	              webSocket.send("1/"+lat+","+lon);
 			    	            
 			    	        	mylo = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
 			    	            message = '<div style="padding:5px;">내 위치</div>'; // 인포윈도우에 표시될 내용입니다
@@ -321,24 +320,39 @@
 			     			// 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 			     			var markerImageGISA = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
 			     	
+			     			
+			     			
+			     			
+			     	var marker;
+			     	var infowindow;
 			    	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
 			    	function displayMarker(mylo, message) {
 
-			    	    // 마커를 생성합니다
-			    	    var marker = new daum.maps.Marker({  
+			    		if(marker==null){
+			    	    	console.log("초기마커찍기");
+			    	   marker = new daum.maps.Marker({  
 			    	        map: map, 
 			    	        position: mylo,
 			    	        image : markerImageGISA
 			    	    }); 
+			    		}else{
+			    			marker.setPosition(mylo);
+			    			
+			    		}
 			    	    
 			    	    var iwContent = message, // 인포윈도우에 표시할 내용
 			    	        iwRemoveable = true;
-
-			    	    // 인포윈도우를 생성합니다
-			    	    var infowindow = new daum.maps.InfoWindow({
+			    	    
+						if(infowindow==null){
+							console.log("초기인포찍기");
+			    	    infowindow = new daum.maps.InfoWindow({
 			    	        content : iwContent,
 			    	        removable : iwRemoveable,
 			    	    });
+						}else{
+							infowindow.setPosition(mylo);
+						}
+						
 			    	    daum.maps.event.addListener(marker, 'click', function() {
 			    		    alert('기사를선택하셨네용');
 			    		});

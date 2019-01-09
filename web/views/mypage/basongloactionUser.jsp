@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.jinkuk.member.model.vo.*"%>
+    pageEncoding="UTF-8" import="com.kh.jinkuk.member.model.vo.*,java.util.*,java.text.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,6 +51,10 @@
  	String endlocation=fullendlocation.split("/")[1];
  	Member user =(Member)request.getAttribute("user");
  	String stat =request.getParameter("stat");
+ 	Calendar calendar = Calendar.getInstance();
+    java.util.Date date = calendar.getTime();
+    String today = (new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss").format(date));
+
  	
  	
 %>
@@ -79,20 +83,14 @@
         	
         	 <div align="left">
         	<!--  <button onclick="NOWtoS()">발송지 까지 길찾기</button> -->
-        	 <br><br>
+        	
         	<!--  <button onclick="StoE()">도착지 까지 길찾기</button> -->
         	 </div>
-        	 <br>
         	 <div align="left">
-        <!-- 	 <div>배송상태변경</div>
-        	 <select id="selectDel" name="selectDel">
-        	 <option value="선택">선택</option>
-        	 <option value="인수중">인수중</option>
-        	 <option value="배송중">배송중</option>
-        	 <option value="배송완료">배송완료</option>
-        	 </select>
-        	 <button id="changeSTAT">적용</button>
-        	 <br><br> -->
+        	 <div id="statusdiv">
+        	 
+        	 </div>
+        	 <br>
         	 <div>
         	 현재상태:<span id="status" style="color:blue"><%=stat %></span>  <button id="sendSMS" >문자보내기</button>
         	 
@@ -142,39 +140,11 @@ $(function(){
 	   window.open(url,'smsform','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=500,height=400');
 	});
 	
-	//ajax 추가
-	$("#changeSTAT").click(function(){
-		var value = $("#selectDel").val();
-		
-		 var t=$("#status");
-		 var num =<%=gno%>;
-		 console.log(num);
-		if(value==="선택"){
-			alert("선택하세요!");
-		}else{ 
-	$.ajax({
-			url:"/reqtakbae/updatebstatus.mp",
-			data:{value:value,gno:num},
-			type:"get",
-			success:function(data){
-				console.log(data);
-				if(data>0)
-					{
-					  t.text(value);
-					}
-				
-			},
-			error:function(request,status,error){
-		        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
-		       },
-
-
-			
-		}); 
-	 		$("#selectDel").val("선택").prop("selected", true);
-		}  
-	});
 	
+	
+	
+	
+
 	
 	
 	
@@ -293,14 +263,32 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
     onMessage(event)
   };
   function onMessage(event) {
-      console.log(event.data);
-      lat =event.data.split(",")[0];
-      lon =event.data.split(",")[1];
-      console.log(lat);
-      console.log(lon);
+      var redata=event.data;
+      if(redata.split("/")[0]==1){
+    	  console.log("좌표값임");
+    	  
+      var fullLo=redata.split("/")[1];
+      
+      lat=fullLo.split(",")[0];
+      lon=fullLo.split(",")[1];
+      
+      console.log("위도"+lat);
+      console.log("경도"+lon);
       mylo = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-      message = '<div style="padding:5px;">기사님 위치</div>'; // 인포윈도우에 표시될 내용입니다
+      message = '<div style="padding:5px;">기사님 위치</div>';
+    	console.log("mylo"+mylo);
       displayMarker(mylo,message);
+      }
+      else if(redata.split("/")[0]==2){
+    	  console.log("상태값임");
+    	  var st=redata.split("/")[1];
+    	  $divs=  $("#statusdiv");
+    	  $("#statusdiv").text("<%=today%>:"+st+"입니다.");
+    	  
+    	  
+    	  
+      }
+      
       
   }
   function onOpen(event) {
@@ -315,12 +303,11 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
 
 		
      
-     		var imageSrc ='/reqtakbae/views/common/images/contents/boxS.png', // 마커이미지의 주소입니다    
-     			imageSize = new daum.maps.Size(44, 49), // 마커이미지의 크기입니다
+     	var imageSrc ='/reqtakbae/views/common/images/contents/boxS.png', // 마커이미지의 주소입니다    
+     	imageSize = new daum.maps.Size(44, 49), // 마커이미지의 크기입니다
      			imageOption = {offset: new daum.maps.Point(27, 69)};
      			// 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
      			var markerImageGISA = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
-     	
     	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
     	function displayMarker(mylo, message) {
 
