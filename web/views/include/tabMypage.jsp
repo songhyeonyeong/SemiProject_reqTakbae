@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import="com.kh.jinkuk.member.model.vo.*"
 %>
-	<div class="tabBigBox btab_7ea mt50 mb50">
+	<div class="tabBigBox btab_8ea mt50 mb50">
 		<ul>
 			<!--신청자일 떄  -->
 			<%if(loginUser.getUser_div().equals("신청자")){ %>
@@ -14,13 +14,13 @@
 			<%} %>
 			<li <%if(bigtabon.equals("4")){%>class="on"<%}%>><a href="/reqtakbae/Cybermoney_breakdownServlet">충전/적립 내역</a></li>
 			<li <%if(bigtabon.equals("5")){%>class="on"<%}%>><a href="/reqtakbae/ExchangeServlet">환전내역</a></li>
-			<li <%if(bigtabon.equals("6")){%>class="on"<%}%>><a href="/reqtakbae//SelectMyInquiry.mp">나의 문의내역</a></li>
-			<li <%if(bigtabon.equals("7")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memModify.jsp">회원정보수정</a></li>
+			<li <%if(bigtabon.equals("6")){%>class="on"<%}%>><a href="/reqtakbae/SelectMyInquiry.mp">나의 문의내역</a></li>
+			<li <%if(bigtabon.equals("7")){%>class="on"<%}%>><a href="/reqtakbae/reset?p=modify">회원정보수정</a></li>
 			
 			<%if(loginUser.getUser_div().equals("기사")){ %>
-			<li <%if(bigtabon.equals("8")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memModifyImg.jsp">회원사진수정</a></li>
+			<li <%if(bigtabon.equals("8")){%>class="on"<%}%>><a href="/reqtakbae/reset?p=ImgModify">회원사진수정</a></li>
 			<%} %>
 			
-			<li <%if(bigtabon.equals("9")){%>class="on"<%}%>><a href="/reqtakbae/views/mypage/memLeave.jsp">탈퇴하기</a></li>
+			<li <%if(bigtabon.equals("9")){%>class="on"<%}%>><a href="/reqtakbae/reset?p=leave">탈퇴하기</a></li>
 		</ul>
 	</div>  
