@@ -534,7 +534,6 @@ public class AnnouncmentDao {
 					result=rset.getInt(1);
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}finally {
 				close(pstmt);
@@ -543,45 +542,6 @@ public class AnnouncmentDao {
 			return result;
 		}
 
-		public int updatedelmembermoney(Connection con, InsertAnnouncment i) {
-			PreparedStatement pstmt = null;
-			int result = 0;
-			String query = prop.getProperty("updatemembermoney");
-			System.out.println(query);
-			try {
-				pstmt = con.prepareStatement(query);
-				pstmt.setInt(1,(i.getGsum()));
-				pstmt.setInt(2,(i.getPoint()));
-				pstmt.setInt(3, i.getUno());
-				result = pstmt.executeUpdate();
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close(pstmt);
-			}
-			System.out.println(result);
-			return result;
-		}
-
-		public int deleteBoard(Connection con, int gno) {
-			PreparedStatement pstmt = null;
-			int result = 0;
-			String query = prop.getProperty("deleteBoard");
-			System.out.println(query);
-			try {
-				pstmt=con.prepareStatement(query);
-				pstmt.setInt(1, gno);
-				result = pstmt.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-			close(pstmt);
-			}
-			System.out.println(result);
-			return result;
-		}
-		
 		public int areaCount(Connection con, String start) {
 			PreparedStatement pstmt = null;
 			int result = 0;
@@ -594,6 +554,115 @@ public class AnnouncmentDao {
 				
 				result = pstmt.executeUpdate();
 				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		//삭제시 유저 돈 돌려주기
+		public int delGMoney(Connection con,int uno,int gno) {
+			PreparedStatement pstmt =null;
+			int result=0;
+			
+			String query =prop.getProperty("delGMoney");
+			
+			try {
+				pstmt=con.prepareStatement(query);
+				pstmt.setInt(1, gno);
+				pstmt.setInt(2, gno);
+				pstmt.setInt(3, uno);
+				result =pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			System.out.println(result);
+			return result;
+		}
+		//삭제시 사이버머니 내역 추가
+		public int delCmoney(Connection con, int uno, int gno) {
+			PreparedStatement pstmt =null;
+			int result=0;
+			
+			String query =prop.getProperty("delCmoney");
+			
+			try {
+				pstmt=con.prepareStatement(query);
+				pstmt.setString(1, "공고취소(사이버머니)");
+				pstmt.setInt(2, gno);
+				pstmt.setString(3, "공고등록");
+				pstmt.setInt(4, uno);
+				pstmt.setInt(5, gno);
+				result =pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		//삭제시 사이버머니 내역 포인트 내역 추가
+		public int delPmoney(Connection con, int uno, int gno) {
+			PreparedStatement pstmt =null;
+			int result=0;
+			
+			String query =prop.getProperty("delPmoney");
+			
+			try {
+				pstmt=con.prepareStatement(query);
+				pstmt.setString(1, "공고취소");
+				pstmt.setInt(2, gno);
+				pstmt.setInt(3, uno);
+				pstmt.setInt(4, gno);
+				result =pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		//삭제시 포인트내역 등록
+		public int delPoint(Connection con, int uno, int gno) {
+			PreparedStatement pstmt =null;
+			int result=0;
+			
+			String query =prop.getProperty("delPoint");
+			
+			try {
+				pstmt=con.prepareStatement(query);
+				pstmt.setString(1, "공고취소");
+				pstmt.setInt(2, gno);
+				pstmt.setString(3, "공고삭제");
+				pstmt.setInt(4, uno);
+				pstmt.setInt(5, gno);
+				
+				result =pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
+		//삭제시 공고 상태 변경 
+		public int delStatus(Connection con, int gno) {
+			PreparedStatement pstmt =null;
+			int result=0;
+			
+			String query =prop.getProperty("delStatus");
+			
+			try {
+				pstmt=con.prepareStatement(query);
+				pstmt.setInt(1, gno);
+				result =pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			} finally {

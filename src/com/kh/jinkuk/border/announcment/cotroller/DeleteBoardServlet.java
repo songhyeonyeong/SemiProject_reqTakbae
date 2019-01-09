@@ -38,27 +38,31 @@ public class DeleteBoardServlet extends HttpServlet {
 		int uno=loginUser.getU_no();
 		int gno=Integer.parseInt(request.getParameter("gno"));
 		String gongdiv =request.getParameter("gongdiv");
+		System.out.println(gno);
+		System.out.println(uno);
+		System.out.println(gongdiv+"1");
+		
+	
 		InsertAnnouncment i = new InsertAnnouncment();
 		i.setUno(uno);
-
-		ArrayList<Announcment> list = new AnnouncmentService().deleteBoard(uno, gno, gongdiv);
+		
+		int result = new AnnouncmentService().deleteBoard(uno, gno);
 		
 		
 		String page = "";
-		if(list != null && gongdiv.equals("일반")) {
-			page = "views/board/allNoticeList.jsp";
-			request.setAttribute("list", list);
-		}else if(list != null && gongdiv.equals("당일")) {
-			page = "views/board/todayNoticeList.jsp";
-			request.setAttribute("list", list);
-
+		/*if(result > 0 && gongdiv.equals("일반")) {
+			page = "/reqtakbae/selectList.bo?gongdiv=일반";
+			response.sendRedirect(page);
+		}else if(result > 0 && gongdiv.equals("당일")) {
+			page = "/reqtakbae/selectList.bo?gongdiv=당일";
+			response.sendRedirect(page);
 		}else {
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시판 삭제 실패!");
+		}*/
+		if(result>0) {
+		response.sendRedirect(request.getContextPath() + "/selectList.bo?gongdiv="+gongdiv);
 		}
-		
-		RequestDispatcher view = request.getRequestDispatcher(page);
-		view.forward(request, response);
 	}
 
 	/**
