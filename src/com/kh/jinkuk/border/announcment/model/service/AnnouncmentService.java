@@ -198,4 +198,15 @@ public class AnnouncmentService {
 		System.out.println(result);
 		return result;
 	}
+	
+	public int areaCount(String start) {
+		Connection con = getConnection();
+		
+		int result = new AnnouncmentDao().areaCount(con, start);
+		
+		close(con);
+		
+		return result;
+	}
+
 }

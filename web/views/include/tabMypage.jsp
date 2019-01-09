@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 	import="com.kh.jinkuk.member.model.vo.*"
 %>
-	<div class="tabBigBox btab_8ea mt50 mb50">
+	<div class="tabBigBox btab_7ea mt50 mb50">
 		<ul>
 			<!--신청자일 떄  -->
 			<%if(loginUser.getUser_div().equals("신청자")){ %>

@@ -17,6 +17,8 @@ import com.kh.jinkuk.admin.model.vo.Admin;
 import com.kh.jinkuk.admin.model.vo.Announcment;
 import com.kh.jinkuk.admin.model.vo.Change;
 import com.kh.jinkuk.admin.model.vo.Chart;
+import com.kh.jinkuk.admin.model.vo.ChartDay;
+import com.kh.jinkuk.admin.model.vo.ChartMonth2;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.admin.model.vo.LoadImg;
@@ -2136,6 +2138,273 @@ public class AdminDao {
 		
 		return c;
 	}
+	
+	public ArrayList<Chart> selectChartArea(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Chart> c = null;
+		
+		String query = prop.getProperty("selectchart");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			c = new ArrayList<Chart>();
+			
+			while(rset.next()) {
+				Chart ch = new Chart();
+				
+				
+				ch.setArea(rset.getString("AREA"));
+				ch.setCount(rset.getInt("A_COUNT"));
+				c.add(ch);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		
+		
+		return c;
+	}
+
+	
+
+	public ChartMonth2 selectChartMonth2(Connection con, int year) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ChartMonth2 c = null;
+		String query = prop.getProperty("selectchartmonth2");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, year);
+			
+			rset = pstmt.executeQuery();
+			
+			c = new ChartMonth2();
+			
+			while(rset.next()) {
+				
+				if(rset.getString("MONTH").equals("01")) {
+					c.setA1(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("02")) {
+					c.setA2(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("03")) {
+					c.setA3(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("04")) {
+					c.setA4(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("05")) {
+					c.setA5(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("06")) {
+					c.setA6(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("07")) {
+					c.setA7(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("08")) {
+					c.setA8(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("09")) {
+					c.setA9(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("10")) {
+					c.setA10(rset.getInt("DA_COUNT"));
+				}else if(rset.getString("MONTH").equals("11")) {
+					c.setA11(rset.getInt("DA_COUNT"));
+				}else{
+					c.setA12(rset.getInt("DA_COUNT"));
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+			
+		}
+		
+		
+		
+		
+		return c;
+	}
+
+	public int selectCharttotal(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int total=0;
+		
+		String query = prop.getProperty("charttotal");
+			
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				total = rset.getInt("COUNT");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		
+		return total;
+	}
+
+	public int selectCharttoday(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int today = 0;
+		
+		String query = prop.getProperty("charttoday");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				today = rset.getInt("COUNT");
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		return today;
+	}
+
+	public int selectChartyesterday(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int yesterday = 0;
+		
+		String query = prop.getProperty("chartyesterday");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			if(rset.next()) {
+				yesterday = rset.getInt("COUNT");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		return yesterday;
+	}
+
+	public ChartDay selectChartday(Connection con, int year, int month) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ChartDay ch = null;
+		
+		String query = prop.getProperty("selectchartday");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, month);
+			pstmt.setInt(2, year);
+			
+			rset = pstmt.executeQuery();
+			ch = new ChartDay();
+			
+			while(rset.next()) {
+				if(rset.getInt("DAY")==1) {
+					ch.setA1(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==2) {
+					ch.setA2(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==3) {
+					ch.setA3(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==4) {
+					ch.setA4(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==5) {
+					ch.setA5(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==6) {
+					ch.setA6(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==7) {
+					ch.setA7(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==8) {
+					ch.setA8(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==9) {
+					ch.setA9(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==10) {
+					ch.setA10(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==11) {
+					ch.setA11(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==12) {
+					ch.setA12(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==13) {
+					ch.setA13(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==14) {
+					ch.setA14(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==15) {
+					ch.setA15(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==16) {
+					ch.setA16(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==17) {
+					ch.setA17(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==18) {
+					ch.setA18(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==19) {
+					ch.setA19(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==20) {
+					ch.setA20(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==21) {
+					ch.setA21(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==22) {
+					ch.setA22(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==23) {
+					ch.setA23(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==24) {
+					ch.setA24(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==25) {
+					ch.setA25(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==26) {
+					ch.setA26(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==27) {
+					ch.setA27(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==28) {
+					ch.setA28(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==29) {
+					ch.setA29(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==30) {
+					ch.setA30(rset.getInt("DA_COUNT"));
+				}else if(rset.getInt("DAY")==31) {
+					ch.setA31(rset.getInt("DA_COUNT"));
+				}
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		return ch;
+	}
+
 
 }
 

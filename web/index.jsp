@@ -20,6 +20,7 @@
    });
 
 </script>
+
 <style>
    #today{
       color:yellow;
@@ -121,12 +122,6 @@
 
 <%@ include file="/views/include/myNav.jsp" %>
 <script type="text/javascript">
-
-
-
-
- 
-         
 $(function(){
 	 	$("#no").css("display","none");
 		var num = 0;
@@ -236,6 +231,23 @@ $(function(){
    
    
 </script>
+
+<%if (loginUser !=null){ %>
+<script>
+	$(function(){
+			var id="<%=loginUser.getUser_id()%>";
+			$.ajax({
+				url:"Visit",
+				type:"get",
+				data: {id:id},
+				success:function(data){
+				},
+				error:function(request,status,error){
+		      	},
+			});	
+	});
+</script>
+<%} %>
 
 
 </body>

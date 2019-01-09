@@ -397,7 +397,7 @@ public class AnnouncmentDao {
 			String query = prop.getProperty("insertPointbd");
 			try {
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, "공고요금사용");
+				pstmt.setString(1, "공고등록");
 				pstmt.setInt(2, i.getPoint());
 				pstmt.setString(3,i.getGtitle());
 				pstmt.setInt(4,i.getUno());
@@ -417,7 +417,7 @@ public class AnnouncmentDao {
 			String query = prop.getProperty("insertcmoneybd");
 			try {
 				pstmt = con.prepareStatement(query);
-				pstmt.setString(1, "공고요금사용");
+				pstmt.setString(1, "공고등록");
 				pstmt.setInt(2, i.getGsum());
 				pstmt.setString(3,i.getGtitle());
 				pstmt.setInt(4,i.getUno());
@@ -581,10 +581,24 @@ public class AnnouncmentDao {
 			System.out.println(result);
 			return result;
 		}
-
 		
-
-	
-
-	
+		public int areaCount(Connection con, String start) {
+			PreparedStatement pstmt = null;
+			int result = 0;
+			
+			String query = prop.getProperty("areacount");
+			String[] area = start.split(" ");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, area[1]);
+				
+				result = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result;
+		}
 }

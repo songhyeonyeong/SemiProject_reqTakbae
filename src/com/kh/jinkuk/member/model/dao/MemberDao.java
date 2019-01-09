@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.member.model.vo.Member;
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class MemberDao {
 	private Properties prop = new Properties();
@@ -369,6 +370,54 @@ public class MemberDao {
 		}
 		
 
+		return result;
+	}
+
+	public boolean visitcheck(Connection con, String id) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		boolean flag = false;
+		
+		String query = prop.getProperty("visitCheck");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				flag=true; //중복있음
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+		
+		return flag;
+	}
+
+	public int visitup(Connection con, String id) {
+		PreparedStatement pstmt = null;
+		int result = 0; 
+		
+		String query = prop.getProperty("visitup");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, id);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 	

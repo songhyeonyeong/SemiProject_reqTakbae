@@ -2,11 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
 import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <% 
-	String tabon="4";
+	String tabon="3";
 	 ArrayList<Chart> c = (ArrayList<Chart>)request.getAttribute("c");
-	/* for(int i = 0; i < c.size();i++){
-			Chart ch = c.get(i);
-	} */
 	int gangnam1 = c.get(0).getCount();
 	int gangnam2 = c.get(1).getCount();
 	int gangnam3 = c.get(2).getCount();
@@ -32,6 +29,11 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 	int gangnam23 = c.get(22).getCount();
 	int gangnam24 = c.get(23).getCount();
 	int gangnam25 = c.get(24).getCount();
+	
+	int sum=0;
+	for(int i = 0 ; i < 25 ; i++){
+		sum = sum + c.get(i).getCount();
+	}
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -41,18 +43,8 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 	<script type="text/javascript">
 		google.charts.load('current', {'packages':['corechart']});
 		google.charts.setOnLoadCallback(drawVisualization);
-	
-		$(function(){
-			if(true){
-				console.log('asd');
-			}
-		});
 		
 		function drawVisualization() { 
-			if(true){
-				console.log('asd');
-			}
-			var a = 7;
 			var data = google.visualization.arrayToDataTable([
 				
 				['Element', '신청수', { role: 'style' }],
@@ -85,17 +77,17 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 		        
 				]);
 			var options = {
-					title : '지역별 신청 통계',
+					/* title : '지역별 신청 통계', */
 					fontSize:12,
 				/* 	vAxis: {title: 'Cups'}, */
 				/* 	hAxis: {title: 'Month'},  */
 					seriesType: 'bars',
 					legend : 'none',
-					animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+					/* animation: { //차트가 뿌려질때 실행될 애니메이션 효과
 	                 startup: true,
 	                 duration: 1000,
 	                 easing: 'linear' },
-	                 tooltip:{textStyle : {fontSize:12}},
+	                 tooltip:{textStyle : {fontSize:12}}, */
                  	annotations: {
                     /*  textStyle: {
                        fontSize: 10,
@@ -127,6 +119,9 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 			<%@ include file="include/tab_statistics.jsp" %>
 			
 		</div><!--// contBox E-->
+
+	&nbsp&nbsp&nbsp<span id="sp" style="font-weight:bold">누적게시물수 : <%=sum %></span>
+	
 
 	</div><!--// container E-->
 	<%-- <div align="center">
