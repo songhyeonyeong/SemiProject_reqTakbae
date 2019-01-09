@@ -73,11 +73,10 @@
             </div>
 			</nav>
 
-							<div id="map" style="width:640px;height:640px;"></div>
+						<div id="map" style="width:640px;height:640px;"></div>
 						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85185db0fc452125ec8070a4279f67bb&libraries=services"></script>
 			<script>
 			$(function(){
-				console.log("스크립트실행");
 				$("#startarea").mouseenter(function(){
 					$(this).parent().css({"background":"darkgray", "cursor":"pointer"});
 				}).mouseout(function(){
@@ -271,7 +270,7 @@
 			    	                onMessage(event)
 			    	              };
 			    	              function onMessage(event) {
-			    	            	  console.log("웹소켓 전송성공!");
+			    	            	  console.log(event.data);
 			    	              }
 			    	              function onOpen(event) {
 			    	            	  console.log("웹소켓 전송성공!");
@@ -281,6 +280,7 @@
 			    	              function onError(event) {
 			    	                alert(event.data);
 			    	              }
+			    	              
 			    	              webSocket.send("1/"+lat+","+lon);
 			    	            
 			    	        	mylo = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다

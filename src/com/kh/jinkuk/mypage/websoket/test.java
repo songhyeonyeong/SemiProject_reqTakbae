@@ -27,6 +27,8 @@ public class test {
 						System.out.println(session.getQueryString()+"공고로 매칭 성공!");
 						client.getBasicRemote().sendText(message);
 					}
+				}else {
+					client.getBasicRemote().sendText("상대방  x");
 				}
 			}
 		}
