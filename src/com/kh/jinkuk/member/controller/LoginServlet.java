@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 		reqMember.setUser_pwd(userPwd);
 
 		Member loginUser = new MemberService().loginCheck(reqMember);
-		if (loginUser != null) {
+		/*if (loginUser != null) {
 			request.getSession().setAttribute("loginUser", loginUser);
 
 			if (loginUser.getUser_id().equals("admin")) {
@@ -57,6 +57,34 @@ public class LoginServlet extends HttpServlet {
 			out.flush();
 
 
+		}*/
+		
+		if(loginUser == null) {
+			out.print("<script>");
+			out.print("alert('로그인실패!');");
+			out.print("history.go(-1);");
+			out.print("</script>");
+			out.flush();
+		}else if(loginUser !=null) {
+			if(loginUser.getStatus().equals("Y")) {
+				request.getSession().setAttribute("loginUser", loginUser);
+				
+				if(loginUser.getUser_id().equals("admin")) {
+					response.sendRedirect("/reqtakbae/admin.no");
+				}else {
+					response.sendRedirect("index.jsp");
+				}
+				
+			}else if(loginUser.getStatus().equals("W")) {
+				response.getWriter().println("<script>alert('관리자 승인중');");
+				response.getWriter().println("window.location='index.jsp'</script>");
+			
+			}else if(loginUser.getStatus().equals("C")) { 
+				response.getWriter().println("<script>alert('가입 거절됨');window.location='index.jsp'</script>");
+			
+			}else if(loginUser.getStatus().equals("N")) {
+				response.getWriter().println("<script>alert('로그인 실패');history.go(-1);</script>");
+			}
 		}
 
 	}

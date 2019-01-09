@@ -13,14 +13,14 @@ import com.kh.jinkuk.member.model.vo.Member;
 /**
  * Servlet implementation class InsertKakaoMemberServlet
  */
-@WebServlet("/insertKakoMember.me")
-public class InsertKakaoMemberServlet extends HttpServlet {
+@WebServlet("/insertSNSMember.me")
+public class InsertSNSMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertKakaoMemberServlet() {
+    public InsertSNSMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

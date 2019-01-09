@@ -106,11 +106,11 @@ public class InsertGisaImgServlet extends HttpServlet {
 				String page="";
 				if(result > 0) {
 					page="/reqtakbae/views/member/joinComplete.jsp";
-					response.sendRedirect(page);
-					return;
+					//response.sendRedirect(page);
+					//return;
 				}else {
 					//실패시 저장된 사진 삭제
-					page="views/common/errorPage.jsp";
+					page="index.jsp";
 					for(int j = 0; j < saveFiles.size(); j++) {
 						//파일시스템에 저장된 이름으로 파일 객체 생성
 						File failedFile = new File(root + saveFiles.get(j));
@@ -118,11 +118,11 @@ public class InsertGisaImgServlet extends HttpServlet {
 						//true false를 리턴함
 						failedFile.delete();
 					}
-					request.setAttribute("msg", "기사 회원가입 실패!");
-					request.getRequestDispatcher(page).forward(request, response);
+					//request.setAttribute("msg", "기사 회원가입 실패!");
+					//request.getRequestDispatcher(page).forward(request, response);
 					
 				}
-			
+				response.sendRedirect(page);
 				//
 			
 			
