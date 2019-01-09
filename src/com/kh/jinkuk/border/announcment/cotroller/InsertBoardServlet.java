@@ -76,6 +76,7 @@ public class InsertBoardServlet extends HttpServlet {
 			int value = Integer.parseInt(multiRequest.getParameter("value"));
 //			System.out.println("value"+value);
 			String start = multiRequest.getParameter("startAdrr");
+			
 			System.out.println("start"+start);
 			String end = multiRequest.getParameter("endAdrr");
 			System.out.println("end"+end);
