@@ -1,6 +1,9 @@
 package com.kh.jinkuk.border.announcment.cotroller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,19 +37,28 @@ public class DeleteBoardServlet extends HttpServlet {
 		Member loginUser =(Member)request.getSession().getAttribute("loginUser");
 		int uno=loginUser.getU_no();
 		int gno=Integer.parseInt(request.getParameter("gno"));
-		Announcment a = new Announcment();
-		a.setU_NO(gno);
+		String gongdiv =request.getParameter("gongdiv");
 		InsertAnnouncment i = new InsertAnnouncment();
 		i.setUno(uno);
-		int result = new AnnouncmentService().deleteBoard(i, a);
+
+		ArrayList<Announcment> list = new AnnouncmentService().deleteBoard(uno, gno, gongdiv);
 		
-		if(result > 0) {
-			response.sendRedirect("/reqtakbae/selectList.bo?gongdiv=일반");
+		
+		String page = "";
+		if(list != null && gongdiv.equals("일반")) {
+			page = "views/board/allNoticeList.jsp";
+			request.setAttribute("list", list);
+		}else if(list != null && gongdiv.equals("당일")) {
+			page = "views/board/todayNoticeList.jsp";
+			request.setAttribute("list", list);
+
 		}else {
-			request.setAttribute("msg", "게시글 삭제 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);;
-			
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "게시판 삭제 실패!");
 		}
+		
+		RequestDispatcher view = request.getRequestDispatcher(page);
+		view.forward(request, response);
 	}
 
 	/**

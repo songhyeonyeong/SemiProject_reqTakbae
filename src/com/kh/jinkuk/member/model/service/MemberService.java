@@ -104,10 +104,10 @@ public class MemberService {
 
 
 
-	public Member snsJoinCheck(String kakaoId, String userDiv) {
+	public Member snsJoinCheck(String SNSId, String userDiv) {
 		Connection con = getConnection();
 		
-		Member member = new MemberDao().snsJoinCheck(con, kakaoId,userDiv);
+		Member member = new MemberDao().snsJoinCheck(con, SNSId,userDiv);
 		
 		close(con);
 		

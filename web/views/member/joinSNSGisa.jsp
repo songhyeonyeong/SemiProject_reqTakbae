@@ -4,7 +4,8 @@
 <%@ include file="/views/include/common.jsp" %>
 
 <%
-	String kakaoId = (String)request.getAttribute("kakaoId");
+	String SNSId = (String)request.getAttribute("SNSId");
+	String loginDiv = (String)request.getAttribute("loginDiv");
 %>
 
 <title>회원가입</title>
@@ -39,8 +40,9 @@
 				<td>
 					<input id="userDiv" name="userDiv" value="기사" type="hidden">
 					<input id="SId" name="userId" type="text">
-					<input id="kakaoId" name="kakaoId" type="hidden" value="<%=kakaoId%>">
+					<input id="SNSId" name="SNSId" type="hidden" value="<%=SNSId%>">
 					<input type="hidden" id="userPassword" name="userPassword" value="1">
+					<input type="hidden" id="loginDiv" name="loginDiv" value="<%=loginDiv%>">
 					<span>
 						<a id="idCheckBtn" class="sbtn db" >중복확인</a>
 						<span id="idCheckMsg"></span>
@@ -464,8 +466,9 @@
 			var userPwd = $("#userPassword").val();
 			var userName = $("#SName").val();
 			var phone = $("#Sphone").val();
-			var kakaoId = $("#kakaoId").val();
+			var SNSId = $("#SNSId").val();
 			var mainWay = $("#mainWay").val();
+			var loginDiv = $("#loginDiv").val();
 			
 			//var bankName = $("#bankName").val();
 			var bankcode = $("#bankcode").val();
@@ -483,13 +486,14 @@
 			console.log("mainWay : "+mainWay);
 			console.log("bankcode : "+bankcode);
 			console.log("accnum : "+accnum);
-			console.log("kakaoId : "+kakaoId);
+			console.log("SNSId : "+SNSId);
+			console.log("loginDiv : "+loginDiv);
 			
 			
 			$.ajax({
 				url : "/reqtakbae/insertKakoMember.me",
 				type : "POST",
-				data:{userDiv:userDiv, userId:userId, userPwd:userPwd, userName:userName, phone:phone, mainWay:mainWay, bankcode:bankcode, accnum:accnum, kakaoId:kakaoId},
+				data:{userDiv:userDiv, userId:userId, userPwd:userPwd, userName:userName, phone:phone, mainWay:mainWay, bankcode:bankcode, accnum:accnum, SNSId:SNSId,loginDiv:loginDiv},
 				success : function(data) {
 					if(data=="회원정보인서트성공"){
 						$("#imgForm").submit();

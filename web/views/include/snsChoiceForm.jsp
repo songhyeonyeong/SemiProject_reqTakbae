@@ -34,7 +34,7 @@
 
 		<div class="mr_auto wth250" align="center" >
 			<br>
-			<input type="radio" name="userDiv" value="신청자">신청자 &nbsp; &nbsp;
+			<input type="radio" name="userDiv" value="신청자" checked>신청자 &nbsp; &nbsp;
 			<input type="radio" name="userDiv" value="기사">기사	
 		</div>
 		
@@ -74,8 +74,8 @@
  
  var userDiv;
 	$("input[type=radio]").click(function(){
-	userDiv = $("input[type=radio]:checked").val();
-	console.log("http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp?userDiv="+userDiv);
+		userDiv = $("input[type=radio]:checked").val();
+		console.log("http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp?userDiv="+userDiv);
 	});	
  
  
@@ -99,7 +99,7 @@
   	       success: function(res) {
   	             console.log(res.id);
   	    
-  	             location.href="<%=request.getContextPath()%>/snsCheck?kakaoId="+res.id+"&userDiv="+userDiv;
+  	             location.href="<%=request.getContextPath()%>/snsCheck?SNSId="+res.id+"&userDiv="+userDiv+"&loginDiv="+"카카오";
   	             <%-- window.opener.top.location.href="<%=request.getContextPath()%>/views/member/joinKakao.jsp";
   	          	 window.close(); --%> 
   	       		}
@@ -112,13 +112,11 @@
   
   
 	//네이버로그인
-	
 	 var naverLogin = new naver.LoginWithNaverId(
 		{
-			
 			clientId: "JwzeBVexbooaJdOsR1vM",
-			//callbackUrl: "http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp",
-			callbackUrl: "http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp?userDiv="+userDiv,
+			callbackUrl: "http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp",
+			//callbackUrl: "http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp?userDiv="+userDiv,
 			isPopup: false, 
 			loginButton: {color: "green", type: 3, height: 48}, 
 		}
@@ -147,15 +145,7 @@
 
 
 
-<script type="text/javascript">
-	
 
-	
-	
-
-
-	
-</script>
 
 
 </body>

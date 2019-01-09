@@ -30,7 +30,7 @@ public class InsertKakaoMemberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userDiv = request.getParameter("userDiv");
-		String kakaoId = request.getParameter("kakaoId");
+		String SNSId = request.getParameter("SNSId");
 
 		String userId = request.getParameter("userId");
 		String userPwd = request.getParameter("userPwd");
@@ -40,6 +40,7 @@ public class InsertKakaoMemberServlet extends HttpServlet {
 		String accnum = request.getParameter("accnum");
 		String mainWay = request.getParameter("mainWay");
 		String bankName="";
+		String loginDiv = request.getParameter("loginDiv");
 		
 		if(bankCode.equals("004")) {
 			bankName="국민은행";
@@ -54,7 +55,7 @@ public class InsertKakaoMemberServlet extends HttpServlet {
 		}
 		
 		System.out.println();
-		System.out.println("kakaoId : "+kakaoId);
+		System.out.println("kakaoId : "+SNSId);
 		System.out.println("userPwd : "+userPwd);
 		System.out.println("userDiv : "+userDiv);
 		System.out.println("userName : "+userName);
@@ -63,6 +64,7 @@ public class InsertKakaoMemberServlet extends HttpServlet {
 		System.out.println("bankName : "+bankName);
 		System.out.println("accnum : "+accnum);
 		System.out.println("mainWay : "+mainWay);
+		System.out.println("loginDiv : "+loginDiv);
 		System.out.println();
 		
 		Member mem = new Member();
@@ -70,11 +72,11 @@ public class InsertKakaoMemberServlet extends HttpServlet {
 		mem.setUser_id(userId);
 		mem.setUser_pwd(userPwd);
 		mem.setUser_name(userName);
-		mem.setEmail(kakaoId);//카카오아이디로 이메일
+		mem.setEmail(SNSId);//SNS아이디로 이메일
 		mem.setPhone(phone);
 		mem.setBank_name(bankName);
 		mem.setBank_num(accnum);
-		mem.setLogin_div("카카오");
+		mem.setLogin_div(loginDiv);
 		
 		if(userDiv.equals("기사")) {
 			mem.setK_trans(mainWay);

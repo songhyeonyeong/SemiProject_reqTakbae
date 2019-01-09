@@ -89,7 +89,9 @@ public class UpdateBoardOneServlet extends HttpServlet {
 		long date =g.getTimeInMillis();
 		String area = multiRequest.getParameter("area");
 		System.out.println("area"+area);
+		
 		int total=Integer.parseInt(multiRequest.getParameter("total"));
+		System.out.println("total점수 확인 : "+total);
 		int point=Integer.parseInt(multiRequest.getParameter("point")); 
 		Member loginUser =(Member)request.getSession().getAttribute("loginUser");
 		int uno=loginUser.getU_no();
@@ -110,9 +112,9 @@ public class UpdateBoardOneServlet extends HttpServlet {
 		System.out.println(i);
 		
 		
-		int result1 = new AnnouncmentService().updateBoard(i,image,gongdiv,gno);
+		int result = new AnnouncmentService().updateBoard(i,image,gongdiv,gno);
 	
-		
+		System.out.println(result);
 		
 	
 		

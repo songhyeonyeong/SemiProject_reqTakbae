@@ -251,9 +251,8 @@ public class Admin implements java.io.Serializable{
 				+ ", userName=" + userName + ", u_date=" + u_date + ", status=" + status + ", k_trans=" + k_trans
 				+ ", path=" + path + ", i_name=" + i_name + ", reportCount=" + reportCount + "]";
 	}
-
-
-
+	
+	
 
 
 

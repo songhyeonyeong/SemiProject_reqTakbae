@@ -9,10 +9,24 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	int i = 0;
 %>
 <%@ include file="/views/admin/include/common.jsp" %>
 
+<script>
 
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 <title>택배를 부탁해 관리자페이지</title>
 </head>
 <body>
@@ -83,17 +97,15 @@
 						<th scope="col">보유포인트</th>
 					</tr>
 				</thead>
-				<tbody>
-				<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.de">
+				<tbody id="money">
+					<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.de">
 					<% for(Admin m : list){ %>
 					<tr>
 						<td>
 							<label for=""> 체크</label>
 							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getUserId()%>">
 						</td>
-					
-						
-							
+							<input type="hidden" value="<%=i++%>">
 							<td><%= m.getUserId() %></td>
 							<td><%= m.getUserName() %></td>
 							<td><%= m.getPhone()%></td>
@@ -103,7 +115,15 @@
 							<td><%= m.getBlackList() %></td>
 							<td><%= m.getC_money() %></td>
 							<td><%= m.getC_point() %></td>
+						<script>	
+			
+		 					var t=$('#money').children().eq(<%=i%>).children().eq(8).text();
+		 					$('#money').children().eq(<%=i%>).children().eq(8).text(Number(t).format());
+		 					
+							var t=$('#money').children().eq(<%=i%>).children().eq(9).text();	
+		 					$('#money').children().eq(<%=i%>).children().eq(9).text(Number(t).format());
 
+						</script>
 						
 					</tr>
 				<% } %> 
