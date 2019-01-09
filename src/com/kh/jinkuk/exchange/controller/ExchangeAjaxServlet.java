@@ -33,7 +33,6 @@ public class ExchangeAjaxServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int uNo = Integer.parseInt(request.getParameter("uno"));
-		
 		/*int money = new ExchangeService().SearchMoney(uNo);
 		response.getWriter().print(money);*/
 		
