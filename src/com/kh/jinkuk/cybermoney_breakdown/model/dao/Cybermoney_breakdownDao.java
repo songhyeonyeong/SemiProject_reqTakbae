@@ -79,7 +79,7 @@ public class Cybermoney_breakdownDao {
 				pstmt.setInt(8, endRow);
 			}else {
 				pstmt.setInt(1, uNo);
-				pstmt.setString(2, "배송료");
+				pstmt.setString(2, "지급받은배송료");
 				pstmt.setInt(3, startRow);
 				pstmt.setInt(4, endRow);
 			}

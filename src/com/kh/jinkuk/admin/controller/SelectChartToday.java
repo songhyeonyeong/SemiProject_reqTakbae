@@ -39,17 +39,18 @@ public class SelectChartToday extends HttpServlet {
 		
 		ChartDay ch = new AdminService().selectChartday(year, month);
 		String page = "";
-		if(total != 0) {
-			request.setAttribute("year", year);
-			request.setAttribute("total", total);
-			request.setAttribute("today", today);
-			request.setAttribute("yesterday", yesterday);
-			request.setAttribute("month", month);
-			request.setAttribute("ch", ch);
-			page = "/views/admin/statisticsday.jsp";
-			request.getRequestDispatcher(page).forward(request, response);
-		}
+		
+
+		request.setAttribute("year", year);
+		request.setAttribute("total", total);
+		request.setAttribute("today", today);
+		request.setAttribute("yesterday", yesterday);
+		request.setAttribute("month", month);
+		request.setAttribute("ch", ch);
+		page = "/views/admin/statisticsday.jsp";
+		request.getRequestDispatcher(page).forward(request, response);
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

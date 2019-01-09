@@ -32,7 +32,7 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 		google.charts.setOnLoadCallback(drawVisualization);
 		function drawVisualization() { 
 			var data = google.visualization.arrayToDataTable([
-				['Element', '신청수', { role: 'style' }],
+				['Element', '방문수', { role: 'style' }],
 		        ['1', <%=ch.getA1()%>, 'ffd700 '],        
 		        ['2', <%=ch.getA2()%>, 'ffd700 '],            // English color name
 		      	['3', <%=ch.getA3()%>, 'ffd700 '],
@@ -96,7 +96,7 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 		google.charts.setOnLoadCallback(drawVisualization);
 		function drawVisualization() { 
 			var data = google.visualization.arrayToDataTable([
-				['Element', '신청수', { role: 'style' }],
+				['Element', '방문수', { role: 'style' }],
 		        ['1', <%=ch.getA1()%>, 'ffd700 '],        
 		        ['2', <%=ch.getA2()%>, 'ffd700 '],            // English color name
 		      	['3', <%=ch.getA3()%>, 'ffd700 '],
@@ -160,7 +160,7 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 		google.charts.setOnLoadCallback(drawVisualization);
 		function drawVisualization() { 
 			var data = google.visualization.arrayToDataTable([
-				['Element', '신청수', { role: 'style' }],
+				['Element', '방문수', { role: 'style' }],
 		        ['1', <%=ch.getA1()%>, 'ffd700 '],        
 		        ['2', <%=ch.getA2()%>, 'ffd700 '],            // English color name
 		      	['3', <%=ch.getA3()%>, 'ffd700 '],

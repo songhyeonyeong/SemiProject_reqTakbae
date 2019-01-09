@@ -8,12 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.jinkuk.member.model.vo.Images;
 import com.kh.jinkuk.member.model.vo.Member;
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 public class MemberDao {
 	private Properties prop = new Properties();
@@ -418,6 +418,75 @@ public class MemberDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public boolean visitcheck2(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		boolean check2 = false;
+		
+		String query = prop.getProperty("visitChek2");
+		
+		try {
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(query);
+			
+			while(rset.next()) {
+				check2 = true;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+			close(rset);
+		}
+		
+		
+		return check2;
+	}
+
+	public int sdatein(Connection con) {
+		Statement stmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("sdatein");
+		
+		try {
+			stmt = con.createStatement();
+			
+			result = stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		System.out.println("sdatein: " +result);
+		return result;
+	}
+
+	public int sdateup(Connection con) {
+		Statement stmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("sdateup");
+		
+		try {
+			stmt = con.createStatement();
+			
+			result = stmt.executeUpdate(query);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		System.out.println("sdateup: " +result);
 		return result;
 	}
 	
