@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-		import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
+      import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*"%>
 
 <% 
-	Announcment a = (Announcment)request.getAttribute("a"); 
-	InsertAnnouncment i = (InsertAnnouncment)request.getAttribute("i");
-	int num = (int)request.getAttribute("num");
-	Images img =(Images)request.getAttribute("img");
-	String gongdiv=(String)request.getAttribute("gongdiv");
+   Announcment a = (Announcment)request.getAttribute("a"); 
+   InsertAnnouncment i = (InsertAnnouncment)request.getAttribute("i");
+   int num = (int)request.getAttribute("num");
+   Images img =(Images)request.getAttribute("img");
+   String gongdiv=(String)request.getAttribute("gongdiv");
 %>
 
 <%@ include file="/views/include/common.jsp" %>
@@ -80,6 +80,7 @@
 <div id="subvisual">공고 -상세보기</div>
 
 <div id="subContainer">
+
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<div class="titNavi">

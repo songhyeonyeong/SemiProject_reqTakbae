@@ -130,7 +130,7 @@ public class MemberService {
 		return result;
 	}
 
-	public boolean visitcheck(String id) {
+/*	public boolean visitcheck(String id) {
 		Connection con = getConnection();
 		
 		boolean check = new MemberDao().visitcheck(con, id);
@@ -138,7 +138,7 @@ public class MemberService {
 		close(con);
 		
 		return check;
-	}
+	}*/
 
 	public int visitup(String id) {
 		Connection con = getConnection();
