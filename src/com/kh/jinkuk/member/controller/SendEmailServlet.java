@@ -35,8 +35,8 @@ public class SendEmailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=UTF-8");
+		/*request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=UTF-8");*/
 		
 		String fullEmail = request.getParameter("fullEmail");
 		String randomCode = request.getParameter("randomCode");
@@ -80,7 +80,7 @@ public class SendEmailServlet extends HttpServlet {
             //메일보내기   
             Transport.send(msg);
        
-            System.out.println("보냄");
+            //System.out.println("보냄");
             
             response.getWriter().print("YES");
             

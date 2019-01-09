@@ -3,6 +3,11 @@
 <%@ include file="/views/include/common.jsp" %>
 
 <title>아이디/비밀번호 찾기</title>
+<style>
+	.radioBtn{
+		font-size: 12pt;
+	}
+</style>
 </head>
 <body>
 
@@ -25,8 +30,10 @@
 		<div class="mr_auto wth250" align="center" >
 			<ul>
 				<li style="margin-top: 10px;">
-					<input type="radio" name="userDiv" value="신청자" style="width:20px; height:20px" checked>신청자 &nbsp; &nbsp;
-					<input type="radio" name="userDiv" value="기사" style="width:20px; height:20px">기사
+					<span class="radioBtn">
+						<input type="radio" name="userDiv" value="신청자" style="width:20px; height:20px" checked>신청자 &nbsp; &nbsp;
+						<input type="radio" name="userDiv" value="기사" style="width:20px; height:20px">기사
+					</span>
 				</li>
 			</ul>
 		</div>

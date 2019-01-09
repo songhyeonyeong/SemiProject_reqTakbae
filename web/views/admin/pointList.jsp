@@ -9,9 +9,23 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	int i = 0;
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
+<script>
 
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 
 <title>택배를 부탁해 관리자페이지</title>
 </head>
@@ -49,7 +63,7 @@
 				<th scope="col">비고</th>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody id="money">
 			<% for(Point m : list){ %>
 			<tr>
 				<td><%=m.getP_no() %></td>
@@ -59,6 +73,20 @@
 				<td><%=m.getP_usePoint() %></td>
 				<td><%=m.getUser_point() %></td>
 				<td><%=m.getP_note() %></td>
+				
+				<script>	
+
+					var t=$('#money').children().eq(<%=i%>).children().eq(4).text();	
+					console.log(t);
+					$('#money').children().eq(<%=i%>).children().eq(4).text(Number(t).format());
+		 			
+		 			var t=$('#money').children().eq(<%=i%>).children().eq(5).text();	
+		 			$('#money').children().eq(<%=i%>).children().eq(5).text(Number(t).format());
+		 			
+					<%=i++%>
+
+
+				</script>
 			</tr>
 			<%} %>
 		</table>

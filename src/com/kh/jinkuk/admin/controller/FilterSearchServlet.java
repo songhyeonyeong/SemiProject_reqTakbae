@@ -37,11 +37,9 @@ public class FilterSearchServlet extends HttpServlet {
 		
 		String destination = request.getParameter("destination");
 		String size = request.getParameter("size");
-		String datePicker = request.getParameter("date");
 		String status = request.getParameter("status");
 		
-		System.out.println("도착지 : " + destination + " 크기 : " + size + " 날짜 : " + datePicker
-				+ " 상태 : " + status);
+		System.out.println("도착지 : " + destination + " 크기 : " + size + " 상태 : " + status);
 		
 
 		Announcment a = new Announcment();

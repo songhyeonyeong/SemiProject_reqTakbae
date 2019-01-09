@@ -280,33 +280,39 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
 	};
 	    
     
-    
-   
-    	
-     
-     if (navigator.geolocation) {
-    	    
-    	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-    	    navigator.geolocation.getCurrentPosition(function(position) {
+	 var lat;
+	 var lon;
+      var webSocket = new WebSocket('ws://localhost:8001/reqtakbae/broadcasting?'+<%=gno%>);
+  webSocket.onerror = function(event) {
+    onError(event)
+  };
+  webSocket.onopen = function(event) {
+    onOpen(event)
+  };
+  webSocket.onmessage = function(event) {
+    onMessage(event)
+  };
+  function onMessage(event) {
+      console.log(event.data);
+      lat =event.data.split(",")[0];
+      lon =event.data.split(",")[1];
+      console.log(lat);
+      console.log(lon);
+      mylo = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+      message = '<div style="padding:5px;">기사님 위치</div>'; // 인포윈도우에 표시될 내용입니다
+      displayMarker(mylo,message);
+      
+  }
+  function onOpen(event) {
+      console.log("웹소켓 연결성공!");
+  }
+  function onError(event) {
+    alert(event.data);
+  }
     	        
-    	        var lat = position.coords.latitude, // 위도
-    	            lon = position.coords.longitude; // 경도
     	        
-    	        	mylo = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-    	            message = '<div style="padding:5px;">내 위치</div>'; // 인포윈도우에 표시될 내용입니다
-    	        
-    	        // 마커와 인포윈도우를 표시합니다
-    	        displayMarker(mylo, message);
-    	            
-    	      });
-    	    
-    	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
-    	    
-    	    	mylo = new daum.maps.LatLng(33.450701, 126.570667),    
-    	        message = 'geolocation을 사용할수 없어요..'
-    	        
-    	    displayMarker(mylo, message);
-    	}
+    	        	
+
 		
      
      		var imageSrc ='/reqtakbae/views/common/images/contents/boxS.png', // 마커이미지의 주소입니다    
@@ -334,7 +340,7 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
     	        removable : iwRemoveable,
     	    });
     	    daum.maps.event.addListener(marker, 'click', function() {
-    		    alert('기사를선택하셨네용');
+    		    alert('기사님이 열심히 운행중입니다^^');
     		});
     	    
     	    // 인포윈도우를 마커위에 표시합니다 

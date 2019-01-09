@@ -205,6 +205,33 @@ function fn_open(img) {
 		
 	 
 	 
+	 $(function(){
+			$("span").eq(2).click(function(){
+				var bool = confirm('승인을 거부 하시겠습니까?');
+				if(bool == true){
+					 $("input:checkbox[name=memCheck]:checked").each(function() {
+					        selected.push($(this).parent().parent().children().eq(3).text());
+					   });
+					console.log(selected);
+					$.ajax({
+						url:"/reqtakbae/joinConfirm", 
+						data:{selected:selected},
+						type:"post",
+						success:function(data){
+							console.log(data);
+							location.reload();
+						},
+						error:function(){
+							console.log("실패");
+						}
+					});
+					
+				}
+		
+			});
+		});
+	 
+	 
 	 
 	 $(function(){
 			$("#confirm").click(function(){

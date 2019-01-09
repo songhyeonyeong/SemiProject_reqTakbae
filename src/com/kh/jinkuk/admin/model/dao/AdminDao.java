@@ -1973,7 +1973,21 @@ public class AdminDao {
 			pstmt.setString(1, "일반");
 			pstmt.setString(2, a.getG_SIZE());
 			
+		}else if((a.getG_E_AREA())!=null && (a.getG_SIZE())!=null && (a.getA_status())!=null) {
+			query = prop.getProperty("selectDao7");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "일반");
+			pstmt.setString(2, a.getG_E_AREA());
+			pstmt.setString(3, a.getG_SIZE());
+			pstmt.setString(4, a.getA_status());
+			
+		}else {
+			query = prop.getProperty("selectDao8");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "일반");
+			
 		}
+
 
 
 			rset = pstmt.executeQuery();
@@ -1991,6 +2005,7 @@ public class AdminDao {
 				m.setG_SIZE(rset.getString("G_SIZE"));
 				m.setG_PRICE(rset.getInt("G_PRICE"));
 				m.setG_P_DIV(rset.getString("G_P_DIV"));
+				m.setG_S_DATE(rset.getDate("G_S_DATE"));
 				
 				list.add(m);
 			}
@@ -2403,6 +2418,131 @@ public class AdminDao {
 		}
 		
 		return ch;
+	}
+
+	public ArrayList<Announcment> selectFilterDel(Connection con, Announcment a) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Announcment> list = null;
+		String query = "";
+
+		System.out.println(query);
+		try {
+			
+		if((a.getG_E_AREA())==null && (a.getG_SIZE())!=null && (a.getA_status())!=null) {
+			query = prop.getProperty("selectDao1");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "당일");
+			pstmt.setString(2, a.getG_SIZE());
+			pstmt.setString(3, a.getA_status());
+
+			
+		}else if((a.getG_E_AREA())!=null && (a.getG_SIZE())==null && (a.getA_status())!=null) {
+			query = prop.getProperty("selectDao2");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "당일");
+			pstmt.setString(2, a.getG_E_AREA());
+			pstmt.setString(3, a.getA_status());
+			
+			
+		}else if((a.getG_E_AREA())!=null && (a.getG_SIZE())!=null && (a.getA_status())==null) {
+			query = prop.getProperty("selectDao3");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "당일");
+			pstmt.setString(2, a.getG_E_AREA());
+			pstmt.setString(3, a.getG_SIZE());
+			
+			
+		}else if((a.getG_E_AREA())==null && (a.getG_SIZE())==null && (a.getA_status())!=null) {
+			query = prop.getProperty("selectDao4");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "당일");
+			pstmt.setString(2, a.getA_status());
+			
+		}else if((a.getG_E_AREA())!=null && (a.getG_SIZE())==null && (a.getA_status())==null) {
+			query = prop.getProperty("selectDao5");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "당일");
+			pstmt.setString(2, a.getG_E_AREA());
+			
+		}else if((a.getG_E_AREA())==null && (a.getG_SIZE())!=null && (a.getA_status())==null) {
+			query = prop.getProperty("selectDao6");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "당일");
+			pstmt.setString(2, a.getG_SIZE());
+			
+		}else if((a.getG_E_AREA())!=null && (a.getG_SIZE())!=null && (a.getA_status())!=null) {
+			query = prop.getProperty("selectDao7");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "당일");
+			pstmt.setString(2, a.getG_E_AREA());
+			pstmt.setString(3, a.getG_SIZE());
+			pstmt.setString(4, a.getA_status());
+			
+		}else {
+			query = prop.getProperty("selectDao8");
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "당일");
+			
+		}
+
+
+
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Announcment>();
+			
+			while(rset.next()) {
+				Announcment m = new Announcment();
+				
+				m.setG_NO(rset.getInt("RNUM"));
+				m.setG_S_AREA(rset.getString("G_S_AREA"));
+				m.setG_E_AREA(rset.getString("G_E_AREA"));
+				m.setG_TITLE(rset.getString("G_TITLE"));
+				m.setG_DAY(rset.getDate("G_DAY"));
+				m.setG_SIZE(rset.getString("G_SIZE"));
+				m.setG_PRICE(rset.getInt("G_PRICE"));
+				m.setG_P_DIV(rset.getString("G_P_DIV"));
+				m.setG_S_DATE(rset.getDate("G_S_DATE"));;
+				
+				list.add(m);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rset);
+		}
+		
+	
+		
+		return list;
+	}
+
+	public int updateJoinDeny(Connection con, Admin m) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("joinDeny");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, m.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 

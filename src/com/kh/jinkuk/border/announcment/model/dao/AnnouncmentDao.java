@@ -192,6 +192,8 @@ public class AnnouncmentDao {
 			return a;
 		}*/
 		
+		//-------------수정 메소드------------------//
+		
 		//공고 수정하기
 		public int updateBoard(Connection con, InsertAnnouncment i, String gongdiv,int gno) {
 			PreparedStatement pstmt = null;
@@ -284,12 +286,14 @@ public class AnnouncmentDao {
 			return result3;
 		}
 		
-		//사이버 머니 사용 내역 업데이트
-		public int updatecmoneybd(Connection con, InsertAnnouncment i, int gno, String gongdiv) {
+		//사이버 머니 사용 내역 삽입 
+		public int insertCmoneydb(Connection con, InsertAnnouncment i, int gno) {
 			PreparedStatement pstmt = null;
 			int result4 = 0;
 			
-			String query = prop.getProperty("updatecmoneybd");
+			String query = prop.getProperty("insertCmoneydb");
+			
+			System.out.println(query);
 			
 			try {
 				pstmt = con.prepareStatement(query);
@@ -307,9 +311,40 @@ public class AnnouncmentDao {
 			} finally {
 				close(pstmt);
 			}
+			
 			System.out.println(result4);
 			return result4;
 		}
+		//사이버 머니 사용 내역 업데이트
+		public int updatecmoneybd(Connection con, InsertAnnouncment i, int gno, String gongdiv) {
+			PreparedStatement pstmt = null;
+			int result4 = 0;
+			
+			String query = prop.getProperty("updatecmoneybd");
+			
+			System.out.println(query);
+			
+			try {
+				pstmt = con.prepareStatement(query);
+				
+				pstmt.setString(1, "공고요금사용");
+				pstmt.setInt(2, i.getGsum());
+				pstmt.setString(3,i.getGtitle());
+				pstmt.setInt(4,i.getUno());
+				pstmt.setInt(5, gno);
+				
+				result4 = pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			
+			System.out.println(result4);
+			return result4;
+		}
+	
 		
 		//사용한 포인트와 사이버 머니 회원상태에서 업데이트
 		public int updateUserCmoney(Connection con, InsertAnnouncment i, int gno) {
@@ -321,10 +356,13 @@ public class AnnouncmentDao {
 			System.out.println(i.getPoint());
 			
 			String query = prop.getProperty("updateUserCmoney");
+			
 			System.out.println(query);
+			
 			try {
 				
 				pstmt = con.prepareStatement(query);
+				
 				pstmt.setInt(1, i.getGsum());
 				pstmt.setInt(2, i.getPoint());
 				pstmt.setInt(3, i.getUno());
@@ -336,11 +374,61 @@ public class AnnouncmentDao {
 			} finally {
 				close(pstmt);
 			}
-			
-			System.out.println(result5);
+		
+			System.out.println("result5"+result5);
 			return result5;
 		}
+		
+		//수정시 이미지 데이터 업데이트
+		public int updateimage(Connection con, Images image, InsertAnnouncment i, int gno) {
+			PreparedStatement pstmt = null;
+			int result6 = 0;
+			String query = prop.getProperty("updateRimage");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1,"공고사진");
+				pstmt.setString(2, image.getI_o_name());
+				pstmt.setString(3, image.getI_c_name());
+				pstmt.setString(4,image.getI_path());
+				pstmt.setInt(5, i.getUno());
+				pstmt.setInt(6, gno);
+				
+				result6 = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result6;
+		}
+		//수정시 이미지 데이터 삽입
+		public int insertimage(Connection con, Images image, int gno, InsertAnnouncment i) {
+			PreparedStatement pstmt = null;
+			int result6 = 0;
+			String query = prop.getProperty("insertRimage");
+			try {
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1,"공고사진");
+				pstmt.setString(2, image.getI_o_name());
+				pstmt.setString(3, image.getI_c_name());
+				pstmt.setString(4,image.getI_path());
+				pstmt.setInt(5, i.getUno());
+				pstmt.setInt(6, gno);
+				result6 = pstmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(pstmt);
+			}
+			return result6;
+		}
+		
+		
 
+		
+		
+
+		//------------------------수정메소드-----------------------------------//
 		
 		//게시판 작성 
 		public int insertBoard(Connection con, InsertAnnouncment i, String gongdiv) {
@@ -450,7 +538,7 @@ public class AnnouncmentDao {
 			return result;
 		}
 
-		public int insertimage(Connection con, Images image) {
+	public int insertimage(Connection con, Images image) {
 			PreparedStatement pstmt = null;
 			int result = 0;
 			String query = prop.getProperty("insertimage");
@@ -670,4 +758,5 @@ public class AnnouncmentDao {
 			}
 			return result;
 		}
+
 }

@@ -9,11 +9,54 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	int i = 0;
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
 
 <title>택배를 부탁해 관리자페이지</title>
+<style>
+	#submit,button{
+		width:70px;
+		
+		height:28px;
+
+   		background-color: gray;
+
+    	border: none;
+
+    	color:#fff;
+
+    	padding: 6px 2px;
+
+    	text-align: center;
+
+    	text-decoration: none;
+
+   		display: inline-block;
+
+    	font-size: 13px;
+
+    	margin: 4px;
+
+    	cursor: pointer;
+		border-radius:3px;
+	}
+</style>
+<script>
+
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -31,7 +74,7 @@
 			<table class="searchTbl mt30 mb30"><!-- searchTbl S -->
 				<caption>공고 검색입니다.</caption>
 				<colgroup>
-					<col style="width:15%;">
+				<col style="width:15%;">
 					<col style="width:%;">
 					<col style="width:15%;">
 					<col style="width:%;">
@@ -39,39 +82,65 @@
 					<col style="width:%;">
 				</colgroup>
 				<tbody>
+				<form action="<%=request.getContextPath() %>/searchDeli.fi" method="POST" name="fr">
 					<tr>
 						<th scope="col">도착</th>
 						<td>
 							<label for=""></label>
-							<select id="" name="" class="wth150">
-							<option value="" selected="selected">서울시 전체</option>
-							<option value="">강남구</option>
-							<option value="">---</option>
+							<select id="destination" name="destination" class="wth150">
+							<option value="" selected="selected" selected disabled hidden>도착지 선택</option>
+							<option value="강남구">강남구</option>
+							<option value="강동구">강동구</option>
+							<option value="강북구">강북구</option>
+							<option value="강서구">강서구</option>
+							<option value="관악구">관악구</option>
+							<option value="광진구">광진구</option>
+							<option value="구로구">구로구</option>
+							<option value="금천구">금천구</option>
+							<option value="노원구">노원구</option>
+							<option value="도봉구">도봉구</option>
+							<option value="동대문구">동대문구</option>
+							<option value="동작구">동작구</option>
+							<option value="마포구">마포구</option>
+							<option value="서대문구">서대문구</option>
+							<option value="서초구">서초구</option>
+							<option value="성동구">성동구</option>
+							<option value="성북구">성북구</option>
+							<option value="송파구">송파구</option>
+							<option value="양천구">양천구</option>
+							<option value="영등포구">영등포구</option>
+							<option value="용산구">용산구</option>
+							<option value="은평구">은평구</option>
+							<option value="종로구">종로구</option>
+							<option value="중구">중구</option>
+							<option value="중랑구">중랑구</option>
 						</td>
 						<th scope="col">크기</th>
 						<td>
 							<label for=""></label>
-							<select id="" name="" class="wth150">
-							<option value="" selected="selected">전체</option>
-							<option value="">소</option>
-							<option value="">중</option>
-							<option value="">대</option>
+							<select id="size" name="size" class="wth150">
+							<option value="" selected="selected" selected disabled hidden>전체</option>
+							<option value="소">소</option>
+							<option value="중">중</option>
+							<option value="대">대</option>
 						</td>
 						<th scope="col">상태</th>
 						<td>
 							<label for=""></label>
-							<select id="" name="" class="wth150">
-							<option value="" selected="selected">전체</option>
-							<option value="">모집중</option>
-							<option value="">배송중</option>					
+							<select id="status" name="status" class="wth150">
+							<option value="" selected="selected" selected disabled hidden>전체</option>
+							<option value="매칭중">매칭중</option>
+							<option value="매칭완료">매칭완료</option>					
 						</td>
 					</tr>
 				</tbody>
+
 			</table>
 			
 			<div class="btnbox mb30">
-				<span><a class="mbtn db wth60" href="#">검색</a></span>
+				<input type="submit" value="검색하기" id="submit">
 			</div>
+			</form>
 
 			<p class="flo_right mb10"><a class="mbtn or" onclick="deleteNotice();">삭제하기</a></p><!-- user에게만 보임 -->
 
@@ -103,7 +172,7 @@
 						<th scope="col">상세</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="money">
 					<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.to">
 				<% for(Announcment m : list){ %>
 					<tr>
@@ -111,6 +180,7 @@
 							<label for=""> 체크</label>
 							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getG_NO()%>">
 						</td>
+						<input type="hidden" value="<%=i++%>">
 						<td><%= m.getG_NO() %></td>
 						<td><%= m.getG_S_AREA() %></td>
 						<td><%= m.getG_E_AREA()%></td>
@@ -120,6 +190,14 @@
 						<td><%= m.getG_PRICE() %></td>
 						<td><%= m.getG_P_DIV() %></td>
 						<td><a class="sbtn gy" href="#">상세보기</a></td>
+						
+						<script>	
+
+							var t=$('#money').children().eq(<%=i%>).children().eq(8).text();	
+		 					$('#money').children().eq(<%=i%>).children().eq(8).text(Number(t).format());
+
+
+						</script>
 					</tr>
 				<% } %> 
 				</form>

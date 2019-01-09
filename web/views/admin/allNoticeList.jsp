@@ -9,9 +9,23 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	int i = 0;
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
+<script>
 
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 
 <title>택배를 부탁해 관리자페이지</title>
 <script src="//code.jquery.com/jquery-1.10.2.js"></script> 
@@ -62,9 +76,11 @@
 			<table class="searchTbl mt30 mb30"><!-- searchTbl S -->
 				<caption>공고 검색입니다.</caption>
 				<colgroup>
-					<col style="width:20%;">
+				<col style="width:15%;">
 					<col style="width:%;">
-					<col style="width:20%;">
+					<col style="width:15%;">
+					<col style="width:%;">
+					<col style="width:15%;">
 					<col style="width:%;">
 				</colgroup>
 				<tbody>
@@ -110,13 +126,6 @@
 							<option value="중">중</option>
 							<option value="대">대</option>
 						</td>
-					</tr>
-					<tr>
-						<th scope="col">배송날짜</th>
-						<td>
-							<label for=""></label>
-							<input id="" name="date" class="wth150" type="date">
-						</td>
 						<th scope="col">상태</th>
 						<td>
 							<label for=""></label>
@@ -126,14 +135,14 @@
 							<option value="매칭완료">매칭완료</option>					
 						</td>
 					</tr>
-
 				</tbody>
+
 			</table>
 			
 			<div class="btnbox mb30">
 				<input type="submit" value="검색하기" id="submit">
 			</div>
-	</form>
+			</form>
 
 			<p class="flo_right mb10"><a class="mbtn or" onclick="deleteNotice();">삭제하기</a></p><!-- admin에게만 보임 -->
 
@@ -165,7 +174,7 @@
 						<th scope="col">상세</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="money">
 				<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.no">
 				<% for(Announcment m : list){ %>
 					<tr>
@@ -173,6 +182,7 @@
 							<label for=""> 체크</label>
 							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getG_NO()%>">
 						</td>
+						<input type="hidden" value="<%=i++%>">
 						<td><%= m.getG_NO() %></td>
 						<td><%= m.getG_S_AREA() %></td>
 						<td><%= m.getG_E_AREA()%></td>
@@ -182,6 +192,13 @@
 						<td><%= m.getG_PRICE() %></td>
 						<td><%= m.getG_P_DIV() %></td>
 						<td><a class="sbtn gy" href="#">상세보기</a></td>
+						
+						<script>	
+		 					
+							var t=$('#money').children().eq(<%=i%>).children().eq(8).text();	
+		 					$('#money').children().eq(<%=i%>).children().eq(8).text(Number(t).format());
+						</script>
+						
 					</tr>
 				<% } %> 
 				</form>
@@ -245,7 +262,7 @@
 
 		$(function(){
 			$(".sbtn").click(function(){
-				var num = $(this).parent().parent().children().eq(1).text();
+				var num = $(this).parent().parent().children().eq(2).text();
 				console.log(num);
 				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num; 
 			});

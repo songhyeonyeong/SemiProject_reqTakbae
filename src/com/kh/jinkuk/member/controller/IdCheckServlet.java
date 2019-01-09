@@ -32,9 +32,9 @@ public class IdCheckServlet extends HttpServlet {
 		boolean flag = true;
 		String str ="";
 		
-		if(!SId.equals("")) { 
-			flag = new MemberService().idCheck(SId);
-		}
+		/*if(!SId.equals("")) { */
+			flag = new MemberService().idCheck(SId);//true: 중복있음
+		/*}*/
 		
 		if(flag) {
 			str="NO";

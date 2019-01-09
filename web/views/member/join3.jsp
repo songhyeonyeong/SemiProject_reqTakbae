@@ -60,7 +60,6 @@
 			<tr>
 				<th scope="row">이름</th>
 				<td>
-					<label for=""></label>
 					<input id="SName" name="userName" type="text"> 
 				</td>
 				<td><img id="nameCheckImg" class="checkTest" src=""></td>
@@ -80,6 +79,7 @@
 				<td>
 					<span>
 						<select name="mainWay" id="mainWay">
+							<option value="선택하세요">선택하세요</option>
 							<option value="차">차</option>
 							<option value="오토바이">오토바이</option>
 							<option value="대중교통">대중교통</option>
@@ -239,7 +239,7 @@
 	
 	
 	
-	<%-- <form id="imgForm" action="<%=request.getContextPath()%>/GisaJoinImg" method="post" encType="multipart/form-data"> --%>
+	
 	<form id="imgForm"  action="<%=request.getContextPath()%>/GisaJoinImg" method="post" encType="multipart/form-data">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원가입 리스트입니다.</caption>
@@ -278,6 +278,7 @@
 			
 			<div class="btnbox mt20"><!-- btnbox S-->
 			<!-- <button type="submit" class="mbtn db">회원가입</button> -->
+			<!-- <span><a class="mbtn gy" onclick="resetBtn();">새로입력</a></span> -->
 			<a class="mbtn db" onclick="joinjoin()">회원가입</a>
 			
 			</div>
@@ -308,7 +309,7 @@
 	//아이디 정규표현식 && 중복체크
 	$("#idCheckBtn").click(function(){
 		var SId = $("#SId").val();
-		var regExp = /\w{3,}/;
+		var regExp = /^\w{3,}$/;
 		
 		if(regExp.test(SId)){
 			$.ajax({
@@ -317,10 +318,10 @@
 				data:{SId:SId},
 				success:function(data){
 					if(data=="YES"){
-						if(SId != "") {
+						/* if(SId != "") { */
 							$("#idCheckMsg").html("");
 							$("#idCheckImg").attr("src",checkImgPath);
-						}
+						/* } */
 					}else{
 						$("#idCheckMsg").html("이미 사용중인 아이디입니다");
 						$("#idCheckMsg").css("color","red");
@@ -341,7 +342,7 @@
 	$("#SPwd").change(function(){
 		var pwd1 = $("#SPwd").val();
 		
-		var regExp=/\w{3,}/;
+		var regExp=/^\w{3,}$/;
 		
 		if(!regExp.test(pwd1)){
 			alert("비밀번호 : 영어/숫자 조합 3자리 이상");
@@ -363,13 +364,14 @@
 			
 			$("#SPwd").val("");
 			$("#SPwd2").val("");
+			
 			$("#pwdCheckImg").attr("src","");
 			$("#pwdCheckImg2").attr("src","");
-		}else if(pwd2==null || pwd1==null){
+		}/* else if(pwd2==null || pwd1==null){
 			$("#pwdCheckMsg").html('');
 			$("#pwdCheckImg").attr("src","");
 			$("#pwdCheckImg2").attr("src","");
-		}else{
+		} */else{
 			$("#pwdCheckMsg").html('');
 			$("#pwdCheckImg").attr("src",checkImgPath);
 			$("#pwdCheckImg2").attr("src",checkImgPath);
@@ -395,12 +397,12 @@
 	//핸드폰 체크
 	$("#Sphone").change(function(){
 		var phone = $("#Sphone").val();
-		var regExp=/[^-]{11,12}$/;
+		var regExp =/^[0-9]{10,11}$/;
 		
 		if(regExp.test(phone)){
 			$("#phoneCheckImg").attr("src",checkImgPath);
 		}else{
-			alert("휴대폰번호 : -없이 11-12자리");
+			alert("휴대폰번호 : -없이 10-11자리");
 			$("#phoneCheckImg").attr("src","");
 		}
 		
@@ -409,7 +411,7 @@
 	
 	//이메일 select 선택시 값 변경
 	 $("#email").change(function(){
-		if($("#email option:selected").val() == "naver"){
+		/* if($("#email option:selected").val() == "naver"){
 			//$("#Semail2").attr("value",$(this).find("option[value='" + $(this).val() + "']").text());
 			$("#Semail2").attr("value","naver.com");
 		}else if($("#email option:selected").val() == "daum"){
@@ -418,12 +420,21 @@
 			$("#Semail2").attr("value","google.com");
 		}else if($("#email option:selected").val() == "self"){
 			$("#Semail2").attr("value","");
-		}
+		} */
+		 var emailAfter = $("#email option:selected").text();
+			if(emailAfter=="직접입력"){
+				$("#Semail2").val("");
+			}else{
+				$("#Semail2").val(emailAfter);
+			}
 	}); 
 	
-	
+	//주 교통수단
 	$("#mainWay").change(function(){
 		$("#mainWayCheckImg").attr("src",checkImgPath);
+		if($("#mainWay").val()=="선택하세요"){
+			$("#mainWayCheckImg").attr("src","");
+		}
 	});
 	
 	
@@ -595,54 +606,87 @@
 	
 		
 		function joinjoin(){
-			
-			var userDiv = $("#userDiv").val();
-			var userId = $("#SId").val();
-			var userPwd = $("#SPwd").val();
-			var userName = $("#SName").val();
-			var phone = $("#Sphone").val();
-			var mainWay = $("#mainWay").val();
-			var email1 = $("#Semail1").val();
-			var email2 = $("#Semail2").val();
-			
-			//var bankName = $("#bankName").val();
-			var bankcode = $("#bankcode").val();
-			
-			var accnum = $("#accnum").val();
-			
-			//사진삽입용 uno
-			$("#GisaId").val(userId);
-			
-			console.log("userDiv : "+userDiv);
-			console.log("userId : "+userId);
-			console.log("userPwd : "+userPwd);
-			console.log("userName : "+userName);
-			console.log("phone : "+phone);
-			console.log("mainWay : "+mainWay);
-			console.log("email1 : "+email1);
-			console.log("email2 : "+email2);
-			console.log("bankcode : "+bankcode);
-			console.log("accnum : "+accnum);
-			
-			
-			$.ajax({
-				url : "/reqtakbae/insertGisa.me",
-				type : "POST",
-				data:{userDiv:userDiv, userId:userId, userPwd:userPwd, userName:userName, phone:phone, mainWay:mainWay, email1:email1, email2:email2, bankcode:bankcode, accnum:accnum},
-				success : function(data) {
-					if(data=="회원정보인서트성공"){
-						$("#imgForm").submit();
-					}else{
-						alert("회원가입 실패")
+			//회원가입 버튼 클릭시 && 널값
+			if($("#SId").val() == ""){
+				alert("아이디를 입력하세요");
+			}else if($("#idCheckImg").attr("src") == ""){
+				alert("아이디 중복을 확인하세요");
+			}else if($("#SPwd").val() == ""){
+				alert("비밀번호를 입력하세요");
+			}else if($("#SPwd2").val() == ""){
+				alert("비밀번호를 확인하세요");
+			}else if($("#SPwd").val() != $("#SPwd2").val()){
+				alert("비밀번호가 일치하지 않습니다");
+				$("#SPwd").val("");
+				$("#SPwd2").val("");
+				$("#pwdCheckImg").attr("src","");
+				$("#pwdCheckImg2").attr("src","");
+			}else if($("#SName").val() == ""){
+				alert("이름을 입력하세요");
+			}else if($("#Sphone").val() == ""){
+				alert("휴대폰 번호를 입력하세요");
+			}else if($("#mainWay").val() == "선택하세요"){
+				alert("주 교통수단을 선택하세요");
+			}else if($("#Semail1").val() == ""){
+				alert("이메일을 입력하세요");
+			}else if($("#Semail2").val() == ""){
+				alert("이메일을 입력하세요");
+			}else if($("#emailCheckImg").attr("src") == ""){
+				alert("이메일을 인증하세요");
+			}else if($("#accountNum").val() == ""){
+				alert("계좌번호를 입력하세요");
+			}else if($("#birth").val() == ""){
+				alert("생년월일을 입력하세요");
+			}else if($("#accountCheckImg").attr("src") == ""){
+				alert("계좌를 인증하세요");
+			}else if($("#IdCardImg").val() == ""){
+				alert("신분증을 등록하세요");
+			}else if($("#faceImg").val() == ""){
+				alert("본인 얼굴사진을 등록하세요");
+			}else{
+				var userDiv = $("#userDiv").val();
+				var userId = $("#SId").val();
+				var userPwd = $("#SPwd").val();
+				var userName = $("#SName").val();
+				var phone = $("#Sphone").val();
+				var mainWay = $("#mainWay").val();
+				var email1 = $("#Semail1").val();
+				var email2 = $("#Semail2").val();
+				//var bankName = $("#bankName").val();
+				var bankcode = $("#bankcode").val();
+				
+				var accnum = $("#accnum").val();
+				
+				//사진삽입용 uno
+				$("#GisaId").val(userId);
+				
+				//회원 인서트 후 사진등록
+				$.ajax({
+					url : "/reqtakbae/insertGisa.me",
+					type : "POST",
+					data:{userDiv:userDiv, userId:userId, userPwd:userPwd, userName:userName, phone:phone, mainWay:mainWay, email1:email1, email2:email2, bankcode:bankcode, accnum:accnum},
+					success : function(data) {
+						if(data=="회원정보인서트성공"){
+							$("#imgForm").submit();
+						}else{
+							alert("회원가입 실패")
+						}
+						
 					}
 					
-				}
-				
-			})
+				}) 
+			}
+	
+			
 		}
 		
 		
-		
+		/* function resetBtn(){
+			 document.getElementById("joinForm").reset();
+
+			 document.getElementById("IdCardImg").value="";
+			 $("#FaceImg").val("");
+		} */
 	
 	</script>
 

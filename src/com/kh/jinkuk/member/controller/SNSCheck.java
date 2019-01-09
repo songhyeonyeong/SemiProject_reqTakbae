@@ -75,11 +75,14 @@ public class SNSCheck extends HttpServlet {
 				request.getRequestDispatcher(page).forward(request, response);
 		
 			}else if(member.getStatus().equals("W")) {
-				//page="index.jsp";
 				response.getWriter().println("<script>alert('관리자 승인중');");
-				//response.sendRedirect(page);
 				response.getWriter().println("window.location='index.jsp'</script>");
 				
+			}else if(member.getStatus().equals("C")) { 
+				response.getWriter().println("<script>alert('가입 거절됨');window.location='index.jsp'</script>");
+			
+			}else if(member.getStatus().equals("N")) {
+				response.getWriter().println("<script>alert('로그인 실패');window.location='index.jsp'</script>");
 			}
 		}
 		//request.getRequestDispatcher(page).forward(request, response);

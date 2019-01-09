@@ -3,6 +3,7 @@
 <% 
 	String tabon="1";
 	ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");	
+	int i = 0;
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
 
@@ -39,6 +40,20 @@
 		border-radius:3px;
 	}
 </style>
+<script>
+
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -56,9 +71,11 @@
 			<table class="searchTbl mt30 mb30"><!-- searchTbl S -->
 				<caption>공고 검색입니다.</caption>
 				<colgroup>
-					<col style="width:20%;">
+					<col style="width:15%;">
 					<col style="width:%;">
-					<col style="width:20%;">
+					<col style="width:15%;">
+					<col style="width:%;">
+					<col style="width:15%;">
 					<col style="width:%;">
 				</colgroup>
 				<tbody>
@@ -104,13 +121,6 @@
 							<option value="중">중</option>
 							<option value="대">대</option>
 						</td>
-					</tr>
-					<tr>
-						<th scope="col">배송날짜</th>
-						<td>
-							<label for=""></label>
-							<input id="datePicker" name="datePicker" class="wth150" type="text">
-						</td>
 						<th scope="col">상태</th>
 						<td>
 							<label for=""></label>
@@ -120,8 +130,8 @@
 							<option value="매칭완료">매칭완료</option>					
 						</td>
 					</tr>
-
 				</tbody>
+
 			</table>
 			
 			<div class="btnbox mb30">
@@ -167,6 +177,7 @@
 							<label for=""> 체크</label>
 							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getG_NO()%>">
 						</td>
+						<input type="hidden" value="<%=i++%>">
 						<td><%= m.getG_NO() %></td>
 						<td><%= m.getG_S_AREA() %></td>
 						<td><%= m.getG_E_AREA()%></td>
@@ -176,6 +187,14 @@
 						<td><%= m.getG_PRICE() %></td>
 						<td><%= m.getG_P_DIV() %></td>
 						<td><a class="sbtn gy" href="#">상세보기</a></td>
+						
+						<script>	
+
+							var t=$('#money').children().eq(<%=i%>).children().eq(8).text();	
+		 					$('#money').children().eq(<%=i%>).children().eq(8).text(Number(t).format());
+
+
+						</script>
 					</tr>
 				<% } %> 
 				</form>
