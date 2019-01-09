@@ -4,7 +4,8 @@
 <%@ include file="/views/include/common.jsp" %>
 
 <%
-	String kakaoId = (String)request.getAttribute("kakaoId");
+	String SNSId = (String)request.getAttribute("SNSId");
+	String loginDiv = (String)request.getAttribute("loginDiv");
 %>
 
 <title>회원가입</title>
@@ -39,11 +40,12 @@
 				<td>
 					<input name="userDiv" value="신청자" type="hidden">
 					<input id="Id" name="userId" type="text">
-					<input id="kakaoId" name="kakaoId" type="hidden" value="<%=kakaoId%>">
+					<input id="SNSId" name="SNSId" type="hidden" value="<%=SNSId%>">
 					<span>
 						<a id="idCheckBtn" class="sbtn db" >중복확인</a>
 						<span id="idCheckMsg"></span>
 						<input type="hidden" id="userPass" name="userPwd" value="1">
+						<input type="hidden" id="loginDiv" name="loginDiv" value="<%=loginDiv%>">
 					</span>
 				</td>
 				<td><img id="idCheckImg" class="checkTest" src=""></td>
@@ -720,7 +722,7 @@
 	
 		
 		$(function(){
-			console.log($("#kakaoId").val());
+			console.log($("#Id").val());
 		});
 		
 	
