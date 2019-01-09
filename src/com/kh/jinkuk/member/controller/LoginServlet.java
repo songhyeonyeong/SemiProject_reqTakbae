@@ -80,7 +80,9 @@ public class LoginServlet extends HttpServlet {
 				response.getWriter().println("window.location='index.jsp'</script>");
 			
 			}else if(loginUser.getStatus().equals("C")) { 
-				response.getWriter().println("<script>alert('가입 거절됨');window.location='index.jsp'</script>");
+				response.getWriter().println("<script>alert('가입 거절됨');");
+				response.getWriter().println("window.location='/reqtakbae/deleteCMember?uno="+loginUser.getU_no()+"'");
+				response.getWriter().println("</script>");
 			
 			}else if(loginUser.getStatus().equals("N")) {
 				response.getWriter().println("<script>alert('로그인 실패');history.go(-1);</script>");

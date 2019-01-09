@@ -138,14 +138,14 @@
 			</tbody>
 			</table>
 			
-		
+		<!-- 
 			<div id="fileArea">
 				<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
 				<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
-			</div>
+			</div> -->
 			
 			<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
+			<span><a class="mbtn gy" onclick="resetBtn();">새로입력</a></span>
 			<span><a class="mbtn db" onclick="insertMember();">회원가입</a></span>
 		</div>
 		</form>
@@ -234,7 +234,7 @@
 	
 	$(function(){
 		$("#sendEmailClick").hide();
-		$("#fileArea").hide();
+		//$("#fileArea").hide();
 	});
 	
 	
@@ -605,26 +605,24 @@
 
 		
 		function insertMember(){
-			/* var form = $("#insertGisaImg")[0];
-			var formData = new FormData(form);
-			console.log("form : " + form);
-			console.log("formData : " + formData);
-
-			$.ajax({
-					url : "/reqtakbae/GisaJoinImg",
-					type : "POST",
-					processData: false,
-                    contentType: false,
-               		data: formData,
-					success : function(data) {
-						alert("업로드 성공!!");
-
-					},
-					error : function(data) {
-					}
-				});  */
-				
-				$("#joinForm").submit();
+		if($("#Id").val() == ""){
+			alert("아이디를 입력하세요");
+		}else if($("#idCheckImg").attr("src") == ""){
+			alert("아이디 중복을 확인하세요");
+		}else if($("#SName").val() == ""){
+			alert("이름을 입력하세요");
+		}else if($("#Sphone").val() == ""){
+			alert("휴대폰 번호를 입력하세요");
+		}else if($("#accnum").val() == ""){
+			alert("계좌번호를 입력하세요");
+		}else if($("#birth").val() == ""){
+			alert("생년월일을 입력하세요");
+		}else if($("#accountCheckImg").attr("src") == ""){
+			alert("계좌를 인증하세요");
+		}  else{
+			$("#joinForm").submit();
+			$("#joinBtn").prop("disabled",true);
+		 } 
 			
 		}
 	
@@ -725,7 +723,10 @@
 			console.log($("#Id").val());
 		});
 		
-	
+		function resetBtn(){
+			 document.getElementById("joinForm").reset();
+			 //$("#joinForm").reset();
+		}
 		
 	
 	</script>

@@ -130,7 +130,7 @@
 	 var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "JwzeBVexbooaJdOsR1vM",
-			callbackUrl: "http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp",
+			callbackUrl: "http://192.168.43.88:8001/reqtakbae/views/include/callback.jsp",
 			//callbackUrl: "http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp?userDiv="+userDiv,
 			isPopup: false, 
 			loginButton: {color: "green", type: 3, height: 48}, 
