@@ -22,7 +22,7 @@
 			<span>홈 &gt; 회원가입</span>
 		</div>
 		
-		<form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="get">
+		<form id="joinForm" action="<%=request.getContextPath()%>/insertMember.me" method="post">
 		<table class="boardWrite wth700 mr_auto mt30"><!-- boardWrite S-->
 			<caption>회원가입 리스트입니다.</caption>
 			<colgroup>
@@ -131,13 +131,13 @@
 			</table>
 			
 		
-			<div id="fileArea">
+			<!-- <div id="fileArea">
 				<input type="file" id="IdCardImg" name="IdCardImg" onchange="loadImg(this, 1)">
 				<input type="file" id="faceImg" name="faceImg" onchange="loadImg(this, 2)">
-			</div>
+			</div> -->
 			
 			<div class="btnbox mt20"><!-- btnbox S-->
-			<span><a class="mbtn gy" href="#">새로입력</a></span>
+			<span><a class="mbtn gy" onclick="resetBtn();">새로입력</a></span>
 			<span><a class="mbtn db" onclick="insertMember();">회원가입</a></span>
 		</div>
 		</form>
@@ -187,17 +187,14 @@
 					<th>
 						<!-- <span>예금주 생년월일</span> -->
 					</th>
-					<td><span> <input type="hidden" class="txt" id="account_holder_info" name="account_holder_info"
-														 /></span>
+					<td><span> <input type="hidden" class="txt" id="account_holder_info" name="account_holder_info" /></span>
 				
 				</tr>
 				<tr>
 					<th>
 						<!-- <span>요청일시</span> -->
 					</th>
-					<td><span style="width: 200px"><input type="hidden"
-														class="txt" id="tran_dtime" title="요청일시 입력"
-														name="tran_dtime" /></span>
+					<td><span style="width: 200px"><input type="hidden" class="txt" id="tran_dtime" title="요청일시 입력" name="tran_dtime" /></span>
 						<!-- <button type="button" onclick="fnSearchRealName()">계좌실명조회</button> --></td>
 				</tr>
 				<!-- <tr> 		
@@ -226,16 +223,13 @@
 	
 	$(function(){
 		$("#sendEmailClick").hide();
-		$("#fileArea").hide();
+		//$("#fileArea").hide();
 	});
-	
-	
-	
-	
+
 	//아이디 정규표현식 && 중복체크
 	$("#idCheckBtn").click(function(){
 		var SId = $("#SId").val();
-		var regExp = /\w{3,}/;
+		var regExp = /^\w{3,}$/;
 		
 		if(regExp.test(SId)){
 			$.ajax({
@@ -244,10 +238,10 @@
 				data:{SId:SId},
 				success:function(data){
 					if(data=="YES"){
-						if(SId != "") {
+						/* if(SId != "") { */
 							$("#idCheckMsg").html("");
 							$("#idCheckImg").attr("src",checkImgPath);
-						}
+						/* } */
 					}else{
 						$("#idCheckMsg").html("이미 사용중인 아이디입니다");
 						$("#idCheckMsg").css("color","red");
@@ -263,12 +257,11 @@
 		}
 	});
 	
-	
 	//비밀번호 유효성체크
 	$("#SPwd").change(function(){
 		var pwd1 = $("#SPwd").val();
 		
-		var regExp=/\w{3,}/;
+		var regExp=/^\w{3,}$/;
 		
 		if(!regExp.test(pwd1)){
 			alert("비밀번호 : 영어/숫자 조합 3자리 이상");
@@ -279,7 +272,7 @@
 		}
 	});
 	
-	//비밀번호 체크
+	//비밀번호 확인 체크
 	$("#SPwd2").change(function(){
 		var pwd1 = $("#SPwd").val();
 		var pwd2 = $("#SPwd2").val();
@@ -290,13 +283,14 @@
 			
 			$("#SPwd").val("");
 			$("#SPwd2").val("");
+			
 			$("#pwdCheckImg").attr("src","");
 			$("#pwdCheckImg2").attr("src","");
-		}else if(pwd2==null || pwd1==null){
+		}/* else if(pwd2==null || pwd1==null){
 			$("#pwdCheckMsg").html('');
 			$("#pwdCheckImg").attr("src","");
 			$("#pwdCheckImg2").attr("src","");
-		}else{
+		} */else{
 			$("#pwdCheckMsg").html('');
 			$("#pwdCheckImg").attr("src",checkImgPath);
 			$("#pwdCheckImg2").attr("src",checkImgPath);
@@ -308,7 +302,7 @@
 	//이름 체크
 	$("#SName").change(function(){
 		var name = $("#SName").val();
-		var regExp =/[ㄱ-ㅎㅏ-ㅣ가-힣]{1,}/;
+		var regExp =/^[ㄱ-ㅎㅏ-ㅣ가-힣]{1,}$/;
 		
 		if(regExp.test(name)){
 			$("#nameCheckImg").attr("src",checkImgPath);
@@ -322,12 +316,13 @@
 	//핸드폰 체크
 	$("#Sphone").change(function(){
 		var phone = $("#Sphone").val();
-		var regExp=/[^-]{11,12}$/;
+		/* var regExp=/^[^-]\d{10,11}$/; */
+		var regExp =/^[0-9]{10,11}$/;
 		
 		if(regExp.test(phone)){
 			$("#phoneCheckImg").attr("src",checkImgPath);
 		}else{
-			alert("휴대폰번호 : -없이 11-12자리");
+			alert("휴대폰번호 : -없이 10-11자리");
 			$("#phoneCheckImg").attr("src","");
 		}
 		
@@ -336,7 +331,7 @@
 	
 	//이메일 select 선택시 값 변경
 	 $("#email").change(function(){
-		if($("#email option:selected").val() == "naver"){
+		/* if($("#email option:selected").val() == "naver"){
 			//$("#Semail2").attr("value",$(this).find("option[value='" + $(this).val() + "']").text());
 			$("#Semail2").attr("value","naver.com");
 		}else if($("#email option:selected").val() == "daum"){
@@ -345,7 +340,14 @@
 			$("#Semail2").attr("value","google.com");
 		}else if($("#email option:selected").val() == "self"){
 			$("#Semail2").attr("value","");
-		}
+		} */
+		
+		 var emailAfter = $("#email option:selected").text();
+			if(emailAfter=="직접입력"){
+				$("#Semail2").val("");
+			}else{
+				$("#Semail2").val(emailAfter);
+			}
 	}); 
 	
 	
@@ -382,7 +384,6 @@
 			alert("이메일 인증 실패");
 			$("#emailCheckImg").attr("src","");
 		}
-		
 	}
 	
 	
@@ -488,7 +489,7 @@
 			});
 	} 
 	 */
-	
+	/* 
 	//이미지 미리보기
 	$("#showImgArea1").click(function(){
 		$("#IdCardImg").click();
@@ -514,6 +515,7 @@
 	}
 	
 	
+	 */
 	
 	
 	
@@ -527,7 +529,6 @@
 	
 	
 	
-/* 	
 	//회원가입 버튼 클릭시 && 널값
 	function insertMember(){
 		if($("#SId").val() == ""){
@@ -537,7 +538,7 @@
 		}else if($("#SPwd").val() == ""){
 			alert("비밀번호를 입력하세요");
 		}else if($("#SPwd2").val() == ""){
-			alert("비밀번호확인을 입력하세요");
+			alert("비밀번호를 확인하세요");
 		}else if($("#SPwd").val() != $("#SPwd2").val()){
 			alert("비밀번호가 일치하지 않습니다");
 			$("#SPwd").val("");
@@ -545,7 +546,7 @@
 			$("#pwdCheckImg").attr("src","");
 			$("#pwdCheckImg2").attr("src","");
 		}else if($("#SName").val() == ""){
-			alert("이름 입력하세요");
+			alert("이름을 입력하세요");
 		}else if($("#Sphone").val() == ""){
 			alert("휴대폰 번호를 입력하세요");
 		}else if($("#Semail1").val() == ""){
@@ -559,11 +560,11 @@
 		}else if($("#birth").val() == ""){
 			alert("생년월일을 입력하세요");
 		}else if($("#accountCheckImg").attr("src") == ""){
-			alert("계좌번호를 입력 입력하세요");
+			alert("계좌를 인증하세요");
 		}else{
 			$("#joinForm").submit();
-		} */
-		
+		} 
+	 }
 		/* var SId = $("#SId").val();
 		$("#userNo").val(SId);
 		
@@ -592,32 +593,9 @@
 		} */
 		
 
-		
-
-
-		
-		function insertMember(){
-			/* var form = $("#insertGisaImg")[0];
-			var formData = new FormData(form);
-			console.log("form : " + form);
-			console.log("formData : " + formData);
-
-			$.ajax({
-					url : "/reqtakbae/GisaJoinImg",
-					type : "POST",
-					processData: false,
-                    contentType: false,
-               		data: formData,
-					success : function(data) {
-						alert("업로드 성공!!");
-
-					},
-					error : function(data) {
-					}
-				});  */
-				
-				$("#joinForm").submit();
-			
+		function resetBtn(){
+			 document.getElementById("joinForm").reset();
+			 //$("#joinForm").reset();
 		}
 	
 
@@ -625,8 +603,7 @@
 
 
 	<script type="text/javascript">
-	 
-	
+	//계좌인증
 	 $.support.cors = true;
 		/* 사용자인증 Access Token 획득 */
 		function fnSearchAccessToken() {
@@ -711,6 +688,8 @@
 					});
 		}
 	
+		
+		
 	
 	
 	</script>

@@ -57,7 +57,7 @@ public class InsertGisaServlet extends HttpServlet {
 			bankName="우리은행";
 		}
 		
-		System.out.println("bankCode : "+bankCode);
+		/*System.out.println("bankCode : "+bankCode);
 		
 		System.out.println("userDiv : "+userDiv);
 		System.out.println("userId : "+userId);
@@ -67,7 +67,7 @@ public class InsertGisaServlet extends HttpServlet {
 		System.out.println("email : "+email);
 		System.out.println("bankName : "+bankName);
 		System.out.println("mainWay : "+mainWay);
-		System.out.println("accnum : "+accnum);
+		System.out.println("accnum : "+accnum);*/
 		
 		
 		Member reqMember = new Member();
@@ -80,10 +80,11 @@ public class InsertGisaServlet extends HttpServlet {
 		reqMember.setBank_num(accnum);
 		reqMember.setUser_div(userDiv);
 		reqMember.setLogin_div("자회원");
+		reqMember.setK_trans(mainWay);
 		
-		if(userDiv.equals("기사")) {
+		/*if(userDiv.equals("기사")) {
 			reqMember.setK_trans(mainWay);
-		}
+		}*/
 		int result = new MemberService().insertMember(reqMember);
 		
 		if(result>0) {

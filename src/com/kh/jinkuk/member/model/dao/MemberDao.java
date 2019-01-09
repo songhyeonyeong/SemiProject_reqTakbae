@@ -288,7 +288,7 @@ public class MemberDao {
 			
 			
 			
-				System.out.println("member.getuno : "+member.getU_no());
+				/*System.out.println("member.getuno : "+member.getU_no());
 				System.out.println("member.getBank_name : "+member.getBank_name());
 				System.out.println("member.getBank_num : "+member.getBank_num());
 				System.out.println("member.getUser_id : "+member.getUser_id());
@@ -302,7 +302,7 @@ public class MemberDao {
 				System.out.println("member.getUser_name : "+member.getUser_name());
 				System.out.println("member.getU_date : "+member.getU_date());
 				System.out.println("member.getStatus : "+member.getStatus());
-				System.out.println("member.getK_trans : "+member.getK_trans());
+				System.out.println("member.getK_trans : "+member.getK_trans());*/
 				
 			
 			}

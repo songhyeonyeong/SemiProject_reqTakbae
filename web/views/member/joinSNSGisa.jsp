@@ -41,8 +41,7 @@
 					<input id="userDiv" name="userDiv" value="기사" type="hidden">
 					<input id="SId" name="userId" type="text">
 					<input id="SNSId" name="SNSId" type="hidden" value="<%=SNSId%>">
-					<input type="hidden" id="userPassword" name="userPassword" value="1">
-					<input type="hidden" id="loginDiv" name="loginDiv" value="<%=loginDiv%>">
+					
 					<span>
 						<a id="idCheckBtn" class="sbtn db" >중복확인</a>
 						<span id="idCheckMsg"></span>
@@ -56,6 +55,8 @@
 				<td>
 					<label for=""></label>
 					<input id="SName" name="userName" type="text"> 
+					<input type="hidden" id="userPassword" name="userPassword" value="1">
+					<input id="loginDiv" name="loginDiv" value="<%=loginDiv%>" type="hidden" >
 				</td>
 				<td><img id="nameCheckImg" class="checkTest" src=""></td>
 			</tr>
@@ -74,6 +75,7 @@
 				<td>
 					<span>
 						<select name="mainWay" id="mainWay">
+							<option value="선택하세요">선택하세요</option>
 							<option value="차">차</option>
 							<option value="오토바이">오토바이</option>
 							<option value="대중교통">대중교통</option>
@@ -267,7 +269,7 @@
 	//아이디 정규표현식 && 중복체크
 	$("#idCheckBtn").click(function(){
 		var SId = $("#SId").val();
-		var regExp = /\w{3,}/;
+		var regExp = /^\w{3,}$/;
 		
 		if(regExp.test(SId)){
 			$.ajax({
@@ -314,7 +316,7 @@
 	//핸드폰 체크
 	$("#Sphone").change(function(){
 		var phone = $("#Sphone").val();
-		var regExp=/[^-]{11,12}$/;
+		var regExp=/^[0-9]{10,11}$/;
 		
 		if(regExp.test(phone)){
 			$("#phoneCheckImg").attr("src",checkImgPath);
@@ -326,7 +328,13 @@
 	});
 	
 	
-	
+	//주 교통수단
+	$("#mainWay").change(function(){
+		$("#mainWayCheckImg").attr("src",checkImgPath);
+		if($("#mainWay").val()=="선택하세요"){
+			$("#mainWayCheckImg").attr("src","");
+		}
+	});
 	
 	
 	
@@ -460,6 +468,27 @@
 	
 		
 		function joinjoin(){
+			if($("#SId").val() == ""){
+				alert("아이디를 입력하세요");
+			}else if($("#idCheckImg").attr("src") == ""){
+				alert("아이디 중복을 확인하세요");
+			}else if($("#SName").val() == ""){
+				alert("이름을 입력하세요");
+			}else if($("#Sphone").val() == ""){
+				alert("휴대폰 번호를 입력하세요");
+			}else if($("#mainWay").val() == "선택하세요"){
+				alert("주 교통수단을 선택하세요");
+			}else if($("#accnum").val() == ""){
+				alert("계좌번호를 입력하세요");
+			}else if($("#birth").val() == ""){
+				alert("생년월일을 입력하세요");
+			}else if($("#accountCheckImg").attr("src") == ""){
+				alert("계좌를 인증하세요");
+			}else if($("#IdCardImg").val() == ""){
+				alert("신분증을 등록하세요");
+			}else if($("#faceImg").val() == ""){
+				alert("본인 얼굴사진을 등록하세요");
+			}else{
 			
 			var userDiv = $("#userDiv").val();
 			var userId = $("#SId").val();
@@ -478,7 +507,7 @@
 			//사진삽입용 uno
 			$("#GisaId").val(userId);
 			
-			console.log("userDiv : "+userDiv);
+			/* console.log("userDiv : "+userDiv);
 			console.log("userId : "+userId);
 			console.log("userPwd : "+userPwd);
 			console.log("userName : "+userName);
@@ -487,11 +516,11 @@
 			console.log("bankcode : "+bankcode);
 			console.log("accnum : "+accnum);
 			console.log("SNSId : "+SNSId);
-			console.log("loginDiv : "+loginDiv);
+			console.log("loginDiv : "+loginDiv); */
 			
 			
 			$.ajax({
-				url : "/reqtakbae/insertKakoMember.me",
+				url : "/reqtakbae/insertSNSMember.me",
 				type : "POST",
 				data:{userDiv:userDiv, userId:userId, userPwd:userPwd, userName:userName, phone:phone, mainWay:mainWay, bankcode:bankcode, accnum:accnum, SNSId:SNSId,loginDiv:loginDiv},
 				success : function(data) {
@@ -500,11 +529,10 @@
 					}else{
 						alert("회원가입 실패")
 					}
-					
 				}
-				
 			})
 		}
+	}
 		
 		
 		

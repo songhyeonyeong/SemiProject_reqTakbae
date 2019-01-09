@@ -81,22 +81,28 @@ public class InsertMemberServlet extends HttpServlet {
 		reqMember.setUser_div(userDiv);
 		reqMember.setLogin_div("자회원");
 		
-		if(userDiv.equals("기사")) {
+		/*if(userDiv.equals("기사")) {
 			reqMember.setK_trans(mainWay);
-		}
+		}*/
 		int result = new MemberService().insertMember(reqMember);
 		
-		if(result>0) {
+		/*if(result>0) {
 			if(userDiv.equals("신청자")) {
-				response.sendRedirect("index.jsp");//회원가입 환영페이지 만들긴
+				response.sendRedirect("/reqtakbae/views/member/joinComplete.jsp");
 				return;
-			}else {
-				request.setAttribute("userId", userId);
+			}else if(userDiv.equals("기사")) {
+				//request.setAttribute("userId", userId);
 				request.getRequestDispatcher("/views/member/join4.jsp").forward(request, response);
 			}
 		}else {
 			//request.setAttribute("msg", "회원가입에 실패했습니다");
 			//request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}*/
+		
+		if(result>0) {
+			response.sendRedirect("/reqtakbae/views/member/joinComplete.jsp");
+		}else {
+			System.out.println("회원가입 실패");
 		}
 		
 	}
