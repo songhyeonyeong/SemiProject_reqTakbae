@@ -6,7 +6,7 @@
 
 <%@ include file="/views/include/common.jsp" %>
 
-<title>탈퇴하기</title>
+<title>회원사진 수정</title>
 
 </head>
 <body>

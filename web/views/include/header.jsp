@@ -64,7 +64,11 @@
 
 		<div class="multBoxR">
 			<span class="mu1"><a href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반">공고신청</a></span>
-			<span class="mu2"><a href="#">배송조회</a></span>
+			<%if(loginUser != null){ %>
+				<span class="mu2"><a id="search" href="#">배송조회</a></span>
+			<%}else{ %>
+				<span hidden></span>
+			<%} %>
 			<span class="mu3"><a href="<%=request.getContextPath()%>/reset?p=info">이용안내</a></span>
 		</div>
 
@@ -212,10 +216,20 @@ function openpop()
 				<%} }%>
 			}
 			
+			$("#search").click(function(){
+				<%if(loginUser!=null){%>
+				<%if(loginUser.getUser_div().equals("신청자")){%>
+				location.href = "<%=request.getContextPath()%>/SelectMydeliverlist.mp";
+				<%}else{%>
+				location.href = "<%=request.getContextPath()%>/matchingdellist.mp";
+				<%}%>
+				<%}%>
+			});
+			
 		</script>
 		
 		<script>
-		
+			
 		</script>
 		
 		<%--  <script type='text/javascript'>

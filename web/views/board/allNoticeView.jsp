@@ -89,7 +89,9 @@
 			<!-- <p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>user에게만 보임 -->
 		<script>
 		function fn_open() {
+			<% if(loginUser != null){ %>
 			   window.open('<%=request.getContextPath()%>/views/board/reportPop.jsp?gno=<%=num%>&title=<%= a.getG_TITLE() %>&name=<%= loginUser.getUser_name() %>&uno=<%=loginUser.getU_no()%>','reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=500,width=600,height=600');
+			<%}%>
 			}
 		
 		</script>	
@@ -120,7 +122,9 @@
 					</colgroup>
 						<% if(loginUser != null){ %>
 						<p class="flo_right mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>
-						<% } %>
+						<% }else{ %>
+							<p hidden><a>신고하기</a></p>
+						<%} %>
 					<tbody id="money">
 					<tr>
 						<th scope="row">제목</th>

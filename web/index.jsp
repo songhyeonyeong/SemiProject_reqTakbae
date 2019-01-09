@@ -5,7 +5,7 @@
 
 <%
    ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list"); 
-	int i = 0;
+	int i = -1;
 %>
 <title>택배를 부탁해 홈</title>
 
@@ -59,19 +59,20 @@
       <li class="banner01 tcen">
          <div class="text">
             <p class="font60">택배보다 <span class="font60 darkbluee">빠르고</span><br>퀵보다 <span class="font60 darkbluee">싸다!!</span></p>
-            <p class="font30" id="msg">&nbsp;</p>
+            <p class="font30" id="msg" hidden>&nbsp;택배업계 최초 일반인 택배서비스</p>
          </div>
          
-         
+
          <div style="position: absolute;bottom:-15px;right:0px;" class="car">
             <img src="/reqtakbae/views/common/images/contents/222.png" width="150" height="80" style="">
          </div>
+
          
          
       </li>
       <li class="banner02">
          <div class="text">
-            <p class="font60">택배보다 <span class="font60 darkbluee">빠르고</span><br>퀵보다 <span class="font60 darkbluee">싸다!!</span></p>
+            <p class="font60">택배보다 <span class="font60 darkbluee">빠르고&nbsp&nbsp</span>퀵보다 <span class="font60 darkbluee">싸다!!</span></p>
             <p class="font30">택배업계 최초 일반인 택배서비스</p>
          </div>
       </li>
@@ -93,7 +94,7 @@
          <div><%=m.getUSER_ID() %> <%=m.getG_S_AREA() %> ~ <%=m.getG_E_AREA() %> <%=m.getG_P_DIV() %></div>
 
       <%} }else{%>
-         <div style="display:none;">--------</div>
+         <div style="display:none;">---------------------------------------------------------</div>
       <%} %>
 
    </div>  
@@ -111,6 +112,13 @@
 
 <%@ include file="/views/include/myNav.jsp" %>
 <script type="text/javascript">
+
+window.onload = function(){
+		start();	
+}
+
+	
+	
 $(function(){
 	 	$("#no").css("display","none");
 		var num = 0;
@@ -122,10 +130,9 @@ $(function(){
         	var name = "";
         	var a = 0;
 			$divs = $("#slideContainer");
-			for(a = 0; a < data.length; a++){
-				name = data[a].G_NO;
-  				console.log(name);
+			for(a = 0; a < data.length; a++){		
   				var $div = $("<div>");
+				$div.append(" ");
 				$div.append(data[a].USER_ID);
 				$div.append(" ");
 				$div.append(data[a].G_S_AREA);
@@ -133,18 +140,19 @@ $(function(){
 				$div.append(data[a].G_E_AREA);
 				$div.append(" ");
 				$div.append(data[a].G_P_DIV);
+				
 				$divs.append($div);
 				
+				
+				$("#slideContainer").click(function(){	
+		    	  location.href = "<%=request.getContextPath()%>/selectList.bo?gongdiv=일반"; 
+		    	  
+		      });
 
 	
 			}
 			
-			
-			$("#slideContainer").click(function(){	
-				console.log(name);
-	    <%-- 	  location.href = "<%=request.getContextPath()%>/selectOne.bo?num="+name; --%>
-	    	  
-	      });
+
 			
 			 $("#slideContainer").css({
 		    	  "cursor" : "pointer",
@@ -154,7 +162,7 @@ $(function(){
 		      
 		      
 		      function slide() {
-		          $("#slideContainer div:first").slideUp(1500, function() {
+		          $("#slideContainer div:first").slideUp(2000, function() {
 		              var $this = $(this);
 		              $this.parent().append(this);
 		              $this.show();
@@ -173,17 +181,35 @@ $(function(){
    });
 
 
+function start(){
+	setInterval(function(){
+		  $(".car").animate({
+		      left:0
+		   },function(){
+		      $(".car").fadeOut(1500);
 
-   $(".car").animate({
-      left:0
-   },function(){
-      $(".car").fadeOut(1500);
-      
-      setTimeout(function(){
-         $("#msg").append("택배업계 최초 일반인 택배서비스");      
-      },300);
-      
-   });
+		      
+		  setTimeout(function(){
+		   /*  $("#msg").append("택배업계 최초 일반인 택배서비스"); */   
+		   $("#msg").fadeIn();
+		   $(".car").fadeIn();
+		         
+		      },300);
+		
+		   });
+
+	},2000);
+
+	
+	}
+
+	
+	
+
+
+	
+
+
    
    
    
