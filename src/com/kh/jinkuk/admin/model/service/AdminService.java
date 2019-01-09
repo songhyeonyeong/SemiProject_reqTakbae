@@ -620,6 +620,28 @@ public class AdminService {
 		return ch;
 	}
 
+	public ArrayList<Announcment> selectFilterDel(Announcment a) {
+		Connection con =  getConnection();
+		
+		ArrayList<Announcment> list = new AdminDao().selectFilterDel(con,a);
+		
+		close(con);
+		
+		return list;
+	}
+
+	public int updateJoinDeny(Admin m) {
+		Connection con = getConnection();
+		int result = new AdminDao().updateJoinDeny(con,m);
+	
+		if(result > 0)commit(con);
+		else rollback(con);
+		close(con);
+		
+		return result;
+		
+	}
+
 
 
 

@@ -4,7 +4,8 @@
 <%@ include file="/views/include/common.jsp" %>
 
 <%
-   ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");   
+   ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list"); 
+	int i = 0;
 %>
 <title>택배를 부탁해 홈</title>
 
@@ -97,18 +98,6 @@
 
    </div>  
 
-<!-- <div id="page">
-
-      <ul class="ticker" id="ticker_01">
-            <a class="tit bold" id="today">오늘의 공고</a>
-         <li>
-            <span class="ml20 mr20">김**</span>
-            <a href="#">서울 중랑구 ~ 서울 강남구</a>
-            <span class="ml20 mr20">모집중</span>
-         </li>
-
-      </ul>
-</div> -->
 
    </div><!--// inner E-->
 </div><!--// noticeLine E-->
@@ -130,30 +119,32 @@ $(function(){
          type:"post",
          success:function(data){
             console.log(data);
-        	
+        	var name = "";
+        	var a = 0;
 			$divs = $("#slideContainer");
-			
-			for(var key in data){
-				var num = data[key].G_NO;
-				var $div = $("<div>");
-				$div.append(data[key].USER_ID);
+			for(a = 0; a < data.length; a++){
+				name = data[a].G_NO;
+  				console.log(name);
+  				var $div = $("<div>");
+				$div.append(data[a].USER_ID);
 				$div.append(" ");
-				$div.append(data[key].G_S_AREA);
+				$div.append(data[a].G_S_AREA);
 				$div.append(" ~ ");
-				$div.append(data[key].G_E_AREA);
+				$div.append(data[a].G_E_AREA);
 				$div.append(" ");
-				$div.append(data[key].G_P_DIV);
+				$div.append(data[a].G_P_DIV);
 				$divs.append($div);
 				
-				$("#slideContainer").click(function(){
-			    	  location.href = "<%=request.getContextPath()%>/selectOne.bo?num="+data[key].G_NO;
-			    	  
-			      });
-		
+
+	
 			}
 			
-		     
-		      
+			
+			$("#slideContainer").click(function(){	
+				console.log(name);
+	    <%-- 	  location.href = "<%=request.getContextPath()%>/selectOne.bo?num="+name; --%>
+	    	  
+	      });
 			
 			 $("#slideContainer").css({
 		    	  "cursor" : "pointer",
@@ -182,40 +173,6 @@ $(function(){
    });
 
 
-
-
-
-
-
-/* 
-   function tick(){
-      $('#ticker_01 li:first').slideUp( function(){ $(this).appendTo($('#ticker_01')).slideDown(); });
-      }setInterval(function(){tick()}, 5000);
-    */
-    
-/*     $(function() {
-
-         
-          $("#slideContainer").css({
-        	  "cursor" : "pointer",
-              "height" :$("#slideContainer div:first").css("height"),
-              "overflow" : "hidden"
-          });
-          
-          function slide() {
-              $("#slideContainer div:first").slideUp(1500, function() {
-                  var $this = $(this);
-                  $this.parent().append(this);
-                  $this.show();
-                  slide();
-              });
-          }
-          slide();  
-      });
-     */
-    
-    
-   
 
    $(".car").animate({
       left:0

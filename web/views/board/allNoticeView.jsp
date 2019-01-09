@@ -54,6 +54,21 @@
 
 
 </script>
+
+<script>
+
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 </head>
 <body>
 
@@ -105,7 +120,7 @@
 						<% if(loginUser != null){ %>
 						<p class="flo_right mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>
 						<% } %>
-					<tbody>
+					<tbody id="money">
 					<tr>
 						<th scope="row">제목</th>
 						<td colspan="3"><span><%= a.getG_TITLE() %></span></td>
@@ -144,6 +159,14 @@
 						<%= a.getG_CONTEXT() %>
 						</td>
 					</tr>
+					
+					<script>	
+
+							var t=$('#money').children().eq(3).children().eq(3).text();	
+		 					$('#money').children().eq(3).children().eq(3).text(Number(t).format());
+		 		
+						</script>
+						
 					</tbody>
 				</table><!--// boardWrite E-->
 			</div><!--// flo_right E-->

@@ -9,11 +9,26 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
+	int i = 0;
 %>	
 <%@ include file="/views/admin/include/common.jsp" %>
+<script>
 
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 
 <title>택배를 부탁해 관리자페이지</title>
+
 </head>
 <body>
 <div id="Wrap"><!-- Wrap S -->
@@ -54,18 +69,34 @@
 				<th scope="col">날짜</th>
 			</tr>
 			</thead>
-			<tbody>
+			<tbody id="money">
 			<%for(Change m : list){ %>
 			<tr>
-				<td id="A"><%=m.getCh_no() %></td>
-				<td id="B">충전</td>
-				<td id="C"><%=m.getUser_id() %></td>
-				<td id="D"><%=m.getUser_name() %></td>
-				<td id="E"><%=m.getCh_rmoney() %></td>
-				<td id="F"><%=m.getCh_cmoney() %></td>
-				<td id="G"><%=m.getBank_num() %></td>
-				<td id="H"><%=m.getBank_name() %></td>
-				<td id="I"><%=m.getCh_date() %></td>
+				<%-- <input type="hidden" value="<%=i++%>"> --%>
+				<td><%=m.getCh_no() %></td>
+				<td>충전</td>
+				<td><%=m.getUser_id() %></td>
+				<td><%=m.getUser_name() %></td>
+				<td><%=m.getCh_rmoney() %></td>
+				<td><%=m.getCh_cmoney() %></td>
+				<td><%=m.getBank_num() %></td>
+				<td><%=m.getBank_name() %></td>
+				<td><%=m.getCh_date() %></td>
+				<script>	
+
+					var t=$('#money').children().eq(<%=i%>).children().eq(4).text();	
+					console.log(t);
+					$('#money').children().eq(<%=i%>).children().eq(4).text(Number(t).format());
+		 			
+		 			var t=$('#money').children().eq(<%=i%>).children().eq(5).text();	
+		 			$('#money').children().eq(<%=i%>).children().eq(5).text(Number(t).format());
+		 			
+					<%=i++%>
+
+
+				</script>
+				
+				
 			</tr>
 			<%} %>
 			</tbody>

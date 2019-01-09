@@ -4,7 +4,20 @@
 	Member loginUser =(Member)session.getAttribute("loginUser");
 %>
 
+<script>
 
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
  <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <header>
 	<div class="inner"><!-- inner S -->
@@ -31,19 +44,26 @@
 					<%} %>
 				</li>
 				<li class="mt5">
-					<span class="aaa" style=color:blue></span>&nbsp
-					<span class="bbb" style=color:orange></span>
-					<span class="sbtn db" onclick="chargeMoney()">충전</span>
+					<%if(loginUser.getUser_div().equals("신청자")){ %>
+						<span class="sbtn db" onclick="chargeMoney()">충전</span>
+					<%}else{%>
+						<span hidden>충전</span>
+					<%} %>
 					<span class="sbtn rd" onclick="logout()">로그아웃</span>
-					<span class="sbtn wh" onclick="myPage()">마이페이지</span>
-					
+					<span class="sbtn wh" onclick="myPage()">마이페이지</span><br>
+					사이버머니 :&nbsp&nbsp<span class="aaa" style=color:blue></span>&nbsp&nbsp
+					<%if(loginUser.getUser_div().equals("신청자")){ %>
+					포인트 :&nbsp&nbsp<span class="bbb" style=color:orange></span>&nbsp&nbsp
+					<%}else{%>
+					<span hidden></span>
+					<%} %>
 				</li>
 			</ul>
 		</div> 
 		<%} %>
 
 		<div class="multBoxR">
-			<span class="mu1"><a href="/reqtakbae/views/board/allNoticeList.jsp">공고신청</a></span>
+			<span class="mu1"><a href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반">공고신청</a></span>
 			<span class="mu2"><a href="#">배송조회</a></span>
 			<span class="mu3"><a href="<%=request.getContextPath()%>/reset?p=info">이용안내</a></span>
 		</div>
@@ -87,10 +107,10 @@
 				type:"get",
 				data: {uno:uno},
 				success:function(data){
-					$(".aaa").text(data["ex"].money+"원");
+					$(".aaa").text(data["ex"].money.format()+"원");
 					
 					if(div=="신청자"){
-						$(".bbb").text(data["ex"].point+"p");
+						$(".bbb").text(data["ex"].point.format()+"p");
 					} 
 				},
 				error:function(request,status,error){

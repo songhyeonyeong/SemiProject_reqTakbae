@@ -1,9 +1,6 @@
 package com.kh.jinkuk.admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,19 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.jinkuk.admin.model.service.AdminService;
-import com.kh.jinkuk.admin.model.vo.Announcment;
+import com.kh.jinkuk.admin.model.vo.Admin;
 
 /**
- * Servlet implementation class FilterSearchServlet
+ * Servlet implementation class joinDenyServlet
  */
-@WebServlet("/search.fi")
-public class FilterSearchServlet extends HttpServlet {
+@WebServlet("/join.de")
+public class joinDenyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FilterSearchServlet() {
+    public joinDenyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,39 +31,25 @@ public class FilterSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
-		String destination = request.getParameter("destination");
-		String size = request.getParameter("size");
-		String status = request.getParameter("status");
-		
-		System.out.println("도착지 : " + destination + " 크기 : " + size + " 상태 : " + status);
-		
+		String[] userId = request.getParameterValues("selected[]"); 
+		int result = 0;
+		for(int i = 0; i<userId.length; i++) {
+			System.out.println(userId[i]);
 
-		Announcment a = new Announcment();
-		a.setG_E_AREA(destination);
-		a.setG_SIZE(size);
-		a.setA_status(status);
+			Admin m = new Admin();
+			m.setUserId(userId[i]);;
 
+			result = new AdminService().updateJoinDeny(m);
+			System.out.println(result);
+
+			}
 		
-		ArrayList<Announcment> list = new AdminService().selectFilter(a);
-		System.out.println(list);
 		
-		
-		String page = "";
-		if(list != null) {
-			request.setAttribute("list", list);
+		if(result > 0) {
+			response.sendRedirect("/reqtakbae/select.jo");
 			
-			page = "/views/admin/allNoticeList_search.jsp";
-		}else {
-			request.setAttribute("msg", "검색 실패!");
-			
-			page = "/views/common/errorPage.jsp";
+
 		}
-		
-		RequestDispatcher view  = request.getRequestDispatcher(page);
-		view.forward(request, response);
-		
-		
 	}
 
 	/**

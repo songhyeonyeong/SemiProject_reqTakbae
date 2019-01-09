@@ -1,22 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-	import="java.util.*, com.kh.jinkuk.border.announcment.model.vo.*, java.text.*"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" 
+	import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 <%
+
 	ArrayList<Announcment> list = (ArrayList<Announcment>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
 	int i = 0;
-	
-	Calendar calendar = Calendar.getInstance();
-    java.util.Date date = calendar.getTime();
-    String today = (new SimpleDateFormat("yyyy-MM-dd").format(date));
-
 %>	
-
+	
 <%@ include file="/views/include/common.jsp" %>
+
+
+<title>전체 공고</title>
+
+<script type="text/javascript">
+function fn_open() {
+   window.open('/reqtakbae/views/board/reportPop.jsp','reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=600,height=600');
+}
+</script>
 <style>
 	#submit,button{
 		width:70px;
@@ -45,14 +44,6 @@
 		border-radius:3px;
 	}
 </style>
-<title>오늘의 공고</title>
-
-<script type="text/javascript">
-function fn_open() {
-   window.open('reportPop.jsp','reportPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=600,height=600');
-}
-</script>
-
 <script>
 
  	Number.prototype.format = function(){
@@ -75,20 +66,17 @@ function fn_open() {
 
 <%@ include file="/views/include/header.jsp" %>
 
-<div id="subvisual">오늘의 공고</div>
+<div id="subvisual">전체 공고</div>
 
 <div id="subContainer">
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<div class="titNavi">
-			오늘의 공고
-			<span>홈 &gt; 오늘의 공고</span>
+			전체 공고
+			<span>홈 &gt; 전체 공고</span>
 		</div>
 
-		
-		<h2 class="tcen cal mt20">당일 날짜 : <em class="font20 darkred"><%=today %></em></h2>
-
-		<table class="searchTbl mt20 mb30"><!-- searchTbl S -->
+		<table class="searchTbl mt30 mb30"><!-- searchTbl S -->
 			<caption>공고 검색입니다.</caption>
 			<colgroup>
 				<col style="width:15%;">
@@ -99,7 +87,7 @@ function fn_open() {
 					<col style="width:%;">
 				</colgroup>
 				<tbody>
-				<form action="<%=request.getContextPath() %>/searchMainDeli.fi" method="POST" name="fr">
+				<form action="<%=request.getContextPath() %>/searchMain.fi" method="POST" name="fr">
 					<tr>
 						<th scope="col">도착</th>
 						<td>
@@ -152,15 +140,17 @@ function fn_open() {
 					</tr>
 				</tbody>
 		</table>
-			<div class="btnbox mb30">
+		
+		<div class="btnbox mb30">
 				<input type="submit" value="검색하기" id="submit">
-			</div>
-	</form>
+		</div>
+		</form>
+
 		<!-- user에게만 보임 -->
 		<% if(loginUser != null){ %>
-		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=당일">공고등록하기</a></p>
+		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반">공고등록하기</a></p>
 		<% } %>
-
+		
 		<table class="boardList mt20">
 			<caption>전체공고 리스트입니다.</caption>
 			<colgroup>
@@ -181,19 +171,19 @@ function fn_open() {
 					<th scope="col">공고등록일자</th>
 					<th scope="col">출발지</th>
 					<th scope="col">도착지</th>
-					<th scope="col">공고내용</th>
+					<th scope="col">공고제목</th>
 					<th scope="col">배송날짜</th>
 					<th scope="col">크기</th>
 					<th scope="col">금액</th>
 					<th scope="col">상태</th>
 					<th scope="col">상세</th>
 				</tr>
-					<% for(Announcment a : list){ %>
+				<% for(Announcment a : list){ %>
 				<tr>
 					<input type="hidden" value="<%=i++%>">
-					<input type="hidden" value="<%= a.getG_NO() %>">
 					<td><%= a.getG_NO() %></td>
 					<td><%= a.getG_S_DATE() %></td>
+					<!--이거 1로 바꿔야함  -->
 					<td><%= a.getG_S_AREA().split("/")[0] %></td>
 					<td><%= a.getG_E_AREA().split("/")[0] %></td>
 					<td><%= a.getG_TITLE() %></td>
@@ -205,44 +195,17 @@ function fn_open() {
 					<script>	
 
 		 					
-							var t=$('#money').children().eq(<%=i%>).children().eq(9).text();	
-		 					$('#money').children().eq(<%=i%>).children().eq(9).text(Number(t).format());
+							var t=$('#money').children().eq(<%=i%>).children().eq(8).text();	
+		 					$('#money').children().eq(<%=i%>).children().eq(8).text(Number(t).format());
 		 		
-					</script>
+						</script>
+						
 				</tr>
 				<% } %>
 			</thead>
 		</table>
 		
-		<!--페이징 처리 부분  -->
-		
-			<div class="numbox pt40 pb50"> 
-			<% if(currentPage <= 1){ %>
-			<span><a class="num" disabled>&lt;</a></span>
-			<% }else{ %>
-			<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage - 1%>&&gongdiv=당일">&lt;</a></span>
-			<% } %>
-			
-			<% for(int p = startPage; p <= endPage; p++){ 
-					if(p == currentPage){
-			%>
-						<span><a class="num on" disabled><%= p %></a></span>
-			<%      }else{ %>
-								<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%= p %>&&gongdiv=당일"><%= p %></a></span>
-			<%      } %>
-	
-			<% } %>
-			
-			
-			<% if(currentPage >= maxPage){ %>
-			<span><a class="num" disabled>></a></span>
-			<% }else{ %>
-				<span><a class="num" href="<%=request.getContextPath()%>/selectList.bo?currentPage=<%=currentPage + 1%>&&gongdiv=당일">></a></span>
-			<% } %>
-			
-			
-		</div>
-		
+
 
 
 	</div><!--// inner E-->
@@ -255,11 +218,11 @@ function fn_open() {
 
 	<script>
 		$(function(){
-			$(".sbtn").click(function(){
+			$(".sbtn.gy").click(function(){
 				
 				var num = $(this).parent().parent().children("td").eq(0).text();
 				console.log(num);
-				location.href="<%=request.getContextPath()%>/selectOne.bo?num="+num+"&&gongdiv=당일";
+				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num+"&&gongdiv=일반";
 			});
 		});
 	</script>
