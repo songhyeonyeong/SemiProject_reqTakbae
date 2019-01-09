@@ -1,6 +1,7 @@
 package com.kh.jinkuk.border.announcment.cotroller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.Date;
 import java.util.GregorianCalendar;
 
@@ -116,7 +117,15 @@ public class UpdateBoardOneServlet extends HttpServlet {
 	
 		System.out.println(result);
 		
+		String page="";
+		
+		
 	
+		if(result>0) {
+			String encoded = URLEncoder.encode(gongdiv,"UTF-8");
+			response.sendRedirect(request.getContextPath() + "/selectOne.bo?num="+gno+"&&gongdiv="+gongdiv);
+			
+			}
 		
 		
 		

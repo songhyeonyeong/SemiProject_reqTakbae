@@ -165,7 +165,8 @@
 			<span><a class="mbtn db wth60" href="<%=request.getContextPath()%>/ReqAnnouncement.bo?gongdiv=<%=gongdiv%>&&gno=<%=num%>">신청하기</a></span>
 			<%} 
 			}%>
-			<span><a class="mbtn bk wth60" onclick="history.go(-1);">돌아가기</a></span>
+			<span><a class="mbtn bk wth60"  href='<%=request.getContextPath()%>/selectList.bo?gongdiv=<%=gongdiv%>&&gno=<%=num%>'>돌아가기</a></span>
+			
 		</div>
 
 
