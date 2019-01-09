@@ -13,6 +13,8 @@ import com.kh.jinkuk.admin.model.vo.Admin;
 import com.kh.jinkuk.admin.model.vo.Announcment;
 import com.kh.jinkuk.admin.model.vo.Change;
 import com.kh.jinkuk.admin.model.vo.Chart;
+import com.kh.jinkuk.admin.model.vo.ChartDay;
+import com.kh.jinkuk.admin.model.vo.ChartMonth2;
 import com.kh.jinkuk.admin.model.vo.Exchange;
 import com.kh.jinkuk.admin.model.vo.Inquiry;
 import com.kh.jinkuk.admin.model.vo.LoadImg;
@@ -556,7 +558,67 @@ public class AdminService {
 		
 		return c;
 	}
+	
+	public ArrayList<Chart> selectChartArea() {
+		Connection con = getConnection();
+		
+		ArrayList<Chart> c = new AdminDao().selectChartArea(con);
+		
+		close(con);
+		
+		return c;
+	}
 
+
+	public ChartMonth2 selectChartMonth2(int year) {
+		Connection con = getConnection();
+		
+		ChartMonth2 c = new AdminDao().selectChartMonth2(con, year);
+		
+		close(con);
+		
+		return c;
+	}
+
+	public int selectCharttotal() {
+		Connection con = getConnection();
+		
+		int total = new AdminDao().selectCharttotal(con);
+		
+		close(con);
+		
+		return total;
+	}
+
+	public int selectCharttoday() {
+		Connection con = getConnection();
+		
+		int today = new AdminDao().selectCharttoday(con);
+		
+		close(con);
+		
+		return today;
+	}
+
+	public int selectChartyesterday() {
+		Connection con = getConnection();
+		
+		int yesterday = new AdminDao().selectChartyesterday(con);
+		
+		close(con);
+		
+		return yesterday;
+	}
+
+	public ChartDay selectChartday(int year, int month) {
+		Connection con = getConnection();
+		
+		ChartDay ch = new AdminDao().selectChartday(con, year, month);
+		
+		close(con);
+		
+		return ch;
+	}
 
 
 

@@ -130,6 +130,26 @@ public class MemberService {
 		return result;
 	}
 
+	public boolean visitcheck(String id) {
+		Connection con = getConnection();
+		
+		boolean check = new MemberDao().visitcheck(con, id);
+		
+		close(con);
+		
+		return check;
+	}
+
+	public int visitup(String id) {
+		Connection con = getConnection();
+		
+		int result = new MemberDao().visitup(con, id);
+		
+		close(con);
+		
+		return result;
+	}
+
 }
 
 
