@@ -1,4 +1,5 @@
 package com.kh.jinkuk.mypage.websoket;
+
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,18 +14,19 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint("/broadcasting")
 public class test {
 
-	private static Set<Session> clients = Collections
-			.synchronizedSet(new HashSet<Session>());
+	private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
 
 	@OnMessage
 	public void onMessage(String message, Session session) throws IOException {
-		System.out.println(message);
+
+		System.out.println("클라이언트로부터온 메세지 :" + message);
 		synchronized (clients) {
-			// Iterate over the connected sessions
-			// and broadcast the received message
 			for (Session client : clients) {
 				if (!client.equals(session)) {
-					client.getBasicRemote().sendText(message);
+					if (session.getQueryString().equals(client.getQueryString())) {
+						System.out.println(session.getQueryString()+"공고로 매칭 성공!");
+						client.getBasicRemote().sendText(message);
+					}
 				}
 			}
 		}
@@ -32,8 +34,9 @@ public class test {
 
 	@OnOpen
 	public void onOpen(Session session) {
-		// Add session to the connected sessions set
-		System.out.println(session);
+		System.out.println(session+"웹소켓 들어옴");
+		String n = session.getQueryString();
+		System.out.println(session+"이 보낸 쿼리스트링 :" + n);
 		clients.add(session);
 	}
 

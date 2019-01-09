@@ -37,7 +37,7 @@ public class getSElocation extends HttpServlet {
 		Member m =new MypageService().selectMemberById(id);
 		String page="";
 		if(stEd!=null) {
-			page="views/mypage/basonglocation.jsp";
+			page="views/mypage/gisaMap/mapview.jsp";
 			request.setAttribute("start", stEd[0]);
 			request.setAttribute("end", stEd[1]);
 			request.setAttribute("gno", gno);
