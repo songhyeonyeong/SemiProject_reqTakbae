@@ -9,10 +9,24 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
-
+	int i=0;
 %>
 <%@ include file="/views/admin/include/common.jsp" %>
 
+<script>
+
+ 	Number.prototype.format = function(){
+	    if(this==0) return 0;
+	 
+	    var reg = /(^[+-]?\d+)(\d{3})/;
+	    var n = (this + '');
+	 
+	    while (reg.test(n)) n = n.replace(reg, '$1' + ',' + '$2');
+	 
+	    return n;
+	};
+
+</script>
 
 <title>택배를 부탁해 관리자페이지</title>
 </head>
@@ -32,7 +46,7 @@
 			<div class="topsearch mt30 mb30"><!-- topsearch S -->
 				<span>
 					<label for="col01"></label>
-					<form action="<%=request.getContextPath() %>/search.me" method="post">
+					<form action="<%=request.getContextPath()%>/search.me" method="post">
 					<select id="select" name="select" class="wth140">
 						<option value="choose" name="searchCondition" selected disabled hidden>선택</option>
 						<option value="userId" name="searchCondition">아이디</option>
@@ -84,7 +98,7 @@
 						<th scope="col">보유포인트</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="money">
 					<form  id="add" method="get" action="<%=request.getContextPath()%>/delete.me">
 					<% for(Admin m : list){ %>
 					<tr>
@@ -92,9 +106,7 @@
 							<label for=""> 체크</label>
 							<input id="memCheck" name="memCheck" class="check" type="checkbox" value="<%=m.getUserId()%>">
 						</td>
-					
-						
-							
+							<input type="hidden" value="<%=i++%>">
 							<td><%= m.getUserId() %></td>
 							<td><%= m.getUserName() %></td>
 							<td><%= m.getPhone()%></td>
@@ -102,13 +114,22 @@
 							<td><%= m.getU_date() %></td>
 							<td><%= m.getReportCount() %></td>
 							<td><%= m.getBlackList() %></td>
-							<td><%= m.getC_money() %></td>
+							<td><%=m.getC_money()%></td>
 							<td><%= m.getC_point() %></td>
+						<script>	
+			
+		 					var t=$('#money').children().eq(<%=i%>).children().eq(8).text();
+		 					$('#money').children().eq(<%=i%>).children().eq(8).text(Number(t).format());
+		 					
+							var t=$('#money').children().eq(<%=i%>).children().eq(9).text();	
+		 					$('#money').children().eq(<%=i%>).children().eq(9).text(Number(t).format());
+		 					
+		 					
 
-							
-						
+						</script>
 						
 					</tr>
+					
 				<% } %> 
 				</form>
 
@@ -155,6 +176,8 @@
 </div><!--// Wrap E-->
 
 	<script>
+
+
 	
 		 $('span').eq(2).click(function() {
 
@@ -208,6 +231,10 @@
 			
 
 			});
+
+
+
+	
 
 		 
 		

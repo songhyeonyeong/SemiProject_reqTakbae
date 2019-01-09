@@ -91,7 +91,7 @@
          <div><%=m.getUSER_ID() %> <%=m.getG_S_AREA() %> ~ <%=m.getG_E_AREA() %> <%=m.getG_P_DIV() %></div>
 
       <%} }else{%>
-         <div style="display:none;">1</div>
+         <div style="display:none;">--------</div>
       <%} %>
 
    </div>  

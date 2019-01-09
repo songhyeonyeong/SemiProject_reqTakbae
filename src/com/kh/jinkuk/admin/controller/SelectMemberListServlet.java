@@ -93,6 +93,7 @@ public class SelectMemberListServlet extends HttpServlet {
 		PageInfo pi = new PageInfo(currentPage, listCount, limit, maxPage, startPage, endPage);
 		ArrayList<Admin> list = new AdminService().selectList(currentPage,limit);
 		System.out.println(list);
+		
 		String page="";
 		if(list != null) {
 			page="/views/admin/memberList1.jsp";
