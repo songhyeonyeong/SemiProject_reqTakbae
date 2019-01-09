@@ -147,8 +147,8 @@ function fn_open(id,name,phone,count,grade,img) {
 					var ok=confirm("선택하시겠습니까?");
 					if(ok==true && ra!=null){
 						
-						location.href="/reqtakbae/updateinsertGisa.mp?uno="+ra+"&&gno="+<%=gno%>;
-						
+						<%-- location.href="/reqtakbae/updateinsertGisa.mp?uno="+ra+"&&gno="+<%=gno%>; --%>
+						 location.href=
 					}else{
 						
 						alert("기사를 먼저 선택해주세요!");

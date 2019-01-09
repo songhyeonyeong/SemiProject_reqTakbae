@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.jinkuk.member.model.vo.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -272,7 +272,7 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
 }); 
 	function NOWtoS(){
 	var start="http://map.daum.net/link/to/<%=fullstartlocation.split("/")[1]%>,"+startlo.getLat()+","+startlo.getLng();
-	<%-- location.href="http://map.daum.net/link/to/<%=fullstartlocation.split("/")[1]%>,"+startlo.getLat()+","+startlo.getLng(); --%>
+	location.href="http://map.daum.net/link/to/<%=fullstartlocation.split("/")[1]%>,"+startlo.getLat()+","+startlo.getLng();
 	window.open(start,'start','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=1000,height=600');
 	};
 	
@@ -287,9 +287,12 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
     	
      
      if (navigator.geolocation) {
-    	    
+    	   var watchId=null; 
     	    // GeoLocation을 이용해서 접속 위치를 얻어옵니다
-    	    navigator.geolocation.getCurrentPosition(function(position) {
+    	   watchId= navigator.geolocation.watchPosition(geo());
+    	    console.log(watchId);
+    	    
+			function geo(position) {
     	        
     	        var lat = position.coords.latitude, // 위도
     	            lon = position.coords.longitude; // 경도
@@ -300,7 +303,7 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
     	        // 마커와 인포윈도우를 표시합니다
     	        displayMarker(mylo, message);
     	            
-    	      });
+    	      }
     	    
     	} else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
     	    
@@ -373,4 +376,4 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
 
 
 </body>
-</html>
+</html> --%>
