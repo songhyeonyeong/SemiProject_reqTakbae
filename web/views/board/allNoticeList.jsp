@@ -153,7 +153,7 @@ function fn_open() {
 			</div>
 	</form>
 		<!-- user에게만 보임 -->
-		<% if(loginUser != null){ %>
+		<% if(loginUser.getUser_div().equals("신청자")){ %>
 		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반">공고등록하기</a></p>
 		<% } %>
 		
