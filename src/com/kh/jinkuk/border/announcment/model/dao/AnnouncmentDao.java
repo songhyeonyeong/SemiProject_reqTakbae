@@ -564,14 +564,14 @@ public class AnnouncmentDao {
 			return result;
 		}
 
-		public int deleteBoard(Connection con, Announcment a) {
+		public int deleteBoard(Connection con, int gno) {
 			PreparedStatement pstmt = null;
 			int result = 0;
 			String query = prop.getProperty("deleteBoard");
 			System.out.println(query);
 			try {
 				pstmt=con.prepareStatement(query);
-				pstmt.setInt(1, a.getG_NO());
+				pstmt.setInt(1, gno);
 				result = pstmt.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
