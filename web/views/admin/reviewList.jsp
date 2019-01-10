@@ -69,7 +69,8 @@
 			<tbody id="listArea">
 			<% for(Review m : list){ %>
 				<tr>
-					<td><%=m.getHno() %></td>
+					<input type="hidden" value="<%=m.getHno()%>">
+					<td><%=m.getRnum() %></td>
 					<td class="tleft"><a href="reviewView.jsp"><%=m.gethTitle() %></a></td>
 					<td><%=m.getDriname() %> 기사님</td>
 					<td><%=m.getUname() %></td>
@@ -136,7 +137,7 @@
 			}).mouseout(function(){
 				$(this).parent().css({"background":"white"});
 			}).click(function(){
-				var num = $(this).parent().children().eq(0).text();
+				var num = $(this).parent().children().eq(0).val();
 				
 				console.log(num);
 				location.href="<%=request.getContextPath()%>/selectAll.reV?num="+num; 

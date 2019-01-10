@@ -153,9 +153,13 @@ function fn_open() {
 			</div>
 	</form>
 		<!-- user에게만 보임 -->
+		<%if(loginUser != null){%>
 		<% if(loginUser.getUser_div().equals("신청자")){ %>
 		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반">공고등록하기</a></p>
 		<% } %>
+		<%}else{ %>
+		<p hidden class="flo_right mb10"><a></a></p>
+		<%} %>
 		
 		<table class="boardList mt20">
 			<caption>전체공고 리스트입니다.</caption>
@@ -257,7 +261,10 @@ function fn_open() {
 				console.log(num);
 				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num+"&&gongdiv=일반";
 			});
-		});
+			
+			});
+		
+		
 	</script>
 
 <%@ include file="/views/include/myNav.jsp" %>

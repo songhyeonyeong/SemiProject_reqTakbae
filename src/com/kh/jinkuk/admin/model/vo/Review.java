@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Review implements java.io.Serializable{
 	private int hno; 				//후기번호
+	private int rnum;
 	private String hTitle;			//글 제목
 	private String hContext;	//글 내용
 	private int hGrade;			// 평점
@@ -22,10 +23,11 @@ public class Review implements java.io.Serializable{
 
 
 
-	public Review(int hno, String hTitle, String hContext, int hGrade, Date hDate, String status, int uno, String uname,
-			int gno, String driname) {
+	public Review(int hno, int rnum, String hTitle, String hContext, int hGrade, Date hDate, String status, int uno,
+			String uname, int gno, String driname) {
 		super();
 		this.hno = hno;
+		this.rnum = rnum;
 		this.hTitle = hTitle;
 		this.hContext = hContext;
 		this.hGrade = hGrade;
@@ -49,6 +51,20 @@ public class Review implements java.io.Serializable{
 
 	public void setHno(int hno) {
 		this.hno = hno;
+	}
+
+
+
+
+	public int getRnum() {
+		return rnum;
+	}
+
+
+
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 
@@ -182,12 +198,15 @@ public class Review implements java.io.Serializable{
 
 	@Override
 	public String toString() {
-		return "Review [hno=" + hno + ", hTitle=" + hTitle + ", hContext=" + hContext + ", hGrade=" + hGrade
-				+ ", hDate=" + hDate + ", status=" + status + ", uno=" + uno + ", uname=" + uname + ", gno=" + gno
-				+ ", driname=" + driname + "]";
+		return "Review [hno=" + hno + ", rnum=" + rnum + ", hTitle=" + hTitle + ", hContext=" + hContext + ", hGrade="
+				+ hGrade + ", hDate=" + hDate + ", status=" + status + ", uno=" + uno + ", uname=" + uname + ", gno="
+				+ gno + ", driname=" + driname + "]";
 	}
 
 
+
+
+	
 
 	
 
