@@ -229,7 +229,7 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 
 	<div id="container"><!-- container S -->
 
-		<div class="tit">&bull; 월별 방문자 통계</div>
+		<div class="tit">&bull; 일일 방문자 통계</div>
 
 		<div class="contBox mt30"><!-- contBox S -->	
 			
