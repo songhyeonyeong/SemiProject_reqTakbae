@@ -84,7 +84,7 @@
 	<div class="contBox inner"><!-- inner S -->
 	 
 		<div class="titNavi">
-			전체 공고
+			상세 보기 페이지
 			<span>홈 &gt; 공고&gt; 상세보기</span>
 			<!-- <p class="flo_left mb10"><a class="mbtn rd"  href="#fn_open" onclick="fn_open()">신고하기</a></p>user에게만 보임 -->
 		<script>
