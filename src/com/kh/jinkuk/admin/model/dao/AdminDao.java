@@ -1168,7 +1168,7 @@ public class AdminDao {
 			
 			while(rset.next()) {
 				Inquiry m = new Inquiry();
-				
+				m.setRnum(rset.getInt("RNUM"));
 				m.setM_no(rset.getInt("M_NO"));
 				m.setM_title(rset.getString("M_TITLE"));
 				m.setM_context(rset.getString("M_CONTEXT"));

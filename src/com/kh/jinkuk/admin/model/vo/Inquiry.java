@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Inquiry {
 	private int m_no;
+	private int rnum;
 	private String m_title;
 	private String m_context;
 	private int ref_mno;
@@ -14,10 +15,11 @@ public class Inquiry {
 	
 	public Inquiry() {}
 
-	public Inquiry(int m_no, String m_title, String m_context, int ref_mno, int reply_level, String status, Date m_date,
-			String u_no) {
+	public Inquiry(int m_no, int rnum, String m_title, String m_context, int ref_mno, int reply_level, String status,
+			Date m_date, String u_no) {
 		super();
 		this.m_no = m_no;
+		this.rnum = rnum;
 		this.m_title = m_title;
 		this.m_context = m_context;
 		this.ref_mno = ref_mno;
@@ -33,6 +35,14 @@ public class Inquiry {
 
 	public void setM_no(int m_no) {
 		this.m_no = m_no;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public String getM_title() {
@@ -93,9 +103,11 @@ public class Inquiry {
 
 	@Override
 	public String toString() {
-		return "Inquire [m_no=" + m_no + ", m_title=" + m_title + ", m_context=" + m_context + ", ref_mno=" + ref_mno
-				+ ", reply_level=" + reply_level + ", status=" + status + ", m_date=" + m_date + ", u_no=" + u_no + "]";
+		return "Inquiry [m_no=" + m_no + ", rnum=" + rnum + ", m_title=" + m_title + ", m_context=" + m_context
+				+ ", ref_mno=" + ref_mno + ", reply_level=" + reply_level + ", status=" + status + ", m_date=" + m_date
+				+ ", u_no=" + u_no + "]";
 	}
+
 	
 	
 }
