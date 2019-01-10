@@ -97,6 +97,9 @@ public class UpdateBoardOneServlet extends HttpServlet {
 		Member loginUser =(Member)request.getSession().getAttribute("loginUser");
 		int uno=loginUser.getU_no();
 		
+		Announcment a = new Announcment();
+		a.setG_NO(gno);
+		
 		InsertAnnouncment i = new InsertAnnouncment();
 		i.setGcontext(area);
 		i.setGday(new Date(date));
@@ -113,7 +116,7 @@ public class UpdateBoardOneServlet extends HttpServlet {
 		System.out.println(i);
 		
 		
-		int result = new AnnouncmentService().updateBoard(i,image,gongdiv,gno);
+		int result = new AnnouncmentService().updateBoard(i,image,gongdiv,gno,a);
 	
 		System.out.println(result);
 		
