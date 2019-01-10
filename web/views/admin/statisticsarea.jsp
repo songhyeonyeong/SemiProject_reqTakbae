@@ -113,11 +113,11 @@ import="java.util.*, com.kh.jinkuk.admin.model.vo.*"%>
 					/* 	hAxis: {title: 'Month'},  */
 						seriesType: 'bars',
 						legend : 'none',
-						/* animation: { //차트가 뿌려질때 실행될 애니메이션 효과
+						animation: { //차트가 뿌려질때 실행될 애니메이션 효과
 		                 startup: true,
 		                 duration: 1000,
 		                 easing: 'linear' },
-		                 tooltip:{textStyle : {fontSize:12}}, */
+		                 tooltip:{textStyle : {fontSize:12}},
 	                 	annotations: {
 	                    /*  textStyle: {
 	                       fontSize: 10,

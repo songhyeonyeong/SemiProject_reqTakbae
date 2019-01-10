@@ -298,5 +298,13 @@ public class MypageService {
 		
 	}
 
+	public int getListCountIn(int uno) {
+		Connection con = getConnection();
+		int listCount = new MypageDao().getListCountInquiry(con, uno);
+		
+		close(con);
+		return listCount;
+	}
+
 
 }

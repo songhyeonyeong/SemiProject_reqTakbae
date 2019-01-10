@@ -54,9 +54,10 @@ public class SelectMyInquiryServlet extends HttpServlet {
 		limit = 10;
 		
 //		BoardService bs = new BoardService();
-		AdminService ns =new AdminService();
+/*		AdminService ns =new AdminService();*/
+		MypageService ms = new MypageService();
 		//전체 게시글 수 조회
-		int listCount = ns.getListCountIn();
+		int listCount = ms.getListCountIn(uno);
 		
 		//총 페이지 수 계산
 		//예를 들어, 목록 수가 123개면 페이지수는 13페이지가 필요하다.
