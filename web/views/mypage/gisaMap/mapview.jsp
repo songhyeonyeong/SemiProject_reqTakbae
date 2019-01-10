@@ -57,7 +57,10 @@
         	 <div>배송상태변경</div>
         	 <select id="selectDel" name="selectDel">
         	 <option value="선택">선택</option>
+        	 <option value="인수출발">인수출발</option>
         	 <option value="인수중">인수중</option>
+        	 <option value="인수완료">인수완료</option>
+        	 <option value="배송출발">배송출발</option>
         	 <option value="배송중">배송중</option>
         	 <option value="배송완료">배송완료</option>
         	 </select>
