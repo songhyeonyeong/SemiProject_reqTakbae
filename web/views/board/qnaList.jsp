@@ -72,8 +72,8 @@ import="java.util.*,
 					
 			%>
 			<tr>
-			<input type="hidden" value="<%=i.getM_no() %>">
-			<td><%=i.getRnum() %></td>
+				<input type="hidden" value="<%=i.getM_no() %>">
+				<td><%=i.getRnum() %></td>
 				<td><%=i.getM_title() %></td>
 				<td><%=i.getM_context()%></td>
 				<td><%=i.getUser_id() %></td>
