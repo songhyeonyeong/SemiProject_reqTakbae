@@ -64,12 +64,15 @@ public class AnnouncmentService {
 	 */
 
 	
-	public int updateBoard(InsertAnnouncment i, Images image, String gongdiv,int gno) {
+	//공고 수정하기 메소드
+	public int updateBoard(InsertAnnouncment i, Images image, String gongdiv,int gno , Announcment a) {
 		Connection con = getConnection();
-		int result1 = 0, result2 = 0, result3 = 0, result4 = 0, result5 = 0, result6 = 0;
+		int result1 = 0, result2 = 0, result3 = 0, result4 = 0, result5 = 0, result6 = 0,result7=0;
 		int result = 0;
 		
-		result1 = new AnnouncmentDao().updateBoard(con, i, gongdiv,gno);
+		result1 = new AnnouncmentDao().plusCmoney(con,i,gno);//돈 돌려주기
+		
+		result2 = new AnnouncmentDao().updateBoard(con, i, gongdiv,gno);
 		System.out.println("포인트 사용 여부 : "+i.getPoint());
 		
 		if(i.getPoint() > 0) {
@@ -98,15 +101,18 @@ public class AnnouncmentService {
 	
 		
 		*/
-		 System.out.println("공고테이블 삽입 결과 :" + result1);
-		 System.out.println("포인트내역 삽입 결과 :" + result3);
-		 System.out.println("싸이버머니내역테이블 삽입 결과 :" + result4);
-		 System.out.println("회원정보 업데이트 결과 :" + result5);
-		 System.out.println("이미지 삽입 결과:"+result6);
-		/* System.out.println("공고상세 테이블 삽입 결과 :" + result2);*/
+		System.out.println("첫 작성한 사이버 머니 결과"+result1);
+		System.out.println("첫 작성한 포인트 결과"+result2);
+		 System.out.println("공고테이블 삽입 결과 :" + result3);
+		 System.out.println("포인트내역 삽입 결과 :" + result4);
+		 System.out.println("싸이버머니내역테이블 삽입 결과 :" + result5);
+		 System.out.println("회원정보 업데이트 결과 :" + result6);
+		 System.out.println("이미지 삽입 결과:"+result7);
+		
+	
 
 		 
-			if (result1 > 0 &&result3>0&& result4>0&& result5>0&&result6>0) {
+			if (result1 > 0&&result3>0&& result4>0&& result5>0&&result6>0) {
 				commit(con);
 				result = 1;
 			} else {

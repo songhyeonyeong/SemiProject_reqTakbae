@@ -401,18 +401,18 @@ public class InquireDao {
 		ResultSet rset = null;
 		ArrayList<Inquire> list = null;
 		
-		String query = prop.getProperty("gg/");
+		System.out.println("타이틀확인 :"+textS);
+		
+		String query = prop.getProperty("searchTitle");
 		
 		try {
 			pstmt = con.prepareStatement(query);
 			
 			pstmt.setString(1,textS);
-			
+		
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<Inquire>();
-			
-		
 			
 			while(rset.next()) {
 				Inquire i = new Inquire();
@@ -428,9 +428,7 @@ public class InquireDao {
 				i.setUser_id(rset.getString("USER_ID"));
 				i.setRnum(rset.getInt("RNUM"));
 				
-				
-				
-				
+			
 				list.add(i);
 				
 			}
