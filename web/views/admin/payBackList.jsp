@@ -101,7 +101,8 @@
 			<tbody id="money">
 			<%for(Exchange m : list){ %>
 			<tr>
-				<td><%=m.getC_no() %></td>
+				<input type="hidden" value="<%=m.getC_no() %>">
+				<td><%=m.getRnum() %></td>
 				<td>환전</td>
 				<td><%=m.getUser_id() %></td>
 				<td><%=m.getUser_name() %></td>
@@ -114,12 +115,12 @@
 				
 				<script>	
 
-					var t=$('#money').children().eq(<%=i%>).children().eq(4).text();	
+					var t=$('#money').children().eq(<%=i%>).children().eq(5).text();	
 					console.log(t);
-					$('#money').children().eq(<%=i%>).children().eq(4).text(Number(t).format());
+					$('#money').children().eq(<%=i%>).children().eq(5).text(Number(t).format());
 		 			
-		 			var t=$('#money').children().eq(<%=i%>).children().eq(5).text();	
-		 			$('#money').children().eq(<%=i%>).children().eq(5).text(Number(t).format());
+		 			var t=$('#money').children().eq(<%=i%>).children().eq(6).text();	
+		 			$('#money').children().eq(<%=i%>).children().eq(6).text(Number(t).format());
 		 			
 					<%=i++%>
 
@@ -268,7 +269,7 @@
 		$(function(){
 			$(".Exchange").click(function(){
 
-				var num = $(this).parent().parent().children().eq(0).text();
+				var num = $(this).parent().parent().children().eq(0).val();
 				console.log(num);
 				location.href="<%=request.getContextPath()%>/updateEx?num=" + num; 
 	

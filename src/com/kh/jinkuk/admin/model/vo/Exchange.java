@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Exchange {
 	private int c_no;
+	private int rnum;
 	private Date cDate;
 	private int cMoney;
 	private int rMoney;
@@ -15,10 +16,11 @@ public class Exchange {
 	
 	public Exchange() {}
 
-	public Exchange(int c_no, Date cDate, int cMoney, int rMoney, String bankName, String bankNum, String user_id,
-			String user_name, String eStatus) {
+	public Exchange(int c_no, int rnum, Date cDate, int cMoney, int rMoney, String bankName, String bankNum,
+			String user_id, String user_name, String eStatus) {
 		super();
 		this.c_no = c_no;
+		this.rnum = rnum;
 		this.cDate = cDate;
 		this.cMoney = cMoney;
 		this.rMoney = rMoney;
@@ -35,6 +37,14 @@ public class Exchange {
 
 	public void setC_no(int c_no) {
 		this.c_no = c_no;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public Date getcDate() {
@@ -103,11 +113,12 @@ public class Exchange {
 
 	@Override
 	public String toString() {
-		return "Exchange [c_no=" + c_no + ", cDate=" + cDate + ", cMoney=" + cMoney + ", rMoney=" + rMoney
-				+ ", bankName=" + bankName + ", bankNum=" + bankNum + ", user_id=" + user_id + ", user_name="
+		return "Exchange [c_no=" + c_no + ", rnum=" + rnum + ", cDate=" + cDate + ", cMoney=" + cMoney + ", rMoney="
+				+ rMoney + ", bankName=" + bankName + ", bankNum=" + bankNum + ", user_id=" + user_id + ", user_name="
 				+ user_name + ", eStatus=" + eStatus + "]";
 	}
-	
+
+
 	
 
 	

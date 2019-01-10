@@ -186,7 +186,7 @@
 	 $(function(){
 			$("span").eq(3).click(function(){
 				 $("input:checkbox[name=memCheck]:checked").each(function() {
-				        selected.push($(this).parent().parent().children().eq(1).text());
+				        selected.push($(this).parent().parent().children().eq(2).text());
 				   });
 				console.log(selected);
 				$.ajax({

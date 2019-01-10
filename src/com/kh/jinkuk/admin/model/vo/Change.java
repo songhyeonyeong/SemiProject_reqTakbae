@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Change {
 	private int ch_no;
+	private int rnum;
 	private Date ch_date;
 	private String ch_div;
 	private int ch_rmoney;
@@ -19,10 +20,11 @@ public class Change {
 	
 	public Change() {}
 
-	public Change(int ch_no, Date ch_date, String ch_div, int ch_rmoney, int ch_cmoney, String status, int ch_ok,
-			int u_no, int ch_p_no, String user_id, String user_name, String bank_num, String bank_name) {
+	public Change(int ch_no, int rnum, Date ch_date, String ch_div, int ch_rmoney, int ch_cmoney, String status,
+			int ch_ok, int u_no, int ch_p_no, String user_id, String user_name, String bank_num, String bank_name) {
 		super();
 		this.ch_no = ch_no;
+		this.rnum = rnum;
 		this.ch_date = ch_date;
 		this.ch_div = ch_div;
 		this.ch_rmoney = ch_rmoney;
@@ -43,6 +45,14 @@ public class Change {
 
 	public void setCh_no(int ch_no) {
 		this.ch_no = ch_no;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public Date getCh_date() {
@@ -143,15 +153,12 @@ public class Change {
 
 	@Override
 	public String toString() {
-		return "Change [ch_no=" + ch_no + ", ch_date=" + ch_date + ", ch_div=" + ch_div + ", ch_rmoney=" + ch_rmoney
-				+ ", ch_cmoney=" + ch_cmoney + ", status=" + status + ", ch_ok=" + ch_ok + ", u_no=" + u_no
-				+ ", ch_p_no=" + ch_p_no + ", user_id=" + user_id + ", user_name=" + user_name + ", bank_num="
-				+ bank_num + ", bank_name=" + bank_name + "]";
+		return "Change [ch_no=" + ch_no + ", rnum=" + rnum + ", ch_date=" + ch_date + ", ch_div=" + ch_div
+				+ ", ch_rmoney=" + ch_rmoney + ", ch_cmoney=" + ch_cmoney + ", status=" + status + ", ch_ok=" + ch_ok
+				+ ", u_no=" + u_no + ", ch_p_no=" + ch_p_no + ", user_id=" + user_id + ", user_name=" + user_name
+				+ ", bank_num=" + bank_num + ", bank_name=" + bank_name + "]";
 	}
-	
-	
-	
-	
+
 	
 	
 	

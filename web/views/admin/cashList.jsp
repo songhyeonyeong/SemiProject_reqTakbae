@@ -72,8 +72,7 @@
 			<tbody id="money">
 			<%for(Change m : list){ %>
 			<tr>
-				<%-- <input type="hidden" value="<%=i++%>"> --%>
-				<td><%=m.getCh_no() %></td>
+				<td><%=m.getRnum() %></td>
 				<td>충전</td>
 				<td><%=m.getUser_id() %></td>
 				<td><%=m.getUser_name() %></td>

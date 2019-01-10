@@ -1389,7 +1389,7 @@ public class AdminDao {
 			
 			while(rset.next()) {
 				Change m = new Change();
-				
+				m.setRnum(rset.getInt("RNUM"));
 				m.setCh_no(rset.getInt("CH_NO"));
 				m.setUser_id(rset.getString("USER_ID"));
 				m.setUser_name(rset.getString("USER_NAME"));
@@ -1532,6 +1532,7 @@ public class AdminDao {
 			
 			while(rset.next()) {
 				Exchange m = new Exchange();
+				m.setRnum(rset.getInt("RNUM"));
 				m.setC_no(rset.getInt("C_NO"));
 				m.setUser_id(rset.getString("USER_ID"));
 				m.setUser_name(rset.getString("USER_NAME"));
@@ -1631,6 +1632,7 @@ public class AdminDao {
 			while(rset.next()) {
 				Review m = new Review();
 				m.setHno(rset.getInt("H_NO"));
+				m.setRnum(rset.getInt("RNUM"));
 				m.setDriname(rset.getString("USER_NAME"));
 				m.sethTitle(rset.getString("H_TITLE"));
 				m.setUname(rset.getString("USER_ID"));
