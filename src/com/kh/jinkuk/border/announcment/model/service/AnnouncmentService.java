@@ -202,25 +202,30 @@ public class AnnouncmentService {
 	//공고 글 삭제시
 	public int deleteBoard(int uno, int gno) {
 		Connection con = getConnection();
-		int result=0;
+		/*int result=0;
 		int result1 = new AnnouncmentDao().delGMoney(con, uno, gno);
 		int result2 = new AnnouncmentDao().delCmoney(con, uno,gno);
 		int result3 = new AnnouncmentDao().delPmoney(con, uno, gno);
-		int result4 = new AnnouncmentDao().delPoint(con, uno, gno);
+		int result4 = new AnnouncmentDao().delPoint(con, uno, gno);*/
 		int result5 = new AnnouncmentDao().delStatus(con, gno);
-		System.out.println(result1);
+		/*System.out.println(result1);
 		System.out.println(result2);
 		System.out.println(result3);
 		System.out.println(result4);
-		System.out.println(result5);
-		if (result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) {
+		System.out.println(result5);*/
+		/*if (result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) {
 			commit(con);
 			result = 1;
 		} else {
 			rollback(con);
 			result = 0;
+		}*/
+		if(result5>0) {
+			commit(con);
+		}else {
+			rollback(con);
 		}
-		return result;
+		return result5;
 	}
 
 }
