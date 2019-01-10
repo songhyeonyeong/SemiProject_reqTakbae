@@ -282,7 +282,7 @@ public class AnnouncmentDao {
 		try {
 			pstmt = con.prepareStatement(query);
 
-			pstmt.setString(1, "공고요금사용");
+			pstmt.setString(1, "공고등록");
 			pstmt.setInt(2, i.getGsum());
 			pstmt.setString(3, i.getGtitle());
 			pstmt.setInt(4, i.getUno());
@@ -312,7 +312,7 @@ public class AnnouncmentDao {
 		try {
 			pstmt = con.prepareStatement(query);
 
-			pstmt.setString(1, "공고요금사용");
+			pstmt.setString(1, "공고등록");
 			pstmt.setInt(2, i.getGsum());
 			pstmt.setString(3, i.getGtitle());
 			pstmt.setInt(4, i.getUno());
@@ -758,6 +758,7 @@ public class AnnouncmentDao {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, gno);
 			pstmt.setInt(2, gno);
+			pstmt.setInt(3,i.getUno());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

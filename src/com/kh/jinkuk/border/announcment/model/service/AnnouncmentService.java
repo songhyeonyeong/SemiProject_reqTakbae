@@ -70,6 +70,7 @@ public class AnnouncmentService {
 		int result1 = 0, result2 = 0, result3 = 0, result4 = 0, result5 = 0, result6 = 0,result7=0;
 		int result = 0;
 		
+		
 		result1 = new AnnouncmentDao().plusCmoney(con,i,gno);//돈 돌려주기
 		
 		result2 = new AnnouncmentDao().updateBoard(con, i, gongdiv,gno);

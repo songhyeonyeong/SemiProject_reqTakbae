@@ -91,7 +91,9 @@ public class InsertBoardServlet extends HttpServlet {
 			String area = multiRequest.getParameter("area");
 			System.out.println("area"+area);
 			int total=Integer.parseInt(multiRequest.getParameter("total"));
+			System.out.println(total);
 			int point=Integer.parseInt(multiRequest.getParameter("point")); 
+			System.out.println(point);
 			Member loginUser =(Member)request.getSession().getAttribute("loginUser");
 			int uno=loginUser.getU_no();
 			
@@ -108,6 +110,7 @@ public class InsertBoardServlet extends HttpServlet {
 			i.setUno(uno);
 			i.setPoint(point);
 			int result = new AnnouncmentService().insertBoard(i,image,gongdiv);
+			
 			
 			int areaCount = new AnnouncmentService().areaCount(start);  
 			
