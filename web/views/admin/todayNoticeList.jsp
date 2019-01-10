@@ -261,7 +261,7 @@
 		
 		$(function(){
 			$(".sbtn").click(function(){
-				var num = $(this).parent().parent().children().eq(1).text();
+				var num = $(this).parent().parent().children().eq(2).text();
 				console.log(num);
 				location.href="<%=request.getContextPath()%>/selectOne.bo?num=" + num; 
 
