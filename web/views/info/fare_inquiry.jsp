@@ -122,37 +122,35 @@
 <%@ include file="/views/include/myNav.jsp" %>
 
 <script>
-	$("#moneyCheck").click(function(){
-		var weight = $("#weight").val();
-		var size = $("#size").val();
-		
-		
-	if(weight == ""){
-		alert("무게를 입력하세요");
-	}else{	
-		if(weight<=5){
-			if(size == "m"){
-				$("#money").html("4800원");
-			}else if(size == "m"){
-				$("#money").html("5500원");
-			}else{
-				$("#money").html("4500원");
-			}
-		}else if(weight<=10){
-			if(size == "l"){
-				$("#money").html("5500원");
-			}else{
-				$("#money").html("4800원");
-			}
-		}else{
-			$("#money").html("5500원");	
-		}
-	}	
-	
-		
-		
-	});
-
+   $("#moneyCheck").click(function(){
+      var weight = $("#weight").val();
+      var size = $("#size").val();
+      
+      
+   if(weight == ""){
+      alert("무게를 입력하세요");
+   }else if(weight > 20){
+      alert("20kg 이상은 배송이 불가합니다.")
+   }else{
+      if(weight<=5){
+         if(size == "m"){
+            $("#money").html("4800원");
+         }else if(size == "m"){
+            $("#money").html("5500원");
+         }else{
+            $("#money").html("4500원");
+         }
+      }else if(weight<=10){
+         if(size == "l"){
+            $("#money").html("5500원");
+         }else{
+            $("#money").html("4800원");
+         }
+      }else{
+         $("#money").html("5500원");   
+         }
+      }   
+   });
 </script>
 
 
