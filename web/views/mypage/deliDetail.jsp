@@ -4,6 +4,7 @@
 
 <%ArrayList<SelectReqGisa> list =(ArrayList<SelectReqGisa>)request.getAttribute("list");
 	int gno =(int)request.getAttribute("gno");
+	String phone;
 %>
 
 <%@ include file="/views/include/common.jsp" %>
@@ -122,6 +123,7 @@ function fn_open(id,name,phone,count,grade,img) {
 		<script type="text/javascript">
 			$(function(){
 				$("#tbody .sbtn.or").click(function(){
+					var Gisadata;
 					var num = $(this).parent().parent().children("input").val();
 				
 			/* 		location.href="/reqtakbae/selectdetailgisa.mp?num="+num; */
@@ -131,6 +133,7 @@ function fn_open(id,name,phone,count,grade,img) {
 								data:{num:num},
 								type:"get",
 								success:function(data){
+											console.log(data);
 											fn_open(data.user_id,data.user_name,data.phone,data.basongnujuk,data.grade,data.imgname);
 									
 								},
@@ -138,25 +141,53 @@ function fn_open(id,name,phone,count,grade,img) {
 							        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
 							       },
 					});
+					console.log(Gisadata);
 					
 				});
 				
 				
 				$("#selectgisa").click(function(){
-
-				
+					
 					var ra=$("#tbody td input[type='radio']:checked").val();
+					var id=$("#tbody td input[type='radio']:checked").parent().next().text();
+					console.log(id);
+					
 					var ok=confirm("선택하시겠습니까?");
-					location.href="/reqtakbae/updateinsertGisa.mp?uno="+ra+"&&gno="+<%=gno%>;
-					<%-- 
 					if(ok==true && ra!=null){
 						
-						 location.href=
-					}else{
+						$.ajax({
+							url:"/reqtakbae/selectmemberbyid.mp",
+							data:{id:id},
+							type:"get",
+							success:function(data){
+					 			url="/reqtakbae/views/mypage/sms/smsform2.jsp?phone="+data.phone;
+							   window.open(url,'smsform','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=500,height=400');	
+						location.href="/reqtakbae/updateinsertGisa.mp?uno="+ra+"&&gno="+<%=gno%>;
+									
+								
+							},
+							error:function(request,status,error){
+						        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+						       },
+				});
 						
-						alert("기사를 먼저 선택해주세요!");
 						
-					} --%>
+					
+					
+				}else{
+					
+					alert("기사를 먼저 선택해주세요!");
+					
+				}
+					
+				
+					
+					
+
+				
+					
+				
+			
 					
 					
 					
