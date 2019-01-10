@@ -129,7 +129,9 @@
 		
 	if(weight == ""){
 		alert("무게를 입력하세요");
-	}else{	
+	}else if(weight > 20){
+		alert("20kg 이상은 배송이 불가합니다.")
+	}else{
 		if(weight<=5){
 			if(size == "m"){
 				$("#money").html("4800원");
@@ -146,13 +148,9 @@
 			}
 		}else{
 			$("#money").html("5500원");	
-		}
-	}	
-	
-		
-		
+			}
+		}	
 	});
-
 </script>
 
 
