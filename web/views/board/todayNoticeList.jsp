@@ -194,8 +194,8 @@ function fn_open() {
 					<input type="hidden" value="<%= a.getG_NO() %>">
 					<td><%= a.getG_NO() %></td>
 					<td><%= a.getG_S_DATE() %></td>
-					<td><%= a.getG_S_AREA().split("/")[0] %></td>
-					<td><%= a.getG_E_AREA().split("/")[0] %></td>
+					<td><%= a.getG_S_AREA().split(" ")[1] %></td>
+					<td><%= a.getG_E_AREA().split(" ")[1] %></td>
 					<td><%= a.getG_TITLE() %></td>
 					<td><%= a.getG_DAY() %></td>
 					<td><%= a.getG_SIZE() %></td>

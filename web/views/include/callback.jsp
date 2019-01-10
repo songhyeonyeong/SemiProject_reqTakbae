@@ -40,7 +40,7 @@
 		var naverLogin = new naver.LoginWithNaverId(
 			{
 				clientId: "JwzeBVexbooaJdOsR1vM",
-				callbackUrl: "http://127.0.0.1:8001/reqtakbae/views/include/callback.jsp",
+				callbackUrl: "http://192.168.30.66:8001/reqtakbae/views/include/callback.jsp",
 				isPopup: false,
 				callbackHandle: true
 			}
