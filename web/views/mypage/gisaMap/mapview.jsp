@@ -276,8 +276,6 @@
 			    	            	  console.log(event.data);
 			    	              }
 			    	              function onOpen(event) {
-			    	            	  console.log("웹소켓 전송성공!");
-			    	            	   console.log(lat+","+lon);
 					    	         
 			    	              }
 			    	              function onError(event) {

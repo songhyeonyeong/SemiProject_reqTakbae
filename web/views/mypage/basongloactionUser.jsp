@@ -200,7 +200,6 @@ geocoder.addressSearch('<%=endlocation%>',function(result, status) {
         infowindow.open(map, marker);
         
         daum.maps.event.addListener(marker, 'click', function() {
-		    alert('배송지를선택하셨네용');
 		});
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -247,9 +246,9 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
 	};
 	    
     
-	 var lat;
-	 var lon;
-      var webSocket = new WebSocket('ws://localhost:8001/reqtakbae/broadcasting?'+<%=gno%>);
+  var lat;
+  var lon;
+  var webSocket = new WebSocket('ws://localhost:8001/reqtakbae/broadcasting?'+<%=gno%>);
   webSocket.onerror = function(event) {
     onError(event)
   };
@@ -264,9 +263,6 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
 	 
       var redata=event.data;
       if(redata.split("/")[0]==1){
-    	 
-    	  
-    	  console.log("좌표값임");
       var fullLo=redata.split("/")[1];
       
       lat=fullLo.split(",")[0];
