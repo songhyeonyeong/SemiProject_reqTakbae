@@ -47,7 +47,7 @@
 			<tbody>
 			<% for(Inquiry m : list){ %>
 					<tr id="listArea">
-						<td><%= m.getM_no()%></td>
+						<td><%=m.getRnum() %></td>
 						<td><a><%= m.getM_title()%></a></td>
 						<td><%= m.getM_context() %></td>
 						<td><%=m.getM_date()%></td>
