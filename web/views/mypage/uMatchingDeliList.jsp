@@ -136,7 +136,6 @@
 							var uno = $(this).parent().parent().children("input").eq(1).val();
 							var id =$(this).parent().prev().prev().text();
 							var stat =$(this).parent().prev().text();
-							location.href="/reqtakbae/views/mypage/selectDetailADDR.jsp"; 
 							 location.href="/reqtakbae/getUser_selocation.mp?gno="+num+"&&id="+id+"&&stat="+stat;
 						});
 						

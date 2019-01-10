@@ -87,17 +87,17 @@
         	<!--  <button onclick="StoE()">도착지 까지 길찾기</button> -->
         	 </div>
         	 <div align="left">
-        	 <div id="statusdiv">
+        	 실시간배송상태보기
+        	 <div id="statusdiv" style="border:1px solid black; height:200px">
         	 
         	 </div>
         	 <br>
         	 <div>
-        	 현재상태:<span id="status" style="color:blue"><%=stat %></span>  <button id="sendSMS" >문자보내기</button>
-        	 
-        	 
+        	 현재상태:<span id="status" style="color:blue"><%=stat %></span><br>
+        	  <button id="sendSMS" >문자보내기</button>
         	 </div>
 			</div>
-			
+			<button onclick="location.href='SelectMydeliverlist.mp'">뒤로가기</button>
             </div>
         </div>
         </div>
@@ -136,21 +136,17 @@ $(function(){
 		var name='<%=user.getUser_name()%>';
 		var phone='<%=user.getPhone()%>';
 		var gno =<%=gno%>;
-		url="/reqtakbae/views/mypage/sms/smsform.jsp?stat="+stat+"&&name="+name+"&&phone="+phone+"&&gno="+gno;
+		url="/reqtakbae/views/mypage/sms/smsform1.jsp?phone="+phone;
 	   window.open(url,'smsform','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=500,height=400');
 	});
 	
 	
-	
-	
-	
-
-	
-	
-	
-	
 });
 
+	function fn_open(id,name,phone,count,grade,img) {
+		console.log(id+" "+name+" "+phone+" "+count+" "+grade);
+	   window.open('/reqtakbae/views/mypage/deliDetailPop.jsp?id='+id+"&&name="+name+"&&phone="+phone+"&&count="+count+"&&grade="+grade+"&&img="+img,'deliDetailPop','scrollbars=yes,menubar=no,toolbar=no,location=no,top=50,left=50,width=700,height=600');
+	}
 
 
 
@@ -262,11 +258,14 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
   webSocket.onmessage = function(event) {
     onMessage(event)
   };
+  var flag=1;
   function onMessage(event) {
+	 
       var redata=event.data;
       if(redata.split("/")[0]==1){
-    	  console.log("좌표값임");
+    	 
     	  
+    	  console.log("좌표값임");
       var fullLo=redata.split("/")[1];
       
       lat=fullLo.split(",")[0];
@@ -275,24 +274,32 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
       console.log("위도"+lat);
       console.log("경도"+lon);
       mylo = new daum.maps.LatLng(lat, lon), // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
-      message = '<div style="padding:5px;">기사님 위치</div>';
     	console.log("mylo"+mylo);
-      displayMarker(mylo,message);
+      if(flag==1){
+      message = '<div style="padding:5px;">기사님 위치!</div>';
+      	flag=-1;
+      }else{
+      message = '<div style="padding:5px;">기사님 클릭!</div>';
+    	  flag=1;
+      }
       }
       else if(redata.split("/")[0]==2){
-    	  console.log("상태값임");
+    	  alert("배송상태가 변경되었습니다!");
     	  var st=redata.split("/")[1];
+    	  $br=$("<br>");
     	  $divs=  $("#statusdiv");
-    	  $("#statusdiv").text("<%=today%>:"+st+"입니다.");
-    	  
-    	  
+    	  $("#statusdiv").append("<%=today%>:"+st+"상태가 되었습니다.");
+    	  $divs.append($br);
+    	  $("#status").text(st);
+    	  message = '<div style="padding:5px;">클릭!</div>';
     	  
       }
-      
+      displayMarker(mylo,message);
       
   }
   function onOpen(event) {
       console.log("웹소켓 연결성공!");
+      message = '<div style="padding:5px;">기사님이 열심히 이동중입니다!</div>';
   }
   function onError(event) {
     alert(event.data);
@@ -308,34 +315,59 @@ geocoder.addressSearch('<%=startlocation %>',function(result, status) {
      			imageOption = {offset: new daum.maps.Point(27, 69)};
      			// 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
      			var markerImageGISA = new daum.maps.MarkerImage(imageSrc, imageSize, imageOption);
-    	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
-    	function displayMarker(mylo, message) {
+    	     	var marker;
+		     	var infowindow;
+		    	// 지도에 마커와 인포윈도우를 표시하는 함수입니다
+		    	function displayMarker(mylo, message) {
 
-    	    // 마커를 생성합니다
-    	    var marker = new daum.maps.Marker({  
-    	        map: map, 
-    	        position: mylo,
-    	        image : markerImageGISA
-    	    }); 
-    	    
-    	    var iwContent = message, // 인포윈도우에 표시할 내용
-    	        iwRemoveable = true;
-
-    	    // 인포윈도우를 생성합니다
-    	    var infowindow = new daum.maps.InfoWindow({
-    	        content : iwContent,
-    	        removable : iwRemoveable,
-    	    });
-    	    daum.maps.event.addListener(marker, 'click', function() {
-    		    alert('기사님이 열심히 운행중입니다^^');
-    		});
-    	    
-    	    // 인포윈도우를 마커위에 표시합니다 
-    	    infowindow.open(map, marker);
-    	    
-    	    // 지도 중심좌표를 접속위치로 변경합니다
-    	    map.setCenter(mylo);      
-    	}   
+		    		if(marker==null){
+		    	    	console.log("초기마커찍기");
+		    	   marker = new daum.maps.Marker({  
+		    	        map: map, 
+		    	        position: mylo,
+		    	        image : markerImageGISA
+		    	    }); 
+		    		}else{
+		    			marker.setPosition(mylo);
+		    			
+		    		}
+		    	    
+		    	    var iwContent = message, // 인포윈도우에 표시할 내용
+		    	        iwRemoveable = true;
+		    	    
+					if(infowindow==null){
+						console.log("초기인포찍기");
+		    	    infowindow = new daum.maps.InfoWindow({
+		    	        content : iwContent,
+		    	        removable : iwRemoveable,
+		    	    });
+					}else{
+						infowindow.setPosition(mylo);
+					}
+					
+		    	    daum.maps.event.addListener(marker, 'click', function() {
+							var num =<%=user.getU_no()%>;
+						$.ajax({
+										url:"/reqtakbae/selectdetailgisa.mp",
+										data:{num:num},
+										type:"get",
+										success:function(data){
+													fn_open(data.user_id,data.user_name,data.phone,data.basongnujuk,data.grade,data.imgname);
+											
+										},
+										error:function(request,status,error){
+									        alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+									       },
+							});
+							
+		    		});
+		    	    
+		    	    // 인포윈도우를 마커위에 표시합니다 
+		    	    infowindow.open(map, marker);
+		    	    
+		    	    // 지도 중심좌표를 접속위치로 변경합니다
+		    	    map.setCenter(mylo);      
+		    	} 
     	
     	 function panTo(val) {
      	    // 이동할 위도 경도 위치를 생성합니다 
