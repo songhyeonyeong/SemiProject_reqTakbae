@@ -115,7 +115,7 @@
 	  	             //console.log(res.id);
 	  	    
 	  	             location.href="<%=request.getContextPath()%>/snsCheck?SNSId="+res.id+"&userDiv="+userDiv+"&loginDiv="+"카카오";
-	  	             window.opener.top.location.href="<%=request.getContextPath()%>/views/member/joinKakao.jsp";
+	  	             <%-- window.opener.top.location.href="<%=request.getContextPath()%>/views/member/joinKakao.jsp"; --%>
 	  	          	 window.close(); 
 	  	       		}
 	

@@ -61,6 +61,7 @@ public class ModifyMember extends HttpServlet {
 					phone, email, m.getBacklist(), m.getUser_div(), m.getC_money(), m.getC_point(), m.getLogin_div(), m.getUser_name(), m.getU_date(), m.getStatus(), m.getK_trans()));
 
 		}else {
+			out.println("<script>");
 			out.println("alert('회원정보 수정 실패');");
 		}
 		
