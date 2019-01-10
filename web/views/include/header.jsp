@@ -63,7 +63,7 @@
 		<%} %>
 
 		<div class="multBoxR">
-			<span class="mu1"><a href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반">공고신청</a></span>
+			<span class="mu1" id="aaaa"><a href="#">공고신청</a></span>
 			<%if(loginUser != null){ %>
 				<span class="mu2"><a id="search" href="#">배송조회</a></span>
 			<%}else{ %>
@@ -143,6 +143,7 @@ function openpop()
 	  });
  }
 //]]>
+
 </script>
 
 
@@ -226,6 +227,14 @@ function openpop()
 				<%}%>
 			});
 			
+			$("#aaaa").click(function(){
+				<%if(loginUser != null){%>
+					location.href = "<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반";
+				<%}else{%>
+					alert("로그인 후 이용해 주세요!");
+				<%}%>
+				
+			});
 		</script>
 		
 		<script>

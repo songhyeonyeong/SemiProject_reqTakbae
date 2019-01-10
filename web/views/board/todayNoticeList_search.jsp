@@ -148,7 +148,7 @@ function fn_open() {
 
 		<!-- user에게만 보임 -->
 		<% if(loginUser != null){ %>
-		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=일반">공고등록하기</a></p>
+		<p class="flo_right mb10"><a class="mbtn or" href="<%=request.getContextPath()%>/InsertForm.bo?gongdiv=당일">공고등록하기</a></p>
 		<% } %>
 		
 		<table class="boardList mt20">
