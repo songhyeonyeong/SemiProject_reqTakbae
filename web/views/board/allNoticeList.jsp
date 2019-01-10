@@ -251,9 +251,7 @@ function fn_open() {
 <%@ include file="/views/include/footer.jsp" %>
 
 
-</div><!--// Wrap E-->
-
-	<script>
+	<script type="text/javascript">
 		$(function(){
 			$(".sbtn.gy").click(function(){
 				
@@ -266,6 +264,8 @@ function fn_open() {
 		
 		
 	</script>
+</div><!--// Wrap E-->
+
 
 <%@ include file="/views/include/myNav.jsp" %>
 

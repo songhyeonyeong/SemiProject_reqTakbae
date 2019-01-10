@@ -122,15 +122,11 @@
 							var num = $(this).parent().parent().children("input").val();
 							var delId=$(this).parent().prev().prev().text();
 							
- 							location.href="/reqtakbae/views/board/reviewWrite.jsp?delId="+delId+"&&gno="+num;
+ 							/* location.href="/reqtakbae/views/board/reviewWrite.jsp?delId="+delId+"&&gno="+num; */
+ 								location.href="/reqtakbae/rvwrite.mp?delId="+delId+"&&gno="+num;
 							
 						});
-						$("#tbody td .sbtn.sk").click(function(){
-							//상세주소 선택부분
-							location.href="/reqtakbae/views/mypage/selectDetailADDR.jsp";
-						});
 
-						
 						$("#tbody td .sbtn.db").click(function(){
 							var num = $(this).parent().parent().children("input").eq(0).val();
 							var uno = $(this).parent().parent().children("input").eq(1).val();
